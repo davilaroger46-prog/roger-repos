@@ -1,0 +1,520 @@
+{
+  "meta": {
+    "id": "012",
+    "titulo": "Hernia Discal Cervical C6-C7 — Radiculopatia Refrataria",
+    "slug": "hernia-discal-cervical-c6-c7-radiculopatia",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Vertebral",
+    "nivel": "avancado",
+    "tags": [
+      "hernia discal cervical",
+      "C6-C7",
+      "radiculopatia",
+      "ACDF",
+      "discectomia",
+      "artrodese cervical"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Feminino",
+    "idade": 45,
+    "atividade": "Fisioterapeuta — trabalho em clinica",
+    "lado": "Direito",
+    "demanda_funcional": "alta",
+    "comorbidades": [
+      "HAS controlada"
+    ]
+  },
+  "historia": {
+    "queixa_principal": "Dor cervical com irradiacao para o braco direito em queimacao associada a parestesias nos dedos indicador e medio — piora noturna e ao dirigir",
+    "inicio": "subagudo",
+    "tempo_evolucao": "6 semanas",
+    "mecanismo_lesao": "Degenerativo com episodio precipitante — paciente realizava procedimento de fisioterapia e sentiu estalo cervical seguido de dor imediata com irradiacao para o braco direito. Hernia discal C6-C7 aguda sobre disc degeneracao cronica pre-existente.",
+    "descricao": "Paciente feminina, 45 anos, fisioterapeuta. Seis semanas de dor cervical intensa com irradiacao em queimacao pelo braco direito ate os dedos indicador e medio (dermátomo C7). Parestesias noturnas que a acordam. Piora significativa ao dirigir, ao deitar-se e com extensao cervical. Lasegue cervical (Spurling) positivo. EMG/velocidade de conducao confirmou radiculopatia C7 direita. RM evidenciou hernia discal para-mediana direita em C6-C7 com compressao da raiz C7 e edema radicular."
+  },
+  "classificacao": {
+    "primaria": "Hernia Discal Cervical — Localizacao e Tipo",
+    "ao_ota": {
+      "codigo": "CEV-HDC7",
+      "osso": "Coluna Cervical C6-C7",
+      "segmento": "Disco Intervertebral",
+      "tipo": "B",
+      "grupo": "Hernia paramediana com radiculopatia C7 refrataria",
+      "descricao": "Hernia discal cervical C6-C7 para-mediana direita com compressao da raiz C7 — radiculopatia refrataria ao conservador por 6 semanas com deficit sensitivo-motor.",
+      "gravidade": "moderada",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Localizacao da Hernia",
+        "grau": "Para-mediana Direita",
+        "descricao": "Para-mediana: comprime a raiz C7 no recesso lateral. Central: mielopatia. Foraminais: raiz fora do canal."
+      },
+      {
+        "nome": "Tipo Morfologico",
+        "grau": "Extrusa com Edema Radicular",
+        "descricao": "Material discal extrudado alem do ligamento longitudinal posterior com edema da raiz C7 — indica compressao aguda sobre disco degenerativo cronico."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Postura antalgica — cabeca inclinada para a esquerda (abre o forame C6-C7 direito)",
+      "Limitacao da rotacao cervical direita e extensao (piora a compressao)",
+      "Sem atrofia muscular visivel — lesao subaguda (6 semanas)",
+      "Fascias tendinosas cervicais em contratura palpavel"
+    ],
+    "palpacao": [
+      "Dor a palpacao da apofise transversa de C6-C7 direita",
+      "Irradiacao reproduzida a palpacao do ponto gatilho cervical lateral direito",
+      "Contratura do trapezio superior e esternocleidomastoideo direito",
+      "Dor a compressao dos processos articulares C6-C7"
+    ],
+    "movimento": "Flexao: 40 graus (normal 45). Extensao: 30 graus — REPRODUZ a dor radicular direita. Rotacao direita: 50 graus (normal 70) — limitada por dor. Inclinacao direita: 20 graus — reproduz parestesias. Rotacao esquerda: 70 graus normal.",
+    "testes": [
+      {
+        "nome": "Spurling Test (Lasegue Cervical)",
+        "sensibilidade": "30-60%",
+        "especificidade": "92-100%",
+        "positivo": "Extensao + inclinacao para o lado da dor + compressao axial do craneo reproduz a radiculopatia ipsilateral. Alta especificidade — positivo confirma radiculopatia cervical compressiva."
+      },
+      {
+        "nome": "Distraction Test (Teste de Distracao)",
+        "sensibilidade": "44%",
+        "especificidade": "90%",
+        "positivo": "Tracao manual da cabeca (5-7kg) alivia a dor radicular — indica compressao foraminais mecanica responsiva a descompressao cirurgica."
+      },
+      {
+        "nome": "Shoulder Abduction Sign",
+        "sensibilidade": "43%",
+        "especificidade": "75%",
+        "positivo": "Colocar a mao ipsilateral no topo da cabeca alivia a radiculopatia — abre o forame neural e descomprime a raiz. Sinal de Bakody positivo."
+      },
+      {
+        "nome": "EMG + Velocidade de Conducao",
+        "sensibilidade": "85%",
+        "especificidade": "95%",
+        "positivo": "Fibrilacoes e ondas positivas no triceps (C7), desaceleracao da velocidade de conducao motora — confirma lesao axonal radicular C7 direita."
+      }
+    ],
+    "red_flags": [
+      "Mielopatia cervical: disfuncao na marcha, hiperreflexia, Babinski, incontinencia — indica compressao medular — cirurgia mais urgente",
+      "Sindrome de Brown-Sequard: hemiplegiaespastica ipsilateral + perda sensitiva contralateral — tumor ou hematoma medular",
+      "Disfagia progressiva — massa prevertebral comprimindo o esofago",
+      "Dor cervical + febre + rigidez — meningite ou espondilodiscite cervical"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Reducao do espaco discal C6-C7 (discopatia degenerativa)",
+        "Osteofitos marginais em C5-C6 e C6-C7",
+        "Retificacao da lordose cervical — postura antalgica",
+        "Alinhamento sagital preservado — sem subluxacao ou instabilidade"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC cervical util para avaliacao de osteofitos foraminais, qualidade ossea dos platôs (planejamento de enxerto ACDF) e morfologia do canal. Complementar a RM."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Hernia discal para-mediana direita C6-C7 com compressao da raiz C7 (forame neural direito obliterado)",
+        "Edema da raiz C7 — hipersinal T2 intraneural (sinal de lesao axonal aguda)",
+        "Discopatia degenerativa C5-C6 e C6-C7 — reducao do sinal T2 (desidratacao discal)",
+        "Medula espinhal sem compressao ou mielopatia — sinal T2 normal",
+        "Estenose foraminais C6-C7 direita"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Hernia discal cervical C6-C7 para-mediana direita com radiculopatia C7 refrataria ao conservador — dermátomo C7 (dedo medio, tríceps, extensores do punho).",
+    "diferenciais": [
+      "Sindrome do tunel do carpo — parestesias do 1° ao 3° dedos, sinal de Phalen e Tinel positivos, EMG especifico",
+      "Plexopatia braquial (sindrome de Parsonage-Turner) — inicio agudo apos infeccao/vacinacao, dor intensa seguida de atrofia rapida",
+      "Sindrome do desfiladeiro toracico — sintomas com abdução do braco, compressao subclavia",
+      "Tumor de Pancoast (sulco superior) — sem relacao com posicao, Horner, RX anormal no apice"
+    ],
+    "confirmacao": "combinado"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "B",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "alta",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "radiculopatia_refrataria_6_semanas AND EMG_positivo AND RM_concordante",
+        "then": "ACDF_C6-C7_indicado",
+        "prioridade": "alta",
+        "justificativa": "Falha do conservador adequado por 6 semanas com deficit neurologico progressivo e EMG positivo. ACDF tem 90% de bons resultados em radiculopatia cervical."
+      },
+      {
+        "if": "sem_mielopatia AND nivel_unico",
+        "then": "ACDF_preferido_a_artroplastia_discal",
+        "prioridade": "alta",
+        "justificativa": "Nivel unico sem mielopatia — ACDF (artrodese) vs artroplastia discal cervical (ADC). Ambos com resultados equivalentes. ACDF mais estabelecido; ADC preserva movimento mas custo maior."
+      },
+      {
+        "if": "demanda_alta AND profissional_de_saude",
+        "then": "cirurgia_eletiva_com_urgencia_relativa",
+        "prioridade": "media",
+        "justificativa": "Fisioterapeuta com demanda funcional alta e risco de cronificacao da dor neuropatica. Indicacao relativa de cirurgia mais precoce para prevencao de dano axonal permanente."
+      },
+      {
+        "if": "niveis_adicionais_degenerativos",
+        "then": "avaliar_extensao_da_artrodese_no_planejamento",
+        "prioridade": "media",
+        "justificativa": "C5-C6 degenerativo assintomático — incluir na artrodese apenas se sintomatico ou se progressao esperada. Artrodese de nivel unico preferida para preservar mobilidade cervical."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "ACDF C6-C7 (Anterior Cervical Discectomy and Fusion) — discectomia + cage PEEK com enxerto de osso sintético + placa cervical anterior. Via retro-esofagica direita. Fluoroscopia intraoperatoria.",
+      "nivel_urgencia": "moderada",
+      "explicacao": "Radiculopatia C7 refrataria por 6 semanas com EMG positivo em fisioterapeuta 45a de alta demanda. ACDF C6-C7 tem taxa de sucesso de 90-95% em radiculopatia cervical por hernia discal. Indicacao moderada — operar antes de 3 meses para prevenir dano axonal permanente. Sem urgencia absoluta exceto mielopatia."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Primeira linha por 6-8 semanas: fisioterapia cervical + AINEs + collar"
+      ],
+      "protocolo": [
+        "Fisioterapia: tracao cervical mecanica (5-7kg), mobilizacao cervical suave, exercicios posturais",
+        "Collar cervical mole por 2-4 semanas — apenas para crise aguda",
+        "AINEs por 4-6 semanas",
+        "Infiltracao epidural cervical transforaminais com corticosteroide guiada por fluoroscopia",
+        "Pregabalina para dor neuropatica"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "14 dias"
+        },
+        {
+          "nome": "Pregabalina",
+          "dose": "75mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "30-60 dias"
+        },
+        {
+          "nome": "Betametasona (transforaminais C6-C7)",
+          "dose": "6mg + bupivacaina 0,25% 2mL",
+          "via": "Epidural transforaminais guiado por fluoroscopia",
+          "intervalo": "Maximo 3 infiltracoes",
+          "duracao": "Unica dose — repetir em 4 semanas se necessario"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Radiculopatia refrataria ao conservador > 6-8 semanas",
+        "Deficit neurologico progressivo (paresia, atrofia)",
+        "Mielopatia cervical — urgencia",
+        "Dor neuropatica incapacitante"
+      ],
+      "tecnicas": [
+        {
+          "nome": "ACDF — Artrodese Cervical Anterior (Padrao)",
+          "quando_usar": "Nivel unico ou multiplos, qualquer idade, radiculopatia e mielopatia",
+          "vantagens": [
+            "Resultados excelentes: 90-95% de melhora da radiculopatia",
+            "Tecnica estabelecida — 70 anos de historia",
+            "Remove a hernia diretamente com boa descompressao foraminais"
+          ],
+          "desvantagens": [
+            "Disfagia transitoria (5-10%)",
+            "Rouquidao transitoria por lesao do nervo larlingeo recorrente (1-2%)",
+            "Sindrome de adjacencia (2-3% por ano progressiva)"
+          ]
+        },
+        {
+          "nome": "Artroplastia Discal Cervical (ADC)",
+          "quando_usar": "Paciente jovem < 50a, nivel unico, sem mielopatia grave, sem instabilidade",
+          "vantagens": [
+            "Preserva mobilidade do segmento",
+            "Menor sindrome de adjacencia em longo prazo",
+            "Resultado equivalente ao ACDF em 5 anos"
+          ],
+          "desvantagens": [
+            "Custo muito maior",
+            "Contraindicada em osteoporose, artrose facetaria grave, mielopatia grave",
+            "Menos estabelecida — curva de aprendizado"
+          ]
+        },
+        {
+          "nome": "Foraminotomia Posterior Cervical",
+          "quando_usar": "Hernia foraminais pura unilateral sem hernia central — alternativa ao ACDF",
+          "vantagens": [
+            "Preserva o disco",
+            "Sem risco de disfagia ou lesao do nervo larlingeo recorrente"
+          ],
+          "desvantagens": [
+            "Acesso mais limitado — nao adequado para hernia central",
+            "Maior risco de instabilidade que ACDF"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Radiculopatia cervical refrataria > 6-8 semanas",
+      "Mielopatia cervical (urgencia relativa)",
+      "Deficit motor progressivo ou atrofia radicular",
+      "Dor intratavel com comprometimento funcional"
+    ],
+    "posicionamento": "Decubito dorsal. Cabeca em extensao leve com apoio em ferradura ou apoio occipital. Rolo sob os ombros para abertura do espaco intervertebral. Leve tracao cefalica (pesos 2-3kg). Inclinacao de 15-20 graus para facilitar retorno venoso e reduzir sangramento.",
+    "anestesia": [
+      "Anestesia geral com intubacao orotraqueal (padrao). Monitoracao de potenciais evocados somato-sensoriais (PESS) se risco de mielopatia.",
+      "Bloqueio do plexo cervical superficial (C2-C4) — analgesia da incisao apos despertar.",
+      "Dexametasona 8mg IV na inducao — reduz edema medular e radicular."
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Incisao e Acesso Anterior",
+        "descricao": "Incisao transversal de 4-5cm no lado direito, seguindo a linha de Langer, ao nivel de C6-C7 (aproximadamente na altura da cartilagem cricóide). Abertura do platisma. Disseccao entre a bainha carotidea (lateral) e o esofago + traqueia (medial) — espaco retroesofagico. Sem cortar musculos.",
+        "ponto_critico": "Retracao SUAVE do esofago e traqueia para a esquerda — pressao excessiva causa disfagia transitoria e neuropraxia do nervo larlingeo recorrente (1-2%). Liberar e reposicionar o afastador a cada 45 minutos."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Confirmacao do Nivel e Discotomia",
+        "descricao": "Agulha no disco C6-C7 + fluoroscopia AP e lateral para confirmar o nivel. Incisao longitudinal da fascia pré-vertebral. Colocacao dos pinos de Caspar nos corpos de C6 e C7 (distracao). Discotomia com bisturi 15 e curetas — remocao de todo o disco ate o LLP.",
+        "ponto_critico": "Confirmar o nivel ANTES da discotomia — erro de nivel e catastrofico na cirurgia cervical. A fluoroscopia deve ser feita com agulha no disco antes de qualquer corte."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Descompressao do Canal e Forames",
+        "descricao": "Remocao do LLP com Kerrison 1-2mm — exposicao da dura-mater. Descompressao da raiz C7: remocao do osteofito e do fragmento discal herniado no recesso lateral e forame direito com micropinça e Kerrison fino. Confirmar raiz C7 livre e sem compressao.",
+        "ponto_critico": "LLP pode estar aderido a raiz ou a dura em hernia extrusas — disecar com cuidado com Penfield antes do Kerrison para evitar lesao da dura ou da raiz."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Preparacao dos Platôs e Implante do Cage",
+        "descricao": "Fresagem do cartilagem dos platôs de C6 e C7 ate o osso esponjoso (favorece a fusao). Medida do espaco discal — selecionar cage PEEK do tamanho adequado (geralmente 6-7mm de altura). Implantacao do cage PEEK preenchido com enxerto osseo sintético (beta-TCP ou granulos de hidroxiapatita) ou osso do ilíaco.",
+        "ponto_critico": "Cage muito grande (oversized) causa dor pos-operatoria por distensao dos discos adjacentes. Cage muito pequeno não mantém a distracao e pode migrar. Confirmar tamanho com trial antes do definitivo."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Fixacao com Placa Cervical Anterior",
+        "descricao": "Placa cervical anterior de titanio de comprimento adequado (cobrindo C6 e C7 com 2mm de margem). Parafusos bicorticais de auto-travamento em C6 (2) e C7 (2) — angulados convergentes. Confirmar posicao com fluoroscopia AP e lateral — placa centrada, parafusos dentro dos corpos vertebrais.",
+        "ponto_critico": "Parafusos que penetram o espaco discal adjacente causam fusao indesejada do nivel supra ou infrajacente. Manter margem de 2mm dos platôs adjacentes. Confirmar no fluoroscopio."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Drenagem",
+        "descricao": "Hemostasia cuidadosa — plexo venoso prevertebral. Dreno de Hemovac por 24h (previne hematoma compressivo). Fechamento da fascia cervical e platisma. Subcutaneo. Curativo. Collar cervical mole por 3-4 semanas. Radiografia AP e lateral final.",
+        "ponto_critico": "Hematoma cervical pos-operatorio e emergencia cirurgica — compressao da via aérea. Sinais de alerta: dificuldade respiratoria, distensao do pescoco, disfagia progressiva nas primeiras 24h. Drenagem urgente."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Cage PEEK com enxerto osseo sintetico (beta-TCP) — varios tamanhos"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Placa cervical anterior de titanio (ex: Depuy Synthes ATLANTIS, Stryker REFLEX)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Parafusos cervicais auto-travantes 4,0-4,5mm"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Pinos de Caspar para distracao intersomatica"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Microscópio cirurgico ou lupas de magnificacao (4x) para descompressao fina"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Collar cervical mole por 3-4 semanas (nao e obrigatorio — conforto)",
+      "Radiografia AP e lateral no DPO 1",
+      "Dieta liquida nas primeiras 24h (disfagia transitoria)",
+      "Avaliar voz e deglutição — lesao do nervo larlingeo recorrente",
+      "Deambulacao no DPO 1 — sem restricao de mobilizacao dos membros"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV",
+        "dose": "2g",
+        "duracao": "Dose unica pre-op"
+      },
+      {
+        "nome": "Dexametasona 4mg IV 8/8h",
+        "dose": "4mg",
+        "duracao": "48h PO (reduz edema radicular)"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Pregabalina 75mg VO 12/12h",
+        "dose": "75mg",
+        "duracao": "4-8 semanas"
+      },
+      {
+        "nome": "Omeprazol 40mg VO 24/24h",
+        "dose": "40mg",
+        "duracao": "30 dias (AINEs PO)"
+      }
+    ],
+    "restricoes": [
+      "Collar por 3-4 semanas — nao obrigatorio mas recomendado",
+      "Sem conduzir por 4 semanas",
+      "Sem atividade fisica intensa por 6 semanas",
+      "Fisioterapia: inicio em 2-4 semanas"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Recuperacao Imediata",
+      "periodo": "Semanas 1-4",
+      "objetivo": "Controle da dor, recuperacao da deglutição, inicio da mobilizacao suave",
+      "exercicios": [
+        "Mobilizacao ativa suave do pescoco (sem impacto) a partir da semana 2",
+        "Caminhada progressiva",
+        "Exercicios de respiracao"
+      ],
+      "restricoes": [
+        "Collar por conforto",
+        "Sem carga no braco direito > 2kg",
+        "Sem atividade aerobica intensa"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Fortalecimento Cervical",
+      "periodo": "Semanas 4-12",
+      "objetivo": "Forca cervical 80%, recuperacao da radiculopatia, retorno ao trabalho",
+      "exercicios": [
+        "Fisioterapia cervical — isometricos e isotonicos suaves",
+        "Exercicios posturais para prevencao de sindrome de adjacencia",
+        "Natacao (costas) a partir da semana 6"
+      ],
+      "restricoes": [
+        "Sem impacto cervical",
+        "Sem hiperflexao ou hiperextensao"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Retorno Funcional",
+      "periodo": "Meses 3-6",
+      "objetivo": "Retorno ao trabalho completo de fisioterapia, fusao ossea radiologica confirmada",
+      "exercicios": [
+        "Pilates cervical",
+        "Musculacao de membros superiores com orientacao postural",
+        "Atividade aerobica plena"
+      ],
+      "restricoes": [
+        "Evitar posicoes que reproduzam a dor radicular"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Manutencao",
+      "periodo": "Apos 6 meses",
+      "objetivo": "Fusao radiologica confirmada, prevencao de sindrome de adjacencia",
+      "exercicios": [
+        "Programa permanente de fortalecimento cervical e escapular",
+        "Posturatraining",
+        "Ergonomia no trabalho de fisioterapia"
+      ],
+      "restricoes": [
+        "Postura adequada — evitar hiperflexao cervical prolongada"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Hematoma cervical pos-operatorio (1-2%) — EMERGENCIA por compressao da via aérea",
+      "Lesao do nervo larlingeo recorrente (1-3%) — rouquidao e disfagia — maioria neuropraxia",
+      "Disfagia transitoria (5-15%) — resolucao em 2-4 semanas",
+      "Fistula de liquor por lesao da dura (1-2%)"
+    ],
+    "tardias": [
+      "Pseudartrose — nao fusao do nivel (5-10% em fumantes)",
+      "Migracao ou subsidencia do cage (2-5%)",
+      "Sindrome de adjacencia (2-3% por ano) — deterioracao dos niveis adjacentes",
+      "Mielopatia por implante mal posicionado (raro < 0,5%)"
+    ],
+    "prevencao": [
+      "Retracao suave do esofago — liberar e reposicionar afastador a cada 45 minutos",
+      "Hemostasia cuidadosa pre-fechamento — evitar hematoma",
+      "Cessacao do tabagismo — reduce pseudartrose de 30% para 8%",
+      "Ergonomia e fisioterapia pós-operatória para prevencao de adjacência"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual e o dermátomo e funcao motora da raiz C7?",
+      "resposta": "Dermátomo C7: dedo medio (3° dedo), face posterior do braco e antebraco. Motor C7: extensor do punho (ECRL, ECRB), extensor dos dedos (EDC), tríceps (extensao do cotovelo — reflexo tricipital). Fraqueza para extensao do punho e triceps + parestesias no 3° dedo = radiculopatia C7."
+    },
+    {
+      "pergunta": "O que e o sinal de Spurling e qual sua especificidade?",
+      "resposta": "Extensao cervical + inclinacao para o lado da dor + compressao axial do craneo — reproduz a radiculopatia ipsilateral (dor/parestesia irradiada). Especificidade 92-100% para radiculopatia cervical por compressao foraminais. Sensibilidade baixa (30-60%) — negativo nao exclui. Positivo = alta probabilidade de compressao radicular mecanica."
+    },
+    {
+      "pergunta": "O que e o ACDF e quais sao suas etapas basicas?",
+      "resposta": "Anterior Cervical Discectomy and Fusion: 1) Acesso anterior pelo espaco retroesofagico, 2) Discectomia completa, 3) Descompressao do canal e forame, 4) Implante de cage PEEK com enxerto, 5) Fixacao com placa e parafusos. Taxa de fusao: 90-95% em nivel unico. Resultados em radiculopatia: 90-95% melhora significativa."
+    },
+    {
+      "pergunta": "Qual a emergencia cirurgica mais temida apos ACDF?",
+      "resposta": "Hematoma cervical pos-operatorio — compressao progressiva da via aérea. Sinais: dificuldade respiratoria, distensao cervical, disfagia rapidamente progressiva nas primeiras 24-48h. Conduta: abrir a ferida imediatamente na cama ou na sala de emergencia para drenagem do hematoma antes de qualquer coisa — aguardar sala cirurgica pode ser fatal."
+    },
+    {
+      "pergunta": "Quando preferir artroplastia discal cervical (ADC) em vez de ACDF?",
+      "resposta": "ADC preferida em: paciente jovem < 50a, nivel unico, sem mielopatia grave, sem artrose facetaria severa, sem osteoporose, sem instabilidade. Vantagem: preserva mobilidade, menor sindrome de adjacencia em longo prazo. Resultados equivalentes ao ACDF em 5-7 anos. Contraindicacoes: osteoporose (falha de fixacao), artrose facetaria (dor de movimento persistente), instabilidade."
+    },
+    {
+      "pergunta": "O que e sindrome de adjacencia apos artrodese cervical?",
+      "resposta": "Deterioracao acelerada dos segmentos adjacentes ao nivel fundido — resultado da transferência de cargas para os discos vizinhos. Incidencia: 2-3% ao ano, 25% em 10 anos requerendo cirurgia. Fator de risco: artrodese de multiplos niveis. Prevenivel com escolha criteriosoa dos niveis e programa de exercicios cervicais. Principal argumento a favor da artroplastia discal."
+    },
+    {
+      "pergunta": "Por que a retracao do esofago deve ser liberada a cada 45 minutos?",
+      "resposta": "A pressao continua do afastador sobre o esofago causa isquemia da mucosa e compressao do nervo larlingeo recorrente (passa no sulco traqueoesofagico esquerdo). Retracao > 60 minutos continua aumenta significativamente o risco de disfagia e rouquidao pos-operatoria. Liberar, reposicionar e verificar integridade a cada 45 minutos."
+    },
+    {
+      "pergunta": "Como diferenciar radiculopatia cervical de sindrome do tunel do carpo (STC)?",
+      "resposta": "STC: parestesias nos 3 primeiros dedos (N. mediano), piora noturna e ao dirigir, Phalen positivo (flexao do punho 60s), Tinel positivo no punho, EMG com desaceleracao na conducao pelo tunel do carpo. Radiculopatia C7: dedo medio + antebraco posterior + triceps fraco, Spurling positivo, sem relacao com posicao do punho, EMG com fibrilacoes no triceps. Podem coexistir (double crush syndrome)."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Hernia discal cervical C6-C7 para-mediana direita com radiculopatia C7 refrataria — dermátomo C7 (3° dedo, triceps fraco). EMG positivo. Falha do conservador por 6 semanas.",
+    "conduta": "ACDF C6-C7 eletivo — discectomia + cage PEEK + placa anterior. Urgencia moderada — operar antes de 3 meses para prevenir dano axonal permanente.",
+    "tecnica": "Acesso anterior retroesofagico. Discectomia + descompressao foraminais direita. Cage PEEK + enxerto sintetico + placa de titanio. Fluoroscopia intraoperatoria.",
+    "riscos": [
+      "Hematoma cervical (1-2%) — emergencia de via aérea",
+      "Lesao do nervo larlingeo recorrente (1-3%)",
+      "Disfagia transitoria (5-15%)",
+      "Sindrome de adjacencia a longo prazo (2-3%/ano)"
+    ],
+    "resumo": "F 45a fisioterapeuta com hernia discal C6-C7 e radiculopatia C7 refrataria por 6 semanas. ACDF C6-C7 indicado. Taxa de sucesso de 90-95%. Recuperacao em 6-8 semanas. Prevencao de cronicidade da dor neuropatica."
+  }
+}
