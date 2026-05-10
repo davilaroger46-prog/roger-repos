@@ -1,0 +1,524 @@
+{
+  "meta": {
+    "id": "014",
+    "titulo": "Fratura por Compressao Osteoporótica T12 — Cifoplastia",
+    "slug": "fratura-compressao-osteoporotica-t12-cifoplastia",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Vertebral",
+    "nivel": "intermediario",
+    "tags": [
+      "fratura vertebral",
+      "osteoporose",
+      "T12",
+      "cifoplastia",
+      "vertebroplastia",
+      "cimento osseo",
+      "compressao vertebral"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Feminino",
+    "idade": 74,
+    "atividade": "Aposentada — independente para AVDs",
+    "lado": "Central (T12)",
+    "demanda_funcional": "baixa",
+    "comorbidades": [
+      "Osteoporose (T-score -3.2)",
+      "HAS",
+      "Insuficiencia renal cronica (CKD 3A)",
+      "Uso cronico de corticosteroide (prednisona 5mg/dia por AR)"
+    ]
+  },
+  "historia": {
+    "queixa_principal": "Dor dorso-lombar aguda intensa apos levantar uma sacola de compras — incapacidade de deambular",
+    "inicio": "agudo",
+    "tempo_evolucao": "4 dias",
+    "mecanismo_lesao": "Fratura vertebral osteoporótica por compressao — mecanismo de carga axial minima (levantar sacola de compras 3kg) sobre corpo vertebral de T12 com qualidade ossea extremamente comprometida (T-score -3.2). Sem trauma de alta energia.",
+    "descricao": "Paciente feminina, 74 anos, aposentada. Usuario cronica de corticosteroide por artrite reumatoide. Refere dor dorso-lombar aguda intensa ao levantar sacola de compras 4 dias atras. Dor 9/10 em VAS, incapacitante — impede a deambulacao e o autocuidado. Sem trauma direto ou queda. RX simples mostrou colapso do corpo vertebral de T12 com reducao de 40% da altura anterior. RM confirmou fratura aguda (edema em hipossinal T1 e hipersinal T2/STIR — fratura recente). Sem deficit neurologico."
+  },
+  "classificacao": {
+    "primaria": "AO Spine + SINS (Spinal Instability Neoplastic Score adaptado para osteoporótico)",
+    "ao_ota": {
+      "codigo": "A1-T12-OPO",
+      "osso": "Coluna Toracolombar T12",
+      "segmento": "Corpo Vertebral",
+      "tipo": "A",
+      "grupo": "A1 — Fratura de compressao por impactacao",
+      "descricao": "Fratura vertebral osteoporótica T12 — tipo A1 de compressao com colapso de 40% da altura anterior. Sem retropulsao significativa. Sem deficit neurologico. Fratura aguda (STIR positivo). Doenca osteoporótica severa (T-score -3.2).",
+      "gravidade": "moderada",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "AO Spine Tipo A",
+        "grau": "A1 — Compressao Anterior",
+        "descricao": "A1: impactacao ou cunha anterior (coluna anterior apenas). A2: split. A3: burst incompleto (1 parede posterior). A4: burst completo (2 paredes). A1 — sem retropulsao — indica estabilidade mecanica."
+      },
+      {
+        "nome": "OVCF Score",
+        "grau": "Aguda — Edema STIR positivo",
+        "descricao": "Fratura vertebral osteoporótica aguda (STIR/T2 positivo no corpo vertebral) — indica atividade inflamatoria recente e boa resposta a cifoplastia. STIR negativo = cronica — cifoplastia menos eficaz."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Postura cifótica compensatoria ao nivel de T12",
+      "Fácies de dor — escala VAS 9/10",
+      "Deambulacao impossivel pela dor — dependente de cadeira de rodas",
+      "Sem deformidade neurologica visivel"
+    ],
+    "palpacao": [
+      "Dor exquisita a palpacao do processo espinhoso de T12",
+      "Contratura paravertebral bilateral reativa ao nivel T11-L1",
+      "Sem dor a palpacao do abdomen — exclui causa visceral",
+      "Sem tensao de psoas — exclui abscesso do psoas"
+    ],
+    "movimento": "Mobilizacao da coluna contraindicada pela dor. Avaliacao neurologica: forca de membros inferiores preservada (5/5 bilateral). Sensibilidade intacta. Reflexo patelar e aquileu normais. Babinski negativo. Bexiga e intestino funcionais.",
+    "testes": [
+      {
+        "nome": "RM com Sequencia STIR",
+        "sensibilidade": "97%",
+        "especificidade": "95%",
+        "positivo": "Hipersinal na sequencia STIR no corpo vertebral de T12 — indica fratura aguda com edema de medula ossea. Diferencia fratura aguda (responde a cifoplastia) de cronica (consolidada — cifoplastia menos eficaz) e de metastase ossea."
+      },
+      {
+        "nome": "Teste de Percussao Espinhosa",
+        "sensibilidade": "70%",
+        "especificidade": "80%",
+        "positivo": "Dor intensa a percussao do processo espinhoso de T12 com martelo — localiza o nivel da fratura sem imagem."
+      },
+      {
+        "nome": "Teste de Compressao Axial",
+        "sensibilidade": "65%",
+        "especificidade": "75%",
+        "positivo": "Compressao axial suave da coluna com maos no craneo do paciente sentado reproduz a dor ao nivel T12 — indica fratura compressiva instavel a carga."
+      },
+      {
+        "nome": "Densitometria Ossea (DXA)",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "T-score coluna = -3.2 (osteoporose severa). T-score colo femoral = -2.9. Indica necessidade de tratamento antiosteoporótico agressivo pos-cirurgia."
+      }
+    ],
+    "red_flags": [
+      "Deficit neurologico (paresia ou hipoestesia abaixo de T12) — indica retropulsao com compressao medular — RM emergencia e cirurgia",
+      "Fratura de mais de 50% da altura com retropulsao — instabilidade mecanica — considerar instrumentacao",
+      "Dor noturna intensa desproporcionalmente maior que a esperada — excluir metastase ossea (PSA, mamografia, eletrof serica)",
+      "Febre + leucocitose + VHS elevado — espondilodiscite infecciosa"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Colapso de 40% da altura anterior do corpo vertebral de T12 — cunha anterior",
+        "Sem retropulsao do fragmento posterior — canal integro",
+        "Esclerose subcondral dos corpos de T11, T12 e L1 (degeneracao cronica)",
+        "Fratura vertebral L1 cronica previa (colapso antigo — sem edema)"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC toracolombar antes da cifoplastia: 1) Confirmar ausencia de retropulsao, 2) Avaliar morfologia do pedículo para guia da agulha, 3) Excluir fratura da parede posterior, 4) Detectar extensao da fratura nao visivel no RX."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Hipossinal T1 e hipersinal T2/STIR em T12 — fratura aguda ativa (3-4 dias)",
+        "Sem retropulsao significativa — canal vertebral preservado",
+        "Fratura L1 cronica — normossinal T1 (consolidada)",
+        "Medula espinhal intacta — sem compressao ou mielopatia",
+        "Sem lesao de partes moles — exclui tumor ou abscesso"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Fratura vertebral osteoporótica aguda T12 por compressao — AO Spine A1 — sem deficit neurologico. Dor incapacitante em idosa com osteoporose severa (T-score -3.2) e uso de corticosteroide cronico.",
+    "diferenciais": [
+      "Metastase ossea vertebral — dor progressiva noturna, lesao litica, historia de tumor primario — excluida pela RM e exames",
+      "Mieloma multiplo — hipercalcemia, proteina de Bence-Jones, eletroforese — excluir com exames laboratoriais",
+      "Espondilodiscite infecciosa — febre, VHS/PCR altos, hipossinal T2 no disco — exclui pela RM",
+      "Fratura vertebral traumatica de alta energia — mecanismo diferente, jovens, RX padrao diferente"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "A",
+      "desvio_mm": 40,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "baixa",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": true
+    },
+    "regras": [
+      {
+        "if": "fratura_aguda_STIR_positivo AND dor_incapacitante AND sem_deficit_neurologico",
+        "then": "cifoplastia_T12_indicada",
+        "prioridade": "alta",
+        "justificativa": "Fratura osteoporótica aguda (STIR+) com dor VAS > 7 refrataria ao conservador — cifoplastia tem 80-90% de alivio da dor e restaura qualidade de vida em 48h. Eficacia maior que vertebroplastia pela restauracao de altura."
+      },
+      {
+        "if": "T-score <= -3 AND corticosteroide_cronico",
+        "then": "tratamento_antiosteoporotico_urgente_pos-cirurgia",
+        "prioridade": "alta",
+        "justificativa": "Osteoporose corticoidea (T-score -3.2 + prednisona cronica) — altissimo risco de novas fraturas. Denosumab 60mg SC 6/6 meses e o agente de escolha (nao renal-dependente como o bisfosfonato). Calcio + Vitamina D."
+      },
+      {
+        "if": "fratura_A1_sem_retropulsao",
+        "then": "cifoplastia_sem_instrumentacao",
+        "prioridade": "alta",
+        "justificativa": "Fratura A1 sem retropulsao e neurologicamente integra — cifoplastia e suficiente. Instrumentacao posterior adicionaria morbidade sem beneficio nesta idosa com baixa demanda."
+      },
+      {
+        "if": "CKD3",
+        "then": "evitar_bifosfonatos_prefer_denosumab",
+        "prioridade": "media",
+        "justificativa": "Bisfosfonatos (alendronato, zoledronato) contraindicados em CKD < 30mL/min (CKD3-5). Denosumab e seguro em qualquer nivel de funcao renal — anticorpo monoclonal anti-RANKL, nao excretado pelo rim."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Cifoplastia percutanea bilateral T12 — insercao bilateral de baloes por pedículos + injecao de cimento osseo de polimetilmetacrilato (PMMA) guiada por fluoroscopia. Procedimento minimamente invasivo em anestesia local + sedacao.",
+      "nivel_urgencia": "moderada",
+      "explicacao": "Fratura osteoporótica aguda T12 com dor VAS 9 incapacitante em idosa 74a. Cifoplastia percutanea: procedimento rapido (45-60 min), minimamente invasivo, eficaz em 80-90% para alivio imediato da dor. Superior a vertebroplastia pela restauracao da altura vertebral (balao cria cavidade antes do cimento). Iniciar denosumab + calcio + vitamina D apos a cirurgia."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Fraturas A1 sem dor severa (VAS < 5) — analgesia + repouso relativo",
+        "Pacientes que recusam procedimento",
+        "Aguardo de imagem confirmatoria antes da decisao"
+      ],
+      "protocolo": [
+        "Repouso relativo em cama rigida por 2-4 semanas",
+        "Cinto abdominal ou ortese toracica (TLSO) para mobilizacao",
+        "AINEs com extremo cuidado (risco renal em CKD) — preferir paracetamol",
+        "Opioide de baixa potencia se dor severa",
+        "Calcio 1000-1500mg/dia + vitamina D 800-1000UI/dia — iniciar imediatamente"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Paracetamol",
+          "dose": "1000mg",
+          "via": "VO",
+          "intervalo": "6/6h",
+          "duracao": "21 dias (preferivel ao AINE em CKD)"
+        },
+        {
+          "nome": "Tramadol",
+          "dose": "50mg",
+          "via": "VO",
+          "intervalo": "8/8h SN",
+          "duracao": "7-14 dias"
+        },
+        {
+          "nome": "Colecalciferol (Vitamina D3)",
+          "dose": "1000UI",
+          "via": "VO",
+          "intervalo": "24/24h",
+          "duracao": "Permanente"
+        },
+        {
+          "nome": "Carbonato de calcio",
+          "dose": "500mg",
+          "via": "VO",
+          "intervalo": "12/12h com refeicao",
+          "duracao": "Permanente"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Dor VAS > 7 por > 4 semanas refrataria ao conservador — ou imediata se muito incapacitante",
+        "Fratura aguda (STIR positivo) — maior eficacia",
+        "Preservacao do nivel de independencia",
+        "Prevencao de complicacoes do decubito (TVP, pneumonia)"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Cifoplastia (Balloon Kyphoplasty)",
+          "quando_usar": "Fratura aguda com STIR+, colapso > 30%, restauracao de altura desejada",
+          "vantagens": [
+            "Restaura parcialmente a altura vertebral (10-30%)",
+            "Menor extravasamento de cimento que vertebroplastia (3-5% vs 10-15%)",
+            "Reduz a cifose local",
+            "Alivio da dor em 80-90% em 48h"
+          ],
+          "desvantagens": [
+            "Custo maior que vertebroplastia (balao descartavel)",
+            "Nao previne novas fraturas — necessita terapia antiosteoporótica"
+          ]
+        },
+        {
+          "nome": "Vertebroplastia",
+          "quando_usar": "Alternativa se cifoplastia nao disponivel ou fratura sem deformidade cifótica",
+          "vantagens": [
+            "Menor custo",
+            "Tecnica mais simples"
+          ],
+          "desvantagens": [
+            "Sem restauracao de altura",
+            "Maior risco de extravasamento de cimento (10-15%)",
+            "Nao corrige cifose"
+          ]
+        },
+        {
+          "nome": "Instrumentacao Posterior (Fixacao com Parafusos)",
+          "quando_usar": "Fratura A3-A4 com retropulsao OU deficit neurologico OU instabilidade mecanica",
+          "vantagens": [
+            "Estabilizacao mecanica definitiva"
+          ],
+          "desvantagens": [
+            "Cirurgia maior — alta morbidade em idosas",
+            "Parafusos em osso osteoporótico podem soltar (pull-out)"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Dor incapacitante por fratura osteoporótica aguda (STIR+)",
+      "Refrataria ao conservador por > 3-4 semanas OU imediata se VAS > 8",
+      "Fratura com > 30% de colapso e fratura aguda",
+      "Preservacao da independencia funcional e prevencao de complicacoes de decubito"
+    ],
+    "posicionamento": "Decubito ventral (prona). Coxins sob o torax e cristas iliacas (alivia pressao abdominal, facilita abertura do espaco intercostal). Cabeca em extensao neutra. Fluoroscopia biplanar (AP e lateral simultanea) obrigatoria.",
+    "anestesia": [
+      "Sedacao + anestesia local (preferida para idosos): propofol em sedacao leve + fentanil + infiltracao local com bupivacaina 0,25% nos pedículos bilaterais de T12",
+      "Anestesia geral se paciente agitado, claustrofobia ou impossibilidade de cooperacao — evitar quando possivel em idosos pela menor morbidade da sedacao"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Confirmacao do Nivel e Infiltracao Local",
+        "descricao": "Fluoroscopia lateral — marcar T12 com marcador externo. Inclinacao do C-arm para visualizar os pedículos em 'olho de touro' na incidencia AP obliqua (angulacao cranio-caudal 20-30 graus + rotacao 15 graus). Infiltracao com bupivacaina 0,25% no peristeo do pedículo bilateral de T12.",
+        "ponto_critico": "Confirmar o nivel com fluoroscopia ANTES de introduzir qualquer agulha — erro de nivel e catastrofico em cifoplastia."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Insercao Bilateral das Agulhas de Trabalho",
+        "descricao": "Insercao bilateral das agulhas de trabalho (trocarteres 10G ou 11G) pelos pedículos de T12 — tecnica 'bullseye' (caminha pelo centro do pedículo na incidencia AP ate estar no corpo vertebral na lateral). Posicao final: 1/3 anterior do corpo vertebral, na juncao com a cortical anterior.",
+        "ponto_critico": "A agulha NAO deve cruzar a cortical medial do pedículo — penetraria o canal e lesaria a medula. Confirmar na incidencia AP que a ponta da agulha nao ultrapassou a linha pedicular medial ate que esteja plenamente no corpo vertebral."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Osteotomia e Insercao dos Baloes",
+        "descricao": "Insercao do fio guia e dilatatores progressivos pelos trocarteres. Insercao dos baloes kyphoplasty bilaterais no corpo de T12. Insuflacao progressiva dos baloes (0,5mL/vez) ate: pressao maxima do balao, reducao da cifose na fluoroscopia lateral, ou restauracao de 50-70% da altura vertebral.",
+        "ponto_critico": "Monitorar pressao do balao — nao ultrapassar a pressao maxima recomendada pelo fabricante. Insuflacao excessiva pode romper o balao no corpo vertebral — complicacao rara mas de manejo dificil."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Desinsuflacao e Preparacao da Cavidade",
+        "descricao": "Desinsuflacao e retirada dos baloes. A cavidade criada pelos baloes e a zona de injecao do cimento. Irrigar a cavidade com SF 0,9%. Verificar na fluoroscopia biplanar que a cavidade esta no centro do corpo vertebral — nao proxima ao canal ou as corticais.",
+        "ponto_critico": "A cavidade deve ser CENTRAL — proxima ao canal aumenta risco de extravasamento de cimento para o canal (catastrofico). Confirmar em AP e lateral antes de injetar o cimento."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Injecao do Cimento PMMA",
+        "descricao": "Preparacao do cimento PMMA (polimetilmetacrilato) em fase pastosa (nao fluida). Injecao lenta bilateral com canulas de injecao — 2-4mL por lado. Monitorar extravasamento com fluoroscopia CONTINUA durante toda a injecao. Parar imediatamente se extravasamento para o canal ou disco.",
+        "ponto_critico": "Injetar o cimento APENAS em fase pastosa — cimento fluido extravasara para o canal (paresia ou paralisia) ou para a veia cava (embolismo de cimento — fatal). Fluido = parar e aguardar 1-2 minutos antes de continuar."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Verificacao Final e Fechamento",
+        "descricao": "Aguardar cimento endurecer (2-3 min). Retirar os trocarteres. Radiografia AP e lateral final — confirmar posicao do cimento (deve preencher a cavidade sem extravasamento). Curativo. Sentar o paciente em 30 minutos — verificar alivio imediato da dor. Fisioterapia: deambulacao na tarde do procedimento.",
+        "ponto_critico": "Se extravasamento de cimento para o canal na fluoroscopia: TC de emergencia. Se compressao neurologica: laminectomia de emergencia para remocao do cimento enquanto ainda fresco (nao endurecido)."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Kit de Cifoplastia com Baloes (Medtronic Kyphon, DePuy Synthes AVAflex)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cimento osseo PMMA radiopaco para cifoplastia"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio biplanar (obrigatorio — AP e lateral simultaneos)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Agulhas de trabalho/trocarteres 10-11G"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Canulas de injecao de cimento (45 e 90 graus)"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Deambulacao na tarde do procedimento (1-2h apos)",
+      "Cinto lombotoracico por conforto (nao obrigatorio)",
+      "VAS esperado < 3 em 24-48h — comparar com pre-op",
+      "Radiografia AP e lateral no DPO 1",
+      "Iniciar denosumab 60mg SC imediatamente ou no DPO 1 — prevencao de novas fraturas"
+    ],
+    "prescricao": [
+      {
+        "nome": "Paracetamol 1000mg VO 6/6h",
+        "dose": "1000mg",
+        "duracao": "14 dias"
+      },
+      {
+        "nome": "Tramadol 50mg VO 8/8h SN",
+        "dose": "50mg",
+        "duracao": "7 dias"
+      },
+      {
+        "nome": "Denosumab 60mg SC",
+        "dose": "60mg",
+        "duracao": "1 injecao SC — repetir em 6 meses (tratamento antiosteoporotico)"
+      },
+      {
+        "nome": "Colecalciferol 1000UI VO 24/24h",
+        "dose": "1000UI",
+        "duracao": "Permanente"
+      },
+      {
+        "nome": "Carbonato de calcio 500mg VO 12/12h",
+        "dose": "500mg",
+        "duracao": "Permanente"
+      }
+    ],
+    "restricoes": [
+      "Sem atividade fisica de impacto por 4-6 semanas",
+      "Sem flexao anterior > 30 graus por 4 semanas",
+      "Cinto lombotoracico ao sair de casa por 4 semanas",
+      "Osteoporose — orientar prevencao de quedas: tapetes, corrimaos, banheiro adaptado"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Mobilizacao Imediata",
+      "periodo": "Dias 1-14",
+      "objetivo": "Deambulacao independente, controle da dor, adaptacao ao lar",
+      "exercicios": [
+        "Deambulacao progressiva com apoio",
+        "Exercicios de respiracao profunda (prevencao pneumonia)",
+        "Exercicios de membros superiores e inferiores em decubito"
+      ],
+      "restricoes": [
+        "Sem flexao lombar > 30 graus",
+        "Sem carga axial > 5kg"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Fortalecimento Basico",
+      "periodo": "Semanas 2-6",
+      "objetivo": "Forca dos membros 80%, independencia nas AVDs, prevencao de novas quedas",
+      "exercicios": [
+        "Fisioterapia de equilíbrio e propriocepcao (prevencao de quedas)",
+        "Exercicios de extensao dorsal suave",
+        "Caminhada progressiva ate 30 min"
+      ],
+      "restricoes": [
+        "Sem hiperflexao",
+        "Cinto por conforto ao sair"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Manutencao",
+      "periodo": "Semanas 6+",
+      "objetivo": "Prevencao de novas fraturas, tratamento da osteoporose, qualidade de vida",
+      "exercicios": [
+        "Hidroginastica — descarga da coluna",
+        "Pilates adaptado para osteoporose",
+        "Caminhadas diarias"
+      ],
+      "restricoes": [
+        "Evitar esportes de impacto permanentemente",
+        "Adaptacoes do domicilio para prevencao de quedas"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Seguimento Longo Prazo",
+      "periodo": "Apos 6 meses",
+      "objetivo": "Tratamento da osteoporose, prevencao de novas fraturas, DXA de controle",
+      "exercicios": [
+        "Programa de exercicios regular de fortalecimento muscular",
+        "Equilibrio e coordenacao"
+      ],
+      "restricoes": [
+        "Nenhuma atividade de alto impacto — risco de nova fratura"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Extravasamento de cimento para o canal vertebral (0,5-1%) — paralisia — emergencia",
+      "Extravasamento vascular de cimento (embolia de cimento — 0,1%) — potencialmente fatal",
+      "Extravasamento para o disco adjacente (5-10%) — assintomatico na maioria",
+      "Pneumotorace (< 0,5%) — por lesao pleural na abordagem toracica alta"
+    ],
+    "tardias": [
+      "Nova fratura vertebral adjacente (25-40% em 1 ano) — pelo nivel maior de rigidez do segmento cimentado",
+      "Falha do tratamento — sem alivio da dor (10-20%) — indica fratura cronica ou diagnostico errado",
+      "Pseudartrose da fratura cimentada (raro)"
+    ],
+    "prevencao": [
+      "Injetar cimento SOMENTE em fase pastosa",
+      "Fluoroscopia biplanar continua durante a injecao",
+      "Tratar a osteoporose apos o procedimento (denosumab) — previne novas fraturas",
+      "Adaptacoes domiciliares para prevencao de quedas"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual a diferenca entre cifoplastia e vertebroplastia?",
+      "resposta": "Vertebroplastia: injeta cimento PMMA diretamente no corpo vertebral sem criar cavidade previa — nao restaura altura, maior risco de extravasamento (10-15%). Cifoplastia: insercao de balao que cria cavidade antes da injecao de cimento — restaura altura vertebral (10-30%), corrige cifose local, menor extravasamento (3-5%) porque o cimento entra em cavidade formada e em osso menos pressurizado. Resultados clinicos similares em dor."
+    },
+    {
+      "pergunta": "O que a sequencia STIR na RM indica em uma fratura vertebral osteoporótica?",
+      "resposta": "STIR (Short TI Inversion Recovery) — sequencia sensivel a agua livre (edema). Hipersinal STIR no corpo vertebral = fratura AGUDA (< 3-4 semanas) com edema de medula ossea ativo. STIR negativo = fratura cronica consolidada. Importancia: cifoplastia e mais eficaz em fraturas STIR positivas (agudas). Tambem distingue fratura osteoporótica de metastase (metastase: hipossinal T1 + massa de partes moles)."
+    },
+    {
+      "pergunta": "Por que o cimento PMMA nao pode ser injetado em fase fluida?",
+      "resposta": "Cimento fluido tem alta pressao de injecao e baixa viscosidade — extravasa facilmente para as veias epidurais (embolia de cimento — potencialmente fatal), para o canal vertebral (paralisia) ou para o disco adjacente. Em fase PASTOSA (consistencia de pasta de dente), o cimento e suficientemente viscoso para preencher a cavidade sem extravasamento. A janela de trabalho e de 2-4 minutos — monitorar a consistencia continuamente."
+    },
+    {
+      "pergunta": "Quais sao as indicacoes absolutas de tratamento cirurgico em fratura vertebral osteoporótica?",
+      "resposta": "1) Deficit neurologico por compressao medular ou radicular — descompressao e instrumentacao urgente. 2) Instabilidade mecanica grave (fratura A3-A4 com retropulsao > 30% do canal). 3) Dor incapacitante refrataria ao conservador por > 3-4 semanas (cifoplastia/vertebroplastia). 4) Sindrome da cauda equina — emergencia. Fratura A1 sem deficit neurologico e sem retropulsao: conservative OU cifoplastia."
+    },
+    {
+      "pergunta": "Por que denosumab e preferido a bifosfonatos em idosos com CKD?",
+      "resposta": "Bifosfonatos (alendronato, zoledronato) sao CONTRAINDICADOS em CKD com TFG < 30mL/min (CKD 4-5) e com cautela em CKD 3 — acumulam-se e causam intoxicacao ossea. Denosumab (anticorpo anti-RANKL) nao e excretado pelo rim — pode ser usado em QUALQUER nivel de funcao renal com seguranca. Em idosas osteoporóticas com CKD — denosumab 60mg SC a cada 6 meses e a escolha."
+    },
+    {
+      "pergunta": "O que e a sindrome de fratura adjacente apos cifoplastia?",
+      "resposta": "Nova fratura vertebral nos segmentos adjacentes ao nivel cimentado — incidencia de 25-40% em 1 ano. Mecanismo: o corpo vertebral cimentado fica mais rigido que os vertebrados adjacentes, concentrando cargas nos platôs adjacentes. Prevenivel com: 1) Tratamento agressivo da osteoporose (denosumab), 2) Cifoplastia de niveis multiplos se indicado, 3) Adaptacoes de atividade e prevencao de quedas."
+    },
+    {
+      "pergunta": "Qual e a posicao de trabalho ideal da agulha de cifoplastia no pedículo?",
+      "resposta": "Tecnica 'bullseye' — na incidencia AP obliqua ('olho de touro'): a agulha avanca pelo centro do pedículo — a ponta aparece como um ponto central no pedículo. A agulha NAO deve cruzar a cortical medial do pedículo ate estar plenamente dentro do corpo vertebral. Na incidencia lateral: confirmar que a ponta esta no 1/3 anterior do corpo vertebral antes de inserir o balao."
+    },
+    {
+      "pergunta": "Quais sao os fatores de risco para novas fraturas vertebrais osteoporóticas?",
+      "resposta": "1) T-score <= -2,5 (osteoporose). 2) Fratura vertebral previa (aumenta risco de nova fratura em 5x). 3) Corticosteroide cronico (> 5mg/dia por > 3 meses) — osteoporose corticoidea. 4) Idade > 65 anos. 5) IMC baixo. 6) Tabagismo. 7) Historia familiar de fratura de quadril. Estratificar com FRAX score. Tratar agressivamente — denosumab, calcio + vitamina D, prevencao de quedas."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Fratura vertebral osteoporótica aguda T12 (AO A1, STIR positivo) — dor incapacitante VAS 9 em idosa com T-score -3.2 e uso cronico de corticosteroide. Sem deficit neurologico.",
+    "conduta": "Cifoplastia percutanea bilateral T12 em sedacao + anestesia local. Iniciar denosumab 60mg SC + calcio + vitamina D imediatamente apos.",
+    "tecnica": "Insercao bilateral de baloes por pedículos T12 + injecao de cimento PMMA em fase pastosa. Fluoroscopia biplanar continua. Deambulacao na tarde do procedimento.",
+    "riscos": [
+      "Extravasamento de cimento para o canal (0,5-1%) — paralisia",
+      "Embolia de cimento (0,1%) — raro mas potencialmente fatal",
+      "Nova fratura adjacente em 1 ano (25-40%) — prevenir com denosumab",
+      "Extravasamento para o disco (5-10%) — assintomatico"
+    ],
+    "resumo": "F 74a com osteoporose severa e fratura T12 aguda (STIR+) por baixo impacto. Cifoplastia percutanea indicada — alivio de 80-90% da dor em 48h. Deambulacao no dia do procedimento. Tratamento antiosteoporótico urgente com denosumab para prevenir novas fraturas (risco de 25-40% em 1 ano sem tratamento)."
+  }
+}
