@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getCases } from "../api/client";
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorBanner from "../components/ErrorBanner";
 
 const NIVEL_BADGE = {
   basico:        "badge-green",
@@ -15,18 +17,20 @@ export default function CaseListPage({ onSelect }) {
   const [regiao, setRegiao] = useState("");
   const [nivel, setNivel]   = useState("");
 
-  useEffect(() => {
+  const fetchCases = useCallback(() => {
     const params = {};
     if (q)      params.q      = q;
     if (regiao) params.regiao = regiao;
     if (nivel)  params.nivel  = nivel;
-
     setLoading(true);
+    setError(null);
     getCases(params)
       .then(setCases)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, [q, regiao, nivel]);
+
+  useEffect(() => { fetchCases(); }, [fetchCases]);
 
   return (
     <>
@@ -60,8 +64,8 @@ export default function CaseListPage({ onSelect }) {
         ))}
       </div>
 
-      {loading && <p style={{ color: "var(--muted)", textAlign: "center" }}>Carregando...</p>}
-      {error   && <p style={{ color: "var(--red)" }}>{error}</p>}
+      {loading && <LoadingSpinner message="Buscando casos..." />}
+      {error   && <ErrorBanner message={error} onRetry={fetchCases} />}
 
       {!loading && cases.length === 0 && (
         <div className="card" style={{ textAlign: "center", color: "var(--muted)" }}>

@@ -4,9 +4,11 @@ import CaseDetailPage from "./pages/CaseDetailPage";
 import FlashcardPage from "./pages/FlashcardPage";
 import ProgressPage from "./pages/ProgressPage";
 import GeneratePage from "./pages/GeneratePage";
+import DecisionPage from "./pages/DecisionPage";
 
 const TABS = [
   { id: "cases",    icon: "🗂️",  label: "Casos" },
+  { id: "decision", icon: "⚡",  label: "Decisão" },
   { id: "generate", icon: "✨",  label: "Gerar" },
   { id: "progress", icon: "📈",  label: "Progresso" },
 ];
@@ -33,7 +35,7 @@ export default function App() {
         <CaseDetailPage
           caso={selectedCase}
           onBack={() => setSelectedCase(null)}
-          onFlashcards={() => setFlashcardCase(selectedCase)}
+          onFlashcards={(fullData) => setFlashcardCase(fullData)}
         />
       </div>
     );
@@ -49,6 +51,9 @@ export default function App() {
       <main className="mobile-content">
         {tab === "cases" && (
           <CaseListPage onSelect={setSelectedCase} />
+        )}
+        {tab === "decision" && (
+          <DecisionPage />
         )}
         {tab === "generate" && (
           <GeneratePage onGenerated={setSelectedCase} />
