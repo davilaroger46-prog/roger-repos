@@ -1,0 +1,530 @@
+{
+  "meta": {
+    "id": "016",
+    "titulo": "Escoliose Degenerativa do Adulto — Desequilíbrio Sagital Grave",
+    "slug": "escoliose-degenerativa-adulto-desequilibrio-sagital",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna — Deformidade Adulto",
+    "nivel": "avancado",
+    "tags": [
+      "escoliose",
+      "degenerativa",
+      "adulto",
+      "SVA",
+      "PSO",
+      "instrumentacao longa",
+      "balanco sagital",
+      "deformidade"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Feminino",
+    "idade": 61,
+    "atividade": "Professora universitaria",
+    "lado": "Curva T11-L4 com convexidade direita",
+    "demanda_funcional": "alta",
+    "comorbidades": [
+      "Osteoporose T-score -2.6",
+      "HAS",
+      "Dislipidemia"
+    ]
+  },
+  "historia": {
+    "queixa_principal": "Dor lombar cronica incapacitante com deformidade progressiva — incapaz de manter postura ereta por 10 minutos",
+    "inicio": "cronico",
+    "tempo_evolucao": "5 anos com piora intensa nos ultimos 18 meses",
+    "mecanismo_lesao": "Escoliose degenerativa do adulto — curvatura lateral por degeneracao assimetrica de discos e facetas articulares. SVA progressivo de +8cm. Sem escoliose na adolescencia.",
+    "descricao": "Paciente feminina, 61 anos, professora universitaria. Deformidade lombar progressiva ha 5 anos sem escoliose previa. Dor lombar VAS 8 — incapaz de manter postura ereta por 10 minutos, nao caminha 100m sem parar. Claudicacao neurogênica bilateral leve. RX panorâmico: curva T11-L4 Cobb 42 graus, SVA +8cm, PI-LL 35 graus. ODI 62%. Falha do conservador por 5 anos."
+  },
+  "classificacao": {
+    "primaria": "SRS-Schwab para Escoliose do Adulto + Parametros de Balanco Sagital",
+    "ao_ota": {
+      "codigo": "ESC-DEG-L",
+      "osso": "Coluna Toracolombar T11-L4",
+      "segmento": "Escoliose Degenerativa Adulto",
+      "tipo": "C",
+      "grupo": "Cobb 42 graus com SVA +8cm — desequilibrio sagital grave",
+      "descricao": "Escoliose degenerativa do adulto T11-L4, Cobb 42 graus, SVA +8cm, PI-LL 35 graus. Modificadores SRS-Schwab: SVA +2, PI-LL +2, PT +2 — trifecta de desequilibrio grave.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "SRS-Schwab",
+        "grau": "Tipo L, SVA+2, PI-LL+2, PT+2",
+        "descricao": "Curva lombar com todos os modificadores no grau maximo — indica necessidade de correcao sagital cirurgica com osteotomia."
+      },
+      {
+        "nome": "ODI — Oswestry",
+        "grau": "62% — Disfuncao Grave",
+        "descricao": "ODI > 40% com deformidade como causa = indicacao cirurgica. Melhora esperada de 30-40 pontos no ODI apos correcao bem-sucedida."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Postura em flexao anterior do tronco — inclinacao para frente (sagittal imbalance)",
+      "Curvatura escoliótica toracolombar com protuberancia posterior direita",
+      "Retroversao pelvica compensatoria — pelve rodada para tras",
+      "Joelhos levemente fletidos — compensacao de membros inferiores"
+    ],
+    "palpacao": [
+      "Dor intensa a palpacao L3-L4-L5 (apex da curva)",
+      "Contratura severa paravertebral bilateral",
+      "Gibosidade posterior direita no teste de Adam (flexao anterior)",
+      "Processo de Adam positivo — rotacao vertebral confirmada"
+    ],
+    "movimento": "Flexao anterior: 30 graus (gravemente limitada). Extensao: impossivel — dor 10/10. Rotacao: 20 graus bilateral. SVA medido em RX: +8cm. Fio de prumo: desvio 3cm para direita (desequilibrio coronal).",
+    "testes": [
+      {
+        "nome": "SVA — Sagittal Vertical Axis",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "Fio de prumo de C7 cai 8cm anterior a borda posterior de S1. Normal: 0-4cm. SVA > 4cm = desequilibrio grave = indicacao de osteotomia."
+      },
+      {
+        "nome": "Angulo de Cobb (RX)",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "Cobb T11-L4 = 42 graus. Adulto: indicacao cirurgica se Cobb > 30 graus com dor grave e falha conservadora."
+      },
+      {
+        "nome": "Discrepancia PI-LL",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "IP 65 graus. Lordose lombar 30 graus. PI-LL = 35 graus (grave — normal < 10). PI-LL > 20 graus = osteotomia corretiva necessaria."
+      },
+      {
+        "nome": "ODI — Oswestry Disability Index",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "ODI 62% — disfuncao grave. Correlaciona diretamente com SVA — principal preditor de satisfacao cirurgica quando corrigido."
+      }
+    ],
+    "red_flags": [
+      "Deficit neurologico progressivo — estenose neurológica pela curvatura — urgencia relativa",
+      "Progressao rapida > 10 graus em 6 meses",
+      "Dor intratavel — considerar causa visceral ou neoplasica",
+      "Colapso sagital agudo — falha de instrumentacao previa ou nova fratura vertebral"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "RX panorâmico EOS em ortostatismo — essencial para medicoes",
+        "Cobb T11-L4 = 42 graus. SVA +8cm. IP 65, LL 30, PT 32",
+        "Translacao vertebral de L3 de 2cm (desvio coronal)",
+        "Artrose facetaria L3-L4 e L4-L5 no apex da curva"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC pre-op obrigatoria: morfologia dos pediculos para planejamento de parafusos, qualidade ossea, artrose facetaria, planejamento 3D da PSO."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Estenose do canal L3-L4 no apex da curva",
+        "Discopatia degenerativa grave L2-L3, L3-L4, L4-L5",
+        "Artrose facetaria bilateral",
+        "Medula espinhal sem compressao acima de L1"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Escoliose degenerativa do adulto T11-L4 Cobb 42 graus com desequilibrio sagital grave (SVA +8cm, PI-LL 35 graus). ODI 62%. Falha conservadora 5 anos.",
+    "diferenciais": [
+      "Escoliose idiopatica residual — historia de escoliose na adolescencia, curva mais rigida",
+      "Osteoporose com colapso assimetrico — multiplas fraturas na RM",
+      "Tumor vertebral — progressao rapida, lesoes liticas",
+      "Espondilite anquilosante — curva toracica rigida, sindesmofitos, sacroiliite"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "alta",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": true
+    },
+    "regras": [
+      {
+        "if": "Cobb > 30 AND SVA > 4cm AND ODI > 40 AND falha_conservador",
+        "then": "instrumentacao_longa_com_correcao_sagital",
+        "prioridade": "alta",
+        "justificativa": "Deformidade grave com disfuncao grave refrataria — indicacao cirurgica. Correcao do SVA e o principal preditor de satisfacao."
+      },
+      {
+        "if": "PI-LL > 20 graus",
+        "then": "PSO_necessaria_para_restaurar_lordose",
+        "prioridade": "alta",
+        "justificativa": "PI-LL 35 graus — lordose atual (30) insuficiente para IP (65). PSO gera 25-35 graus de correcao em nivel unico. Sem PSO o SVA nao sera corrigido adequadamente."
+      },
+      {
+        "if": "T-score -2.6 AND instrumentacao_longa",
+        "then": "augmentacao_parafusos_com_cimento",
+        "prioridade": "alta",
+        "justificativa": "Osteoporose — alta taxa de pull-out em instrumentacao longa. Cimento PMMA nos pediculos criticos (L5, S1, niveis superiores) aumenta forca de fixacao em 300%."
+      },
+      {
+        "if": "curva_rigida AND maior_60_anos",
+        "then": "correcao_parcial_alvo_SVA<5cm",
+        "prioridade": "media",
+        "justificativa": "Tentativa de correcao total aumenta complicacoes sem beneficio adicional em idosas com curvas rigidas. Meta: SVA < 5cm e Cobb < 25 graus."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Instrumentacao posterior longa T10-S1/Ilíaco + PSO em L2 para restaurar lordose (25-35 graus) + descompressao L3-L4 + augmentacao com cimento PMMA em osteoporose.",
+      "nivel_urgencia": "baixa",
+      "explicacao": "Escoliose degenerativa grave com desequilibrio sagital grave em professora 61a. Cirurgia complexa de alto risco: instrumentacao T10-sacro-ilíaco + PSO. Sangramento esperado 1-3L. Equipe experiente em deformidade adulta. Melhora esperada do ODI de 30-40 pontos."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Cobb < 30 com dor moderada — fisioterapia",
+        "Alto risco cirurgico",
+        "Como preparo pre-op — otimizacao fisica e cardiologica"
+      ],
+      "protocolo": [
+        "Fisioterapia: core stabilization, hidroginastica",
+        "AINEs por 4-6 semanas em crises",
+        "Infiltracoes facetarias ou epidurais"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "21 dias"
+        },
+        {
+          "nome": "Duloxetina",
+          "dose": "60mg",
+          "via": "VO",
+          "intervalo": "24/24h",
+          "duracao": "60-90 dias"
+        },
+        {
+          "nome": "Pregabalina",
+          "dose": "75mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "30-60 dias"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Cobb > 30 com dor grave ODI > 40%",
+        "SVA > 4cm",
+        "Progressao > 5 graus/ano",
+        "Deficit neurologico por estenose associada"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Instrumentacao Posterior Longa + PSO",
+          "quando_usar": "SVA > 4cm, PI-LL > 20 — desequilibrio sagital grave",
+          "vantagens": [
+            "Correcao do desequilibrio sagital — preditor de satisfacao",
+            "Estabilidade longa"
+          ],
+          "desvantagens": [
+            "4-8h de cirurgia, sangramento 1-3L",
+            "Complicacoes em 40-60%"
+          ]
+        },
+        {
+          "nome": "Instrumentacao + TLIF com Cage Lordótico",
+          "quando_usar": "PI-LL < 20 graus — osteotomia menor suficiente",
+          "vantagens": [
+            "Menor morbidade que PSO",
+            "Boa correcao em desequilibrios moderados"
+          ],
+          "desvantagens": [
+            "Insuficiente para PI-LL > 20"
+          ]
+        },
+        {
+          "nome": "Instrumentacao sem Osteotomia",
+          "quando_usar": "Curvas flexiveis ou PI-LL < 10 graus",
+          "vantagens": [
+            "Menor sangramento e tempo"
+          ],
+          "desvantagens": [
+            "Nao adequado para desequilibrio sagital grave"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Cobb > 30 com dor grave refrataria ao conservador",
+      "SVA > 4cm",
+      "Deficit neurologico pela curvatura",
+      "Progressao > 5 graus/ano documentada"
+    ],
+    "posicionamento": "Decubito ventral em armacao radiotransparente (Jackson frame). Abdomen livre. Fluoroscopia biplanar. PEM+PESS desde a instalacao.",
+    "anestesia": [
+      "Anestesia geral. Monitoracao invasiva: linha arterial, CVC (cirurgia 4-8h)",
+      "PEM + PESS obrigatoria — PSO tem risco neurologico significativo",
+      "Cell saver obrigatorio — sangramento esperado 1-3L",
+      "Acido tranexamico 1g IV na inducao + 1g ao longo",
+      "Manter temperatura — cobertores termicos"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Exposicao e Parafusos Pediculares T10-S1 + Ilíaco",
+        "descricao": "Incisao T10-S1 (20-25cm). Exposicao ampla bilateral. Parafusos pediculares bilaterais todos os niveis. Parafusos iliacos bilaterais — ancoragem distal solida. Augmentacao com cimento PMMA em L3, L4, L5 e S1 pela osteoporose (T-score -2.6).",
+        "ponto_critico": "Cimento PMMA antes do parafuso nos niveis criticos — S1 e L5 tem maior pull-out em osteoporose. Fluoroscopia para confirmar nao-extravasamento para o canal (1-2mL por pediculo)."
+      },
+      {
+        "ordem": 2,
+        "titulo": "PSO em L2 — Pedicle Subtraction Osteotomy",
+        "descricao": "Resseccao bilateral do pediculo de L2. Remocao da cunha ossea posterior do corpo de L2 (subtraction). Fechamento progressivo — cria 25-35 graus de lordose no nivel. Fixar barras antes de fechar. Monitoracao PEM continua.",
+        "ponto_critico": "PSO = momento de maior risco neurologico. Durante fechamento, medula e comprimida momentaneamente. PEM em vigilancia maxima. Queda > 50% = parar, reverter, metilprednisolona 1g IV, elevar PAM."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Descompressao L3-L4",
+        "descricao": "Laminectomia L3-L4 no apex da curva. Resseccao dos ligamentos flavum. Verificar raizes L4 e L5 livres. Hemostasia com cera de osso e bipolar.",
+        "ponto_critico": "Raizes no apex podem estar estiradas pelo angulo da escoliose — mobilizacao cuidadosa. Nao traccionar raizes aderidas."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Reducao da Curva e Hastes de Cromo-Cobalto",
+        "descricao": "Hastes de cromo-cobalto 5,5-6,35mm (mais rigidas — melhor para deformidade). Reducao progressiva da curva: compressao, distracao e derotacao. Meta: Cobb < 25 graus e SVA < 4cm. Confirmar fluoroscopia.",
+        "ponto_critico": "Derotacao vertebral = manobra de risco para raizes. Reducao progressiva em varios passos — nunca brusca. Monitorar PEM continuamente."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Artrodese + TLIF L3-L4",
+        "descricao": "Enxerto osseo autólogo (das osteotomias) + aloenxerto nas facetas e processos transversos — artrodese extensa. TLIF em L3-L4 com cage PEEK lordótico para suporte anterior e maior taxa de fusao. BMP-2 considerar pela osteoporose.",
+        "ponto_critico": "Artrodese insuficiente = pseudartrose (causa principal de falha tardia). Decorticar agressivamente. Enxerto generoso. BMP-2 em osteoporose aumenta taxa de fusao."
+      },
+      {
+        "ordem": 6,
+        "titulo": "TC Intraoperatoria e Fechamento",
+        "descricao": "TC intraoperatoria (O-arm) obrigatoria — confirmar posicao de TODOS os parafusos e do cage antes do fechamento. Reposicionar parafusos malposicionados. Drenos bilaterais. Fechamento por planos. UTI no pos-operatorio.",
+        "ponto_critico": "Nunca fechar sem TC intraoperatoria em cirurgia de deformidade complexa — custo de reoperacao e muito maior que tempo adicional para TC. Parafuso no canal = reoperacao imediata."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Parafusos pediculares + iliacos (sistema de deformidade — ex: Medtronic CD Horizon)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Hastes de cromo-cobalto 5,5-6,35mm"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cage PEEK TLIF lordótico L3-L4"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cimento PMMA para augmentacao em osteoporose"
+      },
+      {
+        "tipo": "implante",
+        "nome": "BMP-2 (rhBMP-2) — promotor de artrodese em osteoporose"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "TC intraoperatoria O-arm ou Airo — obrigatoria"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "PEM + PESS — obrigatorio"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Cell saver para recuperacao de sangue"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "UTI 24-48h — monitoracao hemodinamica intensiva",
+      "Avaliacao neurologica horaria nas primeiras 12h",
+      "Hemoglobina controle — transfusao se Hb < 8g/dL",
+      "Fisioterapia: sentar DPO2, deambulacao com andador DPO 3-4",
+      "Radiografia panorâmica DPO3 — avaliar correcao"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV 8/8h",
+        "dose": "2g",
+        "duracao": "48h PO"
+      },
+      {
+        "nome": "Morfina IV PCA 1mg/h + bolus",
+        "dose": "1mg/h basal",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "72h"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "35 dias"
+      },
+      {
+        "nome": "Denosumab 60mg SC",
+        "dose": "60mg",
+        "duracao": "1 injecao SC — repetir em 6 meses"
+      }
+    ],
+    "restricoes": [
+      "Sem atividade intensa por 3-4 meses",
+      "Trabalho sedentario: 3 meses; fisico: 6-12 meses",
+      "Ortese lombossacra por 3-4 meses ao sair",
+      "Sem dirigir por 4-6 semanas"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Recuperacao Hospitalar",
+      "periodo": "Semanas 1-4",
+      "objetivo": "Verticalizacao, dor controlada, prevencao TVP e pneumonia",
+      "exercicios": [
+        "Fisioterapia respiratoria intensiva",
+        "Exercicios ativos de membros no leito",
+        "Deambulacao progressiva com andador"
+      ],
+      "restricoes": [
+        "Ortese em toda verticalizacao",
+        "Sem flexao lombar > 30 graus"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Fortalecimento Basico",
+      "periodo": "Semanas 4-16",
+      "objetivo": "Marcha independente, forca do core 50%, AVDs",
+      "exercicios": [
+        "Fisioterapia especializada em deformidade",
+        "Hidroterapia",
+        "Bicicleta ergometrica",
+        "Pilates adaptado sem rotacao"
+      ],
+      "restricoes": [
+        "Ortese ao sair por 4 meses",
+        "Sem rotacao ou flexao excessiva"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Retorno Funcional",
+      "periodo": "Meses 4-12",
+      "objetivo": "Retorno ao trabalho de professora, fusao progressiva",
+      "exercicios": [
+        "Musculacao moderada de membros",
+        "Natacao",
+        "Terapia ocupacional para ergonomia",
+        "Caminhadas progressivas"
+      ],
+      "restricoes": [
+        "Sem cargas axiais > 10kg",
+        "Sem esportes de impacto"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Manutencao Longo Prazo",
+      "periodo": "Apos 12 meses",
+      "objetivo": "Fusao consolidada, programa permanente, saude ossea",
+      "exercicios": [
+        "Pilates avancado adaptado",
+        "Natacao periodica",
+        "Musculacao regular"
+      ],
+      "restricoes": [
+        "Sem esportes de contato — permanente",
+        "Tratar osteoporose permanentemente — denosumab bianual"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Deficit neurologico por PSO (1-5%) — monitoracao PEM previne",
+      "Sangramento grave (1-3L) em > 80% dos casos",
+      "Infeccao profunda (3-5%) em cirurgias longas",
+      "Pneumonia e complicacoes respiratorias (5-10%)"
+    ],
+    "tardias": [
+      "Pseudartrose (10-15%) — reoperacao",
+      "Falha de implante — quebra de barra ou parafuso (5-10%)",
+      "Cifose juncional proximal — PJK (15-40%)",
+      "Sindrome de adjacencia acima da instrumentacao (10-20%)"
+    ],
+    "prevencao": [
+      "TC intraoperatoria — confirmar implantes",
+      "Cell saver + acido tranexamico",
+      "Augmentacao com cimento em osteoporose",
+      "Fisioterapia pre-op (prehab) — reduz complicacoes 30%"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "O que e o SVA e qual seu valor normal e patologico?",
+      "resposta": "SVA (Sagittal Vertical Axis): distancia horizontal do fio de prumo de C7 ao canto posterossuperior de S1 no RX lateral em ortostatismo. Normal: 0-4cm. Desequilibrio moderado: 4-9cm. Grave: > 9cm. SVA e o principal preditor de qualidade de vida — correlaciona diretamente com dor e ODI."
+    },
+    {
+      "pergunta": "O que e Incidencia Pelvica e sua relacao com lordose?",
+      "resposta": "IP e um parametro morfologico FIXO que determina a lordose lombar necessaria. Formula: IP = LL + PT. Normal: 40-65 graus. PI-LL > 10 = desequilibrio. PI-LL > 20 = grave = PSO. Paciente com IP alta PRECISA de mais lordose — sem ela, o SVA vai para frente e ha dor por fadiga dos extensores."
+    },
+    {
+      "pergunta": "O que e PSO e quando esta indicada?",
+      "resposta": "PSO (Pedicle Subtraction Osteotomy): remove pediculo bilateral + cunha ossea posterior — ao fechar cria 25-35 graus de lordose. Indicada em: PI-LL > 20 graus, SVA > 4cm, cifose rigida nao corrigivel em decubito. E a osteotomia de maior poder corretivo mas maior risco neurologico (1-5% de deficit)."
+    },
+    {
+      "pergunta": "Quais parametros radiograficos avaliar na escoliose do adulto?",
+      "resposta": "1) SVA (C7-S1): normal 0-4cm. 2) IP (fixo): normal 40-65 graus. 3) LL: deve ser = IP ±10 graus. 4) PT: normal < 20 (> 30 = grave). 5) SS: normal 35-45. 6) Cobb: angulo da curva. 7) Translacao vertebral (balance coronal). Todos medidos em RX panorâmico EOS em ortostatismo."
+    },
+    {
+      "pergunta": "Por que a Cifose Juncional Proximal (PJK) ocorre e como prevenir?",
+      "resposta": "PJK: cifose > 10 graus acima do nivel mais cranial da instrumentacao (incidencia 15-40%). Causas: transicao rigido-movel abrupta, parafusos superiores com pull-out, extensao insuficiente. Prevencao: terminar em vertebra neutra, augmentacao com cimento nos niveis superiores, hastes mais flexiveis na juncao, fortalecimento muscular pre-op."
+    },
+    {
+      "pergunta": "Quando incluir o iliaco na instrumentacao da escoliose do adulto?",
+      "resposta": "Ancoragem ilíaca quando: artrodese atinge L5 ou S1, osteoporose (S1 sozinho nao aguenta carga de curvas longas), PSO (necessidade de ancoragem distal solida), espondilolistese L5-S1 associada. Parafusos iliacos passam pelo iliaco — grande massa ossea — muito mais resistentes que sacros em osteoporose."
+    },
+    {
+      "pergunta": "Quais complicacoes especificas da cirurgia de escoliose degenerativa do adulto?",
+      "resposta": "Taxa total de complicacoes: 40-60%. Principais: PJK 15-40%, pseudartrose 10-15%, falha de implante 5-10%, infeccao 3-5%, deficit neurologico por PSO 1-5%, sangramento com transfusao > 80%. Por isso a decisao cirurgica deve ser extremamente criteriosa e o paciente detalhadamente informado."
+    },
+    {
+      "pergunta": "Como diferenciar escoliose degenerativa de idiopatica em adulto?",
+      "resposta": "Degenerativa: inicio > 50 anos, sem historia de escoliose na adolescencia, curva lombar ou toracolombar, degeneracao discal e facetaria assimetrica, frequentemente com desequilibrio sagital grave. Idiopatica em adulto: historia de escoliose na infancia (antes dos 18 anos), curva mais rigida e simetrica, padrao Lenke reconhecivel, menor degeneracao precoce."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Escoliose degenerativa adulto T11-L4 Cobb 42 graus, SVA +8cm, PI-LL 35 graus. ODI 62%. Osteoporose T-score -2.6.",
+    "conduta": "Instrumentacao longa T10-S1/Ilíaco + PSO em L2 + descompressao L3-L4. Alta complexidade — equipe especializada em deformidade adulta.",
+    "tecnica": "Parafusos pediculares + iliacos. Hastes cromo-cobalto. PSO L2. TLIF L3-L4. Augmentacao com cimento. TC intraoperatoria. Cell saver.",
+    "riscos": [
+      "Deficit por PSO (1-5%)",
+      "Sangramento grave (1-3L) em > 80%",
+      "Pseudartrose (10-15%)",
+      "Cifose juncional proximal PJK (15-40%)",
+      "Complicacoes totais: 40-60%"
+    ],
+    "resumo": "F 61a professora com escoliose degenerativa grave (Cobb 42, SVA +8cm) e disfuncao grave (ODI 62%). Cirurgia complexa de alto risco — instrumentacao T10-sacro-ilíaco + PSO. Melhora esperada ODI 30-40 pontos em 1-2 anos. Informar detalhadamente sobre riscos."
+  }
+}
