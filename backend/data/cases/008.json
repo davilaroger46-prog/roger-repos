@@ -1,0 +1,512 @@
+{
+  "meta": {
+    "id": "008",
+    "titulo": "Coxartrose Primaria Grau IV — Indicacao de ATQ",
+    "slug": "coxartrose-primaria-grau-iv-atq",
+    "especialidade": "ortopedia",
+    "regiao": "Quadril",
+    "subespecialidade": "Artroplastia do Quadril",
+    "nivel": "avancado",
+    "tags": [
+      "coxartrose",
+      "artrose do quadril",
+      "artroplastia total do quadril",
+      "ATQ",
+      "Kellgren Lawrence",
+      "via de Hardinge"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Feminino",
+    "idade": 72,
+    "atividade": "Aposentada professora, caminhadas diarias",
+    "lado": "Esquerdo",
+    "demanda_funcional": "moderada",
+    "comorbidades": ["HAS", "Osteoporose (T-score -2.9)", "Obesidade IMC 31"]
+  },
+  "historia": {
+    "queixa_principal": "Dor no quadril esquerdo em repouso e a marcha ha 4 anos com piora progressiva — incapacidade de caminhar mais de 100m",
+    "inicio": "cronico",
+    "tempo_evolucao": "4 anos",
+    "mecanismo_lesao": "Degenerativo — coxartrose primaria. Sem trauma precipitante. Evolucao lenta e progressiva com deterioracao da qualidade de vida nos ultimos 18 meses.",
+    "descricao": "Paciente feminina, 72 anos, professora aposentada. Refere dor no quadril esquerdo com inicio ha 4 anos, inicialmente ao esforco, evoluindo para dor em repouso e noturna. Hoje incapaz de caminhar mais de 100 metros sem parar por dor intensa. Uso cronico de anti-inflamatorios ha 2 anos sem controle adequado da dor. RX confirmou artrose grau IV de Kellgren-Lawrence com colapso do espaco articular, esclerose subcondral, osteofitos marginais e geodes subcondrais."
+  },
+  "classificacao": {
+    "primaria": "Kellgren-Lawrence para artrose do quadril",
+    "ao_ota": {
+      "codigo": "31-KL4",
+      "osso": "Femur Proximal",
+      "segmento": "Cabeca do Femur",
+      "tipo": "C",
+      "grupo": "Artrose Grau IV",
+      "descricao": "Coxartrose primaria grau IV — colapso completo do espaco articular, esclerose subcondral difusa, osteofitos marginais exuberantes, geodes subcondrais. Indicacao absoluta de ATQ.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Kellgren-Lawrence",
+        "grau": "Grau IV",
+        "descricao": "Colapso completo do espaco articular (osso sobre osso). Esclerose subcondral. Osteofitos exuberantes. Geodes."
+      },
+      {
+        "nome": "Harris Hip Score (pre-op)",
+        "grau": "28/100 (Ruim)",
+        "descricao": "Pontuacao funcional ruim — dor severa, limitacao significativa da amplitude de movimento, dificuldade de caminhar mais de 100m."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Marcha antalgica tipo Trendelenburg — abdutores insuficientes pela dor",
+      "Membro encurtado aparente pela adducao e rotacao interna compensatoria",
+      "Hipotrofia da musculatura glutea esquerda visivel",
+      "Bascular pelvico compensatorio"
+    ],
+    "palpacao": [
+      "Dor a palpacao da virilha (articulacao coxofemoral anterior)",
+      "Reducao significativa da rotacao interna (<10 graus)",
+      "Sinal de Thomas positivo — contratura em flexao de 15 graus",
+      "Patrick (FABER) positivo — dor no quadril com o teste"
+    ],
+    "movimento": "Flexao: 80 graus (normal 120). Extensao: -15 graus (contratura). Abducao: 15 graus (normal 45). Adducao: 20 graus. Rotacao interna: 5 graus. Rotacao externa: 20 graus. Diferenca de comprimento: 1cm (relativa, por contratura).",
+    "testes": [
+      {
+        "nome": "Sinal de Trendelenburg",
+        "sensibilidade": "55%",
+        "especificidade": "70%",
+        "positivo": "Pelve cai para o lado oposto ao apoio — indica fraqueza dos abdutores (gluteo medio) pelo desuso e dor cronica."
+      },
+      {
+        "nome": "Teste de Patrick (FABER)",
+        "sensibilidade": "70%",
+        "especificidade": "70%",
+        "positivo": "Dor no quadril ipsilateral com FABER — indica patologia intra-articular do quadril. Diferenciar de sacroiliite (dor contralateral)."
+      },
+      {
+        "nome": "Teste de Thomas",
+        "sensibilidade": "89%",
+        "especificidade": "91%",
+        "positivo": "Contratura em flexao identificada ao testar extensao com joelho contralateral ao peito — 15 graus neste caso."
+      },
+      {
+        "nome": "Harris Hip Score",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "HHS 28/100 (ruim) — indicacao funcional para ATQ quando < 70 pontos com falha do conservador."
+      }
+    ],
+    "red_flags": [
+      "Dor excruciante em repouso desproporcionalmente maior que a esperada pela artrose — pensar em osteossarcoma ou metastase ossea no acetabulo/femur",
+      "Febre associada a dor no quadril — artrite septica/osteomielite",
+      "Dor irradiada em faixa para joelho com parestesias — radiculopatia L3-L4",
+      "Historia de tumor primario conhecido — metastase ossea"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Colapso completo do espaco articular coxofemoral esquerdo (Kellgren-Lawrence IV)",
+        "Esclerose subcondral difusa no acetabulo e na cabeca femoral",
+        "Osteofitos marginais exuberantes — acetabulo e cabeca do femur",
+        "Geodes (cistos subcondrais) multiplos na cabeca femoral",
+        "Canal femoral: Dorr tipo B — padrao adequado para implante nao-cimentado"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC do quadril pre-operatoria para planejamento de ATQ — avaliacao da morfologia acetabular, metragem do offset femoral, planejamento digital dos implantes e deteccao de protrusio acetabuli ou displasia nao evidentes ao RX."
+    },
+    "rm": {
+      "indicado": false,
+      "achados": [
+        "RM geralmente desnecessaria na coxartrose primaria grau IV — diagnostico e indicacao cirurgica pelo RX + clinica"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Coxartrose primaria grau IV do quadril esquerdo (Kellgren-Lawrence IV) com indicacao absoluta de artroplastia total do quadril. Harris Hip Score pre-op: 28/100.",
+    "diferenciais": [
+      "Artrite reumatoide do quadril — bilateral, erosoes, sorologicos",
+      "Necrose avascular da cabeca femoral — colapso da cabeca em etapas, RX inicial normal",
+      "Coxartrose secundaria a displasia — avaliacao do angulo CE <20 graus",
+      "Metastase ossea — dor desproporcionalmente intensa, lesao litica"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "moderada",
+      "deficit_extensor": false,
+      "incongruencia_articular": true,
+      "osso_osteoporotico": true
+    },
+    "regras": [
+      {
+        "if": "Kellgren_Lawrence == IV AND HHS < 70 AND falha_conservador",
+        "then": "artroplastia_total_do_quadril_indicada",
+        "prioridade": "alta",
+        "justificativa": "Indicacao classica de ATQ: artrose grau IV + dor incapacitante + falha do tratamento conservador + HHS < 70."
+      },
+      {
+        "if": "T-score <= -2.5 AND idosa",
+        "then": "preferir_implante_cimentado_ou_hibrido",
+        "prioridade": "alta",
+        "justificativa": "Osteoporose grave (T-score -2.9) em idosa 72a — fixacao cimentada do femoral oferece maior seguranca de fixacao primaria em osso de ma qualidade."
+      },
+      {
+        "if": "IMC > 30",
+        "then": "alertar_risco_aumentado_de_infeccao_e_instabilidade",
+        "prioridade": "media",
+        "justificativa": "Obesidade IMC 31 aumenta risco de infeccao periprotesica (3-5x) e instabilidade. Orientar perda de peso pre-operatoria. Cabeca femoral de maior diametro (36mm) para reduzir instabilidade."
+      },
+      {
+        "if": "canal_dorr_tipo_B",
+        "then": "planejamento_templating_digital_obrigatorio",
+        "prioridade": "media",
+        "justificativa": "Planificacao pre-operatoria digital obrigatoria para definir tamanho e offset dos implantes. Restaurar offset femoral e comprimento do membro e fundamental."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Artroplastia total do quadril cimentada hibrida — componente acetabular nao-cimentado press-fit + componente femoral cimentado (Exeter ou CPT). Via de Hardinge (lateral direta) ou posterior minimamente invasiva.",
+      "nivel_urgencia": "baixa",
+      "explicacao": "Coxartrose grau IV com HHS 28 em idosa osteoporotica. Indicacao classica de ATQ. Implante hibrido preferido pela osteoporose severa. Cirurgia eletiva de baixa urgencia — otimizar comorbidades (HAS, DM) pre-operatoriamente. Perda de peso se possivel. Meta: HHS > 90 e retorno a caminhadas sem dor."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": false,
+      "criterios": [
+        "Apenas em graus I-III com boa resposta aos AINEs",
+        "Pacientes com risco cirurgico proibitivo",
+        "Como ponte ate a cirurgia"
+      ],
+      "protocolo": [
+        "AINEs + fisioterapia de fortalecimento de gluteos",
+        "Infiltracao intra-articular com corticosteroide (maximo 3/ano)",
+        "Auxilio de marcha (bengala no lado contralateral)",
+        "Hialuronato de sodio intra-articular (evidencia modesta em graus I-III)"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "14-28 dias"
+        },
+        {
+          "nome": "Paracetamol",
+          "dose": "1000mg",
+          "via": "VO",
+          "intervalo": "6/6h",
+          "duracao": "Conforme necessidade"
+        },
+        {
+          "nome": "Deflazacorte",
+          "dose": "6mg",
+          "via": "VO",
+          "intervalo": "24/24h",
+          "duracao": "5-7 dias em crises"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Artrose grau IV Kellgren-Lawrence",
+        "HHS < 70 com falha do conservador",
+        "Dor em repouso e noturna incapacitante",
+        "Incapacidade de deambulacao > 100m"
+      ],
+      "tecnicas": [
+        {
+          "nome": "ATQ Hibrida (Acetabulo press-fit + Femoral cimentado)",
+          "quando_usar": "Osteoporose grave (T-score <= -2.5) em idosos >65-70a",
+          "vantagens": [
+            "Fixacao femoral segura em osso osteoporotico",
+            "Resultados excelentes em longo prazo (>95% sobrevida em 20 anos — Exeter)",
+            "Tecnica bem estabelecida"
+          ],
+          "desvantagens": [
+            "Dificuldade de revisao do femoral cimentado",
+            "Cimento osseo pode necrosar osso se mal pressurizado"
+          ]
+        },
+        {
+          "nome": "ATQ Nao-Cimentada Total",
+          "quando_usar": "Pacientes jovens < 65a com boa qualidade ossea (Dorr A ou B)",
+          "vantagens": [
+            "Melhor estoque osseo para revisoes",
+            "Sem interface cimento"
+          ],
+          "desvantagens": [
+            "Contraindicada em osteoporose — risco de afundamento do femoral"
+          ]
+        },
+        {
+          "nome": "ATQ Hibrida Invertida (Femoral press-fit + Acetabulo cimentado)",
+          "quando_usar": "Protrusio acetabuli — fixa o componente acetabular com enxerto",
+          "vantagens": [
+            "Enxerto osseo no acetabulo",
+            "Boa fixacao em protrusio"
+          ],
+          "desvantagens": [
+            "Menos comum — indicacao especifica de protrusio"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Artrose grau IV com dor incapacitante",
+      "HHS < 70 apos falha do tratamento conservador",
+      "Limitacao funcional severa — incapacidade de deambulacao > 100m",
+      "Necessidade de analgesicos cronicos de alta potencia"
+    ],
+    "posicionamento": "Decubito lateral. Rolo axilar. Apoio pubico e sacral para fixar a pelve. Bracos em extensao. Mesa radiotransparente. Garrote nao utilizado na ATQ.",
+    "anestesia": [
+      "Raquidiana (preferida): bupivacaina hiperbirica 0,5% 10-15mg. Menor sangramento e TEP. Melhor analgesia PO imediato.",
+      "Bloqueio do quadrado lombar (QLB) ou femoral USG-guiado para analgesia PO prolongada",
+      "Anestesia geral se contraindicacao a raquiana (anticoagulacao, recusa)"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Via de Hardinge (Lateral Direta) e Exposicao",
+        "descricao": "Incisao lateral de 15-20cm centrada no grande trocanter. Divisao do tensor da fascia lata. Desinserção do gluteo medio e minimo do grande trocanter (1/3 anterior). Capsulotomia anterior e posterior em T. Luxacao anterior do quadril com rotacao externa e extensao.",
+        "ponto_critico": "Preservar o gluteo medio posterior e o tensor — desinserção excessiva causa fraqueza abductora permanente e marcha de Trendelenburg pos-operatoria."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Resseccao da Cabeca Femoral",
+        "descricao": "Resseccao do colo femoral com oscilometria no angulo e nivel planejado (55 graus de colotomia). Verificar comprimento com regua. Remocao da cabeca femoral. Avaliacao do acetabulo — remover osteofitos marginais.",
+        "ponto_critico": "Nivel de resseccao determina o comprimento do membro — cortar muito distal encurta, muito proximal alonga. Usar gabaritos e templating pre-operatorio."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Preparacao e Implante Acetabular",
+        "descricao": "Fresagem progressiva do acetabulo (2mm acima do tamanho final planejado para press-fit). Posicionamento em 45 graus de inclinacao e 20 graus de anteversao. Impactacao do componente acetabular. Estabilidade testada — nenhum movimento rotacional. Insercao de parafusos de suporte se necessario.",
+        "ponto_critico": "Inclinacao > 55 graus (abducao excessiva) aumenta risco de instabilidade e desgaste do polietileno. Inclinacao < 35 graus restringe ROM e aumenta risco de impingimento. Alvo: 40-45 graus."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Preparacao do Canal Femoral e Cimentacao",
+        "descricao": "Fresagem proximal com raspa sequencial ate tamanho definitivo. Lavagem com jet pulsatil (3 litros SF). Cimentacao do componente femoral: tampao no canal + pressurizacao do cimento (pistola de cimento) + impactacao do femoral em 15 graus de anteversao.",
+        "ponto_critico": "Pressurizacao do cimento e critica — cimento nao pressurizado nao penetra o cancelo e resulta em interface fraca e afundamento precoce. Minimo 3 ciclos de pressurizacao."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Reducao e Teste de Estabilidade",
+        "descricao": "Selecao da cabeca femoral (32-36mm). Reducao do quadril. Teste de estabilidade em flexao/rotacao interna/adducao (risco de luxacao posterior) e extensao/rotacao externa (instabilidade anterior). Verificar comprimento do membro. Radiografia intraoperatoria ou fluoroscopia.",
+        "ponto_critico": "Testar luxacao em posicao de risco — flexao 90+/rot int 45+. Se luxa facilmente, aumentar cabeca para 36mm ou verificar anteversao do componente."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Reinsercao do Gluteo Medio",
+        "descricao": "Reinsercao do gluteo medio ao grande trocanter com ponto transosseo ou ancora (crucial para marcha). Dreno de hemovac por 24-48h. Fechamento por planos. Compressao elastica. Verificar igualdade de comprimento dos membros clinicamente.",
+        "ponto_critico": "Reinsercao segura do gluteo medio e determinante para evitar Trendelenburg PO. Sutura transossea com fio de alta resistencia nao-absorvivel."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Componente acetabular nao-cimentado press-fit (ex: Depuy Pinnacle, Zimmer TM, Stryker Trident)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Polietileno altamente reticulado (HXLPE) — inserto do acetabulo"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Componente femoral cimentado (Exeter ou CPT — Zimmer)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cabeca femoral 32-36mm (ceramica ou metal — conforme opcao)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cimento osseo com antibiotico (Simplex P ou Palacos com gentamicina)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Sistema de fresagem acetabular progressiva"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Pistola de cimento osseo (cimentacao pressurizada)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm) para verificacao de posicao"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Carga total imediata no dia seguinte com andador (ATQ hibrida cimentada)",
+      "Fisioterapia: iniciada em 24-48h — marcha, exercicios de gluteos, prevencao de TVP",
+      "Meias de compressao elastica ate alta",
+      "Abducao em neutro — nao cruzar as pernas (risco de luxacao posterior)",
+      "Radiografia AP da bacia no DPO 1 para verificar posicao dos implantes"
+    ],
+    "prescricao": [
+      { "nome": "Cefazolina 2g IV 8/8h", "dose": "2g", "duracao": "24h PO" },
+      { "nome": "Dipirona 1g IV 6/6h", "dose": "1g", "duracao": "48h" },
+      { "nome": "Tramadol 50mg IV 8/8h SN", "dose": "50mg", "duracao": "48-72h" },
+      { "nome": "Enoxaparina 40mg SC 24/24h", "dose": "40mg", "duracao": "35 dias (risco TEP na ATQ)" },
+      { "nome": "Rivaroxabana 10mg VO 24/24h (alta)", "dose": "10mg", "duracao": "35 dias — mais conveniente para alta" }
+    ],
+    "restricoes": [
+      "Nao cruzar as pernas por 6-8 semanas (luxacao posterior)",
+      "Cadeira alta > 45cm",
+      "Nao se sentar no chao",
+      "Banheiro com apoio lateral",
+      "Nao dirigir por 6-8 semanas"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Mobilizacao Imediata",
+      "periodo": "Dias 1-7",
+      "objetivo": "Marcha com andador, exercicios de gluteos, prevencao de TVP",
+      "exercicios": [
+        "Marcha assistida com andador — carga total no DPO 1",
+        "Exercicios de bomba de tornozelo (anti-TVP)",
+        "Exercicios de quadriceps e gluteos em decubito dorsal",
+        "Subir e descer escadas com corrimao"
+      ],
+      "restricoes": [
+        "Nao cruzar as pernas",
+        "Nao fletir quadril > 90 graus",
+        "Nao sentar em cadeiras baixas"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Independencia Funcional",
+      "periodo": "Semanas 2-6",
+      "objetivo": "Retirada das muletas, marcha independente, AVDs basicas",
+      "exercicios": [
+        "Marcha progressiva — andador para bengala para independente",
+        "Exercicios de abducao e extensao do quadril",
+        "Subir escadas alternado"
+      ],
+      "restricoes": [
+        "Precaucoes de luxacao por 6-8 semanas",
+        "Sem atividade fisica intensa"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Fortalecimento",
+      "periodo": "Semanas 6-12",
+      "objetivo": "Forca dos abdutores 80%, eliminar Trendelenburg",
+      "exercicios": [
+        "Fortalecimento progressivo do gluteo medio com theraband",
+        "Leg press ate 60 graus",
+        "Bicicleta ergometrica"
+      ],
+      "restricoes": [
+        "Sem impacto (corrida, salto)",
+        "Sem cargas > 20kg"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Retorno Pleno",
+      "periodo": "Meses 3-6",
+      "objetivo": "HHS > 90, caminhadas sem limitacao, retorno a atividades de lazer",
+      "exercicios": [
+        "Caminhadas progressivas sem limite",
+        "Golf, natacao, ciclismo — liberados",
+        "Musculacao moderada com supervisao"
+      ],
+      "restricoes": [
+        "Sem esportes de alto impacto (corrida de rua, futebol)",
+        "Sem atividades de rotacao extrema do quadril"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Tromboembolismo pulmonar (0,5-2%) — maior risco na ATQ — profilaxia 35 dias obrigatoria",
+      "Infeccao periprotesica profunda (1-2% — maior em DM e obesos)",
+      "Luxacao do quadril (1-3%) — maior nas primeiras 6 semanas",
+      "Fratura periprotesica intraoperatoria (1-3% — Dorr C)",
+      "Lesao do nervo ciatico (0,5-2%)"
+    ],
+    "tardias": [
+      "Soltamento asseptico dos componentes (5-10% em 15 anos)",
+      "Infeccao periprotesica tardia por hematogena (0,5%)",
+      "Desigualdade de comprimento dos membros (5% > 1cm)",
+      "Fratura periprotesica de Vancouver (1-2% em 15 anos)"
+    ],
+    "prevencao": [
+      "Profilaxia de TVP 35 dias (risco alto)",
+      "Antibioticoprofilaxia com cimento osseo com antibiotico",
+      "Cabeca 36mm para reduzir instabilidade em obesos",
+      "Precaucoes de luxacao por 6-8 semanas rigorosamente"
+    ]
+  },
+  "evidencia": {
+    "nivel_I": [],
+    "nivel_II": [],
+    "nivel_III": [],
+    "nivel_IV": [],
+    "nivel_V": [],
+    "recentes": []
+  },
+  "flashcards": [
+    {
+      "pergunta": "Quais sao os criterios classicos de indicacao de artroplastia total do quadril?",
+      "resposta": "1) Artrose grau III-IV de Kellgren-Lawrence. 2) Dor incapacitante nao controlada pelo conservador. 3) Harris Hip Score < 70. 4) Impacto significativo nas atividades de vida diaria. 5) Falha de tratamento conservador adequado (>3-6 meses). A indicacao e clinico-radiologica — nao existe corte absoluto de idade."
+    },
+    {
+      "pergunta": "O que e o Harris Hip Score e qual a interpretacao?",
+      "resposta": "Escore funcional de 0 a 100 pontos que avalia dor (44pts), funcao/marcha (33pts) e mobilidade (15pts) e ausencia de deformidade (8pts). Interpretacao: 90-100 excelente; 80-89 bom; 70-79 regular; <70 ruim. Indicacao de ATQ quando < 70 com falha do conservador."
+    },
+    {
+      "pergunta": "Qual o posicionamento ideal do componente acetabular e por que?",
+      "resposta": "Zona de seguranca de Lewinnek: 40 graus de inclinacao (30-50) e 15 graus de anteversao (5-25). Inclinacao > 55 graus aumenta desgaste do polietileno e instabilidade. Inclinacao < 35 graus causa impingimento. Anteversao excessiva causa instabilidade anterior. Anteversao insuficiente causa luxacao posterior."
+    },
+    {
+      "pergunta": "Quando preferir cimentacao femoral na ATQ?",
+      "resposta": "Osteoporose (T-score <= -2.5), canal de Dorr tipo C (alargado), idosos > 70-75 anos, insuficiencia renal cronica. O cimento penetra o cancelo osteoporotico e oferece fixacao imediata. O Exeter cimentado tem sobrevida de 97% em 20 anos — melhor evidencia de longo prazo em ATQ."
+    },
+    {
+      "pergunta": "Por que a profilaxia de TVP e de 35 dias apos ATQ?",
+      "resposta": "A ATQ e o procedimento com maior risco de TEP na ortopedia — incidencia de TVP assintomatica de 40-60% sem profilaxia. O risco persiste por 35 dias pelo estado de hipercoagulabilidade, imobilidade relativa e exposicao venosa intraoperatoria. Diretrizes AAOS e ACCP recomendam profilaxia por 35 dias."
+    },
+    {
+      "pergunta": "O que e o sinal de Trendelenburg e qual sua causa na ATQ?",
+      "resposta": "Descida da pelve contralateral ao membro em apoio — indica fraqueza do gluteo medio ipsilateral. Na ATQ pela via de Hardinge, pode ocorrer se a reinsercao do gluteo medio for inadequada ou se houver neuropraxia do nervo gluteo superior. Corrida de balde indica Trendelenburg grave."
+    },
+    {
+      "pergunta": "O que e a classificacao de Dorr para o canal femoral?",
+      "resposta": "Classifica a morfologia do canal femoral pelo RX: Tipo A — cortical espessa, canal estreito em champanhe (jovens) — ideal para press-fit. Tipo B — cortical moderada, canal medio — hibrido. Tipo C — cortical fina, canal alargado (stovepipe) — idosos/osteoporoticos — cimentacao obrigatoria."
+    },
+    {
+      "pergunta": "Quais sao as precaucoes de luxacao apos ATQ pela via posterior?",
+      "resposta": "Nao cruzar as pernas, nao fletir o quadril acima de 90 graus, nao sentar em cadeiras baixas (< 45cm), nao sentar no chao, usar vaso sanitario alto, nao juntar os joelhos ao sentar. Duracao: 6-8 semanas apos cicatrizacao capsular. A via posterior tem maior risco de luxacao posterior (2-3x maior que a lateral direta)."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Coxartrose primaria grau IV (Kellgren-Lawrence IV) do quadril esquerdo em idosa osteoporotica. HHS 28/100 (ruim).",
+    "conduta": "Artroplastia total do quadril hibrida (acetabulo press-fit + femoral cimentado). Cirurgia eletiva — otimizar HAS e DM pre-op. Profilaxia de TVP por 35 dias.",
+    "tecnica": "Via de Hardinge. Componente acetabular nao-cimentado press-fit + polietileno HXLPE. Femoral cimentado (Exeter). Cabeca 36mm.",
+    "riscos": [
+      "TVP/TEP (maior risco na ATQ — profilaxia 35 dias)",
+      "Infeccao periprotesica (maior em DM e obesos)",
+      "Luxacao (1-3%)",
+      "Fratura periprotesica intraoperatoria"
+    ],
+    "resumo": "F 72a osteoporotica com coxartrose grau IV e HHS 28. ATQ hibrida indicada. Cirurgia eletiva apos otimizacao clinica. Carga total imediata. Meta: HHS > 90 e retorno a caminhadas sem dor em 3-6 meses."
+  }
+}
