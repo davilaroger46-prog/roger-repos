@@ -1,0 +1,517 @@
+{
+  "meta": {
+    "id": "015",
+    "titulo": "Mielopatia Cervical Espondilótica C3-C6",
+    "slug": "mielopatia-cervical-espondilótica-c3-c6",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Cervical",
+    "nivel": "avancado",
+    "tags": [
+      "mielopatia cervical",
+      "espondilose",
+      "laminoplastia",
+      "mJOA",
+      "Nurick",
+      "compressao medular"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Masculino",
+    "idade": 63,
+    "atividade": "Contador — trabalho sedentario com computador",
+    "lado": "Bilateral",
+    "demanda_funcional": "moderada",
+    "comorbidades": [
+      "HAS",
+      "DM tipo 2 controlado"
+    ]
+  },
+  "historia": {
+    "queixa_principal": "Marcha instavel com quedas frequentes + torpor bilateral nas maos ha 14 meses",
+    "inicio": "cronico",
+    "tempo_evolucao": "14 meses com piora progressiva",
+    "mecanismo_lesao": "Compressao progressiva da medula espinhal entre C3-C6 por osteofitos posteriores e hipertrofia do ligamento flavum causando sindrome do neurônio motor superior progressiva. Sem trauma agudo.",
+    "descricao": "Paciente masculino, 63 anos, contador. Queixa de dormencia e fraqueza bilateral nas maos progressiva ha 14 meses, acompanhada de marcha instavel e 4 quedas no ultimo ano. Dificuldade para abotoar camisa e escrever a mao. Urgencia urinaria ocasional. Hiperreflexia, Hoffmann bilateral e clonus do tornozelo ao exame. mJOA 11/18. RM mostra compressao medular em C3-C4, C4-C5 e C5-C6 com mielomalacia em C4-C5 (hipersinal T2)."
+  },
+  "classificacao": {
+    "primaria": "mJOA + Nurick + Classificacao Morfologica AO",
+    "ao_ota": {
+      "codigo": "CEV-MCE-C3C6",
+      "osso": "Coluna Cervical C3-C6",
+      "segmento": "Canal Vertebral Cervical",
+      "tipo": "C",
+      "grupo": "Mielopatia cervical moderada-grave — 3 niveis",
+      "descricao": "Mielopatia cervical espondilótica C3-C6. Compressao multinivel com mielomalacia C4-C5. mJOA 11/18. Nurick III. Indicacao cirurgica urgente.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "mJOA Score",
+        "grau": "11/18 — Moderado-Grave",
+        "descricao": "Funcao motora MS + sensitiva + MI + esfincteriana. < 12 = indicacao cirurgica. Mielomalacia limita recuperacao completa."
+      },
+      {
+        "nome": "Nurick",
+        "grau": "Grau III",
+        "descricao": "Dificuldade moderada de marcha — trabalha mas com limitacoes. Grau IV seria dependente de auxilio."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Marcha em base alargada — ataxia proprioceptiva",
+      "Pequenos passos — medo de quedas",
+      "Sem atrofia muscular visivel",
+      "Tremor fino das maos nas tarefas de precisao"
+    ],
+    "palpacao": [
+      "Dor a palpacao C4-C5-C6",
+      "Sinal de Hoffmann bilateral positivo — patognomônico de mielopatia",
+      "Clonus do tornozelo bilateral 3+ batidas",
+      "Hiperreflexia patelar e aquileu bilateral"
+    ],
+    "movimento": "ROM cervical limitado (rotacao 40 graus). Forca preensao 4+/5 bilateral. Propriocepcao e vibratoria diminuidos nos pes. Babinski negativo (lesao em C3-C6, nao tronco).",
+    "testes": [
+      {
+        "nome": "Sinal de Hoffmann",
+        "sensibilidade": "58-78%",
+        "especificidade": "78-96%",
+        "positivo": "Flexao do 3o dedo causa flexao reflexa do polegar — neurônio motor superior. Bilateral = alta suspeita de mielopatia cervical."
+      },
+      {
+        "nome": "Teste de Lhermitte",
+        "sensibilidade": "41%",
+        "especificidade": "89%",
+        "positivo": "Flexao do pescoco causa descarga eletrica para membros — irritacao ou desmielinizacao da medula cervical. Alta especificidade quando positivo."
+      },
+      {
+        "nome": "mJOA Score",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "mJOA 11/18 — indicacao cirurgica (< 14 com progressao). mJOA < 8 = grave — resultados cirurgicos piores pela mielomalacia extensa."
+      },
+      {
+        "nome": "30-meter Walk Test",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "28 segundos para 30 metros (normal < 20s) — ataxia da marcha por disfuncao da coluna posterior cervical."
+      }
+    ],
+    "red_flags": [
+      "Piora neurologica rapida (dias) — mielopatia aguda — emergencia cirurgica imediata",
+      "Incontinencia fecal — comprometimento grave — indicacao de urgencia absoluta",
+      "Disfagia alta — compressao esofagica ou envolvimento de tronco — RM de fossa posterior",
+      "Sindrome de Brown-Sequard — tumor ou hematoma medular"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Espondilose difusa — osteofitos C3 a C6",
+        "Reducao dos espacos discais C4-C5 e C5-C6",
+        "Retificacao da lordose cervical — postura antalgica",
+        "Sem subluxacao nos dinamicos"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC cervical para planejamento: diametro sagital do canal (normal > 13mm), morfologia dos osteofitos, espessura das laminas para laminoplastia, qualidade ossea para parafusos."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Compressao medular C3-C4, C4-C5 e C5-C6 — canal < 10mm nos 3 niveis",
+        "Hipersinal T2 na medula C4-C5 — MIELOMALACIA — lesao irreversivel",
+        "Hipertrofia bilateral dos ligamentos flavum C3-C6",
+        "Osteofitos posteriores compressivos em C4 e C5",
+        "Disco herniado central C5-C6 contribuindo para compressao"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Mielopatia cervical espondilótica multinivel C3-C6 — mJOA 11 — Nurick III. Mielomalacia C4-C5. Indicacao cirurgica urgente.",
+    "diferenciais": [
+      "Esclerose lateral amiotrófica (ELA) — fasciculacoes, sem compressao na RM, EMG especifico",
+      "Esclerose multipla — lesoes cerebrais na RM, jovens, surtos e remissoes",
+      "Siringomielia — cavidade na medula, dissociacao sensitiva",
+      "Tumor intradural — massa na RM com captacao de gadolinio"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "moderada",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "mJOA < 14 AND progressao_em_14_meses",
+        "then": "descompressao_cirurgica_urgente",
+        "prioridade": "alta",
+        "justificativa": "Cada mes de atraso representa deterioracao neurologica potencialmente irreversivel (mielomalacia progressiva)."
+      },
+      {
+        "if": "3_niveis_E_lordose_preservada",
+        "then": "laminoplastia_cervical_C3-C6_preferida",
+        "prioridade": "alta",
+        "justificativa": "Mielopatia de 3+ niveis com lordose preservada — laminoplastia expande o canal posterior sem artrodese. Preferia ao ACDF multiplo (maior pseudartrose em 3 niveis)."
+      },
+      {
+        "if": "mielomalacia_T2_em_C4-C5",
+        "then": "alertar_resultado_parcial",
+        "prioridade": "alta",
+        "justificativa": "Mielomalacia = lesao irreversivel estabelecida. Cirurgia para progressao mas recuperacao completa improvavel."
+      },
+      {
+        "if": "PAM_intraoperatoria",
+        "then": "manter_PAM_minimo_85mmHg",
+        "prioridade": "alta",
+        "justificativa": "Medula comprimida com autoregulacao comprometida — PAM < 80 causa isquemia adicional. Manter PAM ≥ 85 durante toda a cirurgia."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Laminoplastia cervical expansiva C3-C6 — tecnica de Hirabayashi (open door) com miniplacas de titanio. Foraminotomia C5 bilateral preventiva. PAM ≥ 85mmHg intraoperatorio.",
+      "nivel_urgencia": "alta",
+      "explicacao": "Mielopatia cervical moderada-grave (mJOA 11) progressiva. Indicacao cirurgica urgente — laminoplastia C3-C6 expande o canal em toda extensao comprimida sem artrodese, preservando mobilidade. Resultado esperado: estabilizacao + melhora parcial (mJOA 14-16 em 70%). Mielomalacia limita recuperacao plena."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": false,
+      "criterios": [
+        "Apenas mielopatia leve (mJOA 15-17) estavel",
+        "Alto risco cirurgico proibitivo"
+      ],
+      "protocolo": [
+        "Collar cervical rigido",
+        "Fisioterapia de reabilitacao — equilibrio e marcha",
+        "Proibir atividades de risco de queda ou trauma cervical"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Baclofeno",
+          "dose": "10mg",
+          "via": "VO",
+          "intervalo": "8/8h",
+          "duracao": "30-60 dias"
+        },
+        {
+          "nome": "Pregabalina",
+          "dose": "75mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "30-60 dias"
+        },
+        {
+          "nome": "Dexametasona",
+          "dose": "4mg",
+          "via": "VO",
+          "intervalo": "24/24h",
+          "duracao": "5-7 dias em piora aguda"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "mJOA < 14 com progressao",
+        "Mielopatia aguda — emergencia",
+        "Compressao de 3+ niveis com canal < 10mm"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Laminoplastia Cervical Open Door (Hirabayashi)",
+          "quando_usar": "3+ niveis com lordose preservada ou neutra — primeira escolha",
+          "vantagens": [
+            "Descompressao multinivel sem artrodese",
+            "Preserva mobilidade cervical",
+            "Menor sindrome de adjacencia"
+          ],
+          "desvantagens": [
+            "Contraindicada em cifose cervical",
+            "Paralisia C5 em 5-10%",
+            "Dor axilar residual"
+          ]
+        },
+        {
+          "nome": "ACDF Multiplo (2-3 niveis)",
+          "quando_usar": "Cifose cervical OU compressao anterior predominante",
+          "vantagens": [
+            "Descompressao anterior direta",
+            "Corrige cifose"
+          ],
+          "desvantagens": [
+            "Pseudartrose em 10-20% em 3 niveis",
+            "Disfagia e lesao do nervo laringeo recorrente"
+          ]
+        },
+        {
+          "nome": "Laminectomia com Artrodese Posterior",
+          "quando_usar": "Instabilidade cervical associada a mielopatia",
+          "vantagens": [
+            "Descompressao + estabilidade",
+            "Indicada se instabilidade confirmada"
+          ],
+          "desvantagens": [
+            "Elimina mobilidade",
+            "Maior sangramento"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "mJOA < 14 progressiva — urgencia",
+      "Mielopatia aguda — emergencia",
+      "Compressao multinivel documentada com deficit funcional"
+    ],
+    "posicionamento": "Decubito ventral com cabeca fixada em suporte de Mayfield (garfo 3 pontas). Pescoco em posicao neutra ou leve flexao (10-15 graus) — NUNCA estender (aumenta compressao). Fluoroscopia disponivel.",
+    "anestesia": [
+      "Videolaringoscopia para intubacao — evitar hiperextensao cervical",
+      "PEM + PESS obrigatoria — mielopatia previa aumenta risco intraoperatorio",
+      "Dexametasona 8mg IV na inducao",
+      "Manter PAM ≥ 85mmHg durante toda a cirurgia"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Incisao e Exposicao Posterior C3-C6",
+        "descricao": "Incisao posterior mediana 10-12cm. Descolamento subperiostal bilateral das laminas C3 a C6. Exposicao das laminas, facetas e processos espinhosos. Preservar musculatura supra e interespinhosa — reduz dor cervical pos-op. Nao expor C2-C3 desnecessariamente.",
+        "ponto_critico": "Preservar insercao muscular em C2 (complexo semispinhal) e C7 — exposicao desnecessaria causa instabilidade e cefaleia cronica suboccipital."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Osteotomia Unilateral — Tecnica Open Door",
+        "descricao": "Osteotomia COMPLETA das laminas C3-C6 no lado direito (high-speed burr ou osteotomo — cortar toda espessura). Osteotomia PARCIAL contralateral (esquerda) — apenas cortical lateral, cortical medial preservada — cria a dobradica (hinge). Abertura suave do canal para a direita.",
+        "ponto_critico": "Dobradica (hinge) deve ser incompleta — green-stick fracture. Se quebrar completamente, lamina fica livre e deve ser fixada com miniplacas. Dobradica intacta garante estabilidade da abertura."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Colocacao das Miniplacas e Espacadores",
+        "descricao": "Abertura das laminas para a direita — expansao do canal 8-10mm. Fixacao com miniplacas de titanio (ex: Synthes Centerpiece) nas laminas abertas e nas massas laterais adjacentes. Confirmar ausencia de compressao residual da medula.",
+        "ponto_critico": "Abertura > 13mm causa mielopatia por tensao da medula. Abertura < 3mm e insuficiente. Alvo: 8-10mm. Confirmar com palpacao suave da dura-mater."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Foraminotomia C5 Bilateral Preventiva",
+        "descricao": "Foraminotomia bilateral do forame de C5 com Kerrison 2mm — prevenir paralisia do nervo C5 (complicacao especifica da laminoplastia). Remover osteofitos que comprimem C5 bilateralmente. Verificar raizes C5 livres com sonda de Penfield.",
+        "ponto_critico": "Paralisia C5 (5-10%) e a complicacao especifica da laminoplastia — tracao posterior da medula 'puxa' a raiz C5 curta. Foraminotomia preventiva reduz sua incidencia significativamente."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Verificacao da Descompressao Medular",
+        "descricao": "Palpacao da medula pelo canal expandido — livre, sem compressao residual. Verificar pulsacao bilateral da dura-mater. PEM e PESS devem estar estaveis ou melhorados. Se queda de PEM > 50% — suspender, administrar metilprednisolona 1g IV, elevar PAM para 90mmHg.",
+        "ponto_critico": "Nao fechar se PEM deteriorado sem recuperacao. Investigar causa: compressao residual, parafuso no canal, hematoma. Resolver antes do fechamento."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Drenagem",
+        "descricao": "Dreno de Hemovac 24-48h (prevencao de hematoma epidural — EMERGENCIA). Fechamento da musculatura ao processo espinhoso — preservar tensao posterior. Fechamento por planos. Collar rigido por 6-8 semanas. Radiografia AP e lateral final.",
+        "ponto_critico": "Hematoma epidural cervical pos-op = emergencia absoluta. Todo paciente com piora neurologica PO deve ter TC emergencia e ser re-explorado imediatamente se hematoma confirmado."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Miniplacas de titanio para laminoplastia (ex: DePuy Synthes CENTERPIECE)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Miniparafusos de titanio 3,5mm para fixacao"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "High-speed burr com broca de diamante para osteotomia"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Suporte de Mayfield (garfo 3 pontas)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Sistema PEM + PESS — obrigatorio"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Ecografia intraoperatoria (fortemente recomendada)"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Avaliacao neurologica horaria nas primeiras 6h",
+      "Collar cervical rigido — NAO retirar nas primeiras 24h",
+      "Retirada do dreno em 24-48h (< 50mL)",
+      "Fisioterapia: membros superiores e inferiores no DPO1",
+      "Deambulacao assistida DPO 1-2 com collar"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV",
+        "dose": "2g",
+        "duracao": "24h PO"
+      },
+      {
+        "nome": "Dexametasona 4mg IV 8/8h",
+        "dose": "4mg",
+        "duracao": "48h (edema medular)"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Baclofeno 10mg VO 8/8h",
+        "dose": "10mg",
+        "duracao": "30-60 dias"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "14 dias"
+      }
+    ],
+    "restricoes": [
+      "Collar rigido 6-8 semanas",
+      "Sem flexao cervical ativa por 4 semanas",
+      "Sem rotacao brusca",
+      "Trabalho sedentario: 4-6 semanas; fisico: 8-12 semanas"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Protecao e Neuroreabilitacao",
+      "periodo": "Semanas 1-8",
+      "objetivo": "Collar rigido, estabilizacao neurologica, fisioterapia neuromotora inicial",
+      "exercicios": [
+        "Fisioterapia neuromotora — motricidade fina das maos",
+        "Exercicios de equilibrio e marcha com supervisao",
+        "Eletroestimulacao de membros superiores se paresia"
+      ],
+      "restricoes": [
+        "Collar rigido em todas as atividades",
+        "Sem rotacao ou flexao cervical ativa"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Recuperacao Funcional",
+      "periodo": "Semanas 8-16",
+      "objetivo": "Retirada do collar, motricidade fina, marcha independente",
+      "exercicios": [
+        "Terapia ocupacional: escrita, abotoar, pinaca",
+        "Fisioterapia da marcha e propriocepcao",
+        "Fortalecimento progressivo dos membros"
+      ],
+      "restricoes": [
+        "Sem impacto cervical",
+        "Evitar flexao extrema"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Reabilitacao Avancada",
+      "periodo": "Meses 4-12",
+      "objetivo": "Recuperacao maxima esperada — mJOA 14-16 em 70% dos casos",
+      "exercicios": [
+        "Musculacao adaptada",
+        "Hidroginastica",
+        "Terapia ocupacional avancada",
+        "Treino de equilibrio com plataforma de estabilometria"
+      ],
+      "restricoes": [
+        "Sem esportes de contato",
+        "Sem risco de queda"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Manutencao",
+      "periodo": "Apos 12 meses",
+      "objetivo": "Manter ganhos neurologicos, prevencao de deterioracao",
+      "exercicios": [
+        "Exercicios regulares de core e membros",
+        "Natacao (costas ou crawl)",
+        "Yoga adaptado"
+      ],
+      "restricoes": [
+        "Sem atividades de risco de trauma cervical — permanente"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Hematoma epidural cervical (1-3%) — tetraplegia rapida — EMERGENCIA re-explorar",
+      "Paralisia do nervo C5 (5-10%) — complicacao especifica da laminoplastia — maioria neuropraxia",
+      "Fistula de liquor (1-2%)",
+      "Infeccao da ferida (2-4%)"
+    ],
+    "tardias": [
+      "Perda da abertura (fechamento da laminoplastia — 5-15%) — cicatriz fecha o canal",
+      "Dor cervical axilar cronica (30-40%)",
+      "Deterioracao neurologica por mielomalacia progressiva"
+    ],
+    "prevencao": [
+      "Foraminotomia C5 preventiva",
+      "Dreno Hemovac 48h",
+      "PAM ≥ 85mmHg intraoperatorio",
+      "Collar 6-8 semanas — consolidacao da dobradica"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual e o sinal de Hoffmann e sua importancia na mielopatia cervical?",
+      "resposta": "Flexao forcada do dedo médio causa flexao reflexa do polegar e indicador — indica hiperreflexia de neurônio motor superior. Especificidade 78-96% para mielopatia cervical quando bilateral. Positivo antes mesmo dos sintomas clinicos. Sensibilidade baixa (58-78%) — ausencia nao exclui."
+    },
+    {
+      "pergunta": "Qual a diferenca entre mJOA leve, moderado e grave e quando operar?",
+      "resposta": "mJOA (0-18): Leve 15-17. Moderado 12-14. Grave 0-11. Indicacao cirurgica: mJOA < 14 com progressao. mJOA < 8 = pior prognostico cirurgico pela extensao da mielomalacia ja estabelecida. A cirurgia para progressao — mas nao reverte mielomalacia previa."
+    },
+    {
+      "pergunta": "Por que laminoplastia e contraindicada em cifose cervical?",
+      "resposta": "Na laminoplastia, a descompressao e INDIRETA — medula se afasta dos osteofitos anteriores por gravidade quando canal expandido posteriormente. Na cifose, a medula permanece pressionada contra os osteofitos mesmo com laminoplastia. Na cifose: ACDF anterior e necessario para descompressao direta e correcao da cifose."
+    },
+    {
+      "pergunta": "O que e a paralisia do nervo C5 pos-laminoplastia e como prevenir?",
+      "resposta": "Complicacao especifica da laminoplastia (5-10%): fraqueza do deltóide e/ou biceps apos cirurgia, sem relacao com a compressao pre-op. Mecanismo: tracao posterior da medula 'puxa' a raiz C5 curta. Prevencao: foraminotomia C5 bilateral preventiva — libera a raiz C5 no forame. Maioria resolve em 3-6 meses."
+    },
+    {
+      "pergunta": "O que e mielomalacia e qual importancia prognostica?",
+      "resposta": "Hipersinal T2 na RM da medula — necrose e substituicao por tecido glial = lesao irreversivel. Descompressao para progressao mas NAO reverte deficit ja instalado. Quanto maior a extensao, pior o mJOA final esperado. mJOA pos-op correlaciona inversamente com extensao da mielomalacia pre-op."
+    },
+    {
+      "pergunta": "Diferenca entre laminoplastia open door e double door?",
+      "resposta": "Open Door (Hirabayashi): osteotomia completa unilateral + dobradica contralateral incompleta. Canal abre como porta para o lado da osteotomia. Double Door (Kurokawa): osteotomia bilateral + corte do processo espinhoso ao meio — canal abre dos 2 lados simetricamente. Resultados equivalentes; open door e mais utilizado."
+    },
+    {
+      "pergunta": "Por que manter PAM ≥ 85mmHg durante cirurgia de mielopatia?",
+      "resposta": "Medula comprimida cronicamente tem autoregulacao comprometida — depende diretamente da pressao sistemica para perfusao. PAM < 80 intraoperatorio correlaciona-se com isquemia adicional e piora neurologica pos-op. Diferente da coluna normal onde PAM 65-70 e adequado."
+    },
+    {
+      "pergunta": "Como diferenciar mielopatia cervical de ELA?",
+      "resposta": "Mielopatia cervical: compressao na RM, sem fasciculacoes generalizadas, nivel sensitivo presente, melhora com cirurgia. ELA: sem compressao na RM, fasciculacoes proeminentes (lingua, tronco, 4 regioes no EMG), sem nivel sensitivo, progressao fatal. Chave diagnostica: EMG de 4 regioes + RM medular."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Mielopatia cervical espondilótica C3-C6 — mJOA 11/18 — Nurick III. Compressao multinivel com mielomalacia C4-C5. Urgencia cirurgica.",
+    "conduta": "Laminoplastia cervical C3-C6 (Hirabayashi open door). Foraminotomia C5 preventiva. PAM ≥ 85mmHg intraoperatorio. Urgencia alta.",
+    "tecnica": "Laminoplastia open door C3-C6. Miniplacas de titanio. Foraminotomia C5 bilateral. Monitoracao PEM+PESS obrigatoria.",
+    "riscos": [
+      "Paralisia C5 (5-10%) — neuropraxia majoritariamente reversivel",
+      "Hematoma epidural (1-3%) — emergencia",
+      "Melhora parcial pela mielomalacia previa",
+      "Dor cervical axilar (30-40%)"
+    ],
+    "resumo": "M 63a com mielopatia cervical espondilótica C3-C6 moderada-grave (mJOA 11, Nurick III) e mielomalacia C4-C5. Laminoplastia urgente — estabilizacao e melhora parcial (mJOA 14-16 em 70%). Mielomalacia limita recuperacao completa."
+  }
+}
