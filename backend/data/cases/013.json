@@ -1,0 +1,520 @@
+{
+  "meta": {
+    "id": "013",
+    "titulo": "Espondilolistese Ístmica L5-S1 Grau II — Radiculopatia L5",
+    "slug": "espondilolistese-ismica-l5-s1-grau-ii",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Vertebral",
+    "nivel": "avancado",
+    "tags": [
+      "espondilolistese",
+      "ístmica",
+      "L5-S1",
+      "listese",
+      "TLIF",
+      "artrodese",
+      "radiculopatia L5"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Feminino",
+    "idade": 42,
+    "atividade": "Ginasta aposentada, atual professora de educacao fisica",
+    "lado": "Bilateral com predominancia direita",
+    "demanda_funcional": "alta",
+    "comorbidades": []
+  },
+  "historia": {
+    "queixa_principal": "Dor lombar cronica com piora progressiva e radiculopatia direita para o pé — parestesias no dorso do pé direito",
+    "inicio": "cronico",
+    "tempo_evolucao": "8 anos — piora nos ultimos 18 meses",
+    "mecanismo_lesao": "Espondilolistese ístmica por fratura de estresse bilateral do istmo vertebral (pars interarticularis) — etiologia tipicamente esportiva. Historia de ginastica artistica na infancia e adolescencia com cargas repetitivas em hiperextensao lombar. Progressao lenta com estabilizacao parcial e reacutizacao atual.",
+    "descricao": "Paciente feminina, 42 anos, ex-ginasta artistica e atual professora de educacao fisica. Refere dor lombar cronica desde os 25 anos com diagnostico tardio de espondilolistese L5-S1 grau II. Nos ultimos 18 meses, surgiu radiculopatia no membro inferior direito com parestesias no dorso do pe (dermátomo L5) e fraqueza para dorsiflexao. RX em carga mostra listese de 32% (grau II de Meyerding). Falha do conservador por 12 meses."
+  },
+  "classificacao": {
+    "primaria": "Meyerding + Wiltse",
+    "ao_ota": {
+      "codigo": "ESP-L5S1-II",
+      "osso": "Coluna Lombar L5-S1",
+      "segmento": "Pars Interarticularis L5",
+      "tipo": "B",
+      "grupo": "Espondilolistese ístmica grau II com radiculopatia L5",
+      "descricao": "Espondilolistese ístmica L5-S1 grau II de Meyerding — deslizamento de 32% de L5 sobre S1 por fratura bilateral da pars interarticularis. Radiculopatia L5 direita com deficit de dorsiflexao.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Meyerding",
+        "grau": "Grau II (25-50%)",
+        "descricao": "Grau I: <25%. Grau II: 25-50%. Grau III: 50-75%. Grau IV: 75-100%. Grau V: Espondiloptose (>100%). Grau II neste caso: 32%."
+      },
+      {
+        "nome": "Wiltse-Newman",
+        "grau": "Tipo II (Ístmica)",
+        "descricao": "Tipo I: Displásica. Tipo II: Ístmica (fratura pars). Tipo III: Degenerativa. Tipo IV: Traumatica. Tipo V: Patologica. Ístmica e a mais comum em atletas."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Hiperlordose lombar exagerada — compensacao pela listese anterior",
+      "Step-off palpavel L4-L5 (processo espinhoso de L5 recuado em relacao a L4) — sinal patognomônico",
+      "Musculatura isquiotibial encurtada bilateral — sinal de Phalen-Dickson",
+      "Marcha em flexo leve de quadris e joelhos (postura espastica da listese)"
+    ],
+    "palpacao": [
+      "Dor a palpacao L5-S1",
+      "Step-off palpavel do processo espinhoso de L5 — recua em relacao a L4",
+      "Contratura severa dos isquiotibiais bilateralmente",
+      "Dor a extensao e rotacao ipsilateral (compressao do forame L5-S1)"
+    ],
+    "movimento": "Extensao lombar muito limitada — < 10 graus — reproduz a dor radicular. Flexao: 60 graus — alivia. Lasegue direito positivo a 45 graus — radiculopatia L5. Teste de Kemp (extensao + rotacao direita) positivo. Dorsiflexao do tornozelo direito: fraqueza grau 4 (normal 5).",
+    "testes": [
+      {
+        "nome": "Lasegue (Elevacao do Membro Reto)",
+        "sensibilidade": "80%",
+        "especificidade": "70%",
+        "positivo": "Positivo a 45 graus no membro inferior direito — compressao da raiz L5 no forame L5-S1 estreitado pela listese."
+      },
+      {
+        "nome": "Step-off Test",
+        "sensibilidade": "90%",
+        "especificidade": "95%",
+        "positivo": "Palpacao do degrau entre os processos espinhosos de L4 e L5 — L5 recua (anterior) em relacao a L4. Pathognomônico de listese grau > I."
+      },
+      {
+        "nome": "Teste de Phalen-Dickson",
+        "sensibilidade": "75%",
+        "especificidade": "80%",
+        "positivo": "Encurtamento dos isquiotibiais com teste de sentar-e-alcancar — bilateral, grave. Indica estiramento cronico das raizes sacras pela listese progressiva."
+      },
+      {
+        "nome": "Forca de Dorsiflexao",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "Dorsiflexao grau 4/5 no pé direito — indica deficit motor da raiz L5. Musculos: tibial anterior e extensor longo do haluce (nervacao L5 — peroneo profundo)."
+      }
+    ],
+    "red_flags": [
+      "Deficit de bexiga ou intestino — sindrome da cauda equina por listese grave — emergencia",
+      "Listese grau IV-V — espondiloptose — risco de paraplegia",
+      "Piora neurologica rapida — hematoma epidural ou progressao da listese",
+      "Dor intensa em repouso e noturna — pensar em neoplasia ou infeccao"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Listese de L5 sobre S1 de 32% (Meyerding grau II) nas incidencias em carga",
+        "Fratura bilateral da pars interarticularis L5 — sinal do colar do cão de Scottie no obliquo",
+        "Hiperlordose lombar compensatoria",
+        "RX dinamico: listese estavel (sem progressao em flexao-extensao > 4mm)"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC lombar obrigatoria para: 1) Confirmar fratura bilateral da pars (sinal do colar), 2) Avaliar qualidade ossea dos platôs (planejamento TLIF), 3) Medir o angulo de deslizamento e angulo lombo-sacro, 4) Identificar pseudartrose da pars."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Estenose do forame L5-S1 bilateral — maior a direita (compressao raiz L5 direita)",
+        "Hernia discal L5-S1 associada — disco degenerativo com hernia central",
+        "Edema da raiz L5 direita — hipersinal T2 intraneural",
+        "Ausencia de compressao medular — nivel L5-S1 abaixo do conal medular"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Espondilolistese ístmica L5-S1 grau II de Meyerding (32%) com radiculopatia L5 direita (deficit de dorsiflexao) por estenose foraminais L5-S1. Falha do conservador por 12 meses.",
+    "diferenciais": [
+      "Hernia discal L5-S1 pura sem listese — sem step-off, sem fratura da pars no RX obliquo",
+      "Estenose do canal lombar L4-L5 — sem step-off, claudicacao neurogênica, idosos",
+      "Sindrome do piriforme — dor glutea, Freiberg positivo, EMG normal",
+      "Espondilolistese degenerativa L4-L5 — idosos, sem fratura da pars"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "B",
+      "desvio_mm": 32,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "alta",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "listese_grau_II AND radiculopatia AND falha_conservador",
+        "then": "TLIF_L5-S1_indicado",
+        "prioridade": "alta",
+        "justificativa": "Listese grau II com radiculopatia L5 e deficit motor — TLIF L5-S1 tem 85-90% de bons resultados. Descompressao foraminais + reducao parcial da listese + artrodese intersomatica."
+      },
+      {
+        "if": "listese_grau_II AND jovem < 50",
+        "then": "reducao_parcial_30-50%_da_listese_com_TLIF",
+        "prioridade": "alta",
+        "justificativa": "Listese grau II em jovem — reducao parcial (nao completa — risco neurologico) melhora a geometria sacropelvica e os resultados funcionais em longo prazo."
+      },
+      {
+        "if": "fratura_bilateral_pars AND sintoma_cronico",
+        "then": "nao_tentar_reparo_da_pars",
+        "prioridade": "media",
+        "justificativa": "Fratura cronica da pars com 8 anos de evolucao e degeneracao discal L5-S1 — reparo isolado da pars contraindicado. TLIF com artrodese e o procedimento definitivo."
+      },
+      {
+        "if": "demanda_alta AND atleta",
+        "then": "planejamento_detalhado_de_balanco_sagital",
+        "prioridade": "media",
+        "justificativa": "Ex-atleta com alta demanda — restaurar o balanco sagital pelvico (incidencia pelvica = lordose lombar + declive sacral) e fundamental para o resultado funcional."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "TLIF L5-S1 (Transforaminal Lumbar Interbody Fusion) — descompressao foraminais bilateral + reducao parcial da listese (30-50%) + cage PEEK intersomatico L5-S1 + artrodese com parafusos pediculares L5-S1 (4 parafusos).",
+      "nivel_urgencia": "moderada",
+      "explicacao": "Espondilolistese ístmica L5-S1 grau II com radiculopatia L5 e deficit motor em professora 42a. TLIF L5-S1 indicado apos falha do conservador. Reducao parcial da listese (30-50%) — reducao completa aumenta risco de lesao radicular L5. Taxa de sucesso: 85-90% em bons resultados. Fusao ossea em 6-12 meses."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Graus I-II sem deficit neurologico por 6-12 meses",
+        "Fisioterapia intensiva com protocolo especifico para listese"
+      ],
+      "protocolo": [
+        "Fisioterapia: exercicios de estabilizacao lombopelvica (protocolo especifico para listese)",
+        "Alongamento intensivo dos isquiotibiais (Phalen-Dickson)",
+        "Evitar hiperextensao lombar — posicao de risco",
+        "Infiltracao transforaminais L5-S1 com corticosteroide guiada por fluoroscopia",
+        "Bengala ou suporte lombar em crises"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "21 dias"
+        },
+        {
+          "nome": "Ciclobenzaprina",
+          "dose": "5mg",
+          "via": "VO",
+          "intervalo": "8/8h",
+          "duracao": "7-10 dias (espasmo)"
+        },
+        {
+          "nome": "Pregabalina",
+          "dose": "75mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "30 dias (dor neuropatica)"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Listese grau II-IV com radiculopatia",
+        "Deficit neurologico progressivo",
+        "Falha do conservador por 6-12 meses",
+        "Listese progressiva (RX dinamico progressao > 5%)"
+      ],
+      "tecnicas": [
+        {
+          "nome": "TLIF L5-S1 (Transforaminais Lumbar Interbody Fusion)",
+          "quando_usar": "Listese ístmica com degeneracao discal + radiculopatia — tecnica padrao atual",
+          "vantagens": [
+            "Descompressao foraminais + artrodese em um tempo",
+            "Acesso unilateral — menor morbidade que PLIF bilateral",
+            "Reducao parcial da listese"
+          ],
+          "desvantagens": [
+            "Maior que descompressao pura — sangramento",
+            "Sindrome de adjacencia em longo prazo (L4-L5 sobrecarga)"
+          ]
+        },
+        {
+          "nome": "PLIF (Posterior Lumbar Interbody Fusion)",
+          "quando_usar": "Alternativa ao TLIF — acesso bilateral para 2 cages",
+          "vantagens": [
+            "Dois cages — maior area de fusao",
+            "Descompressao bilateral mais ampla"
+          ],
+          "desvantagens": [
+            "Maior retraction radicular bilateral — risco de lesao de raiz",
+            "Mais sangramento e tempo cirurgico"
+          ]
+        },
+        {
+          "nome": "Reparo da Pars (Scott Wiring ou Parafuso Direto)",
+          "quando_usar": "APENAS em espondilolistese grau I, jovem < 25a, disco integro (RM normal), fratura aguda",
+          "vantagens": [
+            "Preserva o movimento do segmento",
+            "Evita artrodese em atletas jovens"
+          ],
+          "desvantagens": [
+            "Contraindicado em degeneracao discal (este caso)",
+            "Taxa de falha de 10-20%"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Espondilolistese grau II-IV com radiculopatia refrataria",
+      "Deficit neurologico progressivo",
+      "Listese com instabilidade (progressao no RX dinamico > 5%)",
+      "Sindrome da cauda equina em listese grave — emergencia"
+    ],
+    "posicionamento": "Decubito ventral em armacao (Wilson frame ou Jackson). Abdomen livre (fundamental). Lordose lombar restaurada pelo posicionamento — coxins sob a crista iliaca. Fluoroscopia disponivel em toda a cirurgia. Monitoracao neurofisiologica PEM + PESS.",
+    "anestesia": [
+      "Anestesia geral — intubacao orotraqueal",
+      "Monitoracao neurofisiologica intraoperatoria PEM + PESS (obrigatoria em reducao de listese — risco L5)",
+      "Acido tranexamico 15mg/kg IV — reduz sangramento em 30%",
+      "Hipotensao controlada moderada (PAM 60-70)"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Exposicao e Parafusos Pediculares L5 e S1",
+        "descricao": "Incisao mediana 10cm. Exposicao dos processos transversos de L5 e alar de S1. Insercao de parafusos pediculares bilaterais em L5 (6,5x45mm) e S1 (7,5x45mm — trajetoria convergente para a cortical ventral de S1). Confirmar posicao por fluoroscopia.",
+        "ponto_critico": "Parafusos pediculares de S1 devem convergir para a cortical ventral e superior de S1 — maximiza o holding power no osso sacral mais esponjoso. Parafusos em L5 mal posicionados podem lesar a raiz L5 — confirmar posicao medial no fluoroscopio."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Laminectomia L5 e Descompressao Foraminais",
+        "descricao": "Laminectomia de L5 (lamina inferior de L5 e superior de S1). Resseccao dos ligamentos amarelos. Identificacao das raizes L5 e S1 bilateralmente. Descompressao do forame L5-S1 direito — remocao do osteofito da pars e da borda cranial de S1 que comprimem L5.",
+        "ponto_critico": "A raiz L5 em listeses cronicas esta aderida e estirada — mobilizacao CUIDADOSA. Tensao radicular excessiva ao tentar reducao completa da listese pode causar paralisia permanente de L5 (pe caido)."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Discectomia L5-S1 via Transforaminais",
+        "descricao": "Acesso ao disco L5-S1 pelo forame direito (afastamento suave da raiz L5). Discotomia e curetagem do disco degenerativo. Preparacao dos platôs — fresagem ate osso esponjoso (fundamental para fusao). Lavagem do espaco discal.",
+        "ponto_critico": "Preservar a cortical dos platôs vertebrais ao fresar — subsidencia do cage no osso esponjoso causa perda de altura e comprometimento da fusao. Parar a fresagem assim que o osso esponjoso sangrar."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Reducao Parcial da Listese (30-50%)",
+        "descricao": "Colocar as barras provisoriamente. Realizar reducao da listese — compressao dos parafusos de L5 enquanto se mantem S1 como pivot. Meta: reducao de 30-50% (de 32% para 16-20%). Monitorar continuamente PEM e PESS durante a reducao — qualquer queda = parar imediatamente.",
+        "ponto_critico": "NUNCA tentar reducao completa da listese ístmica cronica — a raiz L5 esta adaptada ao comprimento encurtado. Reducao completa causa avulsao da raiz L5 com paralisia permanente. Reducao 30-50% e o alvo seguro com melhora do balanco sagital."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Implante do Cage PEEK e Artrodese",
+        "descricao": "Implantacao do cage PEEK (10-12mm altura, lordótico 6-10 graus) preenchido com enxerto osseo autólogo (osso da laminectomia) via forame direito. Confirmar posicao central do cage por fluoroscopia (nao lateralizado). Adicionar enxerto osseo nos recessos posterolaterais (artrodese posterolateral — PLF). Apertar os parafusos definitivamente.",
+        "ponto_critico": "Cage muito anteriormente posicionado pode migrar para a frente (expulsao) — confirmar que o cage esta a >5mm da borda anterior do corpo vertebral na fluoroscopia lateral. Cage muito lateralizado comprime a raiz — centralizar."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Verificacao Final e Fechamento",
+        "descricao": "Confirmar PEM e PESS normais apos reducao e implantacao do cage. TC intraoperatoria se disponivel — confirmar posicao dos implantes e descompressao foraminais. Hemostasia. Dreno de Hemovac por 24-48h. Fechamento por planos. Ortese TLSO por 8-10 semanas.",
+        "ponto_critico": "TC intraoperatoria e fortemente recomendada — detecta malposicionamento de parafusos pediculares e cage antes do fechamento, evitando reoperacao precoce. Parafuso no canal = reoperacao imediata."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Parafusos pediculares poliaxiais 6,5mm L5 e 7,5mm S1 (sistema de artrodese)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Cage PEEK TLIF lordótico 10-12mm (ex: Medtronic Capstone, Depuy PIPELINE)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Barras de titanio 5,5mm + conectores"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Monitoracao neurofisiologica PEM + PESS — obrigatoria"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "TC intraoperatoria (O-arm ou Airo) — fortemente recomendada"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Avaliacao neurologica horaria nas primeiras 6h — forca dorsiflexao pe direito",
+      "TC lombar no DPO imediato — posicao dos implantes e descompressao",
+      "Ortese TLSO para toda verticalizacao por 8-10 semanas",
+      "Deambulacao com andador no DPO 1-2",
+      "Fisioterapia: inicio no DPO 1 — sentado, transferencia"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV 8/8h",
+        "dose": "2g",
+        "duracao": "24h PO"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Tramadol 100mg IV 8/8h SN",
+        "dose": "100mg",
+        "duracao": "72h"
+      },
+      {
+        "nome": "Gabapentina 300mg VO 8/8h",
+        "dose": "300mg",
+        "duracao": "6-8 semanas"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "21-28 dias"
+      }
+    ],
+    "restricoes": [
+      "Ortese TLSO em toda verticalizacao por 8-10 semanas",
+      "Sem flexao lombar > 30 graus",
+      "Sem rotacao lombar ativa",
+      "Trabalho sedentario: 3-4 meses. Atividade fisica leve: 3-4 meses. Esporte: 12-18 meses"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Mobilizacao Inicial",
+      "periodo": "Semanas 1-8",
+      "objetivo": "Verticalizacao com ortese, exercicios isometricos, controle da dor neuropatica",
+      "exercicios": [
+        "Exercicios isometricos de gluteos e abdominais em decubito",
+        "Caminhada curta com andador (5-10 min/dia)",
+        "Exercicios de membros superiores",
+        "Fisioterapia respiratoria"
+      ],
+      "restricoes": [
+        "Ortese TLSO em toda verticalizacao",
+        "Sem flexao ou rotacao lombar"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Fortalecimento Basico",
+      "periodo": "Semanas 8-16",
+      "objetivo": "Marcha independente, forca dos abdominais e gluteos 60%",
+      "exercicios": [
+        "Fisioterapia lombar especifica para pos-listese",
+        "Pilates adaptado sem hiperextensao",
+        "Hidroterapia — descarga da gravidade",
+        "Bicicleta ergometrica (coluna neutra)"
+      ],
+      "restricoes": [
+        "Sem hiperextensao lombar permanentemente",
+        "Sem cargas axiais > 10kg"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Retorno Funcional",
+      "periodo": "Meses 4-9",
+      "objetivo": "Retorno ao trabalho de professora, fusao radiologica confirmada",
+      "exercicios": [
+        "Musculacao moderada de membros inferiores",
+        "Natacao (costas e crawl)",
+        "Caminhadas longas",
+        "Yoga adaptada (sem posicoes de hiperextensao lombar)"
+      ],
+      "restricoes": [
+        "Sem corrida ate 9-12 meses",
+        "Sem impacto axial"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Esporte e Manutencao",
+      "periodo": "Meses 9-18",
+      "objetivo": "Retorno a atividade fisica plena se fusao confirmada",
+      "exercicios": [
+        "Corrida progressiva (se fusao confirmada no RX/TC)",
+        "Musculacao plena com core treinado",
+        "Pilates avancado"
+      ],
+      "restricoes": [
+        "Sem ginastica artistica ou esportes de alto impacto em hiperextensao — permanente"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Deficit neurologico L5 pos-reducao (1-5%) — pe caido — maioria neuropraxia",
+      "Hematoma epidural (1-3%)",
+      "Fistula de liquor (1-3%)",
+      "Infeccao profunda (2-4%)"
+    ],
+    "tardias": [
+      "Pseudartrose (10-15% em fumantes) — falha da fusao ossea",
+      "Subsidencia do cage (5-10%) — perda de altura intersomatica",
+      "Falha de implante — quebra de parafuso ou barra (3-5%)",
+      "Sindrome de adjacencia L4-L5 (10-20% em 10 anos)"
+    ],
+    "prevencao": [
+      "Monitoracao PEM+PESS durante toda a reducao",
+      "Reducao PARCIAL (30-50%) — nunca completa",
+      "TC intraoperatoria para confirmar posicao antes do fechamento",
+      "Cessacao do tabagismo — reduz pseudartrose de 30% para 8%"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual o sinal radiológico da fratura da pars interarticularis e o que e o colar do cão de Scottie?",
+      "resposta": "Na incidencia obliqua de 45 graus da coluna lombar, o 'cão de Scottie' e formado por: cabeca (processo articular superior), pescoco (pars interarticularis), orelha (processo transverso), pata dianteira (processo articular inferior). O COLAR do cão = radiolucencia no pescoco (pars) = fratura da pars interarticularis = espondilolistese ísthmica."
+    },
+    {
+      "pergunta": "O que e a Classificacao de Meyerding e como se calcula?",
+      "resposta": "Grau de deslizamento: porcentagem do corpo de L5 que deslizou alem da borda anterior de S1. Grau I: 0-25%. Grau II: 25-50%. Grau III: 50-75%. Grau IV: 75-100%. Grau V (Espondiloptose): >100% (L5 cai anterior a S1). Mede-se no RX lateral em carga."
+    },
+    {
+      "pergunta": "Por que e perigoso realizar reducao completa da espondilolistese ísthmica cronica?",
+      "resposta": "A raiz L5 esta adaptada ao comprimento encurtado pela listese cronica — esta hipersensibilizada e estirada. Reducao completa causa tensao aguda da raiz L5 resultando em paralisia permanente (pe caido — deficit de dorsiflexao). A meta segura e reducao de 30-50%. A raiz L5 deve ser monitorada continuamente com PEM durante a reducao."
+    },
+    {
+      "pergunta": "Qual e a diferenca entre espondilolistese ísthmica e degenerativa?",
+      "resposta": "Ísthmica (Wiltse II): fratura bilateral da pars por estresse repetitivo — comum em atletas, ocorre em jovens, nivel mais comum L5-S1. Degenerativa (Wiltse III): erosao das facetas articulares degenerativas sem fratura da pars — idosos, nivel mais comum L4-L5 (facetas mais verticalizadas). Ambas causam listese mas por mecanismos diferentes."
+    },
+    {
+      "pergunta": "O que e o balanco sagital pelvico e por que importa na cirurgia da listese?",
+      "resposta": "Incidencia Pelvica (IP) = angulo fixo pelvico que determina a demanda de lordose lombar (LL) e declive sacral (DS). Formula: IP = LL + DS. Em listeses com IP alta (>65 graus), o paciente precisa de maior lordose lombar para equilibrio sagital. O cage TLIF lordótico e a posicao cirurgica devem restaurar esse balanco — desequilibrio sagital causa dor cronica e falha funcional."
+    },
+    {
+      "pergunta": "Qual a diferenca entre TLIF e PLIF?",
+      "resposta": "PLIF (Posterior Lumbar Interbody Fusion): acesso bilateral ao disco, 2 cages inseridos bilateralmente — maior area de fusao mas maior retraction radicular bilateral. TLIF (Transforaminais LIF): acesso ao disco pelo forame de um lado (geralmente do lado mais sintomatico), 1 cage maior — menor retraction radicular, acesso mais seguro para as raizes, resultado equivalente ao PLIF. TLIF e o padrao atual."
+    },
+    {
+      "pergunta": "Qual e o sinal de Phalen-Dickson e o que indica na espondilolistese?",
+      "resposta": "Encurtamento dos isquiotibiais — incapacidade de extensao dos joelhos com o quadril fletido (posicao sentada com joelhos estendidos impossivel). Indica estiramento cronico das raizes S1-S2 pela listese anterior, causando espasmo reflexo dos isquiotibiais para proteger as raizes. Presente em listeses grau > I e melhora apos artrodese bem-sucedida."
+    },
+    {
+      "pergunta": "Quando e indicado reparo da pars interarticularis em vez de artrodese na espondilolistese ísthmica?",
+      "resposta": "Apenas em: 1) Paciente jovem < 20-25 anos, 2) Listese grau I apenas, 3) Disco INTEGRO na RM (sem degeneracao discal L5-S1), 4) Fratura aguda ou subaguda (edema na RM), 5) Atleta de alta performance com imperativo de preservar o movimento. Se o disco esta degenerado (como neste caso), o reparo da pars e insuficiente — a dor discal persiste. TLIF com artrodese e o procedimento correto em adultos com discopatia."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Espondilolistese ístmica L5-S1 grau II (32%) com radiculopatia L5 direita (deficit de dorsiflexao). Falha conservadora por 12 meses.",
+    "conduta": "TLIF L5-S1 com reducao parcial (30-50%) + cage PEEK + artrodese. Monitoracao PEM+PESS obrigatoria. Urgencia moderada.",
+    "tecnica": "Parafusos pediculares L5-S1 + TLIF pelo forame direito + cage PEEK lordótico + reducao parcial com monitoracao neurofisiologica.",
+    "riscos": [
+      "Deficit L5 por reducao excessiva (1-5%)",
+      "Pseudartrose (10-15% em fumantes)",
+      "Subsidencia do cage (5-10%)",
+      "Sindrome de adjacencia L4-L5 (10-20% em 10 anos)"
+    ],
+    "resumo": "F 42a ex-ginasta com espondilolistese ístmica L5-S1 grau II e radiculopatia L5. TLIF L5-S1 com reducao parcial indicado. Monitoracao PEM+PESS obrigatoria. Retorno ao trabalho em 3-4 meses e esporte em 12-18 meses."
+  }
+}
