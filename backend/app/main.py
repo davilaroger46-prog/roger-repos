@@ -7,7 +7,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import init_db
-from app.routers import cases, decision, progress
+from app.routers import cases, decision, progress, generate
 
 app = FastAPI(
     title="OrthoStudy API",
@@ -30,6 +30,7 @@ app.add_middleware(
 app.include_router(cases.router,    prefix="/cases",    tags=["Casos"])
 app.include_router(decision.router, prefix="/decision", tags=["Decisão AO"])
 app.include_router(progress.router, prefix="/progress", tags=["Progresso"])
+app.include_router(generate.router, prefix="/generate", tags=["Geração IA"])
 
 # ─── Startup ─────────────────────────────────────────────────────
 
