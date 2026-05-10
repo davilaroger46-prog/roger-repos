@@ -47,8 +47,8 @@ export default function CaseListPage({ onSelect }) {
         />
       </div>
 
-      <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
-        {["", "Joelho", "Cotovelo", "Quadril", "Tornozelo"].map((r) => (
+      <div style={{ display: "flex", gap: 6, marginBottom: 14, flexWrap: "wrap" }}>
+        {["", "Ombro", "Cotovelo", "Quadril", "Joelho", "Tornozelo", "Coluna"].map((r) => (
           <button
             key={r}
             onClick={() => setRegiao(r)}

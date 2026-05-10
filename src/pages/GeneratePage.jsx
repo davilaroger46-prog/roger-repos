@@ -1,5 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
+import { generateCase } from "../api/client";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const EXEMPLOS = [
   "Fratura do olécrano 21-B1 em adulto jovem atleta",
@@ -7,6 +8,8 @@ const EXEMPLOS = [
   "Fratura do platô tibial lateral — Schatzker II",
   "Ruptura do manguito rotador em atleta",
   "Fratura de Colles em idosa com osteoporose",
+  "Luxação do ombro anterior — Bankart",
+  "Fratura subtrocantérica em adulto jovem — trauma de alta energia",
 ];
 
 export default function GeneratePage({ onGenerated }) {
@@ -20,8 +23,8 @@ export default function GeneratePage({ onGenerated }) {
     setLoading(true);
     setError(null);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/generate/", { tema, nivel: nivel || undefined });
-      onGenerated(res.data.caso);
+      const data = await generateCase({ tema, nivel: nivel || undefined });
+      onGenerated(data.caso);
     } catch (e) {
       setError(e.response?.data?.detail || e.message);
     } finally {
@@ -49,20 +52,25 @@ export default function GeneratePage({ onGenerated }) {
       </div>
 
       <div className="card">
-        <div className="risk-label" style={{ marginBottom: 8 }}>Nível</div>
-        <div style={{ display: "flex", gap: 8 }}>
-          {["", "basico", "intermediario", "avancado"].map((n) => (
+        <div className="risk-label" style={{ marginBottom: 8 }}>Nível de dificuldade</div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {[
+            { val: "",             label: "Qualquer" },
+            { val: "basico",       label: "Básico" },
+            { val: "intermediario",label: "Intermediário" },
+            { val: "avancado",     label: "Avançado" },
+          ].map(({ val, label }) => (
             <button
-              key={n}
-              onClick={() => setNivel(n)}
+              key={val}
+              onClick={() => setNivel(val)}
               style={{
                 padding: "6px 12px", borderRadius: 999, fontSize: 11, fontWeight: 700,
                 border: "1px solid var(--border)", cursor: "pointer",
-                background: nivel === n ? "var(--primary)" : "transparent",
-                color: nivel === n ? "#fff" : "var(--muted)",
+                background: nivel === val ? "var(--primary)" : "transparent",
+                color: nivel === val ? "#fff" : "var(--muted)",
               }}
             >
-              {n || "Qualquer"}
+              {label}
             </button>
           ))}
         </div>
@@ -74,7 +82,7 @@ export default function GeneratePage({ onGenerated }) {
           <div
             key={e}
             className="list-item"
-            style={{ cursor: "pointer", fontSize: 13 }}
+            style={{ cursor: "pointer", fontSize: 13, padding: "8px 0" }}
             onClick={() => setTema(e)}
           >
             {e}
@@ -83,7 +91,11 @@ export default function GeneratePage({ onGenerated }) {
       </div>
 
       {error && (
-        <div className="emergency-banner">{error}</div>
+        <div className="emergency-banner" style={{ marginBottom: 12 }}>{error}</div>
+      )}
+
+      {loading && (
+        <LoadingSpinner message="Gerando caso com IA... (pode levar 20-30s)" />
       )}
 
       <button
@@ -97,7 +109,7 @@ export default function GeneratePage({ onGenerated }) {
           marginTop: 8,
         }}
       >
-        {loading ? "Gerando caso com IA..." : "✨ Gerar Caso"}
+        {loading ? "Gerando..." : "✨ Gerar Caso"}
       </button>
     </>
   );

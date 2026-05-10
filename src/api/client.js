@@ -64,6 +64,12 @@ export async function getFlashcards(caseId) {
   return res.data;
 }
 
+// ─── GERAÇÃO IA ─────────────────────────────────────────────────
+export async function generateCase(payload) {
+  const res = await client.post("/generate", payload, { timeout: 90000 });
+  return res.data;
+}
+
 // ─── PROGRESSO ──────────────────────────────────────────────────
 export async function getProgress() {
   const res = await client.get("/progress");
