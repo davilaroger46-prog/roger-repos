@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>OrthoStudy v2.0 — Preview</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: #0f172a;
+      --panel-soft: #1e293b;
+      --primary: #3b82f6;
+      --accent: #e11d48;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, rgba(59,130,246,.12), transparent 35%), var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .phone {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+    /* HEADER */
+    .mobile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: rgba(2,6,23,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .status { font-size: 11px; color: var(--green); font-weight: 700; }
+
+    /* SCREENS */
+    .screen { display: none; flex: 1; overflow-y: auto; padding: 16px; }
+    .screen.active { display: block; }
+
+    /* CARD */
+    .card {
+      background: linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .decision-card {
+      background: linear-gradient(145deg, rgba(225,29,72,.18), rgba(15,23,42,.95));
+      border: 1px solid rgba(225,29,72,.35);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .decision-label { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 800; }
+    .decision-main { margin-top: 8px; font-size: 20px; line-height: 1.2; font-weight: 900; color: var(--text); }
+    .decision-technique { margin-top: 10px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .emergency-banner {
+      background: rgba(220,38,38,.14);
+      border: 1px solid rgba(220,38,38,.4);
+      color: #fecaca;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 800;
+      border-radius: 999px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .badge-green { background: rgba(16,185,129,.15); color: var(--green); }
+    .badge-amber { background: rgba(245,158,11,.15); color: var(--amber); }
+    .badge-red { background: rgba(239,68,68,.15); color: var(--red); }
+    .badge-blue { background: rgba(59,130,246,.15); color: var(--primary); }
+    .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+    .risk-box { background: var(--panel-soft); border: 1px solid var(--border); border-radius: 12px; padding: 10px; }
+    .risk-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+    .risk-value { margin-top: 4px; font-size: 14px; font-weight: 900; }
+    .list-item { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; line-height: 1.5; }
+    .list-item:last-child { border-bottom: none; }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(2,6,23,.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border);
+      position: sticky;
+      bottom: 0;
+    }
+    .bottom-nav button {
+      flex: 1;
+      padding: 12px 8px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 20px;
+      cursor: pointer;
+      transition: all .2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .bottom-nav button span { font-size: 9px; font-weight: 700; letter-spacing: .05em; }
+    .bottom-nav button.active { color: var(--primary); }
+
+    /* TABS INTERNAS */
+    .inner-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+    .inner-tabs button {
+      padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 700;
+      border: 1px solid var(--border); cursor: pointer; white-space: nowrap;
+      background: transparent; color: var(--muted); transition: all .2s;
+    }
+    .inner-tabs button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* CASE LIST */
+    .case-card {
+      background: linear-gradient(145deg, #0f172a, #020617);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .case-card:hover { border-color: var(--primary); }
+    .search-box {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* FLASH */
+    .flashcard {
+      background: linear-gradient(145deg, rgba(225,29,72,.18), rgba(15,23,42,.95));
+      border: 1px solid rgba(59,130,246,.35);
+      border-radius: 18px;
+      padding: 24px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+    .progress-bar { height: 4px; background: var(--panel-soft); border-radius: 999px; margin-bottom: 16px; }
+    .progress-fill { height: 100%; background: var(--primary); border-radius: 999px; width: 37%; }
+
+    /* STEP */
+    .step { margin-bottom: 14px; border-left: 3px solid var(--primary); padding-left: 12px; }
+    .step-num {
+      background: var(--primary); color: #fff; border-radius: 50%;
+      width: 22px; height: 22px; display: inline-flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 900; margin-right: 8px;
+    }
+    .step-title { font-weight: 800; font-size: 14px; display: inline; }
+    .step-body { margin-top: 6px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .step-alert {
+      background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3);
+      border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--amber); margin-top: 6px;
+    }
+
+    /* REHAB */
+    .rehab-card { border-radius: 14px; padding: 14px; margin-bottom: 12px; border: 1px solid var(--border); }
+
+    /* PROGRESS */
+    .prog-bar-wrap { height: 6px; background: var(--panel-soft); border-radius: 999px; flex: 1; }
+    .prog-bar-fill { height: 100%; border-radius: 999px; }
+
+    /* BTN */
+    .btn-primary {
+      width: 100%; padding: 14px; border-radius: 14px; border: none;
+      background: var(--primary); color: #fff; font-weight: 800;
+      font-size: 15px; cursor: pointer; margin-bottom: 12px;
+    }
+    .btn-accent {
+      width: 100%; padding: 14px; border-radius: 14px; border: none;
+      background: var(--accent); color: #fff; font-weight: 800;
+      font-size: 15px; cursor: pointer; margin-bottom: 12px;
+    }
+
+    /* TOGGLE */
+    .toggle-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .toggle-btn {
+      width: 44px; height: 24px; border-radius: 999px; border: none;
+      cursor: pointer; position: relative;
+    }
+    .toggle-off { background: var(--panel-soft); }
+    .toggle-on  { background: var(--primary); }
+    .toggle-dot {
+      position: absolute; top: 3px; width: 18px; height: 18px;
+      border-radius: 50%; background: #fff;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 999px; }
+  </style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- HEADER -->
+  <header class="mobile-header">
+    <span style="font-weight:900;font-size:18px">OrthoStudy</span>
+    <span class="status">● Online</span>
+  </header>
+
+  <!-- ── TELA: CASOS ── -->
+  <div class="screen active" id="screen-cases">
+    <div class="search-box">🔍 Buscar caso clínico...</div>
+
+    <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto">
+      <button onclick="" style="padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--primary);background:var(--primary);color:#fff;cursor:pointer">Todos</button>
+      <button onclick="" style="padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">Ombro</button>
+      <button onclick="" style="padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">Quadril</button>
+      <button onclick="" style="padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">Joelho</button>
+    </div>
+
+    <div class="case-card" onclick="showDetail('007')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="badge badge-red">Avançado</span>
+        <span style="font-size:11px;color:var(--muted)">Ombro</span>
+      </div>
+      <div style="font-weight:800;margin-top:8px;font-size:15px">Ruptura Maciça do Manguito Rotador</div>
+      <div style="margin-top:6px;font-size:13px;color:var(--muted);line-height:1.5">M 67a ex-pedreiro com ruptura maciça do manguito (Patte 3/Goutallier III) e pseudoparalisia crônica...</div>
+      <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">
+        <span class="badge badge-blue">manguito rotador</span>
+        <span class="badge badge-blue">artroscopia</span>
+        <span class="badge badge-blue">RTSA</span>
+      </div>
+    </div>
+
+    <div class="case-card" onclick="showDetail('008')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="badge badge-red">Avançado</span>
+        <span style="font-size:11px;color:var(--muted)">Quadril</span>
+      </div>
+      <div style="font-weight:800;margin-top:8px;font-size:15px">Coxartrose Primária Grau IV — ATQ</div>
+      <div style="margin-top:6px;font-size:13px;color:var(--muted);line-height:1.5">F 72a osteoporótica com coxartrose grau IV e HHS 28. ATQ híbrida indicada. Carga total imediata...</div>
+      <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">
+        <span class="badge badge-blue">coxartrose</span>
+        <span class="badge badge-blue">ATQ</span>
+        <span class="badge badge-blue">Kellgren Lawrence</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TELA: DETALHE 007 ── -->
+  <div class="screen" id="screen-detail-007">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <button onclick="goBack()" style="background:none;border:none;color:var(--primary);font-size:22px;cursor:pointer">←</button>
+      <span style="font-weight:800;font-size:15px;line-height:1.3">Ruptura Maciça do Manguito Rotador</span>
+    </div>
+
+    <div class="inner-tabs">
+      <button class="active" onclick="switchInnerTab(this,'007','geral')">Visão Geral</button>
+      <button onclick="switchInnerTab(this,'007','cirurgia')">Cirurgia</button>
+      <button onclick="switchInnerTab(this,'007','rehab')">Reabilitação</button>
+      <button onclick="switchInnerTab(this,'007','evidencias')">Evidências</button>
+    </div>
+
+    <div id="tab-007-geral">
+      <div class="card" style="border-left:4px solid var(--primary)">
+        <p style="margin:0;font-size:14px;line-height:1.6">M 67a ex-pedreiro com ruptura maciça do manguito (Patte 3/Goutallier III) e pseudoparalisia crônica. Reparo primário contraindicado pela alta taxa de reruptura. Artroplastia reversa do ombro é o procedimento de escolha — elevação ativa esperada de 120-140 graus.</p>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-label">Conduta</div>
+        <div class="decision-main">🔪 Cirúrgico</div>
+        <div class="decision-technique">Artroplastia total reversa do ombro (RTSA)</div>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted);line-height:1.5">Ruptura maciça Patte 3/Goutallier III. Reparo artroscópico primário contraindicado (>70% reruptura).</p>
+      </div>
+
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:10px">Paciente</div>
+        <div class="risk-grid">
+          <div class="risk-box"><div class="risk-label">Sexo</div><div class="risk-value" style="font-size:13px">Masc.</div></div>
+          <div class="risk-box"><div class="risk-label">Idade</div><div class="risk-value" style="font-size:13px">67a</div></div>
+          <div class="risk-box"><div class="risk-label">Lado</div><div class="risk-value" style="font-size:13px">Direito</div></div>
+          <div class="risk-box"><div class="risk-label">Demanda</div><div class="risk-value" style="font-size:13px">Moderada</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-top:6px">Aposentado, ex-pedreiro</div>
+        <div style="margin-top:8px;display:flex;gap:4px">
+          <span class="badge badge-amber">HAS</span>
+          <span class="badge badge-amber">DM tipo 2</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Classificação AO/OTA</div>
+        <div style="font-size:24px;font-weight:900;color:var(--primary)">11-C2</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px">Úmero Proximal — Ruptura maciça com retração grau 3 e atrofia muscular grau III</div>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <span class="badge badge-red">Gravidade: Alta</span>
+          <span class="badge badge-blue">Confiança: Alta</span>
+        </div>
+        <div style="margin-top:10px">
+          <div class="risk-label" style="margin-bottom:6px">Classificações Secundárias</div>
+          <div class="list-item"><strong>Patte Grau 3</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Retração tendínea até a cavidade glenoide</div></div>
+          <div class="list-item"><strong>Goutallier Grau III</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Infiltração gordurosa 50-75% — preditor negativo de reparo</div></div>
+          <div class="list-item"><strong>DeOrio-Cofield Maciça (>5cm)</strong><div style="font-size:12px;color:var(--muted);margin-top:2px">Ruptura envolvendo pelo menos 2 tendões</div></div>
+        </div>
+      </div>
+
+      <div class="emergency-banner">🚩 Red Flags: Massa palpável supraclavicular · Dor irradiada com parestesias · Febre + dor</div>
+
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Exame Físico</div>
+        <div class="risk-label" style="margin-bottom:4px">Testes Especiais</div>
+        <div style="background:var(--panel-soft);border-radius:10px;padding:10px;margin-bottom:8px">
+          <div style="font-weight:800;font-size:13px">Drop Arm Test</div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <span class="badge badge-green">Sens: 73%</span>
+            <span class="badge badge-blue">Esp: 97%</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Braço cai ao soltar após elevação passiva a 90° — ruptura maciça.</div>
+        </div>
+        <div style="background:var(--panel-soft);border-radius:10px;padding:10px">
+          <div style="font-weight:800;font-size:13px">Hornblower Sign</div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <span class="badge badge-green">Sens: 100%</span>
+            <span class="badge badge-blue">Esp: 93%</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px">Incapacidade de rotação externa a 90° de abdução — infraespinhal roto.</div>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="showFlashcards('007')">🃏 Estudar Flashcards (8)</button>
+    </div>
+
+    <div id="tab-007-cirurgia" style="display:none">
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Posicionamento</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5">Beach chair 45-60°. Braço livre. Tração leve 1-2kg. Mesa especial de ombro.</p>
+      </div>
+
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:12px">Passo a Passo Cirúrgico</div>
+        <div class="step">
+          <span class="step-num">1</span><span class="step-title">Incisão e Abordagem Deltopeitoral</span>
+          <div class="step-body">Incisão deltopeitoral 8-12cm. Identificação e proteção do nervo axilar. Divisão do intervalo deltopeitoral preservando a veia cefálica lateralmente.</div>
+          <div class="step-alert">⚠️ Nervo axilar a 5-7mm da cápsula articular inferior — palpação e visualização obrigatórias.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span><span class="step-title">Capsulotomia e Exposição</span>
+          <div class="step-body">Capsulotomia anterior em L invertido. Luxação anterior da cabeça umeral. Confirmar integridade do subescapular.</div>
+          <div class="step-alert">⚠️ Subescapular roto compromete estabilidade da RTSA e muda o planejamento.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span><span class="step-title">Preparo Glenoidal e Glenosfera</span>
+          <div class="step-body">Fresagem da glenoide. Posicionamento inferior da glenosfera (5mm abaixo da borda inferior). Fixação com parafuso central + 2-4 periféricos.</div>
+          <div class="step-alert">⚠️ Inclinação inferior 10° e posicionamento inferior são críticos para evitar notching escapular.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span><span class="step-title">Componente Umeral e Cimentação</span>
+          <div class="step-body">Ressecção do colo a 155°. Fresagem sequencial. Implante com retroversão de 20°. Cimento ósseo em osteoporóticos.</div>
+          <div class="step-alert">⚠️ Retroversão excessiva = instabilidade posterior. Alvo: 20°.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span><span class="step-title">Redução e Teste de Estabilidade</span>
+          <div class="step-body">Redução do implante. Teste em elevação, rotação e tração. Verificar tensão do deltóide — sinal da tecla. Ajuste do polietileno (S, M ou L).</div>
+          <div class="step-alert">⚠️ Tensão insuficiente = instabilidade. Excessiva = dor crônica.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">6</span><span class="step-title">Fechamento e Reinserção</span>
+          <div class="step-body">Reinserção do subescapular com âncoras. Dreno de Penrose 24-48h. Imobilizador Velpeau 4-6 semanas.</div>
+          <div class="step-alert">⚠️ Reinserção do subescapular é fundamental — sem ela, risco de instabilidade anterior.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Implantes</div>
+        <div class="list-item">• Sistema RTSA (DePuy Delta XTEND / Stryker ReUnion / Zimmer Biomet)</div>
+        <div class="list-item">• Glenosfera 36-42mm</div>
+        <div class="list-item">• Componente umeral cimentado ou não-cimentado</div>
+        <div class="list-item">• Polietileno S, M ou L</div>
+      </div>
+
+      <button class="btn-primary" onclick="showFlashcards('007')">🃏 Estudar Flashcards (8)</button>
+    </div>
+
+    <div id="tab-007-rehab" style="display:none">
+      <div class="rehab-card" style="border-left:4px solid var(--green);background:linear-gradient(145deg,rgba(16,185,129,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 1 — Proteção</span>
+          <span class="badge badge-green">Sem 1-6</span>
+        </div>
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);font-style:italic">Controle de edema, exercícios pendulares passivos</div>
+        <div class="risk-label" style="margin:10px 0 4px">Exercícios</div>
+        <div class="list-item">• Exercícios de Codman (pendulares) passivos — semana 2</div>
+        <div class="list-item">• Mobilização ativa de dedos, punho e cotovelo</div>
+        <div class="risk-label" style="margin:10px 0 4px">Restrições</div>
+        <div class="list-item" style="color:var(--red)">✗ Sem elevação ativa · Sem rotação externa ativa · Velpeau obrigatório</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid var(--amber);background:linear-gradient(145deg,rgba(245,158,11,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 2 — Mobilização Ativa-Assistida</span>
+          <span class="badge badge-amber">Sem 6-12</span>
+        </div>
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);font-style:italic">Elevação ativa-assistida, ROM 0-90°, fortalecimento do deltóide</div>
+        <div class="list-item">• Elevação ativa-assistida com bastão ou polia</div>
+        <div class="list-item">• Fortalecimento isométrico do deltóide</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid var(--primary);background:linear-gradient(145deg,rgba(59,130,246,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 3 — Fortalecimento</span>
+          <span class="badge badge-blue">Meses 3-6</span>
+        </div>
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);font-style:italic">Força 60-70% contralateral, retorno às AVDs básicas</div>
+        <div class="list-item">• Fortalecimento progressivo do deltóide com theraband</div>
+        <div class="list-item">• Bicicleta ergométrica com rotação bilateral</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid #a855f7;background:linear-gradient(145deg,rgba(168,85,247,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 4 — Retorno Funcional</span>
+          <span class="badge" style="background:rgba(168,85,247,.15);color:#a855f7">Meses 6-12</span>
+        </div>
+        <div style="margin-top:6px;font-size:13px;color:var(--muted);font-style:italic">Elevação ativa 120-140°, força 80% contralateral</div>
+        <div class="list-item">• Musculação progressiva com supervisão</div>
+        <div class="list-item">• Natação (crawl) se tolerado · Golf, tênis de mesa</div>
+        <div class="list-item" style="color:var(--red)">✗ Sem esportes de contato permanentemente</div>
+      </div>
+      <button class="btn-primary" onclick="showFlashcards('007')">🃏 Estudar Flashcards (8)</button>
+    </div>
+
+    <div id="tab-007-evidencias" style="display:none">
+      <div class="card" style="text-align:center;color:var(--muted)">
+        <p style="font-size:32px;margin-bottom:8px">📄</p>
+        <p>Referências bibliográficas serão exibidas aqui após importação dos casos com evidências preenchidas.</p>
+      </div>
+      <button class="btn-primary" onclick="showFlashcards('007')">🃏 Estudar Flashcards (8)</button>
+    </div>
+  </div>
+
+  <!-- ── TELA: DETALHE 008 ── -->
+  <div class="screen" id="screen-detail-008">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <button onclick="goBack()" style="background:none;border:none;color:var(--primary);font-size:22px;cursor:pointer">←</button>
+      <span style="font-weight:800;font-size:15px;line-height:1.3">Coxartrose Primária Grau IV — ATQ</span>
+    </div>
+
+    <div class="inner-tabs">
+      <button class="active" onclick="switchInnerTab(this,'008','geral')">Visão Geral</button>
+      <button onclick="switchInnerTab(this,'008','cirurgia')">Cirurgia</button>
+      <button onclick="switchInnerTab(this,'008','rehab')">Reabilitação</button>
+    </div>
+
+    <div id="tab-008-geral">
+      <div class="card" style="border-left:4px solid var(--primary)">
+        <p style="margin:0;font-size:14px;line-height:1.6">F 72a osteoporótica com coxartrose grau IV e HHS 28. ATQ híbrida indicada. Cirurgia eletiva após otimização clínica. Carga total imediata. Meta: HHS > 90 em 3-6 meses.</p>
+      </div>
+      <div class="decision-card">
+        <div class="decision-label">Conduta</div>
+        <div class="decision-main">🔪 Cirúrgico</div>
+        <div class="decision-technique">ATQ Híbrida — acetábulo press-fit + femoral cimentado (Exeter)</div>
+        <p style="margin-top:10px;font-size:13px;color:var(--muted);line-height:1.5">Urgência baixa — otimizar HAS e osteoporose pré-op.</p>
+      </div>
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:10px">Paciente</div>
+        <div class="risk-grid">
+          <div class="risk-box"><div class="risk-label">Sexo</div><div class="risk-value" style="font-size:13px">Fem.</div></div>
+          <div class="risk-box"><div class="risk-label">Idade</div><div class="risk-value" style="font-size:13px">72a</div></div>
+          <div class="risk-box"><div class="risk-label">Lado</div><div class="risk-value" style="font-size:13px">Esquerdo</div></div>
+          <div class="risk-box"><div class="risk-label">HHS</div><div class="risk-value" style="font-size:13px;color:var(--red)">28/100</div></div>
+        </div>
+        <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap">
+          <span class="badge badge-amber">HAS</span>
+          <span class="badge badge-amber">Osteoporose T-2.9</span>
+          <span class="badge badge-amber">IMC 31</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Kellgren-Lawrence IV</div>
+        <div style="font-size:24px;font-weight:900;color:var(--primary)">KL-IV</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px">Colapso completo do espaço articular · Esclerose subcondral · Geodes</div>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <span class="badge badge-red">Gravidade: Alta</span>
+          <span class="badge badge-blue">Indicação Absoluta</span>
+        </div>
+      </div>
+      <div class="emergency-banner">🚩 Red Flags: Dor desproporcional → excluir metástase · Febre → artrite séptica · Parestesias → radiculopatia L3-L4</div>
+      <button class="btn-primary" onclick="showFlashcards('008')">🃏 Estudar Flashcards (8)</button>
+    </div>
+
+    <div id="tab-008-cirurgia" style="display:none">
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Posicionamento</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.5">Decúbito lateral. Rolo axilar. Apoio púbico e sacral. Mesa radiotransparente.</p>
+      </div>
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:12px">Passo a Passo Cirúrgico</div>
+        <div class="step">
+          <span class="step-num">1</span><span class="step-title">Via de Hardinge e Exposição</span>
+          <div class="step-body">Incisão lateral 15-20cm. Divisão do tensor da fáscia lata. Desinserção do glúteo médio e mínimo (1/3 anterior). Cápsula em T.</div>
+          <div class="step-alert">⚠️ Preservar glúteo médio posterior — desinserção excessiva causa Trendelenburg permanente.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span><span class="step-title">Ressecção da Cabeça Femoral</span>
+          <div class="step-body">Colotomia a 55° no nível planejado. Verificar comprimento com régua. Remover osteófitos acetabulares.</div>
+          <div class="step-alert">⚠️ Nível de ressecção determina comprimento do membro — usar templating pré-operatório.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span><span class="step-title">Implante Acetabular</span>
+          <div class="step-body">Fresagem progressiva (2mm acima do final). Posicionamento 45° inclinação + 20° anteversão. Impactação press-fit. Parafusos de suporte.</div>
+          <div class="step-alert">⚠️ Inclinação >55° = desgaste do polietileno. Alvo: 40-45°. Zona de segurança de Lewinnek.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span><span class="step-title">Canal Femoral e Cimentação</span>
+          <div class="step-body">Fresagem sequencial. Lavagem com jet pulsátil (3L SF). Tampão + pistola de cimento (3 ciclos de pressurização). Femoral a 15° anteversão.</div>
+          <div class="step-alert">⚠️ Pressurização do cimento é crítica — cimento não pressurizado = interface fraca = afundamento.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span><span class="step-title">Redução e Teste</span>
+          <div class="step-body">Cabeça 32-36mm. Teste em flexão/rotação interna/adução. Verificar comprimento do membro. Fluoroscopia.</div>
+          <div class="step-alert">⚠️ Testar luxação: flex 90°+rot int 45°. Se instável → cabeça 36mm ou revisar anteversão.</div>
+        </div>
+        <div class="step">
+          <span class="step-num">6</span><span class="step-title">Fechamento e Reinserção Glútea</span>
+          <div class="step-body">Reinserção do glúteo médio com ponto transósseo ou âncora. Dreno de hemovac 24-48h. Compressão elástica.</div>
+          <div class="step-alert">⚠️ Reinserção segura do glúteo médio é determinante para evitar Trendelenburg PO.</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showFlashcards('008')">🃏 Estudar Flashcards (8)</button>
+    </div>
+
+    <div id="tab-008-rehab" style="display:none">
+      <div class="rehab-card" style="border-left:4px solid var(--green);background:linear-gradient(145deg,rgba(16,185,129,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 1 — Mobilização Imediata</span>
+          <span class="badge badge-green">Dias 1-7</span>
+        </div>
+        <div class="list-item">• Marcha com andador — carga total no DPO 1</div>
+        <div class="list-item">• Exercícios de bomba de tornozelo (anti-TVP)</div>
+        <div class="list-item" style="color:var(--red)">✗ Não cruzar as pernas · Não fletir >90° · Sem cadeiras baixas</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid var(--amber);background:linear-gradient(145deg,rgba(245,158,11,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 2 — Independência Funcional</span>
+          <span class="badge badge-amber">Sem 2-6</span>
+        </div>
+        <div class="list-item">• Andador → bengala → independente</div>
+        <div class="list-item">• Exercícios de abdução e extensão do quadril</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid var(--primary);background:linear-gradient(145deg,rgba(59,130,246,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 3 — Fortalecimento</span>
+          <span class="badge badge-blue">Sem 6-12</span>
+        </div>
+        <div class="list-item">• Glúteo médio com theraband</div>
+        <div class="list-item">• Leg press até 60° · Bicicleta ergométrica</div>
+      </div>
+      <div class="rehab-card" style="border-left:4px solid #a855f7;background:linear-gradient(145deg,rgba(168,85,247,.08),var(--bg))">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:900;font-size:14px">Fase 4 — Retorno Pleno</span>
+          <span class="badge" style="background:rgba(168,85,247,.15);color:#a855f7">Meses 3-6</span>
+        </div>
+        <div class="list-item">• Caminhadas sem limite · Golf, natação, ciclismo</div>
+        <div class="list-item" style="color:var(--red)">✗ Sem corrida · Sem rotação extrema do quadril</div>
+      </div>
+      <button class="btn-primary" onclick="showFlashcards('008')">🃏 Estudar Flashcards (8)</button>
+    </div>
+  </div>
+
+  <!-- ── TELA: FLASHCARDS 007 ── -->
+  <div class="screen" id="screen-flash-007">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <button onclick="goBack()" style="background:none;border:none;color:var(--primary);font-size:22px;cursor:pointer">←</button>
+      <span style="color:var(--muted);font-size:13px">1 / 8 · Manguito Rotador</span>
+      <div style="flex:1;height:4px;background:var(--panel-soft);border-radius:999px">
+        <div style="height:100%;background:var(--primary);border-radius:999px;width:12%"></div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.querySelector('.back').style.display=this.querySelector('.back').style.display=='none'?'block':'none';this.querySelector('.front').style.display=this.querySelector('.front').style.display=='none'?'block':'none'">
+      <div class="front">
+        <div class="decision-label">Pergunta</div>
+        <div style="margin-top:10px;font-size:16px;font-weight:800;line-height:1.4">Qual é o critério clínico que define pseudoparalisia no manguito rotador?</div>
+        <div style="margin-top:16px;font-size:12px;color:var(--muted)">Toque para ver a resposta</div>
+      </div>
+      <div class="back" style="display:none">
+        <div class="decision-label" style="color:var(--green)">Resposta</div>
+        <div style="margin-top:10px;font-size:14px;line-height:1.7">Incapacidade de elevação ativa acima de 90° com elevação passiva preservada acima de 120°. É causada pela perda do mecanismo depressor da cabeça umeral (supra+infraespinhal), que permite ao deltóide elevar sem impacto subacromial.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button onclick="goBack()" style="flex:1;padding:14px;border-radius:12px;border:none;background:rgba(239,68,68,.15);color:var(--red);font-weight:800;font-size:14px;cursor:pointer">✗ Errei</button>
+      <button onclick="goBack()" style="flex:1;padding:14px;border-radius:12px;border:none;background:rgba(16,185,129,.15);color:var(--green);font-weight:800;font-size:14px;cursor:pointer">✓ Acertei</button>
+    </div>
+  </div>
+
+  <!-- ── TELA: FLASHCARDS 008 ── -->
+  <div class="screen" id="screen-flash-008">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <button onclick="goBack()" style="background:none;border:none;color:var(--primary);font-size:22px;cursor:pointer">←</button>
+      <span style="color:var(--muted);font-size:13px">1 / 8 · ATQ</span>
+      <div style="flex:1;height:4px;background:var(--panel-soft);border-radius:999px">
+        <div style="height:100%;background:var(--primary);border-radius:999px;width:12%"></div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.querySelector('.back').style.display=this.querySelector('.back').style.display=='none'?'block':'none';this.querySelector('.front').style.display=this.querySelector('.front').style.display=='none'?'block':'none'">
+      <div class="front">
+        <div class="decision-label">Pergunta</div>
+        <div style="margin-top:10px;font-size:16px;font-weight:800;line-height:1.4">Quais são os critérios clássicos de indicação de artroplastia total do quadril?</div>
+        <div style="margin-top:16px;font-size:12px;color:var(--muted)">Toque para ver a resposta</div>
+      </div>
+      <div class="back" style="display:none">
+        <div class="decision-label" style="color:var(--green)">Resposta</div>
+        <div style="margin-top:10px;font-size:14px;line-height:1.7">1) Artrose grau III-IV KL. 2) Dor incapacitante sem controle conservador. 3) HHS &lt; 70. 4) Impacto nas AVDs. 5) Falha do conservador &gt;3-6 meses. A indicação é clínico-radiológica — não existe corte absoluto de idade.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button onclick="goBack()" style="flex:1;padding:14px;border-radius:12px;border:none;background:rgba(239,68,68,.15);color:var(--red);font-weight:800;font-size:14px;cursor:pointer">✗ Errei</button>
+      <button onclick="goBack()" style="flex:1;padding:14px;border-radius:12px;border:none;background:rgba(16,185,129,.15);color:var(--green);font-weight:800;font-size:14px;cursor:pointer">✓ Acertei</button>
+    </div>
+  </div>
+
+  <!-- ── TELA: DECISÃO AO ── -->
+  <div class="screen" id="screen-decision">
+    <div class="decision-label" style="margin-bottom:12px">Motor de Decisão AO/OTA</div>
+    <div class="card">
+      <div class="risk-label" style="margin-bottom:8px">Segmento AO</div>
+      <select style="width:100%;background:var(--panel-soft);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 10px;font-size:13px">
+        <option>21 — Rádio/Ulna Proximal</option>
+        <option>11 — Úmero Proximal</option>
+        <option>23 — Rádio Distal</option>
+        <option>41 — Tíbia Proximal</option>
+        <option>31 — Fêmur Proximal</option>
+      </select>
+      <div class="risk-label" style="margin:12px 0 8px">Tipo AO</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="selectTipo(this)" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--primary);background:var(--primary);color:#fff;font-weight:800;font-size:16px;cursor:pointer">A</button>
+        <button onclick="selectTipo(this)" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:800;font-size:16px;cursor:pointer">B</button>
+        <button onclick="selectTipo(this)" style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:800;font-size:16px;cursor:pointer">C</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="risk-label" style="margin-bottom:10px">Dados Clínicos</div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:13px;margin-bottom:4px">Desvio: <strong style="color:var(--primary)">3 mm</strong></div>
+        <input type="range" min="0" max="20" value="3" style="width:100%;accent-color:var(--primary)">
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:13px;margin-bottom:4px">Idade: <strong style="color:var(--primary)">34 anos</strong></div>
+        <input type="range" min="10" max="95" value="34" style="width:100%;accent-color:var(--primary)">
+      </div>
+      <div class="risk-label" style="margin-bottom:6px">Demanda Funcional</div>
+      <div style="display:flex;gap:6px;margin-bottom:10px">
+        <button style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:700;font-size:12px;cursor:pointer">baixa</button>
+        <button style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid var(--primary);background:var(--primary);color:#fff;font-weight:700;font-size:12px;cursor:pointer">moderada</button>
+        <button style="flex:1;padding:8px 4px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:700;font-size:12px;cursor:pointer">alta</button>
+      </div>
+      <div class="toggle-row">Instabilidade articular<button class="toggle-btn toggle-off"><span class="toggle-dot" style="left:2px"></span></button></div>
+      <div class="toggle-row">Cominuição<button class="toggle-btn toggle-off"><span class="toggle-dot" style="left:2px"></span></button></div>
+      <div class="toggle-row">Osso osteoporótico<button class="toggle-btn toggle-off"><span class="toggle-dot" style="left:2px"></span></button></div>
+      <div class="toggle-row">🩸 Fratura exposta<button class="toggle-btn toggle-off"><span class="toggle-dot" style="left:2px"></span></button></div>
+      <div class="toggle-row">⚡ Déficit neurovascular<button class="toggle-btn toggle-off"><span class="toggle-dot" style="left:2px"></span></button></div>
+    </div>
+    <button class="btn-accent" onclick="showDecisionResult()">⚡ Calcular Decisão</button>
+    <div id="decision-result" style="display:none">
+      <div class="decision-card">
+        <div class="decision-label">Conduta</div>
+        <div class="decision-main">🩹 Conservador</div>
+        <div class="decision-technique">Tala posterior + controle — Mayo I sem desvio e mecanismo extensor íntegro</div>
+      </div>
+      <div class="card">
+        <div class="decision-label" style="margin-bottom:8px">Implante Recomendado</div>
+        <div style="font-size:15px;font-weight:700">Placa LCP posterior 3,5 mm + parafuso longo proximal 4,0 mm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TELA: GERAR ── -->
+  <div class="screen" id="screen-generate">
+    <div class="decision-label" style="margin-bottom:12px">Gerar Caso com IA</div>
+    <div class="card">
+      <div class="risk-label" style="margin-bottom:8px">Tema do caso</div>
+      <textarea rows="3" placeholder="Ex: Fratura do olécrano 21-B1 em adulto jovem atleta" style="width:100%;background:transparent;border:none;color:var(--text);font-size:14px;outline:none;resize:none;line-height:1.6;font-family:inherit"></textarea>
+    </div>
+    <div class="card">
+      <div class="risk-label" style="margin-bottom:8px">Exemplos rápidos</div>
+      <div class="list-item" style="cursor:pointer">Fratura do olécrano 21-B1 em adulto jovem atleta</div>
+      <div class="list-item" style="cursor:pointer">Fratura do colo do fêmur em idosa osteoporótica</div>
+      <div class="list-item" style="cursor:pointer">Fratura do platô tibial lateral — Schatzker II</div>
+      <div class="list-item" style="cursor:pointer">Ruptura do ligamento cruzado anterior em atleta</div>
+      <div class="list-item" style="cursor:pointer">Fratura de Colles em idosa com osteoporose</div>
+    </div>
+    <button class="btn-primary">✨ Gerar Caso com IA</button>
+  </div>
+
+  <!-- ── TELA: PROGRESSO ── -->
+  <div class="screen" id="screen-progress">
+    <div class="decision-label" style="margin-bottom:12px">Seu Progresso</div>
+    <div class="risk-grid" style="margin-bottom:14px">
+      <div class="risk-box"><div class="risk-label">Flashcards</div><div class="risk-value" style="color:var(--primary)">16</div></div>
+      <div class="risk-box"><div class="risk-label">Corretos</div><div class="risk-value" style="color:var(--green)">11</div></div>
+      <div class="risk-box"><div class="risk-label">Acurácia</div><div class="risk-value" style="color:var(--amber)">69%</div></div>
+    </div>
+    <div class="card">
+      <div style="font-weight:700;font-size:13px;margin-bottom:8px">007 — Manguito Rotador</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="prog-bar-wrap"><div class="prog-bar-fill" style="background:var(--green);width:75%"></div></div>
+        <span style="font-size:12px;color:var(--muted);min-width:36px">75%</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">6/8 flashcards</div>
+    </div>
+    <div class="card">
+      <div style="font-weight:700;font-size:13px;margin-bottom:8px">008 — Coxartrose / ATQ</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div class="prog-bar-wrap"><div class="prog-bar-fill" style="background:var(--amber);width:62%"></div></div>
+        <span style="font-size:12px;color:var(--muted);min-width:36px">62%</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">5/8 flashcards</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="active" onclick="showScreen('cases',this)">🗂️<span>Casos</span></button>
+    <button onclick="showScreen('decision',this)">⚡<span>Decisão</span></button>
+    <button onclick="showScreen('generate',this)">✨<span>Gerar</span></button>
+    <button onclick="showScreen('progress',this)">📈<span>Progresso</span></button>
+  </nav>
+
+</div>
+
+<script>
+  let history = [];
+
+  function showScreen(name, btn) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    history = [name];
+    window.scrollTo(0, 0);
+  }
+
+  function showDetail(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-detail-' + id).classList.add('active');
+    history.push('detail-' + id);
+    window.scrollTo(0, 0);
+  }
+
+  function showFlashcards(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-flash-' + id).classList.add('active');
+    history.push('flash-' + id);
+    window.scrollTo(0, 0);
+  }
+
+  function goBack() {
+    history.pop();
+    const prev = history[history.length - 1] || 'cases';
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + prev).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function switchInnerTab(btn, caseId, tab) {
+    const detail = document.getElementById('screen-detail-' + caseId);
+    detail.querySelectorAll('[id^="tab-' + caseId + '"]').forEach(t => t.style.display = 'none');
+    document.getElementById('tab-' + caseId + '-' + tab).style.display = 'block';
+    detail.querySelectorAll('.inner-tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function selectTipo(btn) {
+    btn.parentElement.querySelectorAll('button').forEach(b => {
+      b.style.background = 'transparent';
+      b.style.color = 'var(--muted)';
+      b.style.borderColor = 'var(--border)';
+    });
+    btn.style.background = 'var(--primary)';
+    btn.style.color = '#fff';
+    btn.style.borderColor = 'var(--primary)';
+  }
+
+  function showDecisionResult() {
+    document.getElementById('decision-result').style.display = 'block';
+  }
+</script>
+</body>
+</html>
