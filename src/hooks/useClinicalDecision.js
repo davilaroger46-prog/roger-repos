@@ -10,18 +10,20 @@ export function useClinicalDecision(data, decision) {
 
     const riskLevel = output?.nivel_urgencia || "baixa";
 
+    const riskClass =
+      riskLevel === "critica"
+        ? "case-critical"
+        : riskLevel === "alta"
+        ? "case-high"
+        : riskLevel === "moderada"
+        ? "case-moderate"
+        : "case-low";
+
     return {
       output,
       isEmergency,
       riskLevel,
-      riskClass:
-        riskLevel === "critica"
-          ? "case-critical"
-          : riskLevel === "alta"
-          ? "case-high"
-          : riskLevel === "moderada"
-          ? "case-moderate"
-          : "case-low",
+      riskClass,
     };
   }, [data, decision]);
 }
