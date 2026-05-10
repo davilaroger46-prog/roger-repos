@@ -1,0 +1,529 @@
+{
+  "meta": {
+    "id": "011",
+    "titulo": "Estenose do Canal Lombar L4-L5 — Claudicacao Neurogênica",
+    "slug": "estenose-canal-lombar-l4-l5-claudicacao",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Vertebral",
+    "nivel": "intermediario",
+    "tags": [
+      "coluna lombar",
+      "estenose",
+      "claudicacao neurogênica",
+      "laminectomia",
+      "L4-L5",
+      "canal vertebral"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Masculino",
+    "idade": 68,
+    "atividade": "Aposentado, caminhadas diarias",
+    "lado": "Bilateral",
+    "demanda_funcional": "moderada",
+    "comorbidades": [
+      "HAS",
+      "DM tipo 2",
+      "Dislipidemia"
+    ]
+  },
+  "historia": {
+    "queixa_principal": "Dor e dormência bilateral nos membros inferiores que piora com a caminhada e melhora ao sentar — claudicacao neurogênica",
+    "inicio": "cronico",
+    "tempo_evolucao": "2 anos com piora progressiva",
+    "mecanismo_lesao": "Degenerativo — hipertrofia dos ligamentos amarelos e das facetas articulares com espondilose L4-L5 causando estreitamento progressivo do canal vertebral e compressao das raizes de L4 e L5 bilateralmente.",
+    "descricao": "Paciente masculino, 68 anos, aposentado. Relata dor e dormência que irradiam da região lombar para ambos os membros inferiores ao caminhar — apos 50-100 metros precisa parar e sentar para alivio. Ciclismo tolerado por 30 minutos sem piora (posicao de flexao descomprime o canal). Excluida claudicacao vascular (pulsos periféricos presentes, melhora ao sentar e nao ao parar em pé). RM evidenciou estenose grave do canal em L4-L5 com area transversal < 75mm²."
+  },
+  "classificacao": {
+    "primaria": "Classificacao morfologica da estenose + Grau de estenose na RM",
+    "ao_ota": {
+      "codigo": "COL-ECL",
+      "osso": "Coluna Lombar L4-L5",
+      "segmento": "Canal Vertebral",
+      "tipo": "B",
+      "grupo": "Estenose grave com claudicacao neurogênica",
+      "descricao": "Estenose do canal vertebral lombar L4-L5 grau grave — area transversal do saco dural < 75mm² (normal > 100mm²). Hipertrofia bilateral dos ligamentos amarelos e articulares com obliteracao do recesso lateral e foraminais.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Grau de Estenose na RM",
+        "grau": "Grau C (Grave)",
+        "descricao": "Grau A: >76mm² (normal). Grau B: 76-100mm² (moderada). Grau C: <75mm² (grave) — sintomatica e com indicacao cirurgica apos falha do conservador."
+      },
+      {
+        "nome": "Meyerding",
+        "grau": "Espondilolistese Grau 0",
+        "descricao": "Sem listese associada — estenose degenerativa pura sem deslizamento vertebral."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Marcha cautelosa com passos curtos — medo de claudicar",
+      "Postura em ligeira flexao do tronco (posicao antálgica de Simian — descomprime o canal)",
+      "Sem desvio lateral ou cifose significativa",
+      "Bom estado geral — claudicacao nao limita AVDs em repouso"
+    ],
+    "palpacao": [
+      "Dor a palpacao dos processos espinhosos L4-L5",
+      "Contratura bilateral da musculatura paravertebral lombar",
+      "Dor a percussao do processo espinhoso de L5",
+      "Sem sinais de irritacao meningea"
+    ],
+    "movimento": "Flexao lombar: 80 graus (dentro do normal — alivia a dor). Extensao lombar: 15 graus (reproduz a dor bilateral — estreitamento do canal em extensao). Teste de Kemp (extensao + rotacao ipsilateral): positivo bilateral — reproduz a irradiacao. Lasegue bilateral: negativo (diferencia de hernia discal).",
+    "testes": [
+      {
+        "nome": "Teste da Caminhada (Treadmill Test)",
+        "sensibilidade": "88%",
+        "especificidade": "75%",
+        "positivo": "Paciente claudica apos 80m — para e senta. Alivio em 2-3min. Reinicia e claudica novamente. Padrao tipico de claudicacao neurogênica."
+      },
+      {
+        "nome": "Teste de Kemp",
+        "sensibilidade": "65%",
+        "especificidade": "95%",
+        "positivo": "Extensao + rotacao ipsilateral reproduz a radiculopatia ipsilateral — estreitamento foraminais em extensao. Diferenciar de facetaria pura."
+      },
+      {
+        "nome": "Lasegue (Elevacao do Membro Reto)",
+        "sensibilidade": "72%",
+        "especificidade": "70%",
+        "positivo": "NEGATIVO neste caso — diferencia estenose de hernia discal aguda. Lasegue positivo em hernia; negativo na maioria das estenoses. Exceto estenose com hernia associada."
+      },
+      {
+        "nome": "ABI (Indice Tornozelo-Braquial)",
+        "sensibilidade": "95%",
+        "especificidade": "99%",
+        "positivo": "ABI > 0,9 bilateralmente — exclui claudicacao vascular. Fundamental para diferenciacao de isquemia vascular critica."
+      }
+    ],
+    "red_flags": [
+      "Perda de controle esfincteriano (urina ou fezes) — sindrome da cauda equina — emergencia cirurgica",
+      "Fraqueza progressiva bilateral dos membros inferiores — deterioracao neurologica rapida",
+      "Saddle anesthesia (anestesia em sela) — lesao do conal medular ou cauda equina",
+      "Febre + dor em coluna + diabetes — espondilodiscite infecciosa"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Espondilose com osteofitos marginais em L4-L5",
+        "Reducao do espaco discal L4-L5 (discopatia degenerativa)",
+        "Sem listese — alinhamento sagital preservado",
+        "Escoliose degenerativa leve (< 10 graus) — nao influencia conduta"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC lombar util para avaliacao da morfologia ossea do canal, hipertrofia das facetas articulares e planejamento da descompressao. Complementa a RM no pre-operatorio."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Estenose grave do canal vertebral L4-L5 — area transversal do saco dural < 75mm²",
+        "Hipertrofia bilateral dos ligamentos amarelos (>5mm — normal <4mm)",
+        "Hipertrofia das facetas articulares com efusao — artrose facetaria grau III",
+        "Hernia discal L4-L5 central associada contribuindo para estenose",
+        "Sinais de espondilose — desidratacao discal (hipossinal T2) em L3-L4, L4-L5 e L5-S1"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Estenose do canal lombar L4-L5 grau grave (area < 75mm²) com claudicacao neurogênica bilateral. Radiculopatia L4-L5 bilateral. Falha do tratamento conservador por 12 meses.",
+    "diferenciais": [
+      "Claudicacao vascular (isquemia periférica) — ABI < 0,9, nao melhora ao sentar mas sim ao parar, pulsos diminuidos",
+      "Hernia de disco lombar (radiculopatia aguda) — Lasegue positivo, dor unilateral, inicio agudo",
+      "Espondilolistese degenerativa L4-L5 — listese > 4mm no RX dinâmico, pode coexistir",
+      "Neuropatia diabética periférica — bilateral simetrica, sem componente mecânico, piora noturna"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "B",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "moderada",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "claudicacao_neurogênica AND falha_conservador_12_meses AND estenose_grave_RM",
+        "then": "laminectomia_descompressiva_L4-L5_indicada",
+        "prioridade": "alta",
+        "justificativa": "Estenose grave sintomatica com claudicacao limitante apos falha do conservador adequado (fisioterapia + AINEs + infiltracao epidural). Laminectomia descompressiva tem 70-80% de bons resultados."
+      },
+      {
+        "if": "sem_listese AND sem_instabilidade",
+        "then": "descompressao_isolada_sem_artrodese",
+        "prioridade": "alta",
+        "justificativa": "Sem listese ou instabilidade — descompressao isolada (laminectomia) e suficiente. Artrodese adicional aumenta morbidade sem beneficio adicional na estenose pura."
+      },
+      {
+        "if": "artrose_facetaria_grave E paciente_idoso",
+        "then": "laminotomia_bilateral_via_uniportal_ou_TLIF_se_instabilidade",
+        "prioridade": "media",
+        "justificativa": "Tecnica minimamente invasiva (laminotomia bilateral via acesso unilateral) preferida em idosos — menor sangramento, recuperacao mais rapida. Artrodese apenas se instabilidade confirmada."
+      },
+      {
+        "if": "DM_tipo_2 AND IMC",
+        "then": "otimizar_glicemia_pre_operatoria",
+        "prioridade": "media",
+        "justificativa": "DM aumenta risco de infeccao da ferida (2-3x). Hemoglobina glicada < 7,5% antes da cirurgia eletiva. Antibioticoprofilaxia prolongada."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Laminectomia descompressiva L4-L5 com laminotomia bilateral — preservacao das facetas articulares (50% bilateral). Sem artrodese na ausencia de listese. Tecnica minimamente invasiva (MILD — minimally invasive lumbar decompression) como opcao em idosos.",
+      "nivel_urgencia": "baixa",
+      "explicacao": "Estenose lombar L4-L5 grave com claudicacao neurogênica em idoso 68a. Falha do conservador adequado por 12 meses. Laminectomia descompressiva e o procedimento padrao com 70-80% de resultados bons/excelentes. Sem listese — artrodese nao indicada (nao melhora o resultado e aumenta complicacoes em idosos). Cirurgia eletiva — sem urgencia exceto se sindrome da cauda equina."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Primeira linha por 6-12 meses: fisioterapia + AINEs + infiltracao epidural",
+        "Pacientes com risco cirurgico elevado (cardiopatia grave, DPOC)",
+        "Estenose moderada (75-100mm²) com sintomas controlaveis"
+      ],
+      "protocolo": [
+        "Fisioterapia: fortalecimento do core, exercicios de flexao lombar (Williams), ciclismo",
+        "Infiltracao epidural com corticosteroide: betametasona 12mg + bupivacaina 0,5% — guiada por fluoroscopia",
+        "AINEs por 4-6 semanas em crises",
+        "Caminhada com andador ou bengala (postura em flexao)",
+        "Perda de peso se obeso"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "28 dias"
+        },
+        {
+          "nome": "Pregabalina",
+          "dose": "75mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "30-60 dias (dor neuropatica)"
+        },
+        {
+          "nome": "Betametasona (infiltracao epidural)",
+          "dose": "12mg",
+          "via": "Epidural interlaminar L3-L4",
+          "intervalo": "Repetir em 4-6 semanas se necessario (maximo 3/ano)",
+          "duracao": "Ate 3 infiltracoes por ciclo"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Claudicacao neurogênica limitante apos falha de 6-12 meses de conservador",
+        "Deficit neurologico progressivo",
+        "Qualidade de vida comprometida (VAS > 6, ODI > 40%)",
+        "Sindrome da cauda equina (emergencia)"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Laminectomia Descompressiva (Padrao)",
+          "quando_usar": "Estenose grave de 1-2 niveis sem listese ou instabilidade em paciente tolerante a cirurgia aberta",
+          "vantagens": [
+            "Descompressao ampla do canal",
+            "Resultados comprovados (SPORT Trial — 70-80% satisfacao 4 anos)",
+            "Recuperacao em 4-6 semanas"
+          ],
+          "desvantagens": [
+            "Risco de instabilidade iatrogenica se facetas removidas > 50% bilateral",
+            "Dor na ferida operatoria",
+            "Maior sangramento que tecnica minimamente invasiva"
+          ]
+        },
+        {
+          "nome": "Laminotomia Bilateral via Acesso Unilateral (ULBD)",
+          "quando_usar": "Idosos, estenose de 1-2 niveis, preferencia por menor morbidade",
+          "vantagens": [
+            "Preserva estrutura posterior (musculatura, ligamento supra e interespinhoso)",
+            "Menor sangramento e dor",
+            "Hospitalizacao mais curta (1-2 dias)"
+          ],
+          "desvantagens": [
+            "Tecnica mais exigente — curva de aprendizado",
+            "Menor descompressao em canais muito estreitos"
+          ]
+        },
+        {
+          "nome": "TLIF com Artrodese L4-L5",
+          "quando_usar": "Estenose + listese grau I-II OU instabilidade em flexao-extensao (listese dinamica > 4mm) OU estenose recorrente pos-laminectomia previa",
+          "vantagens": [
+            "Estabiliza o segmento — evita progressao da listese",
+            "Indicado se instabilidade confirmada"
+          ],
+          "desvantagens": [
+            "Cirurgia maior — maior sangramento e tempo cirurgico",
+            "Custo do cage e do sistema de instrumentacao",
+            "Sindrome de adjacencia a longo prazo"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Claudicacao neurogênica limitante apos falha conservadora",
+      "Deficit neurologico progressivo (paresia ou alteracao esfincteriana)",
+      "Sindrome da cauda equina — emergencia",
+      "Qualidade de vida inaceitavel apesar do conservador"
+    ],
+    "posicionamento": "Decubito ventral em armacao radiotransparente (Wilson frame). Abdomen livre. Joelhos levemente fletidos. Almofadas sob o torax e cristas iliacas. Confirmacao do nivel por fluoroscopia antes da incisao.",
+    "anestesia": [
+      "Anestesia geral com intubacao orotraqueal (padrao)",
+      "Raquidiana possivel em cirurgias de nivel unico em idosos — menor risco respiratorio",
+      "Infiltracao local com bupivacaina 0,25% no fechamento — analgesia PO precoce"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Confirmacao do Nivel e Incisao",
+        "descricao": "Fluoroscopia intraoperatoria — marcar L4-L5 com agulha intradispal. Incisao mediana 6-8cm centrada em L4-L5. Descolamento subperiostal bilateral dos musculos paravertebrais ate os processos articulares. Protecao com afastadores de Caspar ou Taylor.",
+        "ponto_critico": "Confirmar o nivel com fluoroscopia ANTES da incisao — erro de nivel e a complicacao mais comum e prevenivel na cirurgia da coluna."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Laminectomia L4 e L5",
+        "descricao": "Remocao da lamina de L4 e L5 com gubia de Leksell e Kerrison progressivamente. Remover os processos espinhosos L4-L5. Descompressao do canal central — visualizar a dura-mater pulsante em toda a extensao de L4-L5. Hemostasia com cera de osso e bipolar.",
+        "ponto_critico": "Preservar pelo menos 50% das facetas articulares bilateralmente — remocao > 50% bilateral causa instabilidade iatrogenica e listese pos-operatoria progressiva."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Resseccao dos Ligamentos Amarelos",
+        "descricao": "Resseccao bilateral dos ligamentos amarelos hipertrofiados com Kerrison fino. Liberar os ligamentos da lamina superior e inferior. Descompressao completa do recesso lateral bilateral onde saem as raizes L4 e L5. Verificar foramens com sonda de Penfield.",
+        "ponto_critico": "Descompressao do recesso lateral e FUNDAMENTAL — a maioria da claudicacao vem da compressao das raizes no recesso, nao apenas no canal central. Nao terminar a cirurgia sem descomprimir o recesso bilateral."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Descompressao Foraminais",
+        "descricao": "Undercut da faceta medial bilateral com osteotomo ou high speed burr (5-7mm de medialization). Sonda de Penfield no forame — verificar que as raizes de L4 e L5 saem livremente. Hemostasia com bipolar no plexo venoso epidural.",
+        "ponto_critico": "Descompressao foraminais insuficiente e a causa mais frequente de dor residual pos-operatoria. Confirmar com sonda de Penfield que a raiz sai livre sem compressao ao longo de todo o trajeto foraminais."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Verificacao Final — Descompressao Completa",
+        "descricao": "Inspecao do canal apos descompressao: dura-mater deve pulsar livremente, raizes de L4 e L5 mobilizaveis sem tensao, recesso lateral amplo bilateralmente, foramens permeaveis. Lavar com SF 0,9% 1 litro. Hemostasia final.",
+        "ponto_critico": "Testar mobilidade das raizes — raiz tensa apos descompressao indica compressao residual (hernia discal remanescente ou osteofito foraminais). Nao fechar sem verificar."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Drenagem",
+        "descricao": "Dreno epidural de Hemovac por 24h (reduz hematoma epidural). Fechamento da fascia toracolombar com Vicryl 0 pontos separados. Subcutaneo com Vicryl 2-0. Pele com grampos ou nylon. Curativo oclusivo. Radiografia final AP e lateral.",
+        "ponto_critico": "Fechamento hermetico da fascia e CRITICO para prevencao de fistula de liquor (pseudomeningocele) se houver lesao inadvertida da dura-mater. Se dura lesada durante a cirurgia — reparo primario obrigatorio com fio 4-0 e teste de Valsalva."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "instrumental",
+        "nome": "Gubia de Leksell (varios tamanhos)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Kerrison angulado 2, 3 e 4mm"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Osteotomo fino e high-speed burr (descompressao foraminais)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Sondas de Penfield n° 1, 3 e 4"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm) para confirmacao de nivel"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Dreno epidural Hemovac (implante temporario — retirar em 24h)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Afastadores de Taylor ou Caspar para exposicao paravertebral"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Deambulacao com andador no dia seguinte a cirurgia (DPO 1)",
+      "Fisioterapia: mobilizacao precoce, exercicios respiratorios",
+      "Retirada do dreno em 24h (producao < 50mL)",
+      "Avaliacao neurologica: comparar com pre-op — melhora imediata da claudicacao em 80% dos casos",
+      "Radiografia AP e lateral no DPO 1 — verificar alinhamento"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV",
+        "dose": "2g",
+        "duracao": "Dose unica pre-op + 24h PO"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Cetoprofeno 100mg IV 12/12h",
+        "dose": "100mg",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Pregabalina 75mg VO 12/12h",
+        "dose": "75mg",
+        "duracao": "4 semanas (dor neuropatica residual)"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "14 dias"
+      }
+    ],
+    "restricoes": [
+      "Sem flexao do tronco > 60 graus por 4 semanas",
+      "Sem carga de peso superior a 5kg por 4 semanas",
+      "Dirigir: liberado apos 2-4 semanas",
+      "Trabalho sedentario: 4-6 semanas. Trabalho fisico: 8-12 semanas"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Mobilizacao Precoce",
+      "periodo": "Semanas 1-4",
+      "objetivo": "Deambulacao independente, controle da dor, retorno as AVDs basicas",
+      "exercicios": [
+        "Caminhada progressiva — inicio com 5 min/dia, aumentar 5 min por semana",
+        "Exercicios de respiracao profunda",
+        "Exercicios isometricos de abdominais em decubito"
+      ],
+      "restricoes": [
+        "Sem flexao > 60 graus do tronco",
+        "Sem carregar peso"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Fortalecimento do Core",
+      "periodo": "Semanas 4-12",
+      "objetivo": "Forca do core 60%, retorno a caminhadas de 500m-1km sem claudicacao",
+      "exercicios": [
+        "Pilates terapeutico — enfase em estabilizadores lombares",
+        "Natacao (crawl ou costas — sem borboleta)",
+        "Bicicleta ergometrica",
+        "Caminhada progressiva ate 30 min continuos"
+      ],
+      "restricoes": [
+        "Sem impacto (corrida)",
+        "Sem hiperextensao lombar"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Retorno Funcional",
+      "periodo": "Meses 3-6",
+      "objetivo": "Caminhadas sem limitacao, retorno ao esporte de baixo impacto",
+      "exercicios": [
+        "Musculacao moderada de membros inferiores",
+        "Hidroginastica",
+        "Golf, ciclismo ao ar livre"
+      ],
+      "restricoes": [
+        "Sem levantamento de peso > 20kg",
+        "Sem esportes de impacto"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Manutencao",
+      "periodo": "Apos 6 meses",
+      "objetivo": "Programa de exercicios permanente para prevencao de recidiva",
+      "exercicios": [
+        "Programa de exercicios diarios de core (15-20 min)",
+        "Caminhadas regulares",
+        "Natacao periodica"
+      ],
+      "restricoes": [
+        "Evitar sedentarismo — principal fator de recidiva"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Hematoma epidural (1-3%) — piora neurologica PO imediato — drenagem de emergencia",
+      "Fistula de liquor/pseudomeningocele (1-5%) — lesao inadvertida da dura — reparo primario",
+      "Infeccao superficial (2-4%) — maior em DM",
+      "Lesao radicular durante a descompressao (1-2%) — paresia transitoria"
+    ],
+    "tardias": [
+      "Estenose recorrente no nivel operado (10-15% em 5 anos) — cicatriz epidural",
+      "Instabilidade iatrogenica com listese progressiva (5-10% se facetas > 50% removidas)",
+      "Sindrome de adjacencia (10-20% em 10 anos) — estenose acima ou abaixo",
+      "Dor residual por neuropatia cronica (15-20%)"
+    ],
+    "prevencao": [
+      "Preservar 50% das facetas articulares bilateralmente",
+      "Confirmar descompressao completa do recesso lateral e foraminais",
+      "Controle rigoroso da glicemia em DM no perioperatorio",
+      "Programa de exercicios de core no PO — prevencao de recidiva"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Como diferenciar claudicacao neurogênica de claudicacao vascular?",
+      "resposta": "Neurogênica: dor/dormência ao caminhar que melhora ao SENTAR (flexao descomprime canal) — pode pedalar sem dor, pulsos periféricos normais, ABI > 0,9. Vascular: dor que melhora ao PARAR (mesmo em pé), piora com subida de escada, pulsos diminuidos, ABI < 0,9. Cianose, ulceras. Neuro: inicio insidioso. Vascular: inicio agudo tipicamente."
+    },
+    {
+      "pergunta": "Qual a area transversal do saco dural que indica estenose grave e quando operar?",
+      "resposta": "Normal: > 100mm². Moderada: 76-100mm². Grave: < 75mm² (grau C). Indicacao cirurgica: estenose grave + claudicacao neurogênica limitante + falha do conservador por 6-12 meses. O SPORT Trial mostrou superioridade da cirurgia sobre o conservador em 4 anos (70-80% vs 50-60% de satisfacao)."
+    },
+    {
+      "pergunta": "Por que preservar pelo menos 50% das facetas articulares na laminectomia?",
+      "resposta": "As facetas articulares sao o principal estabilizador da coluna lombar. Remocao > 50% bilateral resulta em instabilidade iatrogenica — permite listese progressiva pos-laminectomia. Quando as facetas precisam ser removidas > 50% bilateral, deve-se associar artrodese (TLIF ou PLF) para estabilizar o segmento."
+    },
+    {
+      "pergunta": "Qual e o teste neurologico de emergencia na estenose lombar?",
+      "resposta": "Sindrome da cauda equina: perda de controle esfincteriano (urina OU fezes) + anestesia em sela + paresia bilateral progressiva. EMERGENCIA — descompressao cirurgica em < 24h. Cada hora de atraso piora o prognostico neurologico. Cateterismo vesical imediato. RM emergencia."
+    },
+    {
+      "pergunta": "Quando adicionar artrodese (TLIF) a descompressao lombar?",
+      "resposta": "Adicionar artrodese quando: 1) Estenose + listese degenerativa grade I-II com instabilidade dinamica (> 4mm de deslocamento em RX flexao-extensao), 2) Descompressao exigiu remocao > 50% das facetas bilateral (instabilidade iatrogenica esperada), 3) Estenose recorrente apos laminectomia previa, 4) Escoliose degenerativa > 20 graus. Sem listese: descompressao isolada e suficiente (SPORT Trial)."
+    },
+    {
+      "pergunta": "O que e o SPORT Trial e qual sua relevancia clinica?",
+      "resposta": "Spine Patient Outcomes Research Trial — maior estudo randomizado sobre tratamento cirurgico vs conservador em estenose lombar, hernia de disco e espondilolistese. Resultado: cirurgia SUPERIOR ao conservador em dor e funcao em 4 anos para estenose grave e hernia com radiculopatia refrataria. Taxa de satisfacao: 70-80% com cirurgia vs 50-60% conservador em 4 anos para estenose."
+    },
+    {
+      "pergunta": "Qual a posicao ideal do paciente na cirurgia de coluna lombar e por que?",
+      "resposta": "Decubito ventral em armacao radiotransparente (Wilson frame ou Jackson frame) com abdomen LIVRE. Abdomen livre e critico — reduz a pressao venosa intraabdominal, diminuindo o ingurgitamento do plexo venoso epidural e o sangramento cirurgico. Abdomen comprimido pode triplicar o sangramento."
+    },
+    {
+      "pergunta": "O que e a sindrome de adjacencia apos artrodese lombar?",
+      "resposta": "Sobrecarga dos segmentos adjacentes a artrodese — resulta em deterioracao acelerada dos discos e facetas acima e abaixo do nivel fundido. Incidencia de 10-20% em 10 anos requerendo nova cirurgia. Fatores de risco: artrodese de mais niveis, degeneracao pre-existente nos adjacentes. Prevenivel com escolha criteriosoa dos niveis de artrodese e programa de exercicios."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Estenose do canal lombar L4-L5 grau grave (area < 75mm²) com claudicacao neurogênica bilateral. Falha do conservador por 12 meses.",
+    "conduta": "Laminectomia descompressiva L4-L5 eletiva. Sem artrodese na ausencia de listese. Cirurgia de baixa urgencia exceto sindrome da cauda equina.",
+    "tecnica": "Laminectomia L4-L5 com resseccao bilateral dos ligamentos amarelos e descompressao dos recessos laterais. Preservar > 50% das facetas.",
+    "riscos": [
+      "Hematoma epidural (1-3%)",
+      "Fistula de liquor (1-5%)",
+      "Instabilidade iatrogenica por remocao excessiva de facetas (5-10%)",
+      "Sindrome de adjacencia em longo prazo (10-20%)"
+    ],
+    "resumo": "M 68a com estenose lombar L4-L5 grave e claudicacao neurogênica bilateral limitante. Laminectomia descompressiva indicada apos falha do conservador. Deambulacao no DPO1. 70-80% de bons resultados em 4 anos (SPORT Trial)."
+  }
+}
