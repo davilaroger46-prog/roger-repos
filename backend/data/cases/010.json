@@ -1,0 +1,532 @@
+{
+  "meta": {
+    "id": "010",
+    "titulo": "Fratura de Burst L1 — ASIA D — Coluna Toracolombar",
+    "slug": "fratura-burst-l1-asia-d",
+    "especialidade": "ortopedia",
+    "regiao": "Coluna",
+    "subespecialidade": "Cirurgia da Coluna Vertebral",
+    "nivel": "avancado",
+    "tags": [
+      "coluna",
+      "fratura de burst",
+      "L1",
+      "ASIA D",
+      "TLISS",
+      "cifoplastia",
+      "instrumentacao posterior"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Masculino",
+    "idade": 34,
+    "atividade": "Operario de construcao civil",
+    "lado": "Bilateral",
+    "demanda_funcional": "alta",
+    "comorbidades": []
+  },
+  "historia": {
+    "queixa_principal": "Dor lombar intensa apos queda de altura de 4m — com deficit motor nos membros inferiores (paresia grau 4)",
+    "inicio": "agudo",
+    "tempo_evolucao": "4 horas",
+    "mecanismo_lesao": "Queda de altura estimada de 4 metros — mecanismo de carga axial sobre a coluna lombar com componente de flexao. Impacto sobre os calcanhares (calcaneos bilateralmente fraturados) com transmissao da forca para a coluna toracolombar. Lesao em 3 colunas de Denis com comprometimento do canal espinhal.",
+    "descricao": "Paciente masculino, 34 anos, operario de construcao civil. Caiu de andaime de 4 metros enquanto trabalhava. Impacto sobre os calcanhares — dor imediata intensa na coluna lombar. Nas primeiras horas evolui com fraqueza nos membros inferiores e retencao urinaria. SAMU imobilizou em prancha rigida com colar cervical. Na chegada: consciente, Glasgow 15, hemodinamicamente estavel. Exame neurologico: paresia grau 4 de quadriceps e tibial anterior bilateral, anestesia em sela parcialmente preservada, tono esfincteriano diminuido. ASIA D. TC evidenciou fratura de burst L1 com retropulsao de 35% do canal espinhal. Fraturas bilaterais de calcaneio associadas (lesao de longa queda)."
+  },
+  "classificacao": {
+    "primaria": "AO Spine + Denis + TLISS",
+    "ao_ota": {
+      "codigo": "A3-L1",
+      "osso": "Coluna Vertebral L1",
+      "segmento": "Toracolombar",
+      "tipo": "C",
+      "grupo": "Burst (A3) com deficit neurologico",
+      "descricao": "Fratura de burst L1 AO Spine A3 — colapso do corpo vertebral com retropulsao do fragmento posterior para o canal espinhal (35%). Deficit neurologico ASIA D. TLISS: 6 pontos.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Denis",
+        "grau": "3 Colunas",
+        "descricao": "Coluna anterior (corpo anterior) + coluna media (corpo posterior roto) + coluna posterior (laminopedicular) — fratura instavel por definicao em 3 colunas."
+      },
+      {
+        "nome": "AO Spine",
+        "grau": "A3 + N3",
+        "descricao": "A3: Burst fracture. N3: Deficit neurologico incompleto (ASIA D). TLISS: morfologia (2) + LCL intacto (0) + neurologico (3) + deficit incompleto (+1) = 6. Cirurgia indicada (TLISS >= 5)."
+      },
+      {
+        "nome": "ASIA",
+        "grau": "D — Incompleto",
+        "descricao": "Motor: forca motora > 3 abaixo do nivel. Sensitivo: preservado abaixo do nivel. Funcao esfincteriana: parcialmente preservada. ASIA D = melhor prognostico — 70-80% recuperacao motora com descompressao precoce."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Paciente em prancha rigida — manter imobilizacao ate completar a avaliacao",
+      "Escoriacoes e hematomas nos calcanhares bilaterais — mecanismo de queda de altura confirmado",
+      "Cifose toracolombar ao palpar a coluna (bloqueio em prancha — avaliacao indireta)",
+      "Sem lesoes cutaneas na regiao da coluna"
+    ],
+    "palpacao": [
+      "Dor exquisita a palpacao do processo espinhoso de L1",
+      "Gap interpinhal L1-T12 — possivel lesao do ligamento interespinhoso",
+      "Parada abrupta da sensibilidade tátil no dermátomo L1-L2",
+      "Tono esfincteriano anal diminuido (avaliacao do esfíncter — ASIA)"
+    ],
+    "movimento": "AVALIACAO DE EMERGENCIA: Mobilizacao contraindicada antes da imagem. Forca motora (ASIA Motor Score): L2 (iliopsoas) 4/5 bilateral. L3 (quadriceps) 3/5 bilateral. L4 (tibial anterior) 3/5 bilateral. L5 (extensor haluce) 2/5 bilateral. S1 (gastrocnemio) 4/5 bilateral. Sensitivo: preservado até L1, diminuido L2-S1, preservado na sela (anestesia em sela incompleta). Tono esfincteriano: diminuido, controle voluntario parcialmente preservado.",
+    "testes": [
+      {
+        "nome": "ASIA Impairment Scale",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "ASIA D: motor e sensitivo preservados abaixo do nivel lesional, mas motor < 3 em mais de 50% dos musculos chave abaixo do nivel. Melhor prognostico de recuperacao."
+      },
+      {
+        "nome": "TLISS Score (Thoracolumbar Injury Classification System)",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "TLISS 6 pontos: morfologia burst (2) + LCL preservado (0) + deficit neurologico incompleto (3) + deficit de raiz cauda equina (1) = 6 — CIRURGIA INDICADA (TLISS >= 5)."
+      },
+      {
+        "nome": "Teste de Babinski",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "Babinski negativo bilateralmente — nivel lesional abaixo de L1 (cauda equina/conal medular distal). Distingue lesao do conal medular (Babinski positivo) de cauda equina (Babinski negativo)."
+      }
+    ],
+    "red_flags": [
+      "SEMPRE considerar lesoes associadas em queda de altura: fraturas dos calcâneos, tornozelos, tibias, quadris e coluna cervical",
+      "Piora do deficit neurologico — indica hematoma epidural ou instabilidade mecanica — emergencia",
+      "Retencao urinaria — diagnosticar e cateterizar na admissao",
+      "Priapismo — indica lesao medular cervical ou toracica alta — nao e o caso aqui"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Colapso do corpo vertebral de L1 — perda da altura anterior (50%) e posterior (25%)",
+        "Alargamento do espaco interpedicular de L1 (sinal de burst)",
+        "Cifose local de 15 graus",
+        "Fratura dos calcâneos bilaterais — lesao de longa queda",
+        "Coluna cervical: normal (sempre avaliar em trauma de alta energia)"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC de columna toracolombar OBRIGATORIA em trauma de coluna — define com precisao: 1) Morfologia da fratura (A3/A4 burst vs B vs C), 2) Grau de retropulsao do canal espinhal (35% neste caso), 3) Lesao dos processos articulares e laminopedicular, 4) Planejamento cirurgico (nivel da instrumentacao)."
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "RM da coluna toracolombar EMERGENCIA — avaliacao do ligamento longitudinal posterior (LLP), do ligamento flavum e do ligamento interespinhoso (LIS)",
+        "Contusao medular/conal: hipersinal em T2 no nivel L1 — extensao da contusao prediz prognostico neurologico",
+        "Status do disco L12-L1 — disco herniado para o canal contribui para a compressao",
+        "Hematoma epidural — identificar e drenar urgência"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Fratura de burst L1 AO Spine A3, TLISS 6, ASIA D — deficit neurologico incompleto (paresia grau 3-4 bilateral) com retropulsao de 35% do canal espinhal. Lesao de longa queda com fraturas bilaterais dos calcâneos.",
+    "diferenciais": [
+      "Fratura de Chance — mecanismo de cintura de seguranca, lesao em distracao B2, pode ser sem deficit",
+      "Fratura-luxacao toracolombar — AO Spine Tipo C, deficit ASIA A-B, instabilidade extrema",
+      "Fratura osteoporotica (compressao simples) — coluna anterior apenas, sem retropulsao, sem deficit neurologico",
+      "Tumor com fratura patologica — dor cronica previa, lesao litica no RX, RM com massa de partes moles"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 0,
+      "instabilidade": true,
+      "cominuicao": true,
+      "demanda_funcional": "alta",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "TLISS >= 5 AND deficit_neurologico_incompleto",
+        "then": "cirurgia_emergencia_precoce_indicada",
+        "prioridade": "alta",
+        "justificativa": "TLISS 6 + ASIA D — indicacao cirurgica absoluta. Descompressao e instrumentacao dentro de 24-48h melhora recuperacao neurologica (evidencia nivel I — Fehlings 2012)."
+      },
+      {
+        "if": "retropulsao_canal > 30% AND ASIA_D",
+        "then": "descompressao_e_instrumentacao_posterior_preferida",
+        "prioridade": "alta",
+        "justificativa": "Retropulsao 35% do canal + deficit ASIA D — instrumentacao posterior longa (2 niveis acima e abaixo) + descompressao indireta por distracao e lordotizacao. Descompressao anterior (corpectomia) se ASIA A-B ou retropulsao > 50%."
+      },
+      {
+        "if": "fratura_calcâneo_bilateral",
+        "then": "nao_apoiar_nos_pés_no_intraoperatorio",
+        "prioridade": "media",
+        "justificativa": "Fraturas dos calcâneos bilaterais — posicionamento intraoperatorio deve proteger os pés. Programar ORIF dos calcâneos apos estabilizacao da coluna."
+      },
+      {
+        "if": "ASIA_D",
+        "then": "monitorar_PESS_e_PEM_intraoperatorio",
+        "prioridade": "alta",
+        "justificativa": "ASIA D com deficit incompleto — monitoracao eletrofisiologica intraoperatoria (PESS + PEM) obrigatoria para detectar deterioracao neurologica durante a instrumentacao."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Instrumentacao posterior longa (T11-L3 — 2 niveis acima e abaixo) com parafusos pediculares + descompressao indireta por distracao + eventualmante corporectomia anterior L1 se descompressao indireta insuficiente. Monitoracao neurofisiologica intraoperatoria.",
+      "nivel_urgencia": "alta",
+      "explicacao": "Fratura de burst L1 TLISS 6 com deficit neurologico incompleto ASIA D. Indicacao cirurgica de emergencia em 24-48h — descompressao precoce melhora recuperacao neurologica em ASIA D. Instrumentacao posterior longa 2-2 niveis com parafusos pediculares + distracao para descompressao indireta do canal. Monitoracao eletrofisiologica obrigatoria. Associar corpectomia anterior (via retroperitoneal) se retropulsao persistir > 30% apos abordagem posterior."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": false,
+      "criterios": [
+        "Fratura de burst SEM deficit neurologico + TLISS < 4 — possivel ortese TLSO",
+        "Paciente com risco cirurgico proibitivo (politraumatizado instavel)",
+        "Fratura de compressao simples (AO Spine A1) sem deficit"
+      ],
+      "protocolo": [
+        "Se nao cirurgico: repouso e analgesia ate 48-72h + ortese TLSO 10-12 semanas",
+        "RX de controle a cada 2 semanas para monitorar progrressao da cifose",
+        "Fisioterapia em decubito ate liberacao da ortese"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Dipirona",
+          "dose": "1g",
+          "via": "IV",
+          "intervalo": "6/6h",
+          "duracao": "Internacao"
+        },
+        {
+          "nome": "Cetoprofeno",
+          "dose": "100mg",
+          "via": "IV",
+          "intervalo": "12/12h",
+          "duracao": "48-72h"
+        },
+        {
+          "nome": "Tramadol",
+          "dose": "100mg",
+          "via": "IV",
+          "intervalo": "8/8h SN",
+          "duracao": "5 dias"
+        },
+        {
+          "nome": "Metilprednisolona",
+          "dose": "30mg/kg IV em 15min, seguido de 5,4mg/kg/h por 23h",
+          "via": "IV",
+          "intervalo": "Protocolo NASCIS (< 8h do trauma)",
+          "duracao": "24h — SO se < 8h do trauma E se ASIA A-B — controverso, nao recomendado em ASIA D"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "TLISS >= 5",
+        "Deficit neurologico incompleto (ASIA B, C, D) — emergencia cirurgica 24-48h",
+        "Deficit completo (ASIA A) em fratura toracolombar instavel — urgencia",
+        "Fratura instavel com cifose progressiva em imagens seriadas"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Instrumentacao Posterior com Parafusos Pediculares (2-2)",
+          "quando_usar": "ASIA D com retropulsao modesta — primeira escolha",
+          "vantagens": [
+            "Menor morbidade que abordagem anterior",
+            "Restaura alinhamento e estabilidade por distracao",
+            "Monitoracao neurologica mais facil em decubito ventral"
+          ],
+          "desvantagens": [
+            "Descompressao indireta pode ser insuficiente em retropulsoes > 50%",
+            "Nao remove diretamente o fragmento retropulsado"
+          ]
+        },
+        {
+          "nome": "Corpectomia L1 + Reconstrucao com Cage (Via Retroperitoneal)",
+          "quando_usar": "ASIA A-B ou retropulsao > 50% ou falha da descompressao posterior",
+          "vantagens": [
+            "Descompressao direta e completa do canal",
+            "Restaura altura anterior do corpo vertebral"
+          ],
+          "desvantagens": [
+            "Maior morbidade — via anterior retroperitoneal",
+            "Risco de lesao vascular (aorta, veia cava, vasos iliomilosacro)",
+            "Risco de ejaculacao retrograda (simpático pre-aortico)"
+          ]
+        },
+        {
+          "nome": "Abordagem Combinada Posterior + Anterior",
+          "quando_usar": "ASIA A-B com retropulsao > 50% e necessidade de reconstrucao completa de 360 graus",
+          "vantagens": [
+            "Maxima descompressao e estabilidade",
+            "Melhor para fraturas com instabilidade extrema"
+          ],
+          "desvantagens": [
+            "2 cirurgias — maior morbidade — geralmente em 2 tempos (posterior primeiro)"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "TLISS >= 5 — indicacao absoluta",
+      "Deficit neurologico incompleto com retropulsao significativa",
+      "Cifose local > 30 graus com instabilidade",
+      "Lesao ligamentar posterior (LIS roto) com instabilidade"
+    ],
+    "posicionamento": "Decubito ventral em armacao radiotransparente (Jackson frame ou suporte de Wilson). Abdomen livre (reduz sangramento por reducao da pressao venosa abdominal). Cabeca neutra com apoio para face. Protecao dos calcâneos fraturados.",
+    "anestesia": [
+      "Anestesia geral com intubacao orotraqueal de sequencia rapida",
+      "Monitoracao intraoperatoria: PESS (potenciais evocados somatossensitivos) + PEM (potenciais evocados motores) — OBRIGATORIA em ASIA D",
+      "Hipotensao controlada moderada (PAM 60-70) para reducao de sangramento",
+      "Acido tranexamico 15mg/kg IV na inducao"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Acesso e Exposicao Posterior",
+        "descricao": "Incisao mediana posterior T11-L3 (2 niveis acima e abaixo). Descolamento dos musculos paravertebrais bilateralmente. Exposicao dos processos transversos e articulares. Localizacao fluoroscopica dos niveis — confirmar T12 e L2 antes de inserir os parafusos.",
+        "ponto_critico": "Confirmar o nivel cirurgico com fluoroscopia antes de qualquer instrumentacao — erro de nivel e a complicacao mais constrangedora e prevenivel na cirurgia da coluna."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Insercao dos Parafusos Pediculares",
+        "descricao": "Insercao de parafusos pediculares bilaterais em T11, T12, L2 e L3 (pular L1 fraturado). Tecnica free-hand ou USG/fluoroscopia. Tamanho: 6,5-7,5mm de diametro, 40-50mm de comprimento. Confirmar posicao com fluoroscopia AP e lateral. Testar estabilidade.",
+        "ponto_critico": "Parafuso pedicular medializadop pode entrar no canal — confirmar nao ha penetracao medial na fluoroscopia AP (parafuso deve ficar dentro do pedículo). Em L1 fraturado — NAO inserir parafuso no nível fraturado — usar 2-2 niveis ao redor."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Reducao e Distracao",
+        "descricao": "Conectar as barras aos parafusos. Realizar distracao progressiva para restaurar a altura do disco L12-L1 e reduzir a retropulsao (mecanismo de ligamentotaxis — o LLP intacto traciona o fragmento de volta). Monitorar PEM e PESS continuamente. Confirmar reducao por fluoroscopia.",
+        "ponto_critico": "Monitorar neurofisiologia durante a distracao — se houver queda dos PEM ou PESS (alerta > 50%), interromper a distracao imediatamente e avaliar posicionamento dos parafusos e causa da deterioracao."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Laminectomia (se necessaria)",
+        "descricao": "Se retropulsao > 30% persistir apos distracao — realizar laminectomia de L1 para descompressao direta do canal e visualizacao da dura-mater. Confirmar pulsacao da dura-mater pos-descompressao. TC intraoperatoria (se disponivel) para confirmar descompressao.",
+        "ponto_critico": "Abrir a laminectomia com cuidado — dura-mater pode estar aderida ao fragmento retropulsado. Usar desprendedor de Penfield antes de usar Kerrison. Lesao da dura causa fistula liquorica."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Artrodese e Enxerto Osseo",
+        "descricao": "Decorticar as facetas articulares e os processos transversos. Colocar enxerto osseo autólogo (osso local da laminectomia + ilíaco se necessario) ou substituto osseo (beta-TCP ou BMP-2) para artrodese definitiva. A instrumentacao e somente uma fixacao temporaria — a fusao ossea e que garante a durabilidade.",
+        "ponto_critico": "Artrodese deficiente (enxerto insuficiente ou superficies mal preparadas) resulta em pseudartrose — a causa mais frequente de falha tardia da cirurgia da coluna com instrumentacao."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Cuidados Finais",
+        "descricao": "Hemostasia com bipolar e cera de osso. Dreno de Hemovac por 24-48h. Fechamento por planos. Curativos. TC pós-operatoria imediata para confirmar descompressao do canal e posicao dos implantes. Sala de recuperacao: monitorar neurologicamente a cada hora nas primeiras 6h.",
+        "ponto_critico": "TC PO imediata e OBRIGATORIA — permite identificar: parafuso malposicionado no canal (retirar e reposicionar), hematoma epidural (drenar urgencia), descompressao insuficiente (indicar abordagem anterior complementar)."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Sistema de parafusos pediculares poliaxiais 6,5-7,5mm (ex: Medtronic CD Horizon, Depuy Expedium, Stryker Xia)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Barras de titanio 5,5mm"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Conectores transversais (cross-links)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm) com modo de baixa dose — obrigatorio"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Sistema de monitoracao neurofisiologica intraoperatoria (PESS + PEM) — obrigatorio em ASIA D"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Kerrison de varios tamanhos para laminectomia"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Neuromonitor — EMG eletivo dos pedículos para confirmar posicionamento"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Avaliacao neurologica rigorosa a cada hora nas primeiras 6h — ASIA score",
+      "TC coluna toracolombar no DPO imediato — confirmar descompressao e posicao implantes",
+      "Cabeceira elevada a 30-45 graus — reduz edema medular",
+      "Sonda vesical por 48-72h (retencao urinaria pre-op)",
+      "Reabilitacao: sentado com apoio no DPO 1-2, transferencia para cadeira de rodas no DPO 2-3"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV 8/8h",
+        "dose": "2g",
+        "duracao": "24h PO"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "Internacao"
+      },
+      {
+        "nome": "Cetoprofeno 100mg IV 12/12h",
+        "dose": "100mg",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Gabapentina 300mg VO 8/8h",
+        "dose": "300mg",
+        "duracao": "4-8 semanas (dor neuropatica)"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "Apos 24-48h da cirurgia — ate deambulacao independente"
+      }
+    ],
+    "restricoes": [
+      "Ortese TLSO para deambulacao por 10-12 semanas",
+      "Sem flexao da coluna > 30 graus",
+      "Sem rotacao axial da coluna",
+      "Retorno ao trabalho: 4-6 meses (trabalho leve) ou 8-12 meses (trabalho pesado)"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Estabilizacao e Mobilizacao Inicial",
+      "periodo": "Dias 1-14 (internacao)",
+      "objetivo": "Sentado, transferencia, fisioterapia respiratoria, controle da dor neuropatica",
+      "exercicios": [
+        "Fisioterapia respiratoria — prevencao de pneumonia (imobilizacao)",
+        "Exercicios de membros superiores",
+        "Transferencia cadeira-cama com assistencia",
+        "Eletroestimulacao dos membros inferiores (TENS)"
+      ],
+      "restricoes": [
+        "Coluna em posicao neutra",
+        "Ortese TLSO para qualquer verticalizacao"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Deambulacao Inicial",
+      "periodo": "Semanas 2-8",
+      "objetivo": "Marcha com andador, recuperacao neurologica, independencia nas AVDs",
+      "exercicios": [
+        "Marcha com andador e supervisao fisioterapeutica",
+        "Fortalecimento de quadriceps (recuperacao ASIA D)",
+        "Hidroterapia se disponivel — reducao da carga na coluna"
+      ],
+      "restricoes": [
+        "Ortese TLSO em todas as atividades verticalizadas",
+        "Sem flexao > 30 graus"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Fortalecimento",
+      "periodo": "Meses 2-6",
+      "objetivo": "Marcha independente, forca motora 4-5/5, retorno a AVDs completas",
+      "exercicios": [
+        "Fisioterapia neuromotora para recuperacao do deficit de L3-L4",
+        "Pilates terapeutico",
+        "Hidroterapia e natacao (crawl)",
+        "Treino proprioceptivo progressivo"
+      ],
+      "restricoes": [
+        "Ortese TLSO ate radiografia de artrodese confirmada (4-6 meses)",
+        "Sem cargas axiais > 15kg na coluna"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Retorno ao Trabalho",
+      "periodo": "Meses 4-12",
+      "objetivo": "Retorno a trabalho leve em 4-6 meses, trabalho pesado em 8-12 meses",
+      "exercicios": [
+        "Musculacao do core progressiva",
+        "Ergonomia — orientacao postural para retorno ao trabalho",
+        "Avaliacao funcional laboral"
+      ],
+      "restricoes": [
+        "Nunca retornar a trabalho pesado sem liberacao neurologica e radiologica completa",
+        "Calcâneos: retorno ao apoio pleno em 8-12 semanas (ORIF calcâneo)",
+        "Avaliar pensao por incapacidade se deficit residual > 20%"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Deterioracao neurologica intraoperatoria (2-5%) — monitoracao PEM/PESS previne",
+      "Fistula liquorica (1-3%) — fechamento primario da dura ou patch de gordura",
+      "Infeccao da ferida operatoria (2-5% — maior em cirurgia prolongada)",
+      "Hematoma epidural pos-op (1-2%) — causa deterioracao neurologica — emergencia cirurgica"
+    ],
+    "tardias": [
+      "Pseudartrose (5-15% em fumantes e osteoporoticos) — reoperacao",
+      "Falha de instrumentacao — quebra de parafuso ou barra (3-10%)",
+      "Sindrome de adjacencia — artrose dos niveis adjacentes a artrodese longa",
+      "Dor neuropatica cronica (10-20% — L1-L2)",
+      "Deficit neurologico residual — maior em ASIA A-C"
+    ],
+    "prevencao": [
+      "Monitoracao neurofisiologica intraoperatoria obrigatoria",
+      "TC PO imediata para confirmar descompressao e posicao dos implantes",
+      "Artrodese tecnica — enxerto osseo adequado",
+      "Cessacao do tabagismo pre-operatoria (reduz pseudartrose)"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "O que e a classificacao TLISS e como usar para decidir cirurgia na fratura toracolombar?",
+      "resposta": "Thoracolumbar Injury Classification and Severity Score: morfologia da fratura (A=0-2, B=+2, C=+3) + status do ligamento posterior (intacto=0, suspeito=2, roto=3) + status neurologico (intacto=0, raiz de nervo=2, incompleto=3, completo=2). TLISS <= 3: conservador. TLISS 4: individualizar. TLISS >= 5: CIRURGIA INDICADA."
+    },
+    {
+      "pergunta": "Qual a diferenca clinica entre lesao do conal medular e cauda equina?",
+      "resposta": "Conal medular (T12-L1): lesao de neurônio motor SUPERIOR — espasticidade tardia, Babinski positivo, bexiga reflexa (hipertonica), priapismo, anestesia em sela completa. Cauda equina (L1-S5): lesao de neurônio motor INFERIOR — flacidez, atrofia, Babinski negativo, bexiga flacida com retencao, anestesia em sela variavel. A fratura L1 pode atingir ambos."
+    },
+    {
+      "pergunta": "Por que a monitoracao neurofisiologica e obrigatoria em ASIA D?",
+      "resposta": "ASIA D tem funcao neurologica preservada — qualquer dano intraoperatorio detectado pelo PEM (potencial evocado motor) ou PESS permite interrupcao da manobra cirurgica e correcao imediata. Queda de amplitude > 50% ou latencia > 10% = alarme. Em ASIA A (completo) — nao ha funcao a monitorar, mas PEM pode detectar recuperacao intraoperatoria."
+    },
+    {
+      "pergunta": "Qual e o mecanismo de descompressao indireta na fratura de burst?",
+      "resposta": "Ligamentotaxis — o fragmento retropulsado fica conectado ao ligamento longitudinal posterior (LLP) intacto. Ao realizar distracao posterior com os parafusos pediculares, o LLP e tensionado e puxa o fragmento de volta ao alinhamento vertebral. Funciona melhor quando o LLP esta intacto e a distracao e feita em < 72h do trauma (antes da organizacao do hematoma)."
+    },
+    {
+      "pergunta": "Qual a indicacao de abordagem anterior complementar (corpectomia) em fratura de burst?",
+      "resposta": "1) Retropulsao > 50% do canal apos abordagem posterior, 2) ASIA A ou B (necessidade de descompressao direta maxima), 3) Integridade discal gravemente comprometida (disrupcao discal anterior), 4) Pseudartrose apos instrumentacao posterior isolada. A corpectomia anterior oferece descompressao direta do canal e reconstrucao da coluna anterior com cage."
+    },
+    {
+      "pergunta": "O que e pseudartrose na cirurgia da coluna e como prevenir?",
+      "resposta": "Falha de artrodese ossea entre os niveis instrumentados — osso nao consolida. Causas: tecnica cirurgica (enxerto insuficiente, superficies mal preparadas), tabagismo (25% de pseudartrose vs 8% em nao-fumantes), diabetes, osteoporose. Prevencao: enxerto osseo abundante (autólogo preferido), decorticacao adequada das facetas, cessacao do tabagismo pre-op."
+    },
+    {
+      "pergunta": "Como interpretar o sinal de alargamento interpedicular no RX de uma fratura de burst?",
+      "resposta": "O alargamento do espaco interpedicular na incidencia AP indica disrupcao do corpo vertebral posterior — fragmento retropulsado que empurra os pediculos lateralmente. E um sinal de fratura de burst (diferencia de fratura de compressao simples). Correlacionar com a TC que quantifica o grau de retropulsao e a percentagem de ocupacao do canal."
+    },
+    {
+      "pergunta": "Quais sao as lesoes associadas tipicas a quedas de altura (mecanismo carga axial)?",
+      "resposta": "Mecanismo de queda de altura: 1) Fratura dos calcâneos bilaterais (50-70% das quedas acima de 4m), 2) Fratura toracolombar (20-30%), 3) Fratura de tibia, femur distal ou tornozelo (10-15%), 4) Fratura do quadril ou acetabulo. A triade calcaneo + coluna + membro inferior e classica — buscar TODAS em todo paciente que cai de altura."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Fratura de burst L1 AO Spine A3 com deficit neurologico incompleto ASIA D (paresia grau 3-4 bilateral). TLISS 6 — indicacao cirurgica. Lesoes dos calcâneos bilaterais associadas.",
+    "conduta": "Instrumentacao posterior urgente T11-L3 com descompressao indireta em 24-48h. Monitoracao neurofisiologica intraoperatoria obrigatoria. Ortese TLSO 10-12 semanas.",
+    "tecnica": "Parafusos pediculares poliaxiais 2-2 niveis (T11-L3) + barras de titanio + distracao para descompressao indireta (ligamentotaxis) + laminectomia L1 se necessario.",
+    "riscos": [
+      "Deterioracao neurologica intraoperatoria (2-5%)",
+      "Pseudartrose (5-15%)",
+      "Fistula liquorica (1-3%)",
+      "Deficit neurologico residual (variavel)"
+    ],
+    "resumo": "M 34a operario com fratura de burst L1 ASIA D apos queda de 4m — paresia grau 3-4 bilateral e retencao urinaria. TLISS 6 — cirurgia em 24-48h. Instrumentacao posterior T11-L3 com monitoracao PEM/PESS. Descompressao precoce melhora recuperacao neurologica em ASIA D. Fraturas dos calcâneos bilaterais — ORIF pos-stabilizacao da coluna."
+  }
+}
