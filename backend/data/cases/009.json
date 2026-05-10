@@ -1,0 +1,522 @@
+{
+  "meta": {
+    "id": "009",
+    "titulo": "Fratura Trimaleolar Weber C — Lesao Ligamentar Complexa",
+    "slug": "fratura-trimaleolar-weber-c",
+    "especialidade": "ortopedia",
+    "regiao": "Tornozelo",
+    "subespecialidade": "Traumatologia do Pé e Tornozelo",
+    "nivel": "avancado",
+    "tags": [
+      "tornozelo",
+      "Weber C",
+      "trimaleolar",
+      "sindesmose",
+      "maléolo posterior",
+      "Lauge-Hansen PA IV"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Masculino",
+    "idade": 38,
+    "atividade": "Jogador de futebol amador",
+    "lado": "Esquerdo",
+    "demanda_funcional": "alta",
+    "comorbidades": []
+  },
+  "historia": {
+    "queixa_principal": "Torção grave do tornozelo esquerdo com deformidade imediata e impossibilidade de apoio",
+    "inicio": "agudo",
+    "tempo_evolucao": "3 horas",
+    "mecanismo_lesao": "Trauma em pronação-abdução durante disputa de bola — mecanismo Lauge-Hansen PA IV. Força de eversão e abdução forçadas com pé fixo ao solo, resultando em ruptura do LDM, fratura fibular alta (acima da sindesmose) e fratura do maleoloo posterior por avulsão da sindesmose posterior.",
+    "descricao": "Paciente masculino, 38 anos, futebolista amador. Sofreu entorse grave do tornozelo esquerdo durante partida — adversario pisou no pé enquanto o tornozelo estava em eversao forcada. Estalo audivel imediato, dor intensa, deformidade visivel e impossibilidade total de apoio. Encaminhado ao PS com tornozelo imobilizado em tala. RX evidenciou fratura trimaleolar: fibula alta (6cm acima da sindesmose — Weber C), maléolo medial (avulsao) e maléolo posterior (>25% da superficie articular)."
+  },
+  "classificacao": {
+    "primaria": "Danis-Weber + Lauge-Hansen",
+    "ao_ota": {
+      "codigo": "44-C3",
+      "osso": "Tornozelo",
+      "segmento": "Trimaleolar",
+      "tipo": "C",
+      "grupo": "C3 — Trimaleolar com sindesmose instavel",
+      "descricao": "Fratura trimaleolar: fibula alta acima da sindesmose (Weber C) + maléolo medial + maléolo posterior >25% da superficie articular tibia. Sindesmose instavel. Lauge-Hansen PA IV.",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "Danis-Weber",
+        "grau": "Weber C",
+        "descricao": "Fratura fibular ACIMA da sindesmose — sempre com instabilidade da sindesmose. Exige fixacao da sindesmose e do LDM medial."
+      },
+      {
+        "nome": "Lauge-Hansen",
+        "grau": "PA IV (Pronacao-Abducao Estagio IV)",
+        "descricao": "Estagio I: LDM roto. Estagio II: membrana interossea ate sindesmose. Estagio III: ruptura sindesmose. Estagio IV: fratura fibular acima sindesmose. Lesao progressiva de medial para lateral."
+      },
+      {
+        "nome": "Maléolo Posterior",
+        "grau": "Fratura >25% superficie articular",
+        "descricao": "Fratura posterior >25% da superficie articular tibial — indicacao de fixacao cirurgica obrigatoria para prevencao de artrose pós-traumatica."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Deformidade em valgo do tornozelo — subluxacao lateral do talus",
+      "Edema maciço na regiao maleolar lateral e medial",
+      "Hematoma difuso nas primeiras horas (ecchymosis tardia)",
+      "Pé em rotacao externa"
+    ],
+    "palpacao": [
+      "Dor exquisita a palpacao do maléolo lateral e fibula proximal",
+      "Dor a palpacao do maléolo medial",
+      "Dor a palpacao do tendao de Aquiles e região posterior do tornozelo",
+      "Teste de squeeze positivo — compressao da fibula proximal reproduz dor no tornozelo (lesao da sindesmose)"
+    ],
+    "movimento": "Avaliacao do movimento prejudicada pela dor e deformidade. Funcao neurologica: sensibilidade do nervo fibular superficial e safeno avaliados e preservados. Pulso pedioso e tibial posterior presentes.",
+    "testes": [
+      {
+        "nome": "Teste de Squeeze (Cotton)",
+        "sensibilidade": "84%",
+        "especificidade": "98%",
+        "positivo": "Compressao da fibula contra a tibia no terco medio da perna reproduz dor no tornozelo — indica ruptura da sindesmose. Especificidade de 98% para lesao sindesmótica."
+      },
+      {
+        "nome": "Teste de Rotacao Externa",
+        "sensibilidade": "71%",
+        "especificidade": "63%",
+        "positivo": "Rotacao externa do pe a 90 graus de flexao do joelho reproduz dor no tornozelo — indica instabilidade da sindesmose tibiofibular."
+      },
+      {
+        "nome": "Hook Test (Intraoperatorio)",
+        "sensibilidade": "100%",
+        "especificidade": "97%",
+        "positivo": "Com gancho cirurgico na fibula, tracao lateral > 3-4mm no fluoroscopio indica instabilidade da sindesmose — indicacao de parafuso de sindesmose."
+      },
+      {
+        "nome": "Maléolo Posterior >25%",
+        "sensibilidade": "—",
+        "especificidade": "—",
+        "positivo": "Avaliacao por TC — fratura posterior > 25% da superficie articular indica fixacao cirurgica obrigatoria para prevencao de artrose pós-traumatica."
+      }
+    ],
+    "red_flags": [
+      "Ausencia de pulso pedioso ou tibial posterior — lesao vascular por subluxacao do talus — reducao de urgencia",
+      "Parestesias do nervo fibular profundo (dorso do pé) — deficit neurologico",
+      "Bolhas ou flictenas cutaneas — aguardar resolucao antes da RAFI definitiva",
+      "Sinal de Maisonneuve — dor na fibula proximal sem fratura distal visivel — solicitar RX de tornozelo E perna inteiros"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Fratura fibular acima da sindesmose (6cm proximal — Weber C)",
+        "Fratura do maléolo medial por avulsao do LDM",
+        "Fratura do maléolo posterior — avaliacao de 25% da superficie articular no perfil",
+        "Alargamento da mortise — espaco tibiotalar medial > 4mm (sinal de instabilidade)",
+        "Deslocamento lateral do talus — subluxacao da mortise"
+      ]
+    },
+    "tc": {
+      "indicado": true,
+      "quando": "TC do tornozelo obrigatoria antes da cirurgia para: 1) Quantificar o tamanho da fratura do maléolo posterior (% da superficie articular), 2) Identificar fragmentos ocultos, 3) Planejamento da via de acesso para o maléolo posterior."
+    },
+    "rm": {
+      "indicado": false,
+      "achados": [
+        "RM raramente necessaria em fratura trimaleolar — RX + TC sao suficientes para o planejamento cirurgico"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Fratura trimaleolar AO 44-C3 (Lauge-Hansen PA IV) — Weber C com instabilidade da sindesmose + maléolo medial + maléolo posterior > 25% da superficie articular tibia. Tornozelo instavel.",
+    "diferenciais": [
+      "Fratura de Maisonneuve — fratura da fibula proximal + ruptura da sindesmose sem fratura distal — solicitar RX da perna toda",
+      "Fratura-luxacao do tornozelo — subluxacao ou luxacao completa do talus",
+      "Fratura bimaleolar sem maléolo posterior — confirmar por TC",
+      "Fratura do processo lateral do talus — avaliacao por TC"
+    ],
+    "confirmacao": "imagem"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 6,
+      "instabilidade": true,
+      "cominuicao": false,
+      "demanda_funcional": "alta",
+      "deficit_extensor": false,
+      "incongruencia_articular": true,
+      "osso_osteoporotico": false
+    },
+    "regras": [
+      {
+        "if": "Weber_C AND sindesmose_instavel",
+        "then": "fixacao_sindesmose_obrigatoria",
+        "prioridade": "alta",
+        "justificativa": "Weber C implica sindesmose SEMPRE instavel — parafuso de sindesmose tricortical 3,5mm obrigatorio. Sem fixacao, artrose por incongruencia da mortise."
+      },
+      {
+        "if": "maleolo_posterior_maior_25_porcento",
+        "then": "fixacao_cirurgica_do_maleolo_posterior",
+        "prioridade": "alta",
+        "justificativa": "Fragmento posterior >25% da superficie articular — fixacao cirurgica impede instabilidade posterior do talus e artrose pós-traumatica. Acesso posterior anti-heroa ou posterolateral."
+      },
+      {
+        "if": "LDM_roto OR maleolo_medial_fraturado",
+        "then": "fixacao_do_maleolo_medial_obrigatoria",
+        "prioridade": "alta",
+        "justificativa": "LDM roto ou maléolo medial fraturado em Weber C — mortise mediatl instavel. Fixar com 2 parafusos de compressao ou ancora de sutura."
+      },
+      {
+        "if": "atleta_alta_demanda AND idade < 45",
+        "then": "fixacao_anatomica_obrigatoria_para_retorno_esportivo",
+        "prioridade": "media",
+        "justificativa": "Atleta jovem de alta demanda — reducao anatomica perfeita e fixacao rigida sao fundamentais para retorno ao esporte sem artrose precoce."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "RAFI trimaleolar: 1) Maléolo posterior (2 parafusos de compressao anteriores) + 2) Maléolo lateral (placa 1/3 tubular ou LCP) + 3) Sindesmose (1-2 parafusos 3,5mm tricortical) + 4) Maléolo medial (2 parafusos de compressao). Sequencia: posterior → lateral → sindesmose → medial.",
+      "nivel_urgencia": "moderada",
+      "explicacao": "Fratura trimaleolar AO 44-C3 instavel em atleta jovem. RAFI em 24-48h quando partes moles permitirem (ausencia de bolhas/flictenas). Sequencia cirurgica: fixar o maléolo posterior primeiro (restaura congruencia articular posterior), depois fibula (restaura comprimento), sindesmose e medial por ultimo. Sem carga por 6-8 semanas."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": false,
+      "criterios": [
+        "Apenas fraturas Weber A sem desvio e tornozelo estavel",
+        "Weber B estavel com maléolo medial integro — bota gessada"
+      ],
+      "protocolo": [
+        "Imobilizacao provisoria em tala gessada posterior antes da cirurgia",
+        "Elevacao do membro — controle do edema",
+        "Crioterapia",
+        "Aguardar resolucao do edema (5-10 dias) antes da cirurgia definitiva se bolhas"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Dipirona",
+          "dose": "1g",
+          "via": "VO",
+          "intervalo": "6/6h",
+          "duracao": "7 dias"
+        },
+        {
+          "nome": "Ibuprofeno",
+          "dose": "600mg",
+          "via": "VO",
+          "intervalo": "8/8h",
+          "duracao": "5 dias"
+        },
+        {
+          "nome": "Tramadol",
+          "dose": "50mg",
+          "via": "VO",
+          "intervalo": "8/8h SN",
+          "duracao": "5 dias"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Fratura trimaleolar (indicacao absoluta)",
+        "Weber C com sindesmose instavel",
+        "Maléolo posterior > 25% da superficie articular",
+        "Tornozelo instavel ao exame e no RX (alargamento da mortise)"
+      ],
+      "tecnicas": [
+        {
+          "nome": "RAFI Convencional (Placa + Parafusos)",
+          "quando_usar": "Padrao para fraturas trimaleolares em adultos",
+          "vantagens": [
+            "Tecnica estabelecida",
+            "Fixacao rigida",
+            "Permite mobilizacao precoce"
+          ],
+          "desvantagens": [
+            "Irritacao dos implantes (ate 30% na fibula lateral)",
+            "Segunda cirurgia para retirada do parafuso de sindesmose em alguns casos"
+          ]
+        },
+        {
+          "nome": "Parafuso de Sindesmose Reabsorvivel",
+          "quando_usar": "Atletas jovens que nao querem segunda cirurgia para retirada",
+          "vantagens": [
+            "Nao requer retirada do parafuso",
+            "Mobilizacao mais precoce"
+          ],
+          "desvantagens": [
+            "Resistencia inferior ao metalico",
+            "Risco de quebra intraossea — mais difícil de resolver"
+          ]
+        },
+        {
+          "nome": "TightRope (Botao Cortical) para Sindesmose",
+          "quando_usar": "Alternativa ao parafuso de sindesmose — permite micromovilizacao fisiologica",
+          "vantagens": [
+            "Nao requer retirada",
+            "Permite mobilizacao mais fisiologica",
+            "Menor taxa de malreducao da sindesmose"
+          ],
+          "desvantagens": [
+            "Maior custo",
+            "Tecnica mais exigente — risco de malreducao"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Fratura trimaleolar (indicacao absoluta)",
+      "Fratura bimaleolar instavel",
+      "Weber C com sindesmose instavel",
+      "Maléolo posterior > 25%"
+    ],
+    "posicionamento": "Decubito ventral para acesso ao maléolo posterior (preferencialmente) — ou decubito dorsal com coxim sob o joelho para acesso lateral e medial primeiro (sequencia alternativa). Garrote pneumatico 300mmHg na raiz da perna.",
+    "anestesia": [
+      "Raquidiana: bupivacaina hiperbirica 0,5% 12-15mg (preferida — menor sangramento, analgesia PO excelente)",
+      "Bloqueio poplíteo (ciático) + safeno USG-guiado como alternativa — analgesia PO prolongada",
+      "Anestesia geral se contraindicacao a raquiana"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Fixacao do Maléolo Posterior",
+        "descricao": "Via posterolateral ou anteromedial direta. Reducao do fragmento posterior com joelho estendido e pe em equino leve. Fixacao com 2 parafusos de compressao 3,5mm anteriores (tecnica de parafuso de fora para dentro) ou placa posterior. Confirmar reducao articular com fluoroscopia.",
+        "ponto_critico": "Reducao anatomica do maléolo posterior e CRITICA — degrau articular residual > 2mm aumenta drasticamente o risco de artrose. Confirmar no fluoroscopio em perfil e mortise view antes de fixar a fibula."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Fixacao do Maléolo Lateral (Fibula)",
+        "descricao": "Via lateral sobre a fibula. Reducao do foco de fratura com forceps. Placa 1/3 tubular ou LCP fibular. 3+ parafusos distais e proximais ao foco. Confirmar comprimento, rotacao e reducao da sindesmose (espaco entre fibula e tibia deve ser < 5mm em incidencia mortise).",
+        "ponto_critico": "Restaurar o comprimento e a rotacao da fibula — fibula curta ou encurvada internaliza rotação do tornozelo e causa artrose. Usar o cortex posterior como referencia de comprimento (tecnica de cortex posterior)."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Teste e Fixacao da Sindesmose",
+        "descricao": "Hook test intraoperatorio — gancho na fibula com tracao lateral no fluoroscopio. Abertura > 3-4mm = instabilidade confirmada. Inserir 1-2 parafusos de sindesmose 3,5mm tricorticais (nao perfurar quarta cortical umeral — permite micromovilizacao). Confirmar posicao no fluoroscopio AP e mortise.",
+        "ponto_critico": "Malreducao da sindesmose (fibula rodada externamente) e a causa mais comum de resultado ruim. Confirmar reducao da sindesmose ANTES de apertar o parafuso. Usar clamp de reducao posicionado anterior a fibula — nao posterolateral."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Fixacao do Maléolo Medial",
+        "descricao": "Via medial — 5cm centrada no maléolo medial. Limpeza do foco. Reducao com forceps. 2 parafusos de compressao parcialmente roscados 4,0mm ou ancora de sutura se fragmento pequeno. Confirmar reducao no fluoroscopio.",
+        "ponto_critico": "Fragmento medial pequeno (<1cm) pode ser muito pequeno para 2 parafusos — usar ancora de sutura 5,5mm ou tecnica de laco de tencao com fio de Kirschner 1,6mm."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Verificacao Final e Fluoroscopia",
+        "descricao": "Fluoroscopia final em 4 incidencias: AP, mortise (15 graus de rotacao interna), perfil e incidencia de gravidade do tornozelo. Confirmar: reducao articular, posicao dos parafusos (nenhum intra-articular), reducao da sindesmose (espaco tibiotalar medial 3-4mm), comprimento da fibula.",
+        "ponto_critico": "Parafuso de sindesmose NAO deve perfurar a cortical lateral da tibia (tricortical) — quadricortical impede a micromovilizacao normal da sindesmose e causa rigidez. Retirar e reposicionar se perfurar as 4 corticais."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Imobilizacao",
+        "descricao": "Hemostasia. Lavar com SF 0,9% 1 litro. Fechamento por planos — periosteo, subcutaneo, pele com pontos separados. Curativo oclusivo. Tala gessada posterior a 0 graus (neutro) por 2 semanas. Elevacao do membro obrigatoria. Nao iniciar carga por 6-8 semanas.",
+        "ponto_critico": "Fechamento sob tensao em pe edemaciado — risco de necrose cutanea. Se tensao, deixar aberto com dreno e fechar em 48-72h com sutura secundaria ou enxerto."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Placa 1/3 tubular fibular 7 ou 9 furos (ou LCP fibular 3,5mm)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Parafusos corticais 3,5mm (fibula e sindesmose)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Parafusos de compressao parcialmente roscados 4,0mm (maléolo medial)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Parafusos de compressao 3,5mm (maléolo posterior — tecnica anterior)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio C-arm (obrigatorio — multiplas incidencias)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Forceps de reducao Weber ponta a ponta"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Clamp de reducao da sindesmose (posicionar anterior a fibula)"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Tala posterior gessada a 0 graus por 2 semanas",
+      "Membro elevado acima do coracao por 48-72h — controle do edema",
+      "Crioterapia 20min a cada 4h",
+      "Sem carga por 6-8 semanas",
+      "Inspecao dos pontos e RX na semana 2"
+    ],
+    "prescricao": [
+      {
+        "nome": "Cefazolina 2g IV",
+        "dose": "2g",
+        "duracao": "24h PO"
+      },
+      {
+        "nome": "Dipirona 1g IV 6/6h",
+        "dose": "1g",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Cetoprofeno 100mg IV 12/12h",
+        "dose": "100mg",
+        "duracao": "48h"
+      },
+      {
+        "nome": "Enoxaparina 40mg SC 24/24h",
+        "dose": "40mg",
+        "duracao": "14-21 dias"
+      },
+      {
+        "nome": "Celecoxibe 200mg VO 12/12h (alta)",
+        "dose": "200mg",
+        "duracao": "14 dias"
+      }
+    ],
+    "restricoes": [
+      "Sem carga ate consolidacao radiografica (8-10 semanas)",
+      "Retirada do parafuso de sindesmose em 8-12 semanas (se metalico)",
+      "Sem esportes de contato por 4-6 meses",
+      "Retorno ao futebol: 6-9 meses com radiografia confirmando consolidacao"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Protecao",
+      "periodo": "Semanas 1-8",
+      "objetivo": "Controle do edema, mobilizacao passiva do tornozelo sem carga",
+      "exercicios": [
+        "Exercicios de dedos e joelho",
+        "Elevacao do membro",
+        "Mobilizacao passiva do tornozelo a partir da semana 4 (se tala retirada)"
+      ],
+      "restricoes": [
+        "Sem carga",
+        "Sem dorsiflexao ativa forcada"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Carga Progressiva",
+      "periodo": "Semanas 8-12",
+      "objetivo": "Inicio de carga com bota walker, carga progressiva",
+      "exercicios": [
+        "Carga parcial com bota walker — progredir de 25% a 100% em 4 semanas",
+        "Exercicios de propriocepcao em descarga",
+        "Fortalecimento de tibial anterior e fibulares"
+      ],
+      "restricoes": [
+        "Sem carga total ate radiografia de consolidacao",
+        "Sem apoio unipodal"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Fortalecimento",
+      "periodo": "Meses 3-5",
+      "objetivo": "Marcha normal, forca 80%, treino proprioceptivo",
+      "exercicios": [
+        "Pliometria progressiva",
+        "Corrida em linha reta a partir do mes 4",
+        "Treino de agilidade basica"
+      ],
+      "restricoes": [
+        "Sem mudancas de direcao abruptas",
+        "Sem futebol ainda"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Retorno ao Esporte",
+      "periodo": "Meses 5-9",
+      "objetivo": "Retorno progressivo ao futebol — treinos e jogos",
+      "exercicios": [
+        "Treino tecnico com bola",
+        "Corrida com mudancas de direcao",
+        "Reintegracao progressiva ao time"
+      ],
+      "restricoes": [
+        "Tornozelo funcional — usar brace de tornozelo nos primeiros 3 meses de retorno"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Malreducao da sindesmose (15-20%) — causa mais comum de resultado ruim — prevenir com fluoroscopia intraoperatoria",
+      "Necrose cutanea por fechamento sob tensao em pe edemaciado",
+      "Infeccao superficial (2-5%) — maior em diabeticos",
+      "Trombose venosa profunda (5-10% sem profilaxia)"
+    ],
+    "tardias": [
+      "Artrose do tornozelo — proporcional ao degrau articular residual e a reducao da sindesmose",
+      "Irritacao dos implantes — ate 30% na fibula lateral (maior placa)",
+      "Sinostose tibiofibular — fusao ossea da sindesmose (1-5%)",
+      "Ruptura do parafuso de sindesmose (5-10%) — manejo conservador se assintomatico"
+    ],
+    "prevencao": [
+      "Fluoroscopia em multiplas incidencias — evitar malreducao da sindesmose",
+      "Aguardar resolucao das partes moles (bolhas) antes da RAFI — reduz necrose cutanea",
+      "Profilaxia antitrombótica 14-21 dias",
+      "Reabilitacao precoce e progressiva"
+    ]
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual a sequencia correta de fixacao na fratura trimaleolar?",
+      "resposta": "1) Maléolo POSTERIOR primeiro — restaura o suporte articular posterior e a congruencia articular. 2) Maléolo LATERAL (fibula) — restaura comprimento, rotacao e o apoio lateral para a sindesmose. 3) SINDESMOSE — hook test intraoperatorio + parafuso se instavel. 4) Maléolo MEDIAL — por ultimo, apos restauracao das relacoes anatômicas laterais."
+    },
+    {
+      "pergunta": "Quando e obrigatorio fixar o maléolo posterior?",
+      "resposta": "Quando o fragmento posterior e > 25% da superficie articular tibia (avaliacao por TC ou perfil de RX). Razoes: 1) Fragmento > 25% aumenta instabilidade posterior do talus, 2) Artrose precoce por incongruencia articular, 3) Sem fixacao, 30-50% dos casos evoluem com subluxacao posterior do talus. Fragmento < 25% pode ser tratado conservadoramente se a mortise estiver congruente."
+    },
+    {
+      "pergunta": "Como detectar malreducao da sindesmose intraoperatoriamente?",
+      "resposta": "4 metodos: 1) Incidencia mortise 15 graus rotacao interna — espaco entre fibula e tibia (espaco claro tibiofibular) deve ser < 5mm. 2) Espaco tibiotalar medial < 4mm na incidencia mortise. 3) Sobreposicao tibiofibular > 1mm na incidencia AP. 4) Clamp de reducao — nao usar posterolateralmente (provoca rotacao externa da fibula) — usar ANTERIORMENTE sobre a fibula."
+    },
+    {
+      "pergunta": "Qual a diferenca entre parafuso tricortical e quadricortical na sindesmose?",
+      "resposta": "Tricortical: perfura 3 corticais (2 fibulares + 1 tibial lateral) — permite micromovilizacao fisiologica da sindesmose. PREFERIDO. Quadricortical: perfura 4 corticais — impede a micromovilizacao fisiologica, aumenta risco de quebra do parafuso pela carga. Necessario remover o parafuso metalico em 8-12 semanas para permitir micromovilizacao."
+    },
+    {
+      "pergunta": "O que e o sinal de Maisonneuve e por que e importante?",
+      "resposta": "Fratura da fibula proximal associada a ruptura completa da sindesmose e da membrana interossea — sem fratura fibular distal visivel. O RX de tornozelo parece 'normal' exceto pelo alargamento da mortise. Clinica: dor na fibula proximal + instabilidade do tornozelo. RX da PERNA inteira e obrigatorio em todo entorse grave com dor proximal na fibula."
+    },
+    {
+      "pergunta": "Por que retirar o parafuso de sindesmose em 8-12 semanas?",
+      "resposta": "O parafuso metalico rigido impede a micromovilizacao fisiologica da sindesmose — necessaria para a biomecânica normal do tornozelo (a fibula se move 2-3mm durante a dorsiflexao). Parafuso mantido > 3 meses tem alto risco de quebra pela carga ciclica. Retirar com 8-12 semanas (sindesmose ja cicatrizada) antes do inicio da carga plena e do esporte."
+    },
+    {
+      "pergunta": "Qual e o criterio radiografico de reducao adequada da sindesmose?",
+      "resposta": "Na incidencia de MORTISE (15 graus de rotacao interna): 1) Espaco claro tibiofibular < 5mm. 2) Sobreposicao tibiofibular > 1mm. 3) Espaco tibiotalar medial (entre maléolo medial e talus) < 4mm — igual ao superior. Na incidencia AP: espaco claro tibiofibular < 5mm e sobreposicao > 10mm."
+    },
+    {
+      "pergunta": "Qual a principal causa de artrose pos-traumatica do tornozelo apos fratura trimaleolar?",
+      "resposta": "Malreducao da sindesmose — e a causa mais frequente e prevenivel. A fibula externalizada deixa a mortise assimetrica, criando contato lateral do talus. Seguida de degrau articular do maleolo posterior > 2mm e instabilidade residual por LDM nao tratado. A malreducao da sindesmose ocorre em 15-20% das cirurgias — necessita fluoroscopia em multiplas incidencias e clamp anterior."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Fratura trimaleolar AO 44-C3 (Weber C, Lauge-Hansen PA IV) — fibula alta + maléolo medial + maléolo posterior > 25%. Sindesmose instavel. Mortise incongruente.",
+    "conduta": "RAFI trimaleolar em 24-48h (ou 5-10 dias se partes moles comprometidas). Sequencia: posterior → lateral → sindesmose → medial.",
+    "tecnica": "Placa 1/3 tubular fibular + parafusos maléolo posterior e medial + parafuso de sindesmose tricortical 3,5mm. Retirar sindesmose em 8-12 semanas.",
+    "riscos": [
+      "Malreducao da sindesmose (15-20%) — principal causa de artrose",
+      "Necrose cutanea por fechamento sob tensao",
+      "Artrose do tornozelo por degrau articular residual",
+      "TVP (5-10%)"
+    ],
+    "resumo": "M 38a futebolista com fratura trimaleolar AO 44-C3 instavel. RAFI em 24-48h: fixacao posterior → fibula → sindesmose → medial. Sem carga 8-10 semanas. Retirar parafuso de sindesmose em 8-12 semanas. Retorno ao futebol em 6-9 meses."
+  }
+}
