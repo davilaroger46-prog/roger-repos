@@ -1,0 +1,524 @@
+{
+  "meta": {
+    "id": "007",
+    "titulo": "Ruptura Maciça do Manguito Rotador",
+    "slug": "ruptura-macica-manguito-rotador",
+    "especialidade": "ortopedia",
+    "regiao": "Ombro",
+    "subespecialidade": "Cirurgia do Ombro",
+    "nivel": "avancado",
+    "tags": [
+      "manguito rotador",
+      "ombro",
+      "supraespinhal",
+      "infraespinhal",
+      "artroscopia",
+      "artroplastia reversa"
+    ],
+    "versao": "2.0"
+  },
+  "paciente": {
+    "sexo": "Masculino",
+    "idade": 67,
+    "atividade": "Aposentado, ex-pedreiro",
+    "lado": "Direito",
+    "demanda_funcional": "moderada",
+    "comorbidades": ["HAS", "DM tipo 2"]
+  },
+  "historia": {
+    "queixa_principal": "Dor cronica no ombro direito ha 3 anos com perda progressiva da elevacao ativa",
+    "inicio": "cronico",
+    "tempo_evolucao": "3 anos",
+    "mecanismo_lesao": "Degenerativo — microtraumas cumulativos por trabalho manual intenso ao longo de decades. Sem episodio agudo definidor. Piora progressiva com limitacao funcional severa nos ultimos 6 meses.",
+    "descricao": "Paciente masculino, 67 anos, ex-pedreiro aposentado. Refere dor em ombro direito ha 3 anos, inicialmente nocturna e com esforco, evoluindo para dor em repouso. Perda gradual da elevacao ativa — hoje incapaz de elevar o braco acima de 90 graus. Sem trauma agudo. RM confirmou ruptura macica do manguito rotador com retracao grau 3 de Patte e atrofia grau III de Goutallier. Sem artrose glenoumeral significativa."
+  },
+  "classificacao": {
+    "primaria": "Classificacao por Tamanho (DeOrio e Cofield) + Retracao (Patte) + Atrofia Muscular (Goutallier)",
+    "ao_ota": {
+      "codigo": "11-C2",
+      "osso": "Umero Proximal",
+      "segmento": "Glenoumeral",
+      "tipo": "C",
+      "grupo": "C2",
+      "descricao": "Ruptura macica do manguito rotador — acometimento de supraespinhal + infraespinhal com retracao grau 3 e atrofia muscular grau III (> 50% gordurosa)",
+      "gravidade": "alta",
+      "confianca": "alta"
+    },
+    "secundarias": [
+      {
+        "nome": "DeOrio e Cofield",
+        "grau": "Macica (>5cm)",
+        "descricao": "Ruptura envolvendo pelo menos 2 tendoes. Retracao marcada com impossibilidade de reparo primario tensao-livre."
+      },
+      {
+        "nome": "Patte",
+        "grau": "Grau 3",
+        "descricao": "Retracao do tendinea ate a cavidade glenoide — reparo primario extremamente dificil ou impossivel."
+      },
+      {
+        "nome": "Goutallier",
+        "grau": "Grau III",
+        "descricao": "Infiltracao gordurosa de 50-75% do musculo supraespinhal — preditor negativo de resultado funcional pos-reparo."
+      }
+    ]
+  },
+  "exame_fisico": {
+    "inspecao": [
+      "Amiotrofia da fossa supra e infraespinhosa visivel",
+      "Protrusao anterior da cabeca do umero (pseudoparalisia)",
+      "Postura antalgica — braco em rotacao interna e aduzido",
+      "Ausencia de equimose — lesao cronica"
+    ],
+    "palpacao": [
+      "Dor a palpacao do grande tuberosculo e insercao do supraespinhal",
+      "Crepitacao subacromia com a mobilizacao passiva",
+      "Sinal do Sul (drop arm sign) positivo — braco cai ao soltar em 90 graus de abducao",
+      "Dor a palpacao da bursa subacromial"
+    ],
+    "movimento": "Elevacao ativa: 60 graus (pseudoparalisia). Elevacao passiva: 150 graus. Rotacao externa ativa: 10 graus (infraespinhal roto). Rotacao interna preservada. Teste de impacto Neer e Hawkins positivos.",
+    "testes": [
+      {
+        "nome": "Drop Arm Test",
+        "sensibilidade": "73%",
+        "especificidade": "97%",
+        "positivo": "Braco cai ao soltar apos elevacao passiva a 90 graus — indica ruptura macica com perda do mecanismo depressor da cabeca umeral."
+      },
+      {
+        "nome": "Hornblower Sign",
+        "sensibilidade": "100%",
+        "especificidade": "93%",
+        "positivo": "Incapacidade de rotacao externa com braco a 90 graus de abducao — especifico para ruptura do infraespinhal e redondo menor."
+      },
+      {
+        "nome": "Belly Press Test",
+        "sensibilidade": "84%",
+        "especificidade": "89%",
+        "positivo": "Cotovelo cai ao pressionar o abdomen — indica ruptura do subescapular."
+      },
+      {
+        "nome": "Teste de Jobe (Empty Can)",
+        "sensibilidade": "79%",
+        "especificidade": "67%",
+        "positivo": "Dor e fraqueza na abducao contra resistencia em 90/30 graus — supraespinhal."
+      }
+    ],
+    "red_flags": [
+      "Dor intensa em repouso associada a febre — pensar em artrite septica ou osteomielite",
+      "Massa palpavel em regiao supraclavicular — tumor de sulco superior (Pancoast)",
+      "Dor irradiada para cotovelo e mao com parestesias — radiculopatia cervical concomitante",
+      "Crepitacao ossea grosseira — pensar em artrose glenoumeral avancada (cuff tear arthropathy)"
+    ]
+  },
+  "imagem": {
+    "rx": {
+      "indicado": true,
+      "achados": [
+        "Ascensao da cabeca do umero (distancia acromio-umeral < 7mm — normal > 7mm)",
+        "Artrose acromio-clavicular associada",
+        "Erosao do acromio inferior — sinal de atrito cronico",
+        "Sem artrose glenoumeral significativa — descarta cuff tear arthropathy avancada"
+      ]
+    },
+    "tc": {
+      "indicado": false,
+      "quando": "TC indicada para avaliacao ossea pre-operatoria se suspeita de glenoide displasica ou planejamento de artroplastia total reversa"
+    },
+    "rm": {
+      "indicado": true,
+      "achados": [
+        "Ruptura completa do supraespinhal e infraespinhal com retracao ate a glenoide (Patte 3)",
+        "Atrofia e infiltracao gordurosa grau III de Goutallier no supraespinhal e infraespinhal",
+        "Bursa subacromial com derrame",
+        "Subescapular integro (importante para artroplastia reversa)",
+        "Cartilagem glenoumeral preservada"
+      ]
+    }
+  },
+  "diagnostico": {
+    "principal": "Ruptura macica do manguito rotador direito — Patte 3 / Goutallier III — pseudoparalisia por perda do mecanismo depressor da cabeca do umero",
+    "diferenciais": [
+      "Artropatia por ruptura do manguito (cuff tear arthropathy — artrose + ascensao umeral) — avaliar no RX",
+      "Radiculopatia cervical C5-C6 — pode mimetizar fraqueza do ombro",
+      "Tendinite calcifica — calcificacoes no RX, dor aguda em surtos",
+      "Artrite reumatoide — bilateral, erosoes articulares, sorologicos positivos"
+    ],
+    "confirmacao": "combinado"
+  },
+  "decisao_clinica": {
+    "input": {
+      "ao_tipo": "C",
+      "desvio_mm": 0,
+      "instabilidade": false,
+      "cominuicao": false,
+      "demanda_funcional": "moderada",
+      "deficit_extensor": false,
+      "incongruencia_articular": false,
+      "osso_osteoporotico": true
+    },
+    "regras": [
+      {
+        "if": "retracao_patte >= 3 AND goutallier >= 3",
+        "then": "reparo_primario_contraindicado_alta_taxa_reruptura",
+        "prioridade": "alta",
+        "justificativa": "Reparo primario em retracao Patte 3 + Goutallier III tem taxa de reruptura de 60-80%. Resultado funcional equivalente ao conservador em muitos estudos."
+      },
+      {
+        "if": "pseudoparalisia AND subescapular_integro AND sem_artrose_glenoumeral",
+        "then": "artroplastia_reversa_do_ombro_indicada",
+        "prioridade": "alta",
+        "justificativa": "Pseudoparalise + subescapular integro + sem artrose = candidato ideal a artroplastia reversa. Taxa de satisfacao >90%."
+      },
+      {
+        "if": "demanda_funcional == moderada AND idade > 65",
+        "then": "considerar_tratamento_conservador_6_semanas_antes_de_cirurgia",
+        "prioridade": "media",
+        "justificativa": "Pacientes com moderada demanda e idade > 65 podem ter boa resposta ao conservador com fisioterapia + infiltracao. Tentar antes da cirurgia em casos selecionados."
+      },
+      {
+        "if": "atrofia_grau >= III",
+        "then": "alertar_sobre_resultado_funcional_limitado_mesmo_com_cirurgia",
+        "prioridade": "media",
+        "justificativa": "Atrofia muscular grau III prediz resultado funcional inferior — preparar paciente para expectativas realistas."
+      }
+    ],
+    "output": {
+      "conduta": "cirurgico",
+      "tecnica_preferida": "Artroplastia total reversa do ombro (RTSA) — indicacao primaria em pseudoparalisia com manguito irrecuperavel, subescapular integro e sem artrose avancada",
+      "nivel_urgencia": "baixa",
+      "explicacao": "Ruptura macica Patte 3/Goutallier III em paciente 67 anos com pseudoparalise. Reparo artroscopico primario contraindicado pela alta taxa de reruptura (>70%). Artroplastia reversa e o procedimento de escolha — inverte o centro de rotacao, permite que o deltóide compense o manguito ausente, com elevacao ativa esperada de 120-140 graus. Conservador como opcao pre-operatoria por 6-12 semanas."
+    }
+  },
+  "tratamento": {
+    "conservador": {
+      "indicado": true,
+      "criterios": [
+        "Tentativa inicial de 6-12 semanas antes da decisao cirurgica",
+        "Pacientes com alto risco cirurgico (cardiopatia severa, coagulopatia)",
+        "Pacientes que recusam cirurgia"
+      ],
+      "protocolo": [
+        "Fisioterapia: fortalecimento do deltóide e musculatura escapular (6-12 semanas)",
+        "Infiltracao subacromial com corticosteroide: betametasona 12mg + bupivacaina 0,5% 5mL",
+        "Modificacao de atividade — evitar elevacao acima de 90 graus e cargas",
+        "Analgesia com AINEs por 2-4 semanas"
+      ],
+      "medicamentos": [
+        {
+          "nome": "Celecoxibe",
+          "dose": "200mg",
+          "via": "VO",
+          "intervalo": "12/12h",
+          "duracao": "14 dias"
+        },
+        {
+          "nome": "Paracetamol",
+          "dose": "750mg",
+          "via": "VO",
+          "intervalo": "6/6h",
+          "duracao": "14 dias"
+        },
+        {
+          "nome": "Betametasona (infiltracao)",
+          "dose": "12mg",
+          "via": "Infiltracao subacromial",
+          "intervalo": "Unica dose — repetir em 4-6 semanas se necessario",
+          "duracao": "1-3 infiltracoes maximas"
+        }
+      ]
+    },
+    "cirurgico": {
+      "indicado": true,
+      "criterios": [
+        "Pseudoparalisia que nao responde ao conservador",
+        "Ruptura macica Patte 3 com subescapular integro",
+        "Paciente com demanda funcional que justifique o risco cirurgico",
+        "Ausencia de artrose glenoumeral avancada"
+      ],
+      "tecnicas": [
+        {
+          "nome": "Artroplastia Total Reversa do Ombro (RTSA)",
+          "quando_usar": "Pseudoparalisia por ruptura macica em paciente >60a, sem artrose severa, subescapular integro",
+          "vantagens": [
+            "Recuperacao da elevacao ativa (120-140 graus esperado)",
+            "Taxa de satisfacao >90%",
+            "Indicacao primaria em manguito irrecuperavel",
+            "Durabilidade comprovada em longo prazo"
+          ],
+          "desvantagens": [
+            "Cirurgia de grande porte",
+            "Risco de complicacoes nervo axilar",
+            "Entalhe escapular (notching) em longo prazo",
+            "Custo elevado do implante"
+          ]
+        },
+        {
+          "nome": "Reparo Artroscopico Parcial (Debridamento + Reparo Incompleto)",
+          "quando_usar": "Paciente jovem <55a, alta demanda, sem atrofia severa (Goutallier I-II)",
+          "vantagens": [
+            "Preservacao biologica",
+            "Menor morbidade que artroplastia"
+          ],
+          "desvantagens": [
+            "Taxa de reruptura 60-80% em Patte 3/Goutallier III",
+            "Resultado imprevisivel em ruptura macica"
+          ]
+        },
+        {
+          "nome": "Transferencia do Grande Dorsal",
+          "quando_usar": "Alternativa em jovens com ruptura posterior macica (supra+infra) sem indicacao de artroplastia",
+          "vantagens": [
+            "Preserva a anatomia glenoumeral",
+            "Resultado funcional razoavel em jovens"
+          ],
+          "desvantagens": [
+            "Tecnica complexa",
+            "Reabilitacao longa (12-18 meses)",
+            "Resultados variaveis"
+          ]
+        }
+      ]
+    }
+  },
+  "cirurgia": {
+    "indicacoes": [
+      "Pseudoparalisia por ruptura macica irrecuperavel",
+      "Falha do tratamento conservador por 3-6 meses",
+      "Subescapular integro (fundamental para o funcionamento da RTSA)",
+      "Qualidade ossea adequada para a glenoide"
+    ],
+    "posicionamento": "Beach chair 45-60 graus. Braco livre. Tracao leve com peso de 1-2kg. Mesa especial de ombro. Preparacao e campo do pescoco ate o cotovelo.",
+    "anestesia": [
+      "Bloqueio do plexo braquial interescalenico USG-guiado (ropivacaina 0,5% 20mL) — analgesia excelente por 18-24h",
+      "Anestesia geral combinada (propofol + sevoflurano) — necessaria pela posicao e duracao",
+      "Sedacao com dexmedetomidina 0,2-0,7mcg/kg/h para reducao do consumo de opioides"
+    ],
+    "passo_a_passo": [
+      {
+        "ordem": 1,
+        "titulo": "Incisao e Abordagem Deltopeitoral",
+        "descricao": "Incisao deltopeitoral de 8-12cm. Identificacao e protecao do nervo axilar (2-3cm distal a borda inferior da articulacao). Divisao do intervalo deltopeitoral preservando a veia cefalica lateralmente. Exposicao da bursa subacromial e da capsula anterior.",
+        "ponto_critico": "Nervo axilar a 5-7mm da capsula articular inferior — lesao iatrogenica causa pseudoparalisia permanente. Palpacao e visualizacao obrigatorias antes de qualquer corte inferior."
+      },
+      {
+        "ordem": 2,
+        "titulo": "Capsulotomia e Exposicao Glenoumeral",
+        "descricao": "Capsulotomia anterior em L invertido. Luxacao anterior da cabeca do umero com rotacao externa e extensao. Avaliacao da cartilagem glenoumeral e do subescapular. Identificacao dos remanescentes do manguito.",
+        "ponto_critico": "Confirmar integridade do subescapular intraoperatoriamente — subescapular roto compromete estabilidade da RTSA e muda o planejamento."
+      },
+      {
+        "ordem": 3,
+        "titulo": "Preparacao Glenoidal e Posicionamento da Glenosfera",
+        "descricao": "Fresagem da glenoide ate o osso subcondral. Posicionamento inferior da glenosfera (5mm abaixo da borda inferior) — reduz notching escapular. Fixacao com parafuso central + 2-4 parafusos perifericos. Confirmar estabilidade da baseplate.",
+        "ponto_critico": "Inclinacao inferior de 10 graus e posicionamento inferior da glenosfera sao criticos para evitar notching escapular — complicacao que compromete longevidade do implante."
+      },
+      {
+        "ordem": 4,
+        "titulo": "Preparacao Umeral e Implante do Componente",
+        "descricao": "Resseccao do colo umeral a 155 graus de inclinacao. Fresagem sequencial do canal umeral. Implante do componente umeral com retroversao de 20 graus. Cimento osseo em pacientes osteoporoticos.",
+        "ponto_critico": "Retroversao excessiva aumenta risco de instabilidade posterior. Retroversao insuficiente causa conflito anterior. Alvo: 20 graus."
+      },
+      {
+        "ordem": 5,
+        "titulo": "Reducao e Teste de Estabilidade",
+        "descricao": "Reducao do implante. Teste de estabilidade em elevacao, rotacao interna e externa, e tracao longitudinal. Verificar tensao do deltóide — deve haver tensao adequada (sinal da tecla). Ajuste do polietileno (tamanho S, M ou L) conforme tensao.",
+        "ponto_critico": "Tensao excessiva do deltóide causa dor cronica e limitacao de ROM. Tensao insuficiente causa instabilidade. O polietileno certo e o que permite reducao com forca moderada."
+      },
+      {
+        "ordem": 6,
+        "titulo": "Fechamento e Cuidados Finais",
+        "descricao": "Reinsercao do subescapular (se teniotomia foi realizada) com ancoras. Dreno de Penrose por 24-48h. Fechamento por planos. Imobilizador tipo Velpeau por 4-6 semanas. Radiografia final AP e perfil.",
+        "ponto_critico": "Reinsercao do subescapular e fundamental — sem ela, risco de instabilidade anterior e distal da protese. Sutura com ancoras ou transossea de alta resistencia."
+      }
+    ],
+    "materiais": [
+      {
+        "tipo": "implante",
+        "nome": "Sistema de Artroplastia Reversa do Ombro (Depuy Synthes Delta XTEND ou Stryker ReUnion ou Zimmer Biomet Comprehensive)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Glenosfera 36-42mm (tamanho conforme morfologia)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Componente umeral cimentado ou nao-cimentado (conforme qualidade ossea)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Polietileno S, M ou L (conforme tensao intraoperatoria)"
+      },
+      {
+        "tipo": "implante",
+        "nome": "Parafusos perifericos de glenoide (4 unidades)"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Sistema de fresagem glenoidal especifico do implante"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Mesa de ombro e suporte beach chair"
+      },
+      {
+        "tipo": "instrumental",
+        "nome": "Fluoroscopio intraoperatorio (C-arm)"
+      }
+    ]
+  },
+  "pos_operatorio": {
+    "imediato": [
+      "Imobilizador tipo Velpeau por 4-6 semanas — rotacao externa passiva apenas a partir de semana 3",
+      "Crioterapia 20min a cada 4h nos primeiros 3 dias",
+      "Exercicios de mao, punho e cotovelo imediatamente",
+      "Verificar funcao do nervo axilar (abducao ativa) no dia seguinte a cirurgia",
+      "Radiografia PO imediato AP e perfil axilar"
+    ],
+    "prescricao": [
+      { "nome": "Cefazolina 2g IV", "dose": "2g", "duracao": "Dose unica pre-op + 24h PO" },
+      { "nome": "Tramadol 50mg VO 8/8h", "dose": "50mg", "duracao": "7-10 dias" },
+      { "nome": "Celecoxibe 200mg VO 12/12h", "dose": "200mg", "duracao": "14 dias" },
+      { "nome": "Omeprazol 40mg VO 24/24h", "dose": "40mg", "duracao": "Periodo de AINE" },
+      { "nome": "Enoxaparina 40mg SC 24/24h", "dose": "40mg", "duracao": "14 dias" }
+    ],
+    "restricoes": [
+      "Sem elevacao ativa por 6 semanas",
+      "Sem rotacao externa ativa por 4 semanas",
+      "Sem carga no membro operado por 6 semanas",
+      "Sem dirigir por 8-12 semanas",
+      "Sem atividade laboral pesada por 6 meses"
+    ]
+  },
+  "reabilitacao": [
+    {
+      "fase": "Fase 1 — Protecao",
+      "periodo": "Semanas 1-6",
+      "objetivo": "Controle de edema, exercicios pendulares passivos, mobilidade de mao/cotovelo",
+      "exercicios": [
+        "Exercicios de Codman (pendulares) passivos a partir da semana 2",
+        "Mobilizacao ativa de dedos, punho e cotovelo",
+        "Crioterapia apos cada sessao"
+      ],
+      "restricoes": [
+        "Sem elevacao ativa",
+        "Sem rotacao externa ativa",
+        "Imobilizador Velpeau exceto nos exercicios"
+      ]
+    },
+    {
+      "fase": "Fase 2 — Mobilizacao Ativa-Assistida",
+      "periodo": "Semanas 6-12",
+      "objetivo": "Inicio de elevacao ativa-assistida, ROM 0-90 graus, fortalecimento do deltóide",
+      "exercicios": [
+        "Elevacao ativa-assistida com bastao ou polia",
+        "Rotacao externa ativa progressiva",
+        "Fortalecimento isometrico do deltóide"
+      ],
+      "restricoes": [
+        "Sem carga superior a 1kg",
+        "Sem movimentos de impacto"
+      ]
+    },
+    {
+      "fase": "Fase 3 — Fortalecimento",
+      "periodo": "Meses 3-6",
+      "objetivo": "Forca 60-70% do contralateral, elevacao ativa acima de 90 graus, retorno as AVDs basicas",
+      "exercicios": [
+        "Fortalecimento progressivo do deltóide com theraband",
+        "Exercicios funcionais de vida diaria",
+        "Bicicleta ergometrica com rotacao bilateral"
+      ],
+      "restricoes": [
+        "Sem cargas superiores a 5kg",
+        "Sem esportes de contato"
+      ]
+    },
+    {
+      "fase": "Fase 4 — Retorno Funcional",
+      "periodo": "Meses 6-12",
+      "objetivo": "Elevacao ativa 120-140 graus, forca 80% contralateral, retorno a AVDs completas",
+      "exercicios": [
+        "Musculacao progressiva com supervisao",
+        "Natacao (crawl) se tolerado",
+        "Retorno a esportes de baixo impacto (golf, tennis de mesa)"
+      ],
+      "restricoes": [
+        "Sem esportes de contato permanentemente",
+        "Sem cargas > 15kg no ombro operado"
+      ]
+    }
+  ],
+  "complicacoes": {
+    "precoces": [
+      "Lesao do nervo axilar (1-3%) — pseudoparalisia pos-op, maioria neuropraxia",
+      "Infeccao profunda (1-2%) — maior risco em DM e imunossuprimidos",
+      "Fratura da acromio ou glenoide (1-2%) — pela ma qualidade ossea",
+      "Hematoma subcutaneo (3-5%)"
+    ],
+    "tardias": [
+      "Notching escapular (30-50% em longo prazo) — erosao ossea inferior da escapula — maioria assintomatico",
+      "Instabilidade do implante (2-5%) — tensao inadequada ou falha do subescapular",
+      "Soltamento asseptico dos componentes (5-10% em 10 anos)",
+      "Fratura periprotesica (1-2%)"
+    ],
+    "prevencao": [
+      "Posicionamento inferior da glenosfera — reduz notching",
+      "Reinsercao meticulosa do subescapular",
+      "Profilaxia antibiotica prolongada em DM",
+      "Fisioterapia pre-operatoria para otimizar musculatura escapular"
+    ]
+  },
+  "evidencia": {
+    "nivel_I": [],
+    "nivel_II": [],
+    "nivel_III": [],
+    "nivel_IV": [],
+    "nivel_V": [],
+    "recentes": []
+  },
+  "flashcards": [
+    {
+      "pergunta": "Qual e o criterio clinico que define pseudoparalisia no manguito rotador?",
+      "resposta": "Incapacidade de elevacao ativa acima de 90 graus com elevacao passiva preservada acima de 120 graus. E causada pela perda do mecanismo depressor da cabeca umeral (supra+infraespinhal), que permite ao deltóide elevar sem impacto subacromial."
+    },
+    {
+      "pergunta": "O que e o sinal de Hornblower e o que indica?",
+      "resposta": "Incapacidade de rotacao externa com braco a 90 graus de abducao — paciente leva a mao a boca como um corno. Especificidade de 93% para ruptura do infraespinhal (e redondo menor). Diferencia ruptura posterior macica de lesao isolada do supraespinhal."
+    },
+    {
+      "pergunta": "O que e a classificacao de Goutallier e qual e sua importancia clinica?",
+      "resposta": "Classifica a infiltracao gordurosa muscular na RM: Grau 0 (normal), I (<25%), II (25-50%), III (50-75%), IV (>75%). Grau >= III prediz alta taxa de reruptura apos reparo (60-80%) e resultado funcional inferior. E preditor negativo mais importante para decidir entre reparo vs artroplastia."
+    },
+    {
+      "pergunta": "Por que a artroplastia reversa do ombro funciona no manguito irrecuperavel?",
+      "resposta": "Inverte o centro de rotacao glenoumeral — a glenosfera fica no umero e o componente concavo na glenoide. Isso muda o braco de momento do deltóide, tornando-o o motor primario de elevacao mesmo sem manguito funcional. Elevacao esperada de 120-140 graus."
+    },
+    {
+      "pergunta": "Qual e o posicionamento ideal da glenosfera na artroplastia reversa e por que?",
+      "resposta": "Posicionamento INFERIOR — 5mm abaixo da borda inferior da glenoide, com inclinacao inferior de 10 graus. Reduz significativamente o notching escapular (erosao ossea por contato do polietileno com o pilar lateral da escapula), que e a complicacao mais frequente em longo prazo."
+    },
+    {
+      "pergunta": "Quando e preferivel transferencia do grande dorsal em vez de artroplastia reversa?",
+      "resposta": "Em pacientes JOVENS (<55-60 anos) com ruptura posterior macica (supra+infra+redondo menor) e sem artrose glenoumeral. Preserva a anatomia para eventual artroplastia futura. Resultado funcional razoavel com recuperacao de rotacao externa ativa."
+    },
+    {
+      "pergunta": "Qual e a distancia de seguranca do nervo axilar na abordagem deltopeitoral?",
+      "resposta": "O nervo axilar passa a 5-7mm da capsula articular inferior e 2-5cm distal ao borde inferior do subescapular. Na abordagem deltopeitoral, deve ser palpado e visualizado antes de qualquer corte inferior. Lesao iatrogenica causa pseudoparalisia permanente."
+    },
+    {
+      "pergunta": "Qual a diferenca entre a classificacao de Patte e de DeOrio-Cofield?",
+      "resposta": "DeOrio-Cofield classifica por TAMANHO: pequena (<1cm), media (1-3cm), grande (3-5cm) e macica (>5cm). Patte classifica por RETRACAO: Grau 1 (proximo a articulacao), Grau 2 (ate cabeca umeral), Grau 3 (ate glenoide). Patte 3 e o preditor de irrecuperabilidade mais relevante para a decisao cirurgica."
+    }
+  ],
+  "output_app": {
+    "diagnostico": "Ruptura macica do manguito rotador direito (Patte 3, Goutallier III) com pseudoparalisia em aposentado ex-pedreiro 67a.",
+    "conduta": "Artroplastia total reversa do ombro (RTSA). Tentativa conservadora (fisioterapia + infiltracao) por 6-12 semanas antes da cirurgia se risco operatorio aceitavel.",
+    "tecnica": "Abordagem deltopeitoral. Artroplastia reversa com glenosfera 36-42mm posicionada inferiormente. Subescapular integro e fundamental.",
+    "riscos": [
+      "Lesao do nervo axilar (1-3%)",
+      "Notching escapular em longo prazo (30-50%)",
+      "Instabilidade da protese (2-5%)",
+      "Infeccao profunda (1-2%)"
+    ],
+    "resumo": "M 67a ex-pedreiro com ruptura macica do manguito (Patte 3/Goutallier III) e pseudoparalisia cronica. Reparo primario contraindicado pela alta taxa de reruptura. Artroplastia reversa do ombro e o procedimento de escolha — elevacao ativa esperada de 120-140 graus. Taxa de satisfacao >90%."
+  }
+}
