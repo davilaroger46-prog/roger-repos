@@ -100,3 +100,47 @@ Retorne somente JSON.
     raw_text = response.content[0].text
     parsed = extract_json(raw_text)
     return validate_case_schema(parsed)
+
+
+def autocorrect_orthopedic_case(case: dict) -> dict:
+    prompt = f"""
+Você receberá um caso clínico ortopédico em JSON.
+
+OBJETIVO:
+Corrigir apenas o que estiver incompleto, ausente, vazio ou fora das regras do schema.
+
+REGRAS:
+- Preserve ao máximo o conteúdo já escrito pelo médico.
+- Não apague campos válidos.
+- Não altere diagnóstico, conduta ou técnica se já estiverem coerentes.
+- Complete apenas lacunas.
+- Corrija contagens obrigatórias.
+- Retorne exclusivamente JSON válido.
+- Sem markdown.
+- Sem comentários.
+
+CONTAGENS OBRIGATÓRIAS:
+- flashcards: exatamente 8
+- cirurgia.passo_a_passo: exatamente 6
+- reabilitacao: exatamente 4 fases
+- tratamento.cirurgico.tecnicas: exatamente 3
+- decisao_clinica.regras: mínimo 4
+- exame_fisico.inspecao: mínimo 4
+- exame_fisico.palpacao: mínimo 4
+- exame_fisico.red_flags: 3 a 5
+
+CASO ATUAL:
+{json.dumps(case, ensure_ascii=False)}
+"""
+
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=8000,
+        temperature=0.2,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    raw_text = response.content[0].text
+    parsed = extract_json(raw_text)
+    return validate_case_schema(parsed)
