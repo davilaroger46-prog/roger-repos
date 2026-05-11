@@ -609,9 +609,16 @@ export default function CaseVisualEditor({
 
       <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
         <button
-          onClick={() => onSave(draft)}
+          onClick={() => {
+            if (!canSave) return;
+            onSave(draft);
+          }}
           disabled={!canSave}
-          style={buttonStyle(canSave ? T.green : T.muted)}
+          style={{
+            ...buttonStyle(canSave ? T.green : T.muted),
+            cursor: canSave ? "pointer" : "not-allowed",
+            opacity: canSave ? 1 : 0.45,
+          }}
         >
           💾 Salvar alterações
         </button>
