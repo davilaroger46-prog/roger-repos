@@ -627,23 +627,23 @@ export default function CaseVisualEditor({
 
         {onAutoCorrect && (
           <button
+            disabled={autoFixing}
             onClick={async () => {
-              setAutoFixing(true);
               try {
+                setAutoFixing(true);
                 const corrected = await onAutoCorrect(draft);
                 setDraft(corrected);
               } finally {
                 setAutoFixing(false);
               }
             }}
-            disabled={autoFixing}
             style={{
               ...buttonStyle(T.blue),
-              opacity: autoFixing ? 0.6 : 1,
+              opacity: autoFixing ? 0.5 : 1,
               cursor: autoFixing ? "not-allowed" : "pointer",
             }}
           >
-            {autoFixing ? "Corrigindo…" : "🤖 Autocorrigir com IA"}
+            {autoFixing ? "🤖 Corrigindo..." : "🤖 Autocorrigir com IA"}
           </button>
         )}
 
