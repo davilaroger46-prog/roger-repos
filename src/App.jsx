@@ -10,6 +10,7 @@ import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
 import CaseActions from "./components/CaseActions";
+import CaseVisualEditor from "./components/CaseVisualEditor";
 import {
   generateCase,
   listCases,
