@@ -4,10 +4,11 @@ Recebe um tema e gera um caso clínico completo via Claude API.
 Salva automaticamente no banco após geração.
 """
 
+import asyncio
 import json
 from fastapi import APIRouter, HTTPException
 from app.models import GenerateCaseInput
-from app.services.case_generator import generate_case
+from app.services.case_generator import generate_orthopedic_case
 from app.database import get_db
 
 router = APIRouter()
@@ -16,10 +17,14 @@ router = APIRouter()
 @router.post("/", response_model=dict)
 async def generate(payload: GenerateCaseInput):
     try:
-        caso = await generate_case(
-            tema=payload.tema,
-            nivel=payload.nivel,
+        caso = await asyncio.to_thread(
+            generate_orthopedic_case,
+            payload.tema,
+            payload.nivel,
+            payload.regiao,
         )
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao gerar caso: {str(e)}")
 
@@ -44,7 +49,7 @@ async def generate(payload: GenerateCaseInput):
                 (
                     caso_id,
                     meta.get("regiao", ""),
-                    meta.get("nivel", "intermediario"),
+                    meta.get("nivel", "avancado"),
                     meta.get("titulo", ""),
                     json.dumps(caso, ensure_ascii=False),
                 ),
