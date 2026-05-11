@@ -350,6 +350,7 @@ export default function CaseVisualEditor({
           label="Passos cirúrgicos"
           items={draft.cirurgia?.passo_a_passo || []}
           onChange={(v) => update("cirurgia.passo_a_passo", v)}
+          min={6} max={6}
           addLabel="+ Adicionar passo"
           createItem={() => ({
             ordem: (draft.cirurgia?.passo_a_passo?.length || 0) + 1,
@@ -393,6 +394,7 @@ export default function CaseVisualEditor({
           label="Técnicas"
           items={draft.tratamento?.cirurgico?.tecnicas || []}
           onChange={(v) => update("tratamento.cirurgico.tecnicas", v)}
+          min={3} max={3}
           addLabel="+ Adicionar técnica"
           createItem={() => ({
             nome: "",
@@ -435,6 +437,7 @@ export default function CaseVisualEditor({
           label="Fases de reabilitação"
           items={draft.reabilitacao || []}
           onChange={(v) => update("reabilitacao", v)}
+          min={4} max={4}
           addLabel="+ Adicionar fase"
           createItem={() => ({
             fase: "",
@@ -504,6 +507,7 @@ export default function CaseVisualEditor({
           label="Flashcards de residência"
           items={draft.flashcards || []}
           onChange={(v) => update("flashcards", v)}
+          min={8} max={8}
           addLabel="+ Adicionar flashcard"
           createItem={() => ({
             pergunta: "",
@@ -753,7 +757,13 @@ function ObjectListEditor({
   createItem,
   renderItem,
   addLabel = "+ Adicionar",
+  min,
+  max,
 }) {
+  const count = items?.length || 0;
+  const underMin = min !== undefined && count < min;
+  const overMax = max !== undefined && count > max;
+  const countColor = underMin || overMax ? T.red : T.green;
   const updateItem = (index, patch) => {
     const next = [...items];
     next[index] = {
@@ -773,7 +783,14 @@ function ObjectListEditor({
 
   return (
     <div style={{ gridColumn: "1 / -1" }}>
-      <div style={labelText}>{label}</div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={labelText}>{label}</div>
+        {(min !== undefined || max !== undefined) && (
+          <span style={{ fontSize: 10, fontWeight: 800, color: countColor }}>
+            {count}{min !== undefined ? `/${min}` : ""}{max !== undefined && max !== min ? `–${max}` : ""}
+          </span>
+        )}
+      </div>
 
       <div style={{ display: "grid", gap: 12, marginTop: 8 }}>
         {items?.map((item, index) => (
