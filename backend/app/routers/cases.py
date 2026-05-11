@@ -223,6 +223,35 @@ def restore_case_version(case_id: int, version_id: int):
         db.close()
 
 
+@router.get("/{case_id}/pdf")
+def export_case_pdf(case_id: int):
+    db: Session = SessionLocal()
+
+    case_db = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id
+    ).first()
+
+    db.close()
+
+    if not case_db:
+        raise HTTPException(
+            status_code=404,
+            detail="Caso não encontrado"
+        )
+
+    pdf_buffer = generate_case_pdf(case_db.caso_json)
+
+    filename = f"orthostudy_case_{case_id}.pdf"
+
+    return StreamingResponse(
+        pdf_buffer,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+    )
+
+
 @router.delete("/{case_id}")
 def delete_case(case_id: int):
     db = SessionLocal()
