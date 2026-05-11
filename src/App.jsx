@@ -110,11 +110,6 @@ export default function App() {
 
   const handleCancelEdit = () => setEditing(false);
 
-  const handleOpenVersion = (snapshot) => {
-    setCaso(snapshot);
-    setEditing(false);
-  };
-
   const handleSave = async () => {
     try {
       const data = await listCases();
@@ -226,7 +221,7 @@ export default function App() {
                   <div style={{ marginTop: 24 }}>
                     <CaseVersionsPanel
                       caseId={activeCaseId}
-                      onOpenVersion={handleOpenVersion}
+                      onOpenVersion={(oldCase) => setVersionPreview(oldCase)}
                     />
                   </div>
                 )}
