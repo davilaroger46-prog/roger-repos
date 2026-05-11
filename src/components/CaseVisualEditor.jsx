@@ -44,6 +44,7 @@ export default function CaseVisualEditor({
   caso,
   onCancel,
   onSave,
+  onAutoCorrect,
 }) {
   const [draft, setDraft] = useState(() =>
     JSON.parse(JSON.stringify(caso))
@@ -622,6 +623,12 @@ export default function CaseVisualEditor({
         >
           💾 Salvar alterações
         </button>
+
+        {onAutoCorrect && (
+          <button onClick={onAutoCorrect} style={buttonStyle(T.cyan)}>
+            🤖 Autocorrigir com IA
+          </button>
+        )}
 
         <button onClick={onCancel} style={buttonStyle(T.red)}>
           Cancelar
