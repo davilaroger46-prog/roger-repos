@@ -7,6 +7,7 @@ from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
 from app.schemas.case import ClinicalCase
 from app.services.pdf_service import generate_case_pdf
+from app.core.slugify import slugify
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
@@ -241,7 +242,8 @@ def export_case_pdf(case_id: int):
 
     pdf_buffer = generate_case_pdf(case_db.caso_json)
 
-    filename = f"orthostudy_case_{case_id}.pdf"
+    titulo = case_db.titulo or f"caso-{case_id}"
+    filename = f"orthostudy-{case_id}-{slugify(titulo)}.pdf"
 
     return StreamingResponse(
         pdf_buffer,
