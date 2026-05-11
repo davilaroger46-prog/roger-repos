@@ -1,16 +1,11 @@
-from typing import Any, Optional
+from typing import Optional
 from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.schemas.case import ClinicalCase
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
-
-
-class UpdateCasePayload(BaseModel):
-    caso_json: dict[str, Any]
 
 
 def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
@@ -67,22 +62,47 @@ def get_case(case_id: int):
 
 
 @router.put("/{case_id}")
-def update_case(case_id: int, payload: UpdateCasePayload):
-    db = SessionLocal()
-    try:
-        case = _get_case_or_404(db, case_id)
+def update_case(case_id: int, payload: dict):
+    db: Session = SessionLocal()
 
-        validated = ClinicalCase.model_validate(payload.caso_json)
-        j = validated.model_dump(by_alias=True, exclude_none=True, mode="json")
-        case.caso_json = j
-        case.titulo    = j.get("meta", {}).get("titulo", case.titulo)
-        case.regiao    = j.get("meta", {}).get("regiao", case.regiao)
-        case.nivel     = j.get("meta", {}).get("nivel", case.nivel)
-        case.ao_codigo = j.get("classificacao", {}).get("ao_ota", {}).get("codigo", case.ao_codigo)
+    case_db = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id
+    ).first()
+
+    if not case_db:
+        db.close()
+        raise HTTPException(
+            status_code=404,
+            detail="Caso não encontrado"
+        )
+
+    try:
+        validated = ClinicalCase.model_validate(payload)
+
+        case_json = validated.model_dump(
+            by_alias=True,
+            exclude_none=True,
+            mode="json",
+        )
+
+        case_db.titulo = case_json["meta"]["titulo"]
+        case_db.regiao = case_json["meta"]["regiao"]
+        case_db.nivel = case_json["meta"]["nivel"]
+        case_db.ao_codigo = case_json["classificacao"]["ao_ota"]["codigo"]
+        case_db.caso_json = case_json
 
         db.commit()
-        db.refresh(case)
-        return case.caso_json
+        db.refresh(case_db)
+
+        return case_db.caso_json
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=422,
+            detail=f"Erro de validação do caso: {str(e)}"
+        )
+
     finally:
         db.close()
 

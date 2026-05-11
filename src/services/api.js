@@ -41,7 +41,7 @@ export async function updateCase(caseId, casoJson) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ caso_json: casoJson }),
+    body: JSON.stringify(casoJson),
   });
 
   if (!response.ok) {
