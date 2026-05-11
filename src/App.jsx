@@ -150,6 +150,12 @@ export default function App() {
         {tab === "progress" && (
           <ProgressPage />
         )}
+
+        {caso && (
+          <div style={{ marginTop: 20 }}>
+            <CasePreview caso={caso} />
+          </div>
+        )}
       </main>
     </div>
   );
