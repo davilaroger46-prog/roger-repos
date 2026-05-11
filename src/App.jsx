@@ -43,6 +43,19 @@ export default function App() {
     }
   };
 
+  const handleDeleteCase = async (caseId) => {
+    try {
+      await deleteCase(caseId);
+
+      const updated = await listCases();
+      setSavedCases(updated);
+
+      setCaso(null);
+    } catch (err) {
+      setError("Erro ao deletar caso.");
+    }
+  };
+
   const handleSave = async () => {
     try {
       const data = await listCases();
