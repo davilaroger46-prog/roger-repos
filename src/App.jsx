@@ -22,6 +22,7 @@ import {
   updateCase,
   autocorrectCase,
   restoreCaseVersion,
+  downloadCasePdf,
 } from "./services/api";
 
 export default function App() {
@@ -182,6 +183,7 @@ export default function App() {
               caso={caso}
               onNewCase={handleNewCase}
               onEdit={() => setEditing(true)}
+              onExportPdf={() => downloadCasePdf(activeCaseId)}
             />
 
             {editing ? (
