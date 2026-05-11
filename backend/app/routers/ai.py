@@ -1,16 +1,21 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.ai import GenerateCaseInput
 from app.schemas.case import ClinicalCase
 from app.services.anthropic_service import generate_orthopedic_case, autocorrect_orthopedic_case
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
+from app.models.user_model import UserModel
+from app.deps.auth_deps import get_current_user
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
 
 @router.post("/generate-case")
-def generate_case(payload: GenerateCaseInput):
+def generate_case(
+    payload: GenerateCaseInput,
+    user: UserModel = Depends(get_current_user),
+):
     try:
         case = generate_orthopedic_case(
             tema=payload.tema,
@@ -25,6 +30,7 @@ def generate_case(payload: GenerateCaseInput):
                 regiao=case["meta"]["regiao"],
                 nivel=case["meta"]["nivel"],
                 ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
+                user_id=user.id,
                 caso_json=case,
             )
 
