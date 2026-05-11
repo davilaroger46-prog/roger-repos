@@ -6,6 +6,7 @@ import ProgressPage from "./pages/ProgressPage";
 import GeneratePage from "./pages/GeneratePage";
 import DecisionPage from "./pages/DecisionPage";
 import { TABS } from "./constants/prompt";
+import SidebarCases from "./components/SidebarCases";
 import {
   generateCase,
   listCases,
