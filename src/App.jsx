@@ -216,7 +216,7 @@ export default function App() {
               />
             ) : (
               <>
-                <CasePreview caso={caso} />
+                <CasePreview caso={versionPreview || caso} />
                 {activeCaseId && (
                   <div style={{ marginTop: 24 }}>
                     {versionPreview && (
