@@ -17,6 +17,7 @@ export default function SidebarCases({
   const [conduta, setConduta] = useState("");
 
   const debouncedSearch = useDebounce(search, 450);
+  const isSearching = search !== debouncedSearch;
 
   useEffect(() => {
     onFilterChange?.({
