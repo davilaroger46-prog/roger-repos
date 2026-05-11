@@ -26,11 +26,11 @@ def generate_case(
         db: Session = SessionLocal()
         try:
             new_case = ClinicalCaseModel(
+                user_id=current_user.id,
                 titulo=case["meta"]["titulo"],
                 regiao=case["meta"]["regiao"],
                 nivel=case["meta"]["nivel"],
                 ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
-                user_id=current_user.id,
                 caso_json=case,
             )
 
