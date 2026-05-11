@@ -1,5 +1,7 @@
 fastapi
-uvicorn[standard]
+uvicorn
 python-dotenv
 anthropic
 pydantic
+sqlalchemy[asyncio]
+asyncpg
