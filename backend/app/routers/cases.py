@@ -317,11 +317,35 @@ def restore_case_version(
         db.close()
 
 
+def _get_user_from_token(token: str) -> UserModel:
+    from jose import jwt, JWTError
+    from app.core.config import SECRET_KEY, ALGORITHM
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("sub")
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Token inválido")
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
+    db = SessionLocal()
+    user = db.query(UserModel).filter(UserModel.id == int(user_id)).first()
+    db.close()
+
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuário não encontrado")
+
+    return user
+
+
 @router.get("/{case_id}/pdf")
 def export_case_pdf(
     case_id: int,
-    current_user: UserModel = Depends(get_current_user),
+    token: str,
 ):
+    current_user = _get_user_from_token(token)
+
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(

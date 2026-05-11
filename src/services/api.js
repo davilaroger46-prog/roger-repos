@@ -149,20 +149,8 @@ export async function restoreCaseVersion(caseId, versionId) {
 }
 
 export function downloadCasePdf(caseId) {
-  const url = `${API_URL}/cases/${caseId}/pdf`;
-
-  fetch(url, {
-    headers: {
-      ...authHeaders(),
-    },
-  })
-    .then((res) => res.blob())
-    .then((blob) => {
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = `orthostudy-${caseId}.pdf`;
-      a.click();
-    });
+  const token = getToken();
+  window.open(`${API_URL}/cases/${caseId}/pdf?token=${token}`, "_blank");
 }
 
 export async function deleteCase(caseId) {
