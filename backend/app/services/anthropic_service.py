@@ -68,7 +68,12 @@ def extract_json(text: str) -> dict:
 
 def validate_case_schema(case: dict) -> dict:
     validated = ClinicalCase.model_validate(case)
-    return validated.model_dump(by_alias=True)
+
+    return validated.model_dump(
+        by_alias=True,
+        exclude_none=True,
+        mode="json",
+    )
 
 
 def generate_orthopedic_case(tema: str, nivel: str, regiao: str | None = None) -> dict:
