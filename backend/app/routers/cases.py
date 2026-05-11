@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Query
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
+from app.models.case_version_model import ClinicalCaseVersionModel
 from app.schemas.case import ClinicalCase
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
