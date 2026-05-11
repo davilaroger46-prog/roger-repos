@@ -64,6 +64,7 @@ export default function App() {
     try {
       const data = await getCase(caseId);
       setCaso(data);
+      setActiveCaseId(caseId);
     } catch (err) {
       setError("Erro ao carregar caso.");
     }
