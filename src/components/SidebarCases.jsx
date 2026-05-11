@@ -16,14 +16,16 @@ export default function SidebarCases({
   const [regiao, setRegiao] = useState("");
   const [conduta, setConduta] = useState("");
 
+  const debouncedSearch = useDebounce(search, 450);
+
   useEffect(() => {
     onFilterChange?.({
-      q: search,
+      q: debouncedSearch,
       nivel,
       regiao,
       conduta,
     });
-  }, [search, nivel, regiao, conduta]);
+  }, [debouncedSearch, nivel, regiao, conduta]);
 
   const regioes = useMemo(() => {
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
