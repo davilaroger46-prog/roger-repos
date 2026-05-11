@@ -198,6 +198,15 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Diagnósticos diferenciais">
+        <ListEditor
+          label="Diferenciais"
+          items={draft.diagnostico?.diferenciais || []}
+          onChange={(v) => update("diagnostico.diferenciais", v)}
+          placeholder="Ex: entorse radiocárpica, fratura do escafoide..."
+        />
+      </Section>
+
       <Section title="Decisão clínica">
         <SelectField
           label="Conduta"
