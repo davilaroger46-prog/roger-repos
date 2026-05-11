@@ -10,7 +10,6 @@ import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
 import CaseActions from "./components/CaseActions";
-import CaseEditPanel from "./components/CaseEditPanel";
 import {
   generateCase,
   listCases,
@@ -210,19 +209,76 @@ export default function App() {
               onNewCase={handleNewCase}
               onEdit={handleStartEdit}
             />
-            {editing && (
-              <CaseEditPanel
-                caso={caso}
-                editJson={editJson}
-                setEditJson={setEditJson}
-                onSave={handleSaveEdit}
-                onCancel={handleCancelEdit}
-              />
+
+            {editing ? (
+              <div
+                style={{
+                  background: T.s1,
+                  border: `1px solid ${T.b2}`,
+                  borderRadius: 18,
+                  padding: 18,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: T.amber,
+                    fontWeight: 800,
+                    textTransform: "uppercase",
+                    letterSpacing: ".1em",
+                    marginBottom: 10,
+                  }}
+                >
+                  Modo edição JSON
+                </div>
+
+                <textarea
+                  value={editJson}
+                  onChange={(e) => setEditJson(e.target.value)}
+                  rows={26}
+                  style={{
+                    width: "100%",
+                    background: T.s2,
+                    border: `1px solid ${T.border}`,
+                    borderRadius: 12,
+                    padding: 14,
+                    color: "#a5f3fc",
+                    fontSize: 11,
+                    lineHeight: 1.6,
+                    fontFamily: "monospace",
+                    outline: "none",
+                  }}
+                />
+
+                <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+                  <button onClick={handleSaveEdit} style={editButton(T.green)}>
+                    💾 Salvar alterações
+                  </button>
+
+                  <button onClick={handleCancelEdit} style={editButton(T.red)}>
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <CasePreview caso={caso} />
             )}
-            <CasePreview caso={caso} />
           </div>
         )}
       </main>
     </div>
   );
+}
+
+function editButton(color) {
+  return {
+    padding: "9px 16px",
+    borderRadius: 10,
+    border: `1px solid ${color}44`,
+    background: `${color}15`,
+    color,
+    fontWeight: 700,
+    fontSize: 12,
+    cursor: "pointer",
+  };
 }
