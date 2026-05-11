@@ -43,7 +43,7 @@ export default function CaseActions({ caso, onNewCase, onEdit }) {
       </button>
 
       {onEdit && (
-        <button onClick={onEdit} style={buttonStyle(T.purple)}>
+        <button onClick={onEdit} style={buttonStyle(T.blue)}>
           ✏️ Editar
         </button>
       )}
