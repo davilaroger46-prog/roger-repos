@@ -18,21 +18,25 @@ def generate_case(payload: GenerateCaseInput):
         )
 
         db: Session = SessionLocal()
+        try:
+            new_case = ClinicalCaseModel(
+                titulo=case["meta"]["titulo"],
+                regiao=case["meta"]["regiao"],
+                nivel=case["meta"]["nivel"],
+                ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
+                caso_json=case,
+            )
 
-        new_case = ClinicalCaseModel(
-            titulo=case["meta"]["titulo"],
-            regiao=case["meta"]["regiao"],
-            nivel=case["meta"]["nivel"],
-            ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
-            caso_json=case,
-        )
+            db.add(new_case)
+            db.commit()
+            db.refresh(new_case)
 
-        db.add(new_case)
-        db.commit()
-        db.refresh(new_case)
-        db.close()
+            return new_case.caso_json
 
-        return case
+        finally:
+            db.close()
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
