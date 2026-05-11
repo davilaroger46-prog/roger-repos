@@ -272,13 +272,13 @@ export default function App() {
 
 function editButton(color) {
   return {
-    padding: "9px 16px",
-    borderRadius: 10,
-    border: `1px solid ${color}44`,
-    background: `${color}15`,
-    color,
-    fontWeight: 700,
-    fontSize: 12,
+    padding: "9px 15px",
+    borderRadius: 9,
     cursor: "pointer",
+    fontSize: 12,
+    fontWeight: 800,
+    background: `${color}12`,
+    border: `1px solid ${color}35`,
+    color,
   };
 }
