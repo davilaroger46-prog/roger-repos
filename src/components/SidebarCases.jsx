@@ -19,6 +19,8 @@ export default function SidebarCases({
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
   const [conduta, setConduta] = useState("");
+  const [sortBy, setSortBy] = useState("id");
+  const [sortDir, setSortDir] = useState("desc");
 
   const debouncedSearch = useDebounce(search, 450);
   const isSearching = search !== debouncedSearch;
@@ -29,8 +31,10 @@ export default function SidebarCases({
       nivel,
       regiao,
       conduta,
+      sort_by: sortBy,
+      sort_dir: sortDir,
     });
-  }, [debouncedSearch, nivel, regiao, conduta]);
+  }, [debouncedSearch, nivel, regiao, conduta, sortBy, sortDir]);
 
   const regioes = useMemo(() => {
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
@@ -120,15 +124,43 @@ export default function SidebarCases({
           <option value="cirurgico">Cirúrgico</option>
           <option value="urgente">Urgente</option>
         </select>
+
+        <div style={{ display: "flex", gap: 6 }}>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={{ ...selectStyle, flex: 1 }}>
+            <option value="id">ID</option>
+            <option value="titulo">Título</option>
+            <option value="nivel">Nível</option>
+            <option value="regiao">Região</option>
+          </select>
+
+          <button
+            onClick={() => setSortDir((d) => (d === "desc" ? "asc" : "desc"))}
+            title={sortDir === "desc" ? "Decrescente" : "Crescente"}
+            style={{
+              background: T.s2,
+              border: `1px solid ${T.border}`,
+              borderRadius: 8,
+              color: T.muted,
+              cursor: "pointer",
+              fontSize: 13,
+              padding: "0 10px",
+              flexShrink: 0,
+            }}
+          >
+            {sortDir === "desc" ? "↓" : "↑"}
+          </button>
+        </div>
       </div>
 
-      {(search || nivel || regiao || conduta) && (
+      {(search || nivel || regiao || conduta || sortBy !== "id" || sortDir !== "desc") && (
         <button
           onClick={() => {
             setSearch("");
             setNivel("");
             setRegiao("");
             setConduta("");
+            setSortBy("id");
+            setSortDir("desc");
           }}
           style={{
             width: "100%",

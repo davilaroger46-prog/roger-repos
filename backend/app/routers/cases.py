@@ -18,6 +18,14 @@ def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
     return case
 
 
+_SORT_COLUMNS = {
+    "id": ClinicalCaseModel.id,
+    "titulo": ClinicalCaseModel.titulo,
+    "nivel": ClinicalCaseModel.nivel,
+    "regiao": ClinicalCaseModel.regiao,
+}
+
+
 @router.get("/")
 def list_cases(
     q: str | None = None,
@@ -26,6 +34,8 @@ def list_cases(
     conduta: str | None = None,
     page: int = 1,
     page_size: int = 20,
+    sort_by: str = "id",
+    sort_dir: str = "desc",
 ):
     db: Session = SessionLocal()
 
@@ -41,9 +51,10 @@ def list_cases(
 
     offset = (page - 1) * page_size
 
-    cases = query.order_by(
-        ClinicalCaseModel.id.desc()
-    ).offset(offset).limit(page_size).all()
+    sort_col = _SORT_COLUMNS.get(sort_by, ClinicalCaseModel.id)
+    order_expr = sort_col.asc() if sort_dir == "asc" else sort_col.desc()
+
+    cases = query.order_by(order_expr).offset(offset).limit(page_size).all()
 
     result = []
 

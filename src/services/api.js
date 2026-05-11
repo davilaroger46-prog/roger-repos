@@ -26,6 +26,8 @@ export async function listCases(filters = {}) {
   if (filters.conduta) params.append("conduta", filters.conduta);
   if (filters.page) params.append("page", filters.page);
   if (filters.page_size) params.append("page_size", filters.page_size);
+  if (filters.sort_by) params.append("sort_by", filters.sort_by);
+  if (filters.sort_dir) params.append("sort_dir", filters.sort_dir);
 
   const response = await fetch(`${API_URL}/cases/?${params.toString()}`);
 
