@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.ai import GenerateCaseInput
-from app.services.anthropic_service import generate_orthopedic_case
+from app.schemas.case import ClinicalCase
+from app.services.anthropic_service import generate_orthopedic_case, autocorrect_orthopedic_case
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 
