@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { T, NIV_C } from "../constants/theme";
 import Tag from "./Tag";
 
@@ -14,6 +14,15 @@ export default function SidebarCases({
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
   const [conduta, setConduta] = useState("");
+
+  useEffect(() => {
+    onFilterChange?.({
+      q: search,
+      nivel,
+      regiao,
+      conduta,
+    });
+  }, [search, nivel, regiao, conduta]);
 
   const regioes = useMemo(() => {
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
