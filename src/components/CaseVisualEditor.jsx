@@ -339,6 +339,12 @@ export default function CaseVisualEditor({
           value={draft.output_app?.resumo}
           onChange={(v) => update("output_app.resumo", v)}
         />
+
+        <ListEditor
+          label="Riscos principais"
+          items={draft.output_app?.riscos || []}
+          onChange={(v) => update("output_app.riscos", v)}
+        />
       </Section>
 
       <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
