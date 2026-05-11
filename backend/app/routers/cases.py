@@ -117,13 +117,3 @@ def delete_case(case_id: int):
         return {"status": "deleted", "id": case_id}
     finally:
         db.close()
-
-
-@router.get("/{case_id}/flashcards")
-def get_flashcards(case_id: int):
-    db = SessionLocal()
-    try:
-        case = _get_case_or_404(db, case_id)
-        return case.caso_json.get("flashcards", [])
-    finally:
-        db.close()
