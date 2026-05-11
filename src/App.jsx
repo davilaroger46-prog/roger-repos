@@ -42,6 +42,9 @@ export default function App() {
   const [editing, setEditing] = useState(false);
   const [versionPreview, setVersionPreview] = useState(null);
   const [caseFilters, setCaseFilters] = useState({});
+  const [casePage, setCasePage] = useState(1);
+  const [casePages, setCasePages] = useState(1);
+  const [caseTotal, setCaseTotal] = useState(0);
 
   const refreshCases = async (filters = caseFilters) => {
     try {
