@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { T } from "../constants/theme";
+import CaseValidationPanel from "./CaseValidationPanel";
 
 export default function CaseVisualEditor({
   caso,
@@ -46,6 +47,8 @@ export default function CaseVisualEditor({
       >
         Editor visual do caso
       </div>
+
+      <CaseValidationPanel caso={draft} />
 
       <Section title="Identificação do caso">
         <Field
