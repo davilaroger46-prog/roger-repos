@@ -23,6 +23,7 @@ export async function generateCase({ tema, nivel, regiao }) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...authHeaders(),
     },
     body: JSON.stringify({ tema, nivel, regiao }),
   });
@@ -47,7 +48,9 @@ export async function listCases(filters = {}) {
   if (filters.sort_by) params.append("sort_by", filters.sort_by);
   if (filters.sort_dir) params.append("sort_dir", filters.sort_dir);
 
-  const response = await fetch(`${API_URL}/cases/?${params.toString()}`);
+  const response = await fetch(`${API_URL}/cases/?${params.toString()}`, {
+    headers: authHeaders(),
+  });
 
   if (!response.ok) {
     throw new Error("Erro ao listar casos");
@@ -57,7 +60,9 @@ export async function listCases(filters = {}) {
 }
 
 export async function getCase(caseId) {
-  const response = await fetch(`${API_URL}/cases/${caseId}`);
+  const response = await fetch(`${API_URL}/cases/${caseId}`, {
+    headers: authHeaders(),
+  });
 
   if (!response.ok) {
     throw new Error("Erro ao carregar caso");
@@ -71,6 +76,7 @@ export async function updateCase(caseId, caseJson) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      ...authHeaders(),
     },
     body: JSON.stringify(caseJson),
   });
@@ -88,6 +94,7 @@ export async function autocorrectCase(caseJson) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...authHeaders(),
     },
     body: JSON.stringify(caseJson),
   });
@@ -101,7 +108,9 @@ export async function autocorrectCase(caseJson) {
 }
 
 export async function listCaseVersions(caseId) {
-  const response = await fetch(`${API_URL}/cases/${caseId}/versions`);
+  const response = await fetch(`${API_URL}/cases/${caseId}/versions`, {
+    headers: authHeaders(),
+  });
 
   if (!response.ok) {
     throw new Error("Erro ao listar versões");
@@ -111,7 +120,9 @@ export async function listCaseVersions(caseId) {
 }
 
 export async function getCaseVersion(caseId, versionId) {
-  const response = await fetch(`${API_URL}/cases/${caseId}/versions/${versionId}`);
+  const response = await fetch(`${API_URL}/cases/${caseId}/versions/${versionId}`, {
+    headers: authHeaders(),
+  });
 
   if (!response.ok) {
     throw new Error("Erro ao carregar versão");
@@ -125,6 +136,7 @@ export async function restoreCaseVersion(caseId, versionId) {
     `${API_URL}/cases/${caseId}/versions/${versionId}/restore`,
     {
       method: "POST",
+      headers: authHeaders(),
     }
   );
 
@@ -137,12 +149,27 @@ export async function restoreCaseVersion(caseId, versionId) {
 }
 
 export function downloadCasePdf(caseId) {
-  window.open(`${API_URL}/cases/${caseId}/pdf`, "_blank");
+  const token = getToken();
+  const url = `${API_URL}/cases/${caseId}/pdf`;
+
+  if (token) {
+    fetch(url, { headers: authHeaders() })
+      .then((res) => res.blob())
+      .then((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `orthostudy-${caseId}.pdf`;
+        a.click();
+      });
+  } else {
+    window.open(url, "_blank");
+  }
 }
 
 export async function deleteCase(caseId) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "DELETE",
+    headers: authHeaders(),
   });
 
   if (!response.ok) {
