@@ -62,18 +62,25 @@ export default function App() {
     setEditJson("");
   };
 
-  const handleUpdateCase = async () => {
-    if (!activeCaseId) return;
+  const handleSaveEdit = async () => {
     try {
+      if (!activeCaseId) {
+        setError("Este caso ainda não possui ID no banco.");
+        return;
+      }
+
       const parsed = JSON.parse(editJson);
-      const data = await updateCase(activeCaseId, parsed);
-      setCaso(data);
+
+      const updated = await updateCase(activeCaseId, parsed);
+
+      setCaso(updated);
       setEditing(false);
       setEditJson("");
-      const updated = await listCases();
-      setSavedCases(updated);
+
+      const list = await listCases();
+      setSavedCases(list);
     } catch (err) {
-      setError(err.message || "Erro ao salvar alterações.");
+      setError(err.message || "Erro ao salvar edição.");
     }
   };
 
@@ -209,7 +216,7 @@ export default function App() {
                 caso={caso}
                 editJson={editJson}
                 setEditJson={setEditJson}
-                onSave={handleUpdateCase}
+                onSave={handleSaveEdit}
                 onCancel={handleCancelEdit}
               />
             )}
