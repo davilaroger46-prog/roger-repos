@@ -107,6 +107,10 @@ export async function restoreCaseVersion(caseId, versionId) {
   return response.json();
 }
 
+export function downloadCasePdf(caseId) {
+  window.open(`${API_URL}/cases/${caseId}/pdf`, "_blank");
+}
+
 export async function deleteCase(caseId) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "DELETE",
