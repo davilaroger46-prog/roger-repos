@@ -652,6 +652,23 @@ export default function CaseVisualEditor({
         </button>
       </div>
 
+      {autoFixing && (
+        <div
+          style={{
+            background: "rgba(59,130,246,.07)",
+            border: "1px solid rgba(59,130,246,.25)",
+            borderRadius: 12,
+            padding: 12,
+            marginTop: 12,
+            color: T.blue,
+            fontSize: 12,
+            fontWeight: 700,
+          }}
+        >
+          🤖 A IA está completando campos obrigatórios e validando o caso...
+        </div>
+      )}
+
       {validationErrors.length > 0 && (
         <div
           style={{
