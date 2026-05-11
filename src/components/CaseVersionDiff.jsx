@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { T } from "../constants/theme";
 import { getByPath } from "../utils/objectPath";
 
-export default function CaseVersionDiff({ currentCase, oldCase }) {
+export default function CaseVersionDiff({ currentCase, oldCase, onRestoreField }) {
   if (!currentCase || !oldCase) return null;
 
   const rows = [
@@ -64,13 +64,34 @@ export default function CaseVersionDiff({ currentCase, oldCase }) {
           const changed = String(current ?? "") !== String(old ?? "");
 
           return (
-            <Fragment key={label}>
+            <Fragment key={path}>
               <LabelCell>{label}</LabelCell>
+
               <ValueCell changed={changed} multiline={multiline}>
                 {String(current ?? "—")}
               </ValueCell>
+
               <ValueCell changed={changed} multiline={multiline}>
-                {String(old ?? "—")}
+                <div>{String(old ?? "—")}</div>
+
+                {changed && (
+                  <button
+                    onClick={() => onRestoreField(path)}
+                    style={{
+                      marginTop: 8,
+                      padding: "6px 9px",
+                      borderRadius: 7,
+                      cursor: "pointer",
+                      background: `${T.green}12`,
+                      border: `1px solid ${T.green}35`,
+                      color: T.green,
+                      fontSize: 10,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Restaurar campo
+                  </button>
+                )}
               </ValueCell>
             </Fragment>
           );
