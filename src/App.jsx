@@ -73,9 +73,14 @@ export default function App() {
   const handleDeleteCase = async (caseId) => {
     try {
       await deleteCase(caseId);
-      await handleSave();
 
-      setCaso(null);
+      const updated = await listCases();
+      setSavedCases(updated);
+
+      if (activeCaseId === caseId) {
+        setCaso(null);
+        setActiveCaseId(null);
+      }
     } catch (err) {
       setError("Erro ao deletar caso.");
     }
