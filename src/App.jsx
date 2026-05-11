@@ -12,7 +12,6 @@ import {
   getCase,
   deleteCase,
 } from "./services/api";
-import { loadSavedCases, saveCases } from "./services/storage";
 
 export default function App() {
   const [tab, setTab] = useState("cases");
@@ -21,7 +20,16 @@ export default function App() {
   const [savedCases, setSavedCases] = useState([]);
 
   useEffect(() => {
-    setSavedCases(loadSavedCases());
+    async function loadCases() {
+      try {
+        const data = await listCases();
+        setSavedCases(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadCases();
   }, []);
 
   if (flashcardCase) {
