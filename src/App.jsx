@@ -6,6 +6,12 @@ import ProgressPage from "./pages/ProgressPage";
 import GeneratePage from "./pages/GeneratePage";
 import DecisionPage from "./pages/DecisionPage";
 import { TABS } from "./constants/prompt";
+import {
+  generateCase,
+  listCases,
+  getCase,
+  deleteCase,
+} from "./services/api";
 
 export default function App() {
   const [tab, setTab] = useState("cases");
