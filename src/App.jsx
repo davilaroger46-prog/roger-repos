@@ -11,6 +11,7 @@ import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
 import CaseActions from "./components/CaseActions";
 import CaseVisualEditor from "./components/CaseVisualEditor";
+import CaseVersionsPanel from "./components/CaseVersionsPanel";
 import {
   generateCase,
   listCases,
@@ -103,6 +104,20 @@ export default function App() {
       }
     } catch (err) {
       setError("Erro ao deletar caso.");
+    }
+  };
+
+  const handleCancelEdit = () => setEditing(false);
+
+  const handleRestore = async (snapshot) => {
+    if (!activeCaseId) return;
+    try {
+      const updated = await updateCase(activeCaseId, snapshot);
+      setCaso(updated);
+      const list = await listCases();
+      setSavedCases(list);
+    } catch (err) {
+      setError(err.message || "Erro ao restaurar versão.");
     }
   };
 
@@ -211,7 +226,17 @@ export default function App() {
                 }}
               />
             ) : (
-              <CasePreview caso={caso} />
+              <>
+                <CasePreview caso={caso} />
+                {activeCaseId && (
+                  <div style={{ marginTop: 24 }}>
+                    <CaseVersionsPanel
+                      caseId={activeCaseId}
+                      onRestore={handleRestore}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
