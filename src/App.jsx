@@ -13,6 +13,7 @@ import CaseActions from "./components/CaseActions";
 import CaseVisualEditor from "./components/CaseVisualEditor";
 import CaseVersionsPanel from "./components/CaseVersionsPanel";
 import CaseVersionDiff from "./components/CaseVersionDiff";
+import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
   listCases,
