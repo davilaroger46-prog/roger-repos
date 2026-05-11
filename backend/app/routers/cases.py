@@ -31,10 +31,13 @@ def list_cases(
     page_size: int = 20,
     sort_by: str = "created_at",
     sort_dir: str = "desc",
+    current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
 
-    query = db.query(ClinicalCaseModel)
+    query = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.user_id == current_user.id
+    )
 
     if q:
         query = query.filter(
@@ -121,7 +124,10 @@ def list_cases(
 
 
 @router.get("/{case_id}")
-def get_case(case_id: int):
+def get_case(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db = SessionLocal()
     try:
         case = _get_case_or_404(db, case_id)
@@ -131,7 +137,11 @@ def get_case(case_id: int):
 
 
 @router.put("/{case_id}")
-def update_case(case_id: int, payload: dict):
+def update_case(
+    case_id: int,
+    payload: dict,
+    current_user: UserModel = Depends(get_current_user),
+):
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
@@ -185,7 +195,10 @@ def update_case(case_id: int, payload: dict):
 
 
 @router.get("/{case_id}/versions")
-def list_case_versions(case_id: int):
+def list_case_versions(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db: Session = SessionLocal()
 
     versions = db.query(ClinicalCaseVersionModel).filter(
@@ -210,7 +223,11 @@ def list_case_versions(case_id: int):
 
 
 @router.get("/{case_id}/versions/{version_id}")
-def get_case_version(case_id: int, version_id: int):
+def get_case_version(
+    case_id: int,
+    version_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db: Session = SessionLocal()
 
     version = db.query(ClinicalCaseVersionModel).filter(
@@ -230,7 +247,11 @@ def get_case_version(case_id: int, version_id: int):
 
 
 @router.post("/{case_id}/versions/{version_id}/restore")
-def restore_case_version(case_id: int, version_id: int):
+def restore_case_version(
+    case_id: int,
+    version_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
@@ -290,7 +311,10 @@ def restore_case_version(case_id: int, version_id: int):
 
 
 @router.get("/{case_id}/pdf")
-def export_case_pdf(case_id: int):
+def export_case_pdf(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
@@ -320,7 +344,10 @@ def export_case_pdf(case_id: int):
 
 
 @router.delete("/{case_id}")
-def delete_case(case_id: int):
+def delete_case(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
     db = SessionLocal()
     try:
         case = _get_case_or_404(db, case_id)
