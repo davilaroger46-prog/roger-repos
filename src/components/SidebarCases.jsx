@@ -7,6 +7,7 @@ export default function SidebarCases({
   activeCaseId,
   onLoadCase,
   onDeleteCase,
+  onExportPdf,
 }) {
   const [search, setSearch] = useState("");
   const [nivel, setNivel] = useState("");
@@ -140,22 +141,44 @@ export default function SidebarCases({
               #{c.id}
             </div>
 
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onDeleteCase(c.id);
-              }}
-              style={{
-                background: "none",
-                border: "none",
-                color: T.muted,
-                cursor: "pointer",
-                fontSize: 16,
-                lineHeight: 1,
-              }}
-            >
-              ×
-            </button>
+            <div style={{ display: "flex", gap: 4 }}>
+              {onExportPdf && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onExportPdf(c.id);
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: T.muted,
+                    cursor: "pointer",
+                    fontSize: 13,
+                    lineHeight: 1,
+                  }}
+                  title="Exportar PDF"
+                >
+                  📄
+                </button>
+              )}
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteCase(c.id);
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: T.muted,
+                  cursor: "pointer",
+                  fontSize: 16,
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
+            </div>
           </div>
 
           <div
