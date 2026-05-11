@@ -143,6 +143,40 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Imagem">
+        <ListEditor
+          label="Achados no RX"
+          items={draft.imagem?.rx?.achados || []}
+          onChange={(v) => update("imagem.rx.achados", v)}
+        />
+
+        <SelectField
+          label="TC indicada?"
+          value={String(draft.imagem?.tc?.indicado)}
+          options={["true", "false"]}
+          onChange={(v) => update("imagem.tc.indicado", v === "true")}
+        />
+
+        <TextAreaField
+          label="Quando solicitar TC"
+          value={draft.imagem?.tc?.quando}
+          onChange={(v) => update("imagem.tc.quando", v)}
+        />
+
+        <SelectField
+          label="RM indicada?"
+          value={String(draft.imagem?.rm?.indicado)}
+          options={["true", "false"]}
+          onChange={(v) => update("imagem.rm.indicado", v === "true")}
+        />
+
+        <ListEditor
+          label="Achados na RM"
+          items={draft.imagem?.rm?.achados || []}
+          onChange={(v) => update("imagem.rm.achados", v)}
+        />
+      </Section>
+
       <Section title="Classificação AO/OTA">
         <Field
           label="Código AO/OTA"
