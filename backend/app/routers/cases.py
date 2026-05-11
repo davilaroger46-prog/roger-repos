@@ -1,5 +1,6 @@
-from typing import Optional
+from typing import Any, Optional
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
@@ -7,12 +8,15 @@ from app.models.case_model import ClinicalCaseModel
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
 
-def get_db() -> Session:
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+class UpdateCasePayload(BaseModel):
+    caso_json: dict[str, Any]
+
+
+def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
+    case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
+    if not case:
+        raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+    return case
 
 
 @router.get("/")
@@ -55,28 +59,24 @@ def list_cases(
 def get_case(case_id: int):
     db = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
-        if not case:
-            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        case = _get_case_or_404(db, case_id)
         return case.caso_json
     finally:
         db.close()
 
 
 @router.put("/{case_id}")
-def update_case(case_id: int, payload: dict):
+def update_case(case_id: int, payload: UpdateCasePayload):
     db = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
-        if not case:
-            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        case = _get_case_or_404(db, case_id)
 
-        caso_json = payload.get("caso_json", case.caso_json)
-        case.caso_json = caso_json
-        case.titulo    = caso_json.get("meta", {}).get("titulo", case.titulo)
-        case.regiao    = caso_json.get("meta", {}).get("regiao", case.regiao)
-        case.nivel     = caso_json.get("meta", {}).get("nivel", case.nivel)
-        case.ao_codigo = caso_json.get("classificacao", {}).get("ao_ota", {}).get("codigo", case.ao_codigo)
+        j = payload.caso_json
+        case.caso_json = j
+        case.titulo    = j.get("meta", {}).get("titulo", case.titulo)
+        case.regiao    = j.get("meta", {}).get("regiao", case.regiao)
+        case.nivel     = j.get("meta", {}).get("nivel", case.nivel)
+        case.ao_codigo = j.get("classificacao", {}).get("ao_ota", {}).get("codigo", case.ao_codigo)
 
         db.commit()
         db.refresh(case)
@@ -89,9 +89,7 @@ def update_case(case_id: int, payload: dict):
 def delete_case(case_id: int):
     db = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
-        if not case:
-            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        case = _get_case_or_404(db, case_id)
         db.delete(case)
         db.commit()
         return {"status": "deleted", "id": case_id}
@@ -103,9 +101,7 @@ def delete_case(case_id: int):
 def get_flashcards(case_id: int):
     db = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
-        if not case:
-            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        case = _get_case_or_404(db, case_id)
         return case.caso_json.get("flashcards", [])
     finally:
         db.close()
