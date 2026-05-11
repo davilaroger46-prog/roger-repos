@@ -2,6 +2,44 @@ import { useState } from "react";
 import { T } from "../constants/theme";
 import CaseValidationPanel from "./CaseValidationPanel";
 
+const getValidationErrors = (caseData) => {
+  const errors = [];
+
+  if ((caseData.flashcards?.length || 0) !== 8) {
+    errors.push("Flashcards precisam ser exatamente 8.");
+  }
+
+  if ((caseData.cirurgia?.passo_a_passo?.length || 0) !== 6) {
+    errors.push("Passos cirúrgicos precisam ser exatamente 6.");
+  }
+
+  if ((caseData.reabilitacao?.length || 0) !== 4) {
+    errors.push("Reabilitação precisa ter exatamente 4 fases.");
+  }
+
+  if ((caseData.tratamento?.cirurgico?.tecnicas?.length || 0) !== 3) {
+    errors.push("Técnicas cirúrgicas precisam ser exatamente 3.");
+  }
+
+  if ((caseData.decisao_clinica?.regras?.length || 0) < 4) {
+    errors.push("Decisão clínica precisa ter pelo menos 4 regras.");
+  }
+
+  if ((caseData.exame_fisico?.inspecao?.length || 0) < 4) {
+    errors.push("Inspeção precisa ter pelo menos 4 itens.");
+  }
+
+  if ((caseData.exame_fisico?.palpacao?.length || 0) < 4) {
+    errors.push("Palpação precisa ter pelo menos 4 itens.");
+  }
+
+  if ((caseData.exame_fisico?.red_flags?.length || 0) < 3) {
+    errors.push("Red flags precisam ter pelo menos 3 itens.");
+  }
+
+  return errors;
+};
+
 export default function CaseVisualEditor({
   caso,
   onCancel,
@@ -10,6 +48,9 @@ export default function CaseVisualEditor({
   const [draft, setDraft] = useState(() =>
     JSON.parse(JSON.stringify(caso))
   );
+
+  const validationErrors = getValidationErrors(draft);
+  const canSave = validationErrors.length === 0;
 
   const update = (path, value) => {
     setDraft((prev) => {
@@ -567,7 +608,11 @@ export default function CaseVisualEditor({
       </Section>
 
       <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
-        <button onClick={() => onSave(draft)} style={buttonStyle(T.green)}>
+        <button
+          onClick={() => onSave(draft)}
+          disabled={!canSave}
+          style={buttonStyle(canSave ? T.green : T.muted)}
+        >
           💾 Salvar alterações
         </button>
 
