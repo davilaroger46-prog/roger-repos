@@ -1,6 +1,7 @@
 import json
 from anthropic import Anthropic
 from app.core.config import ANTHROPIC_API_KEY
+from app.schemas.case import ClinicalCase
 
 client = Anthropic(api_key=ANTHROPIC_API_KEY)
 
@@ -66,27 +67,8 @@ def extract_json(text: str) -> dict:
 
 
 def validate_case_schema(case: dict) -> dict:
-    required = [
-        "meta", "paciente", "historia", "classificacao", "exame_fisico",
-        "imagem", "diagnostico", "decisao_clinica", "tratamento", "cirurgia",
-        "pos_operatorio", "reabilitacao", "complicacoes", "evidencia",
-        "flashcards", "output_app",
-    ]
-
-    missing = [field for field in required if field not in case]
-    if missing:
-        raise ValueError(f"JSON incompleto. Campos ausentes: {missing}")
-
-    if len(case.get("flashcards", [])) != 8:
-        raise ValueError("O caso deve conter exatamente 8 flashcards.")
-
-    if len(case.get("cirurgia", {}).get("passo_a_passo", [])) != 6:
-        raise ValueError("O caso deve conter exatamente 6 passos cirúrgicos.")
-
-    if len(case.get("reabilitacao", [])) != 4:
-        raise ValueError("O caso deve conter exatamente 4 fases de reabilitação.")
-
-    return case
+    validated = ClinicalCase.model_validate(case)
+    return validated.model_dump(by_alias=True)
 
 
 def generate_orthopedic_case(tema: str, nivel: str, regiao: str | None = None) -> dict:
