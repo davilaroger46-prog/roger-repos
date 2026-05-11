@@ -2,8 +2,25 @@ import { Fragment } from "react";
 import { T } from "../constants/theme";
 import { getByPath } from "../utils/objectPath";
 
-export default function CaseVersionDiff({ currentCase, oldCase, onRestoreField }) {
+export default function CaseVersionDiff({ currentCase, oldCase, onRestoreField, onRestoreBlock }) {
   if (!currentCase || !oldCase) return null;
+
+  const blocks = [
+    ["Identificação", "meta"],
+    ["Paciente", "paciente"],
+    ["História", "historia"],
+    ["AO/OTA", "classificacao.ao_ota"],
+    ["Diagnóstico", "diagnostico"],
+    ["Decisão clínica", "decisao_clinica"],
+    ["Tratamento", "tratamento"],
+    ["Cirurgia", "cirurgia"],
+    ["Pós-operatório", "pos_operatorio"],
+    ["Reabilitação", "reabilitacao"],
+    ["Complicações", "complicacoes"],
+    ["Evidência", "evidencia"],
+    ["Flashcards", "flashcards"],
+    ["Output app", "output_app"],
+  ];
 
   const rows = [
     ["Título", "meta.titulo"],
@@ -45,6 +62,41 @@ export default function CaseVersionDiff({ currentCase, oldCase, onRestoreField }
         }}
       >
         Comparação de versões · {changedCount} alteração(ões)
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          gap: 8,
+          flexWrap: "wrap",
+          marginBottom: 16,
+        }}
+      >
+        {blocks.map(([label, path]) => {
+          const current = getByPath(currentCase, path);
+          const old     = getByPath(oldCase, path);
+          const changed = JSON.stringify(current) !== JSON.stringify(old);
+
+          return (
+            <button
+              key={path}
+              disabled={!changed}
+              onClick={() => onRestoreBlock(path)}
+              style={{
+                padding: "7px 10px",
+                borderRadius: 8,
+                cursor: changed ? "pointer" : "not-allowed",
+                background: changed ? `${T.green}12` : T.s2,
+                border: `1px solid ${changed ? T.green + "35" : T.border}`,
+                color: changed ? T.green : T.muted,
+                fontSize: 10,
+                fontWeight: 800,
+              }}
+            >
+              Restaurar {label}
+            </button>
+          );
+        })}
       </div>
 
       <div

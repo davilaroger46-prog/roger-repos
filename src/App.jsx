@@ -244,6 +244,26 @@ export default function App() {
                         setError(err.message || "Erro ao restaurar campo.");
                       }
                     }}
+                    onRestoreBlock={async (path) => {
+                      try {
+                        const oldBlock = getByPath(versionPreview, path);
+                        const merged = setByPath(caso, path, oldBlock);
+
+                        if (!activeCaseId) {
+                          setError("Caso sem ID ativo.");
+                          return;
+                        }
+
+                        const updated = await updateCase(activeCaseId, merged);
+
+                        setCaso(updated);
+
+                        const list = await listCases();
+                        setSavedCases(list);
+                      } catch (err) {
+                        setError(err.message || "Erro ao restaurar bloco.");
+                      }
+                    }}
                   />
                 )}
                 {activeCaseId && (
