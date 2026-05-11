@@ -161,6 +161,66 @@ def get_case_version(case_id: int, version_id: int):
     return version.caso_json
 
 
+@router.post("/{case_id}/versions/{version_id}/restore")
+def restore_case_version(case_id: int, version_id: int):
+    db: Session = SessionLocal()
+
+    case_db = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id
+    ).first()
+
+    if not case_db:
+        db.close()
+        raise HTTPException(status_code=404, detail="Caso não encontrado")
+
+    version = db.query(ClinicalCaseVersionModel).filter(
+        ClinicalCaseVersionModel.case_id == case_id,
+        ClinicalCaseVersionModel.id == version_id,
+    ).first()
+
+    if not version:
+        db.close()
+        raise HTTPException(status_code=404, detail="Versão não encontrada")
+
+    try:
+        backup = ClinicalCaseVersionModel(
+            case_id=case_db.id,
+            action="before_restore",
+            caso_json=case_db.caso_json,
+        )
+
+        db.add(backup)
+
+        restored = ClinicalCase.model_validate(version.caso_json)
+
+        case_json = restored.model_dump(
+            by_alias=True,
+            exclude_none=True,
+            mode="json",
+        )
+
+        case_db.titulo = case_json["meta"]["titulo"]
+        case_db.regiao = case_json["meta"]["regiao"]
+        case_db.nivel = case_json["meta"]["nivel"]
+        case_db.ao_codigo = case_json["classificacao"]["ao_ota"]["codigo"]
+        case_db.caso_json = case_json
+
+        db.commit()
+        db.refresh(case_db)
+
+        return case_db.caso_json
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(
+            status_code=422,
+            detail=f"Erro ao restaurar versão: {str(e)}"
+        )
+
+    finally:
+        db.close()
+
+
 @router.delete("/{case_id}")
 def delete_case(case_id: int):
     db = SessionLocal()
