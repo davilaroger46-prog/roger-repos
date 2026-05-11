@@ -17,8 +17,17 @@ export async function generateCase({ tema, nivel, regiao }) {
   return response.json();
 }
 
-export async function listCases() {
-  const response = await fetch(`${API_URL}/cases/`);
+export async function listCases(filters = {}) {
+  const params = new URLSearchParams();
+
+  if (filters.q) params.append("q", filters.q);
+  if (filters.regiao) params.append("regiao", filters.regiao);
+  if (filters.nivel) params.append("nivel", filters.nivel);
+  if (filters.conduta) params.append("conduta", filters.conduta);
+
+  const url = `${API_URL}/cases/${params.toString() ? `?${params.toString()}` : ""}`;
+
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Erro ao listar casos");
