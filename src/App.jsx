@@ -20,6 +20,8 @@ export default function App() {
   const [savedCases, setSavedCases] = useState([]);
   const [caso, setCaso] = useState(null);
   const [error, setError] = useState(null);
+  const [stage, setStage] = useState("");
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     async function loadCases() {
@@ -33,6 +35,28 @@ export default function App() {
 
     loadCases();
   }, []);
+
+  const stopPct = () => setGenerating(false);
+
+  const handleGenerate = async ({ tema, nivel, regiao }) => {
+    setGenerating(true);
+    setStage("Gerando caso com IA...");
+    setError(null);
+    try {
+      const data = await generateCase({ tema, nivel, regiao });
+
+      stopPct();
+      setStage("Caso gerado com sucesso.");
+      setCaso(data);
+
+      const updated = await listCases();
+      setSavedCases(updated);
+    } catch (err) {
+      stopPct();
+      setStage("");
+      setError(err.message || "Erro ao gerar caso.");
+    }
+  };
 
   const handleLoadCase = async (caseId) => {
     try {
