@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { updateProgress } from "../services/api";
 
 export default function FlashcardPage({ caso, onBack }) {
   const flashcards = caso.flashcards || [];
@@ -43,11 +42,6 @@ export default function FlashcardPage({ caso, onBack }) {
     if (acertou) setCorretos(novosCorretos);
 
     if (index + 1 >= flashcards.length) {
-      updateProgress({
-        caso_id: caso.id || caso.meta?.id,
-        flashcards_vistos: novosVistos,
-        flashcards_corretos: novosCorretos,
-      }).catch(() => {});
       setDone(true);
     } else {
       setIndex(index + 1);

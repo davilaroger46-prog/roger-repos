@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getCases } from "../services/api";
+import { listCases } from "../services/api";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorBanner from "../components/ErrorBanner";
 import Tag from "../components/Tag";
@@ -14,17 +14,13 @@ export default function CaseListPage({ onSelect }) {
   const [nivel, setNivel]   = useState("");
 
   const fetchCases = useCallback(() => {
-    const params = {};
-    if (q)      params.q      = q;
-    if (regiao) params.regiao = regiao;
-    if (nivel)  params.nivel  = nivel;
     setLoading(true);
     setError(null);
-    getCases(params)
+    listCases()
       .then(setCases)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [q, regiao, nivel]);
+  }, []);
 
   useEffect(() => { fetchCases(); }, [fetchCases]);
 
@@ -63,6 +59,43 @@ export default function CaseListPage({ onSelect }) {
       {loading && <LoadingSpinner message="Buscando casos..." />}
       {error   && <ErrorBanner message={error} onRetry={fetchCases} />}
 
+      {(() => {
+        let filtered = cases;
+        if (regiao) filtered = filtered.filter(c => c.regiao?.toLowerCase() === regiao.toLowerCase());
+        if (nivel)  filtered = filtered.filter(c => c.nivel === nivel);
+        if (q)      filtered = filtered.filter(c =>
+          c.titulo?.toLowerCase().includes(q.toLowerCase()) ||
+          c.output_app?.resumo?.toLowerCase().includes(q.toLowerCase()) ||
+          c.meta?.tags?.some(t => t.toLowerCase().includes(q.toLowerCase()))
+        );
+        return filtered.map((c) => (
+          <div
+            key={c.id}
+            className="card"
+            onClick={() => onSelect(c)}
+            style={{ cursor: "pointer" }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <Tag nivel={c.nivel} />
+              <span style={{ fontSize: 11, color: "var(--muted)" }}>{c.regiao}</span>
+            </div>
+            <div style={{ fontWeight: 800, marginTop: 8, fontSize: 15 }}>{c.titulo}</div>
+            {c.output_app?.resumo && (
+              <div style={{ marginTop: 6, fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>
+                {c.output_app.resumo.substring(0, 120)}...
+              </div>
+            )}
+            {c.meta?.tags?.length > 0 && (
+              <div style={{ marginTop: 8, display: "flex", gap: 4, flexWrap: "wrap" }}>
+                {c.meta.tags.slice(0, 3).map((tag) => (
+                  <Tag key={tag} label={tag} className="badge-blue" />
+                ))}
+              </div>
+            )}
+          </div>
+        ));
+      })()}
+
       {!loading && cases.length === 0 && (
         <div className="card" style={{ textAlign: "center", color: "var(--muted)" }}>
           <p>Nenhum caso encontrado.</p>
@@ -70,32 +103,6 @@ export default function CaseListPage({ onSelect }) {
         </div>
       )}
 
-      {cases.map((c) => (
-        <div
-          key={c.id}
-          className="card"
-          onClick={() => onSelect(c)}
-          style={{ cursor: "pointer" }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Tag nivel={c.nivel} />
-            <span style={{ fontSize: 11, color: "var(--muted)" }}>{c.regiao}</span>
-          </div>
-          <div style={{ fontWeight: 800, marginTop: 8, fontSize: 15 }}>{c.titulo}</div>
-          {c.output_app?.resumo && (
-            <div style={{ marginTop: 6, fontSize: 13, color: "var(--muted)", lineHeight: 1.5 }}>
-              {c.output_app.resumo.substring(0, 120)}...
-            </div>
-          )}
-          {c.meta?.tags?.length > 0 && (
-            <div style={{ marginTop: 8, display: "flex", gap: 4, flexWrap: "wrap" }}>
-              {c.meta.tags.slice(0, 3).map((tag) => (
-                <Tag key={tag} label={tag} className="badge-blue" />
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
     </>
   );
 }

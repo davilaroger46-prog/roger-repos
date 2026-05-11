@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { runAoDecision } from "../services/api";
 import ClinicalDecisionPanel from "../components/ClinicalDecisionPanel";
 
 const SEGMENTOS = [
@@ -57,8 +56,7 @@ export default function DecisionPage() {
       codigo_ao: `${form.segmento}-${form.tipo}`,
     };
     try {
-      const res = await runAoDecision(payload);
-      setResult(res);
+      throw new Error("Motor AO/OTA temporariamente indisponível.");
     } catch (e) {
       setError(e.message);
     } finally {
