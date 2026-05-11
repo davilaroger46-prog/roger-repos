@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
@@ -26,22 +27,27 @@ def list_cases(
     conduta: str | None = None,
     page: int = 1,
     page_size: int = 20,
-    sort_by: str = "id",
+    sort_by: str = "created_at",
     sort_dir: str = "desc",
 ):
     db: Session = SessionLocal()
 
     query = db.query(ClinicalCaseModel)
 
+    if q:
+        query = query.filter(
+            or_(
+                ClinicalCaseModel.titulo.ilike(f"%{q}%"),
+                ClinicalCaseModel.regiao.ilike(f"%{q}%"),
+                ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
+            )
+        )
+
     if regiao:
         query = query.filter(ClinicalCaseModel.regiao == regiao)
 
     if nivel:
         query = query.filter(ClinicalCaseModel.nivel == nivel)
-
-    total = query.count()
-
-    offset = (page - 1) * page_size
 
     sort_map = {
         "id": ClinicalCaseModel.id,
@@ -53,12 +59,15 @@ def list_cases(
         "updated_at": ClinicalCaseModel.updated_at,
     }
 
-    sort_column = sort_map.get(sort_by, ClinicalCaseModel.id)
+    sort_column = sort_map.get(sort_by, ClinicalCaseModel.created_at)
 
     if sort_dir == "asc":
         query = query.order_by(sort_column.asc())
     else:
         query = query.order_by(sort_column.desc())
+
+    total = query.count()
+    offset = (page - 1) * page_size
 
     cases = query.offset(offset).limit(page_size).all()
 
@@ -94,8 +103,8 @@ def list_cases(
             "ao_codigo": case.ao_codigo,
             "conduta": case_conduta,
             "diagnostico": diagnostico,
-            "created_at": case.created_at.isoformat() if case.created_at else None,
-            "updated_at": case.updated_at.isoformat() if case.updated_at else None,
+            "created_at": case.created_at,
+            "updated_at": case.updated_at,
         })
 
     db.close()
