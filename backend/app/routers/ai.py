@@ -41,3 +41,16 @@ def generate_case(payload: GenerateCaseInput):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/autocorrect-case")
+def autocorrect_case(payload: dict):
+    try:
+        corrected = autocorrect_orthopedic_case(payload)
+        return corrected
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=422,
+            detail=str(e)
+        )
