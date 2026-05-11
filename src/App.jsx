@@ -49,7 +49,9 @@ export default function App() {
   const refreshCases = async (filters = caseFilters) => {
     try {
       const data = await listCases(filters);
-      setSavedCases(data);
+      setSavedCases(data.items);
+      setCaseTotal(data.total);
+      setCasePages(data.pages);
     } catch (err) {
       setError("Erro ao carregar casos.");
     }
@@ -165,9 +167,17 @@ export default function App() {
         onLoadCase={handleLoadCase}
         onDeleteCase={handleDeleteCase}
         onExportPdf={(caseId) => downloadCasePdf(caseId)}
+        page={casePage}
+        pages={casePages}
+        total={caseTotal}
+        onPageChange={(page) => {
+          setCasePage(page);
+          refreshCases({ ...caseFilters, page });
+        }}
         onFilterChange={(filters) => {
           setCaseFilters(filters);
-          refreshCases(filters);
+          setCasePage(1);
+          refreshCases({ ...filters, page: 1 });
         }}
       />
 
