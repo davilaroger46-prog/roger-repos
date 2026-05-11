@@ -430,6 +430,55 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Reabilitação">
+        <ObjectListEditor
+          label="Fases de reabilitação"
+          items={draft.reabilitacao || []}
+          onChange={(v) => update("reabilitacao", v)}
+          addLabel="+ Adicionar fase"
+          createItem={() => ({
+            fase: "",
+            periodo: "",
+            objetivo: "",
+            exercicios: [],
+            restricoes: [],
+          })}
+          renderItem={(f, index, updateItem) => (
+            <>
+              <Field
+                label="Fase"
+                value={f.fase}
+                onChange={(v) => updateItem(index, { fase: v })}
+              />
+
+              <Field
+                label="Período"
+                value={f.periodo}
+                onChange={(v) => updateItem(index, { periodo: v })}
+              />
+
+              <TextAreaField
+                label="Objetivo"
+                value={f.objetivo}
+                onChange={(v) => updateItem(index, { objetivo: v })}
+              />
+
+              <ListEditor
+                label="Exercícios"
+                items={f.exercicios || []}
+                onChange={(v) => updateItem(index, { exercicios: v })}
+              />
+
+              <ListEditor
+                label="Restrições"
+                items={f.restricoes || []}
+                onChange={(v) => updateItem(index, { restricoes: v })}
+              />
+            </>
+          )}
+        />
+      </Section>
+
       <Section title="Complicações">
         <ListEditor
           label="Complicações precoces"
