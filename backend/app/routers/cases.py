@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import func, cast, String, or_
+from sqlalchemy import or_
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
@@ -31,18 +31,13 @@ def list_cases(
     query = db.query(ClinicalCaseModel)
 
     if q:
-        tsquery = func.plainto_tsquery("portuguese", q)
-        tsvector = func.to_tsvector(
-            "portuguese",
-            func.concat_ws(
-                " ",
-                ClinicalCaseModel.titulo,
-                ClinicalCaseModel.regiao,
-                ClinicalCaseModel.ao_codigo,
-                cast(ClinicalCaseModel.nivel, String),
-            ),
+        query = query.filter(
+            or_(
+                ClinicalCaseModel.titulo.ilike(f"%{q}%"),
+                ClinicalCaseModel.regiao.ilike(f"%{q}%"),
+                ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
+            )
         )
-        query = query.filter(tsvector.op("@@")(tsquery))
 
     if regiao:
         query = query.filter(
