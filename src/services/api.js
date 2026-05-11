@@ -91,6 +91,22 @@ export async function getCaseVersion(caseId, versionId) {
   return response.json();
 }
 
+export async function restoreCaseVersion(caseId, versionId) {
+  const response = await fetch(
+    `${API_URL}/cases/${caseId}/versions/${versionId}/restore`,
+    {
+      method: "POST",
+    }
+  );
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => null);
+    throw new Error(err?.detail || "Erro ao restaurar versão");
+  }
+
+  return response.json();
+}
+
 export async function deleteCase(caseId) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "DELETE",
