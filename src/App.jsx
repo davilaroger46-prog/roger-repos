@@ -35,6 +35,7 @@ export default function App() {
   const [regiao, setRegiao] = useState("");
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
+  const [versionPreview, setVersionPreview] = useState(null);
 
   useEffect(() => {
     async function loadCases() {
