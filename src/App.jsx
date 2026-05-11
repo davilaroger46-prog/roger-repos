@@ -229,11 +229,6 @@ export default function App() {
                         const oldValue = getByPath(versionPreview, path);
                         const merged = setByPath(caso, path, oldValue);
 
-                        if (!activeCaseId) {
-                          setError("Caso sem ID ativo.");
-                          return;
-                        }
-
                         const updated = await updateCase(activeCaseId, merged);
 
                         setCaso(updated);
@@ -246,13 +241,8 @@ export default function App() {
                     }}
                     onRestoreBlock={async (path) => {
                       try {
-                        const oldBlock = getByPath(versionPreview, path);
-                        const merged = setByPath(caso, path, oldBlock);
-
-                        if (!activeCaseId) {
-                          setError("Caso sem ID ativo.");
-                          return;
-                        }
+                        const oldValue = getByPath(versionPreview, path);
+                        const merged = setByPath(caso, path, oldValue);
 
                         const updated = await updateCase(activeCaseId, merged);
 
