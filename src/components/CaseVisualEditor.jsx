@@ -49,6 +49,7 @@ export default function CaseVisualEditor({
   const [draft, setDraft] = useState(() =>
     JSON.parse(JSON.stringify(caso))
   );
+  const [autoFixing, setAutoFixing] = useState(false);
 
   const validationErrors = getValidationErrors(draft);
   const canSave = validationErrors.length === 0;
@@ -627,12 +628,22 @@ export default function CaseVisualEditor({
         {onAutoCorrect && (
           <button
             onClick={async () => {
-              const corrected = await onAutoCorrect(draft);
-              setDraft(corrected);
+              setAutoFixing(true);
+              try {
+                const corrected = await onAutoCorrect(draft);
+                setDraft(corrected);
+              } finally {
+                setAutoFixing(false);
+              }
             }}
-            style={buttonStyle(T.blue)}
+            disabled={autoFixing}
+            style={{
+              ...buttonStyle(T.blue),
+              opacity: autoFixing ? 0.6 : 1,
+              cursor: autoFixing ? "not-allowed" : "pointer",
+            }}
           >
-            🤖 Autocorrigir com IA
+            {autoFixing ? "Corrigindo…" : "🤖 Autocorrigir com IA"}
           </button>
         )}
 
