@@ -63,6 +63,28 @@ def get_case(case_id: int):
         db.close()
 
 
+@router.put("/{case_id}")
+def update_case(case_id: int, payload: dict):
+    db = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
+        if not case:
+            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+
+        caso_json = payload.get("caso_json", case.caso_json)
+        case.caso_json = caso_json
+        case.titulo    = caso_json.get("meta", {}).get("titulo", case.titulo)
+        case.regiao    = caso_json.get("meta", {}).get("regiao", case.regiao)
+        case.nivel     = caso_json.get("meta", {}).get("nivel", case.nivel)
+        case.ao_codigo = caso_json.get("classificacao", {}).get("ao_ota", {}).get("codigo", case.ao_codigo)
+
+        db.commit()
+        db.refresh(case)
+        return case.caso_json
+    finally:
+        db.close()
+
+
 @router.delete("/{case_id}")
 def delete_case(case_id: int):
     db = SessionLocal()

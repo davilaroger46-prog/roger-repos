@@ -10,11 +10,13 @@ import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
 import CaseActions from "./components/CaseActions";
+import CaseEditPanel from "./components/CaseEditPanel";
 import {
   generateCase,
   listCases,
   getCase,
   deleteCase,
+  updateCase,
 } from "./services/api";
 
 export default function App() {
@@ -30,6 +32,8 @@ export default function App() {
   const [tema, setTema] = useState("");
   const [regiao, setRegiao] = useState("");
   const [pct, setPct] = useState(0);
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     async function loadCases() {
@@ -45,6 +49,22 @@ export default function App() {
   }, []);
 
   const stopPct = () => setGenerating(false);
+
+  const handleUpdateCase = async (updatedJson) => {
+    if (!activeCaseId) return;
+    setSaving(true);
+    try {
+      const data = await updateCase(activeCaseId, updatedJson);
+      setCaso(data);
+      setEditing(false);
+      const updated = await listCases();
+      setSavedCases(updated);
+    } catch (err) {
+      setError("Erro ao salvar alterações.");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleNewCase = () => {
     setCaso(null);
@@ -170,7 +190,17 @@ export default function App() {
             <CaseActions
               caso={caso}
               onNewCase={handleNewCase}
+              onEdit={() => setEditing((v) => !v)}
+              editing={editing}
             />
+            {editing && (
+              <CaseEditPanel
+                caso={caso}
+                saving={saving}
+                onSave={handleUpdateCase}
+                onCancel={() => setEditing(false)}
+              />
+            )}
             <CasePreview caso={caso} />
           </div>
         )}
