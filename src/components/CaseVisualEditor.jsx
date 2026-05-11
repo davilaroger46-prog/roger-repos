@@ -534,6 +534,86 @@ function ListEditor({ label, items = [], onChange, placeholder = "Novo item" }) 
   );
 }
 
+function ObjectListEditor({
+  label,
+  items = [],
+  onChange,
+  createItem,
+  renderItem,
+  addLabel = "+ Adicionar",
+}) {
+  const updateItem = (index, patch) => {
+    const next = [...items];
+    next[index] = {
+      ...next[index],
+      ...patch,
+    };
+    onChange(next);
+  };
+
+  const removeItem = (index) => {
+    onChange(items.filter((_, i) => i !== index));
+  };
+
+  const addItem = () => {
+    onChange([...(items || []), createItem()]);
+  };
+
+  return (
+    <div style={{ gridColumn: "1 / -1" }}>
+      <div style={labelText}>{label}</div>
+
+      <div style={{ display: "grid", gap: 12, marginTop: 8 }}>
+        {items?.map((item, index) => (
+          <div
+            key={index}
+            style={{
+              background: T.s3,
+              border: `1px solid ${T.border}`,
+              borderRadius: 12,
+              padding: 12,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: 10,
+              }}
+            >
+              <strong style={{ fontSize: 12, color: T.text }}>
+                Item {index + 1}
+              </strong>
+
+              <button
+                type="button"
+                onClick={() => removeItem(index)}
+                style={smallButton(T.red)}
+              >
+                Remover
+              </button>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 10,
+              }}
+            >
+              {renderItem(item, index, updateItem)}
+            </div>
+          </div>
+        ))}
+
+        <button type="button" onClick={addItem} style={smallButton(T.blue)}>
+          {addLabel}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function smallButton(color) {
   return {
     padding: "8px 11px",
