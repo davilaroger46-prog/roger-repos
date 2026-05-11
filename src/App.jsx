@@ -9,6 +9,7 @@ import { TABS } from "./constants/prompt";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
+import CaseActions from "./components/CaseActions";
 import {
   generateCase,
   listCases,
@@ -153,6 +154,12 @@ export default function App() {
 
         {caso && (
           <div style={{ marginTop: 20 }}>
+            <CaseActions
+              caso={caso}
+              onFlashcards={(c) => setFlashcardCase(c)}
+              onDetail={(c) => setSelectedCase(c)}
+              onDelete={handleDeleteCase}
+            />
             <CasePreview caso={caso} />
           </div>
         )}
