@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, JSON, DateTime
+from sqlalchemy import Column, Integer, String, JSON, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from app.db.database import Base
 
@@ -12,6 +12,8 @@ class ClinicalCaseModel(Base):
     regiao = Column(String)
     nivel = Column(String)
     ao_codigo = Column(String)
+
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
 
     caso_json = Column(JSON, nullable=False)
 
