@@ -76,7 +76,7 @@ export default function SidebarCases({
         style={inputStyle}
       />
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 6, marginBottom: 12 }}>
         <select value={nivel} onChange={(e) => setNivel(e.target.value)} style={selectStyle}>
           <option value="">Nível</option>
           <option value="basico">Básico</option>
@@ -91,6 +91,13 @@ export default function SidebarCases({
               {r}
             </option>
           ))}
+        </select>
+
+        <select value={conduta} onChange={(e) => setConduta(e.target.value)} style={selectStyle}>
+          <option value="">Conduta</option>
+          <option value="conservador">Conservador</option>
+          <option value="cirurgico">Cirúrgico</option>
+          <option value="urgente">Urgente</option>
         </select>
       </div>
 
