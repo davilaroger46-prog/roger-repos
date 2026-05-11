@@ -13,9 +13,21 @@ from pathlib import Path
 
 _PROMPT_PATH = Path(__file__).parent.parent.parent.parent / "docs" / "prompt-mestre.md"
 
-_SYSTEM_PROMPT = """Você é um sistema especializado em geração de casos clínicos estruturados para a plataforma OrthoStudy, voltada a médicos e residentes de ortopedia e traumatologia.
-
-Ao receber um tema ortopédico, retorne EXCLUSIVAMENTE um JSON válido e completo seguindo o schema v2.0 do OrthoStudy. Não escreva texto fora do JSON. Não use markdown, não use blocos de código. Retorne apenas o JSON puro. O primeiro caractere deve ser `{` e o último `}`."""
+_SYSTEM_BLOCKS = [
+    {
+        "type": "text",
+        "text": (
+            "Você é um sistema especializado em geração de casos clínicos estruturados "
+            "para a plataforma OrthoStudy, voltada a médicos e residentes de ortopedia "
+            "e traumatologia.\n\n"
+            "Ao receber um tema ortopédico, retorne EXCLUSIVAMENTE um JSON válido e completo "
+            "seguindo o schema v2.0 do OrthoStudy. Não escreva texto fora do JSON. Não use "
+            "markdown, não use blocos de código. Retorne apenas o JSON puro. O primeiro "
+            "caractere deve ser `{` e o último `}`."
+        ),
+        "cache_control": {"type": "ephemeral"},
+    }
+]
 
 
 def _call_claude(user_message: str) -> str:
@@ -24,7 +36,7 @@ def _call_claude(user_message: str) -> str:
         model="claude-sonnet-4-6",
         max_tokens=6000,
         temperature=0.4,
-        system=_SYSTEM_PROMPT,
+        system=_SYSTEM_BLOCKS,
         messages=[{"role": "user", "content": user_message}],
     )
     return message.content[0].text.strip()
