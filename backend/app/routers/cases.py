@@ -116,6 +116,31 @@ def update_case(case_id: int, payload: dict):
         db.close()
 
 
+@router.get("/{case_id}/versions")
+def list_case_versions(case_id: int):
+    db: Session = SessionLocal()
+
+    versions = db.query(ClinicalCaseVersionModel).filter(
+        ClinicalCaseVersionModel.case_id == case_id
+    ).order_by(
+        ClinicalCaseVersionModel.id.desc()
+    ).all()
+
+    result = [
+        {
+            "id": v.id,
+            "case_id": v.case_id,
+            "action": v.action,
+            "created_at": v.created_at,
+        }
+        for v in versions
+    ]
+
+    db.close()
+
+    return result
+
+
 @router.delete("/{case_id}")
 def delete_case(case_id: int):
     db = SessionLocal()
