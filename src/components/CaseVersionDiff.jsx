@@ -1,26 +1,28 @@
 import { Fragment } from "react";
 import { T } from "../constants/theme";
+import { getByPath } from "../utils/objectPath";
 
 export default function CaseVersionDiff({ currentCase, oldCase }) {
   if (!currentCase || !oldCase) return null;
 
   const rows = [
-    ["Título", currentCase.meta?.titulo, oldCase.meta?.titulo],
-    ["Região", currentCase.meta?.regiao, oldCase.meta?.regiao],
-    ["Nível", currentCase.meta?.nivel, oldCase.meta?.nivel],
-    ["AO/OTA", currentCase.classificacao?.ao_ota?.codigo, oldCase.classificacao?.ao_ota?.codigo],
-    ["Gravidade", currentCase.classificacao?.ao_ota?.gravidade, oldCase.classificacao?.ao_ota?.gravidade],
-    ["Diagnóstico", currentCase.diagnostico?.principal, oldCase.diagnostico?.principal],
-    ["Conduta", currentCase.decisao_clinica?.output?.conduta, oldCase.decisao_clinica?.output?.conduta],
-    ["Urgência", currentCase.decisao_clinica?.output?.nivel_urgencia, oldCase.decisao_clinica?.output?.nivel_urgencia],
-    ["Técnica", currentCase.decisao_clinica?.output?.tecnica_preferida, oldCase.decisao_clinica?.output?.tecnica_preferida],
-    ["Flashcards", currentCase.flashcards?.length, oldCase.flashcards?.length],
-    ["Passos cirúrgicos", currentCase.cirurgia?.passo_a_passo?.length, oldCase.cirurgia?.passo_a_passo?.length],
-    ["Fases reabilitação", currentCase.reabilitacao?.length, oldCase.reabilitacao?.length],
-    ["Resumo", currentCase.output_app?.resumo, oldCase.output_app?.resumo, true],
+    ["Título", "meta.titulo"],
+    ["Região", "meta.regiao"],
+    ["Nível", "meta.nivel"],
+    ["AO/OTA", "classificacao.ao_ota.codigo"],
+    ["Gravidade", "classificacao.ao_ota.gravidade"],
+    ["Diagnóstico", "diagnostico.principal"],
+    ["Conduta", "decisao_clinica.output.conduta"],
+    ["Urgência", "decisao_clinica.output.nivel_urgencia"],
+    ["Técnica", "decisao_clinica.output.tecnica_preferida"],
+    ["Resumo", "output_app.resumo", true],
   ];
 
-  const changedCount = rows.filter((r) => String(r[1] ?? "") !== String(r[2] ?? "")).length;
+  const changedCount = rows.filter(
+    ([, path]) =>
+      String(getByPath(currentCase, path) ?? "") !==
+      String(getByPath(oldCase, path) ?? "")
+  ).length;
 
   return (
     <div
@@ -56,7 +58,9 @@ export default function CaseVersionDiff({ currentCase, oldCase }) {
         <Header>Atual</Header>
         <Header>Antiga</Header>
 
-        {rows.map(([label, current, old, multiline]) => {
+        {rows.map(([label, path, multiline]) => {
+          const current = getByPath(currentCase, path);
+          const old     = getByPath(oldCase, path);
           const changed = String(current ?? "") !== String(old ?? "");
 
           return (
