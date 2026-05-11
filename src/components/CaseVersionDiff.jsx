@@ -1,171 +1,174 @@
 import { T } from "../constants/theme";
 
-export default function CaseVersionDiff({ current, previous }) {
-  if (!current || !previous) return null;
+export default function CaseVersionDiff({
+  currentCase,
+  oldCase,
+}) {
+  if (!currentCase || !oldCase) return null;
 
-  const diffs = computeDiffs(previous, current);
-
-  if (diffs.length === 0) {
-    return (
-      <div
-        style={{
-          background: T.s1,
-          border: `1px solid ${T.b2}`,
-          borderRadius: 14,
-          padding: 14,
-        }}
-      >
-        <Header />
-        <div style={{ color: T.muted, fontSize: 12 }}>
-          Nenhuma diferença encontrada.
-        </div>
-      </div>
-    );
-  }
+  const rows = [
+    {
+      label: "Título",
+      current: currentCase.meta?.titulo,
+      old: oldCase.meta?.titulo,
+    },
+    {
+      label: "Código AO/OTA",
+      current: currentCase.classificacao?.ao_ota?.codigo,
+      old: oldCase.classificacao?.ao_ota?.codigo,
+    },
+    {
+      label: "Diagnóstico",
+      current: currentCase.diagnostico?.principal,
+      old: oldCase.diagnostico?.principal,
+    },
+    {
+      label: "Conduta",
+      current: currentCase.decisao_clinica?.output?.conduta,
+      old: oldCase.decisao_clinica?.output?.conduta,
+    },
+    {
+      label: "Urgência",
+      current: currentCase.decisao_clinica?.output?.nivel_urgencia,
+      old: oldCase.decisao_clinica?.output?.nivel_urgencia,
+    },
+    {
+      label: "Técnica",
+      current: currentCase.decisao_clinica?.output?.tecnica_preferida,
+      old: oldCase.decisao_clinica?.output?.tecnica_preferida,
+    },
+    {
+      label: "Resumo",
+      current: currentCase.output_app?.resumo,
+      old: oldCase.output_app?.resumo,
+      multiline: true,
+    },
+  ];
 
   return (
     <div
       style={{
         background: T.s1,
-        border: `1px solid ${T.b2}`,
-        borderRadius: 14,
-        padding: 14,
+        border: `1px solid ${T.purple}35`,
+        borderRadius: 16,
+        padding: 16,
+        marginBottom: 14,
       }}
     >
-      <Header count={diffs.length} />
+      <div
+        style={{
+          fontSize: 10,
+          color: T.purple,
+          fontWeight: 800,
+          textTransform: "uppercase",
+          letterSpacing: ".1em",
+          marginBottom: 14,
+        }}
+      >
+        Comparação de versões
+      </div>
 
-      <div style={{ display: "grid", gap: 6 }}>
-        {diffs.map((d) => (
-          <div
-            key={d.path}
-            style={{
-              background: T.s2,
-              border: `1px solid ${T.border}`,
-              borderRadius: 10,
-              padding: "10px 12px",
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                color: T.muted,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: ".06em",
-                marginBottom: 6,
-              }}
-            >
-              {d.path}
-            </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "220px 1fr 1fr",
+          gap: 10,
+        }}
+      >
+        <Header>Campo</Header>
+        <Header>Versão Atual</Header>
+        <Header>Versão Antiga</Header>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-              <ValueBox label="Antes" value={d.before} color={T.red} />
-              <ValueBox label="Depois" value={d.after} color={T.green} />
-            </div>
-          </div>
-        ))}
+        {rows.map((r) => {
+          const changed =
+            JSON.stringify(r.current) !== JSON.stringify(r.old);
+
+          return (
+            <>
+              <CellLabel key={r.label}>
+                {r.label}
+              </CellLabel>
+
+              <Cell
+                changed={changed}
+                multiline={r.multiline}
+              >
+                {String(r.current || "—")}
+              </Cell>
+
+              <Cell
+                changed={changed}
+                multiline={r.multiline}
+              >
+                {String(r.old || "—")}
+              </Cell>
+            </>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-function Header({ count }) {
+function Header({ children }) {
   return (
     <div
       style={{
         fontSize: 10,
-        color: T.purple,
+        color: T.muted,
         fontWeight: 800,
         textTransform: "uppercase",
-        letterSpacing: ".1em",
-        marginBottom: count ? 10 : 0,
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
+        paddingBottom: 8,
+        borderBottom: `1px solid ${T.border}`,
       }}
     >
-      <span>Diferenças</span>
-      {count > 0 && (
-        <span
-          style={{
-            background: `${T.purple}18`,
-            border: `1px solid ${T.purple}35`,
-            color: T.purple,
-            borderRadius: 999,
-            padding: "2px 8px",
-            fontSize: 10,
-          }}
-        >
-          {count}
-        </span>
-      )}
+      {children}
     </div>
   );
 }
 
-function ValueBox({ label, value, color }) {
-  const display = formatValue(value);
+function CellLabel({ children }) {
   return (
     <div
       style={{
-        background: `${color}08`,
-        border: `1px solid ${color}25`,
-        borderRadius: 8,
-        padding: "6px 8px",
+        fontSize: 11,
+        color: T.text,
+        fontWeight: 700,
+        padding: 10,
+        background: T.s2,
+        borderRadius: 10,
       }}
     >
-      <div style={{ fontSize: 9, color, fontWeight: 800, marginBottom: 3 }}>
-        {label}
-      </div>
-      <div
-        style={{
-          fontSize: 11,
-          color: T.text,
-          wordBreak: "break-word",
-          whiteSpace: "pre-wrap",
-          maxHeight: 80,
-          overflow: "hidden",
-        }}
-      >
-        {display}
-      </div>
+      {children}
     </div>
   );
 }
 
-function formatValue(v) {
-  if (v === undefined || v === null) return "—";
-  if (Array.isArray(v)) return `[${v.length} itens]`;
-  if (typeof v === "object") return JSON.stringify(v, null, 2);
-  return String(v);
-}
-
-function flatten(obj, prefix = "", out = {}) {
-  if (obj === null || typeof obj !== "object" || Array.isArray(obj)) {
-    out[prefix] = obj;
-    return out;
-  }
-  for (const key of Object.keys(obj)) {
-    flatten(obj[key], prefix ? `${prefix}.${key}` : key, out);
-  }
-  return out;
-}
-
-function computeDiffs(before, after) {
-  const flatBefore = flatten(before);
-  const flatAfter  = flatten(after);
-  const allKeys    = new Set([...Object.keys(flatBefore), ...Object.keys(flatAfter)]);
-  const diffs      = [];
-
-  for (const path of allKeys) {
-    const b = flatBefore[path];
-    const a = flatAfter[path];
-    const bStr = JSON.stringify(b);
-    const aStr = JSON.stringify(a);
-    if (bStr !== aStr) {
-      diffs.push({ path, before: b, after: a });
-    }
-  }
-
-  return diffs;
+function Cell({
+  children,
+  changed,
+  multiline,
+}) {
+  return (
+    <div
+      style={{
+        fontSize: 11,
+        color: changed ? "#fde68a" : T.muted,
+        background: changed
+          ? "rgba(245,158,11,.08)"
+          : T.s2,
+        border: `1px solid ${
+          changed
+            ? "rgba(245,158,11,.25)"
+            : T.border
+        }`,
+        borderRadius: 10,
+        padding: 10,
+        lineHeight: multiline ? 1.7 : 1.4,
+        whiteSpace: multiline ? "pre-wrap" : "normal",
+      }}
+    >
+      {children}
+    </div>
+  );
 }
