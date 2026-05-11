@@ -130,7 +130,12 @@ def get_case(
 ):
     db = SessionLocal()
     try:
-        case = _get_case_or_404(db, case_id)
+        case = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
+        if not case:
+            raise HTTPException(status_code=404, detail="Caso não encontrado")
         return case.caso_json
     finally:
         db.close()
@@ -145,7 +150,8 @@ def update_case(
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id
+        ClinicalCaseModel.id == case_id,
+        ClinicalCaseModel.user_id == current_user.id,
     ).first()
 
     if not case_db:
@@ -255,7 +261,8 @@ def restore_case_version(
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id
+        ClinicalCaseModel.id == case_id,
+        ClinicalCaseModel.user_id == current_user.id,
     ).first()
 
     if not case_db:
@@ -318,7 +325,8 @@ def export_case_pdf(
     db: Session = SessionLocal()
 
     case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id
+        ClinicalCaseModel.id == case_id,
+        ClinicalCaseModel.user_id == current_user.id,
     ).first()
 
     db.close()
@@ -350,7 +358,12 @@ def delete_case(
 ):
     db = SessionLocal()
     try:
-        case = _get_case_or_404(db, case_id)
+        case = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
+        if not case:
+            raise HTTPException(status_code=404, detail="Caso não encontrado")
         db.delete(case)
         db.commit()
         return {"status": "deleted", "id": case_id}
