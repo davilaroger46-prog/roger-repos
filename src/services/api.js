@@ -54,6 +54,23 @@ export async function updateCase(caseId, caseJson) {
   return response.json();
 }
 
+export async function autocorrectCase(caseJson) {
+  const response = await fetch(`${API_URL}/ai/autocorrect-case`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(caseJson),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => null);
+    throw new Error(err?.detail || "Erro ao autocorrigir caso");
+  }
+
+  return response.json();
+}
+
 export async function deleteCase(caseId) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "DELETE",
