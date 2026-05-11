@@ -6,7 +6,7 @@ Salva automaticamente no banco após geração.
 
 import json
 from fastapi import APIRouter, HTTPException
-from app.models import GenerateRequest
+from app.models import GenerateCaseInput
 from app.services.case_generator import generate_case
 from app.database import get_db
 
@@ -14,12 +14,11 @@ router = APIRouter()
 
 
 @router.post("/", response_model=dict)
-async def generate(payload: GenerateRequest):
+async def generate(payload: GenerateCaseInput):
     try:
         caso = await generate_case(
             tema=payload.tema,
             nivel=payload.nivel,
-            parametros=payload.parametros,
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao gerar caso: {str(e)}")

@@ -42,12 +42,8 @@ def _call_claude(user_message: str) -> str:
     return message.content[0].text.strip()
 
 
-async def generate_case(tema: str, nivel: str | None = None, parametros: str | None = None) -> dict:
-    user_parts = [f"Tema: {tema}"]
-    if nivel:
-        user_parts.append(f"Nível: {nivel}")
-    if parametros:
-        user_parts.append(parametros)
+async def generate_case(tema: str, nivel: str = "avancado") -> dict:
+    user_parts = [f"Tema: {tema}", f"Nível: {nivel}"]
     user_parts.append(
         "Importante: o JSON deve ser retornado completo. "
         "Se necessário, reduza o nível de detalhe mas mantenha todos os campos preenchidos."

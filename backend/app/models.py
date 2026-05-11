@@ -102,8 +102,7 @@ class ProgressResponse(BaseModel):
 
 # ─── Geração via Claude API ───────────────────────────────────────
 
-class GenerateRequest(BaseModel):
+class GenerateCaseInput(BaseModel):
     tema: str
-    nivel: Optional[str] = None
+    nivel: str = "avancado"
     regiao: Optional[str] = None
-    parametros: Optional[str] = None
