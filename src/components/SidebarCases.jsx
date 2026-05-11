@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { T, NIV_C } from "../constants/theme";
 import Tag from "./Tag";
+import useDebounce from "../hooks/useDebounce";
 
 export default function SidebarCases({
   cases = [],
