@@ -219,6 +219,46 @@ export default function App() {
                 <CasePreview caso={caso} />
                 {activeCaseId && (
                   <div style={{ marginTop: 24 }}>
+                    {versionPreview && (
+                      <div
+                        style={{
+                          background: "rgba(139,92,246,.07)",
+                          border: "1px solid rgba(139,92,246,.25)",
+                          borderRadius: 14,
+                          padding: 14,
+                          marginBottom: 14,
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: 10,
+                            color: T.purple,
+                            fontWeight: 800,
+                            textTransform: "uppercase",
+                            letterSpacing: ".1em",
+                            marginBottom: 8,
+                          }}
+                        >
+                          Visualizando versão antiga
+                        </div>
+
+                        <button
+                          onClick={() => setVersionPreview(null)}
+                          style={{
+                            padding: "7px 12px",
+                            borderRadius: 8,
+                            cursor: "pointer",
+                            background: T.s2,
+                            border: `1px solid ${T.border}`,
+                            color: T.muted,
+                            fontSize: 11,
+                            fontWeight: 800,
+                          }}
+                        >
+                          Voltar para versão atual
+                        </button>
+                      </div>
+                    )}
                     <CaseVersionsPanel
                       caseId={activeCaseId}
                       onOpenVersion={(oldCase) => setVersionPreview(oldCase)}
