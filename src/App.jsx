@@ -23,6 +23,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [stage, setStage] = useState("");
   const [generating, setGenerating] = useState(false);
+  const [activeCaseId, setActiveCaseId] = useState(null);
 
   useEffect(() => {
     async function loadCases() {
