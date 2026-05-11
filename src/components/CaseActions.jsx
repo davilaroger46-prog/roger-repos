@@ -1,6 +1,6 @@
 import { T } from "../constants/theme";
 
-export default function CaseActions({ caso, onNewCase, onEdit, editing }) {
+export default function CaseActions({ caso, onNewCase, onEdit }) {
   if (!caso) return null;
 
   const copyJson = async () => {
@@ -43,8 +43,8 @@ export default function CaseActions({ caso, onNewCase, onEdit, editing }) {
       </button>
 
       {onEdit && (
-        <button onClick={onEdit} style={buttonStyle(editing ? T.cyan : T.purple)}>
-          {editing ? "✕ Fechar Edição" : "✏️ Editar"}
+        <button onClick={onEdit} style={buttonStyle(T.purple)}>
+          ✏️ Editar
         </button>
       )}
 

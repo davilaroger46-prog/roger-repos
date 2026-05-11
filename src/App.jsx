@@ -209,7 +209,6 @@ export default function App() {
               caso={caso}
               onNewCase={handleNewCase}
               onEdit={handleStartEdit}
-              editing={editing}
             />
             {editing && (
               <CaseEditPanel
