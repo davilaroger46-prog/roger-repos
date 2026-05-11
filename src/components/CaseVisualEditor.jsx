@@ -625,7 +625,13 @@ export default function CaseVisualEditor({
         </button>
 
         {onAutoCorrect && (
-          <button onClick={onAutoCorrect} style={buttonStyle(T.cyan)}>
+          <button
+            onClick={async () => {
+              const corrected = await onAutoCorrect(draft);
+              setDraft(corrected);
+            }}
+            style={buttonStyle(T.blue)}
+          >
             🤖 Autocorrigir com IA
           </button>
         )}
