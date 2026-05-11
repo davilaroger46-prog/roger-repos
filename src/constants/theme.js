@@ -1,4 +1,5 @@
 export const T = {
+  bg:     "var(--bg, #080b12)",
   s1:     "var(--surface-1, #0f1117)",
   s2:     "var(--surface-2, #1a1d27)",
   text:   "var(--text, #e8eaf0)",

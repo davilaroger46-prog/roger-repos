@@ -6,6 +6,7 @@ import ProgressPage from "./pages/ProgressPage";
 import GeneratePage from "./pages/GeneratePage";
 import DecisionPage from "./pages/DecisionPage";
 import { TABS } from "./constants/prompt";
+import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import {
   generateCase,
@@ -119,13 +120,23 @@ export default function App() {
   }
 
   return (
-    <div className="mobile-app">
-      <header className="mobile-header">
-        <span style={{ fontWeight: 900, fontSize: 18 }}>OrthoStudy</span>
-        <span className="status">● Online</span>
-      </header>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: T.bg,
+        color: T.text,
+        fontFamily: "'DM Sans', system-ui, sans-serif",
+        display: "flex",
+      }}
+    >
+      <SidebarCases
+        cases={savedCases}
+        activeCaseId={activeCaseId}
+        onLoadCase={handleLoadCase}
+        onDeleteCase={handleDeleteCase}
+      />
 
-      <main className="mobile-content">
+      <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
         {tab === "cases" && (
           <CaseListPage onSelect={setSelectedCase} />
         )}
@@ -139,19 +150,6 @@ export default function App() {
           <ProgressPage />
         )}
       </main>
-
-      <nav className="bottom-nav">
-        {TABS.map((t) => (
-          <button
-            key={t.id}
-            className={tab === t.id ? "active" : ""}
-            onClick={() => setTab(t.id)}
-            title={t.label}
-          >
-            {t.icon}
-          </button>
-        ))}
-      </nav>
     </div>
   );
 }
