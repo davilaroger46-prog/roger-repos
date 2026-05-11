@@ -141,26 +141,24 @@ export default function SidebarCases({
               #{c.id}
             </div>
 
-            <div style={{ display: "flex", gap: 4 }}>
-              {onExportPdf && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onExportPdf(c.id);
-                  }}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: T.muted,
-                    cursor: "pointer",
-                    fontSize: 13,
-                    lineHeight: 1,
-                  }}
-                  title="Exportar PDF"
-                >
-                  📄
-                </button>
-              )}
+            <div style={{ display: "flex", gap: 6 }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onExportPdf(c.id);
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: T.red,
+                  cursor: "pointer",
+                  fontSize: 13,
+                  lineHeight: 1,
+                  fontWeight: 800,
+                }}
+              >
+                PDF
+              </button>
 
               <button
                 onClick={(e) => {
