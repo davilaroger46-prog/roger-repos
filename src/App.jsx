@@ -33,7 +33,7 @@ export default function App() {
   const [regiao, setRegiao] = useState("");
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [editJson, setEditJson] = useState("");
 
   useEffect(() => {
     async function loadCases() {
@@ -50,19 +50,18 @@ export default function App() {
 
   const stopPct = () => setGenerating(false);
 
-  const handleUpdateCase = async (updatedJson) => {
+  const handleUpdateCase = async () => {
     if (!activeCaseId) return;
-    setSaving(true);
     try {
-      const data = await updateCase(activeCaseId, updatedJson);
+      const parsed = JSON.parse(editJson);
+      const data = await updateCase(activeCaseId, parsed);
       setCaso(data);
       setEditing(false);
+      setEditJson("");
       const updated = await listCases();
       setSavedCases(updated);
     } catch (err) {
-      setError("Erro ao salvar alterações.");
-    } finally {
-      setSaving(false);
+      setError(err.message || "Erro ao salvar alterações.");
     }
   };
 
@@ -196,9 +195,10 @@ export default function App() {
             {editing && (
               <CaseEditPanel
                 caso={caso}
-                saving={saving}
+                editJson={editJson}
+                setEditJson={setEditJson}
                 onSave={handleUpdateCase}
-                onCancel={() => setEditing(false)}
+                onCancel={() => { setEditing(false); setEditJson(""); }}
               />
             )}
             <CasePreview caso={caso} />

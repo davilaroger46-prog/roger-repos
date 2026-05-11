@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { T } from "../constants/theme";
 
-export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
+export default function CaseEditPanel({ caso, editJson, setEditJson, onSave, onCancel }) {
   const [draft, setDraft] = useState(() => JSON.parse(JSON.stringify(caso)));
   const [jsonError, setJsonError] = useState(null);
-  const [rawJson, setRawJson] = useState(() => JSON.stringify(caso, null, 2));
   const [mode, setMode] = useState("fields"); // "fields" | "json"
 
   const set = (path, value) => {
@@ -22,7 +21,7 @@ export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
   };
 
   const handleJsonChange = (raw) => {
-    setRawJson(raw);
+    setEditJson(raw);
     try {
       setDraft(JSON.parse(raw));
       setJsonError(null);
@@ -33,7 +32,8 @@ export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
 
   const handleSave = () => {
     if (jsonError) return;
-    onSave(draft);
+    if (mode === "fields") setEditJson(JSON.stringify(draft, null, 2));
+    onSave();
   };
 
   return (
@@ -53,7 +53,7 @@ export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
 
         <div style={{ display: "flex", gap: 6 }}>
           <ModeBtn active={mode === "fields"} onClick={() => setMode("fields")}>Campos</ModeBtn>
-          <ModeBtn active={mode === "json"}   onClick={() => { setRawJson(JSON.stringify(draft, null, 2)); setMode("json"); }}>JSON</ModeBtn>
+          <ModeBtn active={mode === "json"}   onClick={() => { setEditJson(JSON.stringify(draft, null, 2)); setMode("json"); }}>JSON</ModeBtn>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
       {mode === "json" && (
         <div>
           <textarea
-            value={rawJson}
+            value={editJson}
             onChange={(e) => handleJsonChange(e.target.value)}
             style={{
               width: "100%",
@@ -135,10 +135,10 @@ export default function CaseEditPanel({ caso, onSave, onCancel, saving }) {
       <div style={{ display: "flex", gap: 8, marginTop: 18 }}>
         <button
           onClick={handleSave}
-          disabled={saving || !!jsonError}
-          style={actionBtn(T.green, saving || !!jsonError)}
+          disabled={!!jsonError}
+          style={actionBtn(T.green, !!jsonError)}
         >
-          {saving ? "Salvando…" : "💾 Salvar"}
+          💾 Salvar
         </button>
         <button onClick={onCancel} style={actionBtn(T.muted, false)}>
           Cancelar
