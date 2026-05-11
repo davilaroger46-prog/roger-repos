@@ -48,6 +48,9 @@ def list_cases(
                 "meta":       c.caso_json.get("meta", {}),
                 "paciente":   c.caso_json.get("paciente", {}),
                 "output_app": c.caso_json.get("output_app", {}),
+                "conduta":    c.caso_json.get("decisao_clinica", {})
+                              .get("output", {})
+                              .get("conduta"),
             }
             for c in cases
         ]
