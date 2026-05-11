@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CaseListPage from "./pages/CaseListPage";
 import CaseDetailPage from "./pages/CaseDetailPage";
 import FlashcardPage from "./pages/FlashcardPage";
@@ -12,11 +12,17 @@ import {
   getCase,
   deleteCase,
 } from "./services/api";
+import { loadSavedCases, saveCases } from "./services/storage";
 
 export default function App() {
   const [tab, setTab] = useState("cases");
   const [selectedCase, setSelectedCase] = useState(null);
   const [flashcardCase, setFlashcardCase] = useState(null);
+  const [savedCases, setSavedCases] = useState([]);
+
+  useEffect(() => {
+    setSavedCases(loadSavedCases());
+  }, []);
 
   if (flashcardCase) {
     return (

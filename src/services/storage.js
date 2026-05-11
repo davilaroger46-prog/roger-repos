@@ -18,3 +18,11 @@ export function set(key, value) {
 export function remove(key) {
   localStorage.removeItem(PREFIX + key);
 }
+
+export function loadSavedCases() {
+  return get("cases", []);
+}
+
+export function saveCases(cases) {
+  set("cases", cases);
+}
