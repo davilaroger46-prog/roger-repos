@@ -125,10 +125,11 @@ export default function SidebarCases({
           <option value="urgente">Urgente</option>
         </select>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={selectStyle}>
-            <option value="created_at">Mais recentes</option>
-            <option value="updated_at">Última edição</option>
+            <option value="created_at">Criado em</option>
+            <option value="updated_at">Atualizado em</option>
+            <option value="id">ID</option>
             <option value="titulo">Título</option>
             <option value="regiao">Região</option>
             <option value="nivel">Nível</option>
