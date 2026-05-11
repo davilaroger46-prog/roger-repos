@@ -1,75 +1,89 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy import select, or_
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.core.database import get_session
-from app.models.case import Case
+from fastapi import APIRouter, HTTPException, Query
+from sqlalchemy.orm import Session
+from app.db.database import SessionLocal
+from app.models.case_model import ClinicalCaseModel
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
 
+def get_db() -> Session:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 @router.get("/")
-async def list_cases(
+def list_cases(
     regiao: Optional[str] = Query(None),
     nivel:  Optional[str] = Query(None),
     q:      Optional[str] = Query(None),
-    session: AsyncSession = Depends(get_session),
 ):
-    stmt = select(Case)
+    db = SessionLocal()
+    try:
+        query = db.query(ClinicalCaseModel)
 
-    if regiao:
-        stmt = stmt.where(Case.regiao.ilike(regiao))
-    if nivel:
-        stmt = stmt.where(Case.nivel == nivel)
-    if q:
-        pattern = f"%{q}%"
-        stmt = stmt.where(
-            or_(
-                Case.titulo.ilike(pattern),
-                Case.data["output_app"]["resumo"].astext.ilike(pattern),
-                Case.data["meta"]["tags"].astext.ilike(pattern),
-            )
-        )
+        if regiao:
+            query = query.filter(ClinicalCaseModel.regiao.ilike(regiao))
+        if nivel:
+            query = query.filter(ClinicalCaseModel.nivel == nivel)
+        if q:
+            query = query.filter(ClinicalCaseModel.titulo.ilike(f"%{q}%"))
 
-    result = await session.execute(stmt.order_by(Case.updated_at.desc()))
-    cases = result.scalars().all()
+        cases = query.order_by(ClinicalCaseModel.id.desc()).all()
 
-    return [
-        {
-            "id":         c.id,
-            "titulo":     c.titulo,
-            "regiao":     c.regiao,
-            "nivel":      c.nivel,
-            "updated_at": c.updated_at,
-            "meta":       c.data.get("meta", {}),
-            "paciente":   c.data.get("paciente", {}),
-            "output_app": c.data.get("output_app", {}),
-        }
-        for c in cases
-    ]
+        return [
+            {
+                "id":         c.id,
+                "titulo":     c.titulo,
+                "regiao":     c.regiao,
+                "nivel":      c.nivel,
+                "ao_codigo":  c.ao_codigo,
+                "meta":       c.caso_json.get("meta", {}),
+                "paciente":   c.caso_json.get("paciente", {}),
+                "output_app": c.caso_json.get("output_app", {}),
+            }
+            for c in cases
+        ]
+    finally:
+        db.close()
 
 
 @router.get("/{case_id}")
-async def get_case(case_id: str, session: AsyncSession = Depends(get_session)):
-    case = await session.get(Case, case_id)
-    if not case:
-        raise HTTPException(status_code=404, detail=f"Caso '{case_id}' não encontrado.")
-    return case.data
+def get_case(case_id: int):
+    db = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
+        if not case:
+            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        return case.caso_json
+    finally:
+        db.close()
 
 
 @router.delete("/{case_id}")
-async def delete_case(case_id: str, session: AsyncSession = Depends(get_session)):
-    case = await session.get(Case, case_id)
-    if not case:
-        raise HTTPException(status_code=404, detail=f"Caso '{case_id}' não encontrado.")
-    await session.delete(case)
-    await session.commit()
-    return {"status": "deleted", "id": case_id}
+def delete_case(case_id: int):
+    db = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
+        if not case:
+            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        db.delete(case)
+        db.commit()
+        return {"status": "deleted", "id": case_id}
+    finally:
+        db.close()
 
 
 @router.get("/{case_id}/flashcards")
-async def get_flashcards(case_id: str, session: AsyncSession = Depends(get_session)):
-    case = await session.get(Case, case_id)
-    if not case:
-        raise HTTPException(status_code=404, detail=f"Caso '{case_id}' não encontrado.")
-    return case.data.get("flashcards", [])
+def get_flashcards(case_id: int):
+    db = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
+        if not case:
+            raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        return case.caso_json.get("flashcards", [])
+    finally:
+        db.close()
