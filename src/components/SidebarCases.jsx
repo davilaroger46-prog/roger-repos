@@ -125,31 +125,19 @@ export default function SidebarCases({
           <option value="urgente">Urgente</option>
         </select>
 
-        <div style={{ display: "flex", gap: 6 }}>
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={{ ...selectStyle, flex: 1 }}>
-            <option value="id">ID</option>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={selectStyle}>
+            <option value="id">Mais recentes</option>
             <option value="titulo">Título</option>
-            <option value="nivel">Nível</option>
             <option value="regiao">Região</option>
+            <option value="nivel">Nível</option>
             <option value="ao_codigo">AO/OTA</option>
           </select>
 
-          <button
-            onClick={() => setSortDir((d) => (d === "desc" ? "asc" : "desc"))}
-            title={sortDir === "desc" ? "Decrescente" : "Crescente"}
-            style={{
-              background: T.s2,
-              border: `1px solid ${T.border}`,
-              borderRadius: 8,
-              color: T.muted,
-              cursor: "pointer",
-              fontSize: 13,
-              padding: "0 10px",
-              flexShrink: 0,
-            }}
-          >
-            {sortDir === "desc" ? "↓" : "↑"}
-          </button>
+          <select value={sortDir} onChange={(e) => setSortDir(e.target.value)} style={selectStyle}>
+            <option value="desc">Desc</option>
+            <option value="asc">Asc</option>
+          </select>
         </div>
       </div>
 
