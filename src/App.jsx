@@ -109,16 +109,9 @@ export default function App() {
 
   const handleCancelEdit = () => setEditing(false);
 
-  const handleRestore = async (snapshot) => {
-    if (!activeCaseId) return;
-    try {
-      const updated = await updateCase(activeCaseId, snapshot);
-      setCaso(updated);
-      const list = await listCases();
-      setSavedCases(list);
-    } catch (err) {
-      setError(err.message || "Erro ao restaurar versão.");
-    }
+  const handleOpenVersion = (snapshot) => {
+    setCaso(snapshot);
+    setEditing(false);
   };
 
   const handleSave = async () => {
@@ -232,7 +225,7 @@ export default function App() {
                   <div style={{ marginTop: 24 }}>
                     <CaseVersionsPanel
                       caseId={activeCaseId}
-                      onRestore={handleRestore}
+                      onOpenVersion={handleOpenVersion}
                     />
                   </div>
                 )}
