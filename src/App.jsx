@@ -14,6 +14,7 @@ import CaseVisualEditor from "./components/CaseVisualEditor";
 import CaseVersionsPanel from "./components/CaseVersionsPanel";
 import CaseVersionDiff from "./components/CaseVersionDiff";
 import CasesDashboard from "./components/CasesDashboard";
+import AuthScreen from "./components/AuthScreen";
 import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
@@ -24,6 +25,8 @@ import {
   autocorrectCase,
   restoreCaseVersion,
   downloadCasePdf,
+  getToken,
+  logoutUser,
 } from "./services/api";
 
 export default function App() {

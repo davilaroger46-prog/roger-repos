@@ -8,6 +8,10 @@ export function getToken() {
   return localStorage.getItem("orthostudy_token");
 }
 
+export function logoutUser() {
+  localStorage.removeItem("orthostudy_token");
+}
+
 export function authHeaders() {
   const token = getToken();
 
