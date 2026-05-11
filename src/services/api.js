@@ -24,10 +24,10 @@ export async function listCases(filters = {}) {
   if (filters.regiao) params.append("regiao", filters.regiao);
   if (filters.nivel) params.append("nivel", filters.nivel);
   if (filters.conduta) params.append("conduta", filters.conduta);
+  if (filters.page) params.append("page", filters.page);
+  if (filters.page_size) params.append("page_size", filters.page_size);
 
-  const url = `${API_URL}/cases/${params.toString() ? `?${params.toString()}` : ""}`;
-
-  const response = await fetch(url);
+  const response = await fetch(`${API_URL}/cases/?${params.toString()}`);
 
   if (!response.ok) {
     throw new Error("Erro ao listar casos");
