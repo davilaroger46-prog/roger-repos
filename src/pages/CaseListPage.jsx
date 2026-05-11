@@ -1,13 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { getCases } from "../api/client";
+import { getCases } from "../services/api";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorBanner from "../components/ErrorBanner";
-
-const NIVEL_BADGE = {
-  basico:        "badge-green",
-  intermediario: "badge-amber",
-  avancado:      "badge-red",
-};
+import Tag from "../components/Tag";
+import { REGIOES, NIVEL_BADGE } from "../constants/prompt";
 
 export default function CaseListPage({ onSelect }) {
   const [cases, setCases]   = useState([]);
@@ -48,7 +44,7 @@ export default function CaseListPage({ onSelect }) {
       </div>
 
       <div style={{ display: "flex", gap: 6, marginBottom: 14, flexWrap: "wrap" }}>
-        {["", "Ombro", "Cotovelo", "Quadril", "Joelho", "Tornozelo", "Coluna"].map((r) => (
+        {REGIOES.map((r) => (
           <button
             key={r}
             onClick={() => setRegiao(r)}
@@ -82,7 +78,7 @@ export default function CaseListPage({ onSelect }) {
           style={{ cursor: "pointer" }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span className={`badge ${NIVEL_BADGE[c.nivel] || "badge-blue"}`}>{c.nivel}</span>
+            <Tag nivel={c.nivel} />
             <span style={{ fontSize: 11, color: "var(--muted)" }}>{c.regiao}</span>
           </div>
           <div style={{ fontWeight: 800, marginTop: 8, fontSize: 15 }}>{c.titulo}</div>
@@ -94,7 +90,7 @@ export default function CaseListPage({ onSelect }) {
           {c.meta?.tags?.length > 0 && (
             <div style={{ marginTop: 8, display: "flex", gap: 4, flexWrap: "wrap" }}>
               {c.meta.tags.slice(0, 3).map((tag) => (
-                <span key={tag} className="badge badge-blue">{tag}</span>
+                <Tag key={tag} label={tag} className="badge-blue" />
               ))}
             </div>
           )}

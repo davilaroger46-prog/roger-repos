@@ -5,13 +5,7 @@ import FlashcardPage from "./pages/FlashcardPage";
 import ProgressPage from "./pages/ProgressPage";
 import GeneratePage from "./pages/GeneratePage";
 import DecisionPage from "./pages/DecisionPage";
-
-const TABS = [
-  { id: "cases",    icon: "🗂️",  label: "Casos" },
-  { id: "decision", icon: "⚡",  label: "Decisão" },
-  { id: "generate", icon: "✨",  label: "Gerar" },
-  { id: "progress", icon: "📈",  label: "Progresso" },
-];
+import { TABS } from "./constants/prompt";
 
 export default function App() {
   const [tab, setTab] = useState("cases");

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { runAoDecision } from "../api/client";
+import { runAoDecision } from "../services/api";
 import ClinicalDecisionPanel from "../components/ClinicalDecisionPanel";
 
 const SEGMENTOS = [

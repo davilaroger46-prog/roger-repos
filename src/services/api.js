@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// ─── Config Base ────────────────────────────────────────────────
 const API_BASE = "http://127.0.0.1:8000";
 
 const client = axios.create({
@@ -9,7 +8,6 @@ const client = axios.create({
   timeout: 10000,
 });
 
-// ─── Interceptor de erro ────────────────────────────────────────
 client.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -17,16 +15,14 @@ client.interceptors.response.use(
       err.message =
         "Backend offline. Rode: cd backend && uvicorn main:app --reload";
     }
-
     if (err.response) {
       console.error("API ERROR:", err.response.data);
     }
-
     return Promise.reject(err);
   }
 );
 
-// ─── CASOS ──────────────────────────────────────────────────────
+// ── Casos ──────────────────────────────────────────────────────────
 export async function getCases(params = {}) {
   const res = await client.get("/cases", { params });
   return res.data;
@@ -52,25 +48,25 @@ export async function deleteCase(id) {
   return res.data;
 }
 
-// ─── MOTOR AO ───────────────────────────────────────────────────
+// ── Motor AO ───────────────────────────────────────────────────────
 export async function runAoDecision(payload) {
   const res = await client.post("/decision/ao", payload);
   return res.data;
 }
 
-// ─── FLASHCARDS ─────────────────────────────────────────────────
+// ── Flashcards ─────────────────────────────────────────────────────
 export async function getFlashcards(caseId) {
   const res = await client.get(`/cases/${caseId}/flashcards`);
   return res.data;
 }
 
-// ─── GERAÇÃO IA ─────────────────────────────────────────────────
+// ── Geração IA ─────────────────────────────────────────────────────
 export async function generateCase(payload) {
   const res = await client.post("/generate", payload, { timeout: 90000 });
   return res.data;
 }
 
-// ─── PROGRESSO ──────────────────────────────────────────────────
+// ── Progresso ──────────────────────────────────────────────────────
 export async function getProgress() {
   const res = await client.get("/progress");
   return res.data;

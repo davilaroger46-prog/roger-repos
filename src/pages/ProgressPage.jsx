@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProgress, getCases } from "../api/client";
+import { getProgress, getCases } from "../services/api";
 
 export default function ProgressPage() {
   const [progress, setProgress] = useState([]);

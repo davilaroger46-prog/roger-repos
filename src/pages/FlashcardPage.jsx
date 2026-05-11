@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { updateProgress } from "../api/client";
+import { updateProgress } from "../services/api";
 
 export default function FlashcardPage({ caso, onBack }) {
   const flashcards = caso.flashcards || [];

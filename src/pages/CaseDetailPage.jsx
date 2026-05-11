@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getCase } from "../api/client";
+import { getCase } from "../services/api";
 import ClinicalDecisionPanel from "../components/ClinicalDecisionPanel";
 
 const Section = ({ title, children }) => (
