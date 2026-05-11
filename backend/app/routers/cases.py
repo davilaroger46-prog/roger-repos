@@ -141,6 +141,26 @@ def list_case_versions(case_id: int):
     return result
 
 
+@router.get("/{case_id}/versions/{version_id}")
+def get_case_version(case_id: int, version_id: int):
+    db: Session = SessionLocal()
+
+    version = db.query(ClinicalCaseVersionModel).filter(
+        ClinicalCaseVersionModel.case_id == case_id,
+        ClinicalCaseVersionModel.id == version_id,
+    ).first()
+
+    db.close()
+
+    if not version:
+        raise HTTPException(
+            status_code=404,
+            detail="Versão não encontrada"
+        )
+
+    return version.caso_json
+
+
 @router.delete("/{case_id}")
 def delete_case(case_id: int):
     db = SessionLocal()
