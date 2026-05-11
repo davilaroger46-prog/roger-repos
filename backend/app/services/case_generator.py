@@ -6,10 +6,10 @@ Requer ANTHROPIC_API_KEY no ambiente.
 
 import asyncio
 import json
-import os
 
 import anthropic
 from pathlib import Path
+from app.config import ANTHROPIC_API_KEY
 
 _PROMPT_PATH = Path(__file__).parent.parent.parent.parent / "docs" / "prompt-mestre.md"
 
@@ -31,7 +31,7 @@ _SYSTEM_BLOCKS = [
 
 
 def _call_claude(user_message: str) -> str:
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=6000,
