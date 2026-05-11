@@ -499,6 +499,34 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Flashcards">
+        <ObjectListEditor
+          label="Flashcards de residência"
+          items={draft.flashcards || []}
+          onChange={(v) => update("flashcards", v)}
+          addLabel="+ Adicionar flashcard"
+          createItem={() => ({
+            pergunta: "",
+            resposta: "",
+          })}
+          renderItem={(f, index, updateItem) => (
+            <>
+              <TextAreaField
+                label="Pergunta"
+                value={f.pergunta}
+                onChange={(v) => updateItem(index, { pergunta: v })}
+              />
+
+              <TextAreaField
+                label="Resposta"
+                value={f.resposta}
+                onChange={(v) => updateItem(index, { resposta: v })}
+              />
+            </>
+          )}
+        />
+      </Section>
+
       <Section title="Output do app">
         <Field
           label="Diagnóstico resumido"
