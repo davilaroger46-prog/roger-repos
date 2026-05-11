@@ -78,14 +78,6 @@ def update_case(case_id: int, payload: dict):
         )
 
     try:
-        version = ClinicalCaseVersionModel(
-            case_id=case_db.id,
-            action="before_update",
-            caso_json=case_db.caso_json,
-        )
-
-        db.add(version)
-
         validated = ClinicalCase.model_validate(payload)
 
         case_json = validated.model_dump(
@@ -93,6 +85,14 @@ def update_case(case_id: int, payload: dict):
             exclude_none=True,
             mode="json",
         )
+
+        version = ClinicalCaseVersionModel(
+            case_id=case_db.id,
+            action="before_update",
+            caso_json=case_db.caso_json,
+        )
+
+        db.add(version)
 
         case_db.titulo = case_json["meta"]["titulo"]
         case_db.regiao = case_json["meta"]["regiao"]
