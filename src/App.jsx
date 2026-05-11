@@ -8,6 +8,7 @@ import DecisionPage from "./pages/DecisionPage";
 import { TABS } from "./constants/prompt";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
+import CasePreview from "./components/CasePreview";
 import {
   generateCase,
   listCases,
