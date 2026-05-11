@@ -24,6 +24,8 @@ def list_cases(
     regiao: str | None = None,
     nivel: str | None = None,
     conduta: str | None = None,
+    page: int = 1,
+    page_size: int = 20,
 ):
     db: Session = SessionLocal()
 
@@ -73,7 +75,17 @@ def list_cases(
 
     db.close()
 
-    return result
+    total = len(result)
+    offset = (page - 1) * page_size
+    paginated = result[offset: offset + page_size]
+
+    return {
+        "total": total,
+        "page": page,
+        "page_size": page_size,
+        "pages": -(-total // page_size),
+        "items": paginated,
+    }
 
 
 @router.get("/{case_id}")
