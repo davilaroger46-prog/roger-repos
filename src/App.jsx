@@ -112,6 +112,7 @@ export default function App() {
     }
   };
 
+  const handleStartEdit = () => setEditing(true);
   const handleCancelEdit = () => setEditing(false);
 
   const handleSave = async () => {
@@ -182,8 +183,15 @@ export default function App() {
             <CaseActions
               caso={caso}
               onNewCase={handleNewCase}
-              onEdit={() => setEditing(true)}
-              onExportPdf={() => downloadCasePdf(activeCaseId)}
+              onEdit={handleStartEdit}
+              onExportPdf={() => {
+                if (!activeCaseId) {
+                  setError("Este caso ainda não possui ID no banco.");
+                  return;
+                }
+
+                downloadCasePdf(activeCaseId);
+              }}
             />
 
             {editing ? (
