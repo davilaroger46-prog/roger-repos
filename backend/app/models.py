@@ -99,10 +99,3 @@ class ProgressResponse(BaseModel):
     decisoes_total: int
     ultima_atividade: Optional[str] = None
 
-
-# ─── Geração via Claude API ───────────────────────────────────────
-
-class GenerateCaseInput(BaseModel):
-    tema: str
-    nivel: str = "avancado"
-    regiao: Optional[str] = None

@@ -33,7 +33,7 @@ app.add_middleware(
 app.include_router(cases.router,    prefix="/cases",    tags=["Casos"])
 app.include_router(decision.router, prefix="/decision", tags=["Decisão AO"])
 app.include_router(progress.router, prefix="/progress", tags=["Progresso"])
-app.include_router(generate.router, prefix="/generate", tags=["Geração IA"])
+app.include_router(generate.router)
 
 # ─── Startup ─────────────────────────────────────────────────────
 

@@ -62,7 +62,7 @@ export async function getFlashcards(caseId) {
 
 // ── Geração IA ─────────────────────────────────────────────────────
 export async function generateCase(payload) {
-  const res = await client.post("/generate", payload, { timeout: 90000 });
+  const res = await client.post("/ai/generate-case", payload, { timeout: 90000 });
   return res.data;
 }
 
