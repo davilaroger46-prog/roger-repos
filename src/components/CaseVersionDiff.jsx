@@ -1,49 +1,26 @@
+import { Fragment } from "react";
 import { T } from "../constants/theme";
 
-export default function CaseVersionDiff({
-  currentCase,
-  oldCase,
-}) {
+export default function CaseVersionDiff({ currentCase, oldCase }) {
   if (!currentCase || !oldCase) return null;
 
   const rows = [
-    {
-      label: "Título",
-      current: currentCase.meta?.titulo,
-      old: oldCase.meta?.titulo,
-    },
-    {
-      label: "Código AO/OTA",
-      current: currentCase.classificacao?.ao_ota?.codigo,
-      old: oldCase.classificacao?.ao_ota?.codigo,
-    },
-    {
-      label: "Diagnóstico",
-      current: currentCase.diagnostico?.principal,
-      old: oldCase.diagnostico?.principal,
-    },
-    {
-      label: "Conduta",
-      current: currentCase.decisao_clinica?.output?.conduta,
-      old: oldCase.decisao_clinica?.output?.conduta,
-    },
-    {
-      label: "Urgência",
-      current: currentCase.decisao_clinica?.output?.nivel_urgencia,
-      old: oldCase.decisao_clinica?.output?.nivel_urgencia,
-    },
-    {
-      label: "Técnica",
-      current: currentCase.decisao_clinica?.output?.tecnica_preferida,
-      old: oldCase.decisao_clinica?.output?.tecnica_preferida,
-    },
-    {
-      label: "Resumo",
-      current: currentCase.output_app?.resumo,
-      old: oldCase.output_app?.resumo,
-      multiline: true,
-    },
+    ["Título", currentCase.meta?.titulo, oldCase.meta?.titulo],
+    ["Região", currentCase.meta?.regiao, oldCase.meta?.regiao],
+    ["Nível", currentCase.meta?.nivel, oldCase.meta?.nivel],
+    ["AO/OTA", currentCase.classificacao?.ao_ota?.codigo, oldCase.classificacao?.ao_ota?.codigo],
+    ["Gravidade", currentCase.classificacao?.ao_ota?.gravidade, oldCase.classificacao?.ao_ota?.gravidade],
+    ["Diagnóstico", currentCase.diagnostico?.principal, oldCase.diagnostico?.principal],
+    ["Conduta", currentCase.decisao_clinica?.output?.conduta, oldCase.decisao_clinica?.output?.conduta],
+    ["Urgência", currentCase.decisao_clinica?.output?.nivel_urgencia, oldCase.decisao_clinica?.output?.nivel_urgencia],
+    ["Técnica", currentCase.decisao_clinica?.output?.tecnica_preferida, oldCase.decisao_clinica?.output?.tecnica_preferida],
+    ["Flashcards", currentCase.flashcards?.length, oldCase.flashcards?.length],
+    ["Passos cirúrgicos", currentCase.cirurgia?.passo_a_passo?.length, oldCase.cirurgia?.passo_a_passo?.length],
+    ["Fases reabilitação", currentCase.reabilitacao?.length, oldCase.reabilitacao?.length],
+    ["Resumo", currentCase.output_app?.resumo, oldCase.output_app?.resumo, true],
   ];
+
+  const changedCount = rows.filter((r) => String(r[1] ?? "") !== String(r[2] ?? "")).length;
 
   return (
     <div
@@ -62,47 +39,36 @@ export default function CaseVersionDiff({
           fontWeight: 800,
           textTransform: "uppercase",
           letterSpacing: ".1em",
-          marginBottom: 14,
+          marginBottom: 10,
         }}
       >
-        Comparação de versões
+        Comparação de versões · {changedCount} alteração(ões)
       </div>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "220px 1fr 1fr",
-          gap: 10,
+          gridTemplateColumns: "180px 1fr 1fr",
+          gap: 8,
         }}
       >
         <Header>Campo</Header>
-        <Header>Versão Atual</Header>
-        <Header>Versão Antiga</Header>
+        <Header>Atual</Header>
+        <Header>Antiga</Header>
 
-        {rows.map((r) => {
-          const changed =
-            JSON.stringify(r.current) !== JSON.stringify(r.old);
+        {rows.map(([label, current, old, multiline]) => {
+          const changed = String(current ?? "") !== String(old ?? "");
 
           return (
-            <>
-              <CellLabel key={r.label}>
-                {r.label}
-              </CellLabel>
-
-              <Cell
-                changed={changed}
-                multiline={r.multiline}
-              >
-                {String(r.current || "—")}
-              </Cell>
-
-              <Cell
-                changed={changed}
-                multiline={r.multiline}
-              >
-                {String(r.old || "—")}
-              </Cell>
-            </>
+            <Fragment key={label}>
+              <LabelCell>{label}</LabelCell>
+              <ValueCell changed={changed} multiline={multiline}>
+                {String(current ?? "—")}
+              </ValueCell>
+              <ValueCell changed={changed} multiline={multiline}>
+                {String(old ?? "—")}
+              </ValueCell>
+            </Fragment>
           );
         })}
       </div>
@@ -118,8 +84,7 @@ function Header({ children }) {
         color: T.muted,
         fontWeight: 800,
         textTransform: "uppercase",
-        paddingBottom: 8,
-        borderBottom: `1px solid ${T.border}`,
+        padding: "0 4px 8px",
       }}
     >
       {children}
@@ -127,16 +92,17 @@ function Header({ children }) {
   );
 }
 
-function CellLabel({ children }) {
+function LabelCell({ children }) {
   return (
     <div
       style={{
-        fontSize: 11,
-        color: T.text,
-        fontWeight: 700,
-        padding: 10,
         background: T.s2,
+        border: `1px solid ${T.border}`,
         borderRadius: 10,
+        padding: 10,
+        fontSize: 11,
+        fontWeight: 800,
+        color: T.text,
       }}
     >
       {children}
@@ -144,27 +110,17 @@ function CellLabel({ children }) {
   );
 }
 
-function Cell({
-  children,
-  changed,
-  multiline,
-}) {
+function ValueCell({ children, changed, multiline }) {
   return (
     <div
       style={{
-        fontSize: 11,
-        color: changed ? "#fde68a" : T.muted,
-        background: changed
-          ? "rgba(245,158,11,.08)"
-          : T.s2,
-        border: `1px solid ${
-          changed
-            ? "rgba(245,158,11,.25)"
-            : T.border
-        }`,
+        background: changed ? "rgba(245,158,11,.08)" : T.s2,
+        border: `1px solid ${changed ? "rgba(245,158,11,.28)" : T.border}`,
         borderRadius: 10,
         padding: 10,
+        fontSize: 11,
         lineHeight: multiline ? 1.7 : 1.4,
+        color: changed ? "#fde68a" : T.muted,
         whiteSpace: multiline ? "pre-wrap" : "normal",
       }}
     >
