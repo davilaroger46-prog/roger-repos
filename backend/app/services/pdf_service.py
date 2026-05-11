@@ -97,8 +97,8 @@ def generate_case_pdf(case: dict) -> BytesIO:
     complicacoes = case.get("complicacoes", {})
 
     # CAPA
-    story.append(Paragraph("OrthoStudy", styles["Title"]))
-    story.append(Paragraph("Relatório Clínico Ortopédico", styles["Heading2"]))
+    story.append(Paragraph("ORTHOSTUDY", styles["Title"]))
+    story.append(Paragraph("AI Clinical Orthopedic Engine", styles["Heading2"]))
     story.append(Spacer(1, 24))
     story.append(Paragraph(meta.get("titulo", "Caso clínico"), styles["Title"]))
     story.append(Spacer(1, 18))
