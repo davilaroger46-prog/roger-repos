@@ -13,6 +13,7 @@ export default function SidebarCases({
   const [search, setSearch] = useState("");
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
+  const [conduta, setConduta] = useState("");
 
   const regioes = useMemo(() => {
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
