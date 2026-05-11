@@ -1,10 +1,12 @@
 from typing import Optional
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
 from app.schemas.case import ClinicalCase
+from app.services.pdf_service import generate_case_pdf
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
