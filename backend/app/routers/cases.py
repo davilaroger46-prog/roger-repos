@@ -1,5 +1,4 @@
-from typing import Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
@@ -21,40 +20,54 @@ def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
 
 @router.get("/")
 def list_cases(
-    regiao: Optional[str] = Query(None),
-    nivel:  Optional[str] = Query(None),
-    q:      Optional[str] = Query(None),
+    q: str | None = None,
+    regiao: str | None = None,
+    nivel: str | None = None,
+    conduta: str | None = None,
 ):
-    db = SessionLocal()
-    try:
-        query = db.query(ClinicalCaseModel)
+    db: Session = SessionLocal()
 
-        if regiao:
-            query = query.filter(ClinicalCaseModel.regiao.ilike(regiao))
-        if nivel:
-            query = query.filter(ClinicalCaseModel.nivel == nivel)
-        if q:
-            query = query.filter(ClinicalCaseModel.titulo.ilike(f"%{q}%"))
+    query = db.query(ClinicalCaseModel)
 
-        cases = query.order_by(ClinicalCaseModel.id.desc()).all()
+    if q:
+        query = query.filter(
+            ClinicalCaseModel.titulo.ilike(f"%{q}%")
+        )
 
-        result = [
-            {
-                "id":        case.id,
-                "titulo":    case.titulo,
-                "regiao":    case.regiao,
-                "nivel":     case.nivel,
-                "ao_codigo": case.ao_codigo,
-                "conduta":   case.caso_json.get("decisao_clinica", {})
-                             .get("output", {})
-                             .get("conduta"),
-            }
-            for case in cases
-        ]
+    if regiao:
+        query = query.filter(
+            ClinicalCaseModel.regiao == regiao
+        )
 
-        return result
-    finally:
-        db.close()
+    if nivel:
+        query = query.filter(
+            ClinicalCaseModel.nivel == nivel
+        )
+
+    cases = query.order_by(
+        ClinicalCaseModel.id.desc()
+    ).all()
+
+    result = []
+
+    for case in cases:
+        case_conduta = case.caso_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
+
+        if conduta and case_conduta != conduta:
+            continue
+
+        result.append({
+            "id": case.id,
+            "titulo": case.titulo,
+            "regiao": case.regiao,
+            "nivel": case.nivel,
+            "ao_codigo": case.ao_codigo,
+            "conduta": case_conduta,
+        })
+
+    db.close()
+
+    return result
 
 
 @router.get("/{case_id}")
