@@ -1,19 +1,18 @@
-export function getPath(obj, path) {
-  return path.split(".").reduce((acc, key) => acc?.[key], obj);
-}
-
-export function setPath(obj, path, value) {
+export function setByPath(obj, path, value) {
+  const copy = JSON.parse(JSON.stringify(obj));
   const keys = path.split(".");
-  const result = structuredClone(obj);
-  let cursor = result;
+  let cursor = copy;
 
   for (let i = 0; i < keys.length - 1; i++) {
-    if (cursor[keys[i]] === undefined || cursor[keys[i]] === null) {
-      cursor[keys[i]] = {};
-    }
+    if (!cursor[keys[i]]) cursor[keys[i]] = {};
     cursor = cursor[keys[i]];
   }
 
   cursor[keys[keys.length - 1]] = value;
-  return result;
+
+  return copy;
+}
+
+export function getByPath(obj, path) {
+  return path.split(".").reduce((acc, key) => acc?.[key], obj);
 }
