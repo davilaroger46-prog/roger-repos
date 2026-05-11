@@ -8,6 +8,7 @@ export default function SidebarCases({
   onLoadCase,
   onDeleteCase,
   onExportPdf,
+  onFilterChange,
 }) {
   const [search, setSearch] = useState("");
   const [nivel, setNivel] = useState("");
