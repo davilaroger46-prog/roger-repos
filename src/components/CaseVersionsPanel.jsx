@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { T } from "../constants/theme";
-import { listCaseVersions, getCaseVersion } from "../services/api";
+import { listCaseVersions, getCaseVersion, restoreCaseVersion } from "../services/api";
 
-export default function CaseVersionsPanel({ caseId, onOpenVersion }) {
+export default function CaseVersionsPanel({ caseId, onOpenVersion, onRestoreVersion }) {
   const [versions, setVersions] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -83,24 +83,45 @@ export default function CaseVersionsPanel({ caseId, onOpenVersion }) {
             </div>
           </div>
 
-          <button
-            onClick={async () => {
-              const data = await getCaseVersion(caseId, v.id);
-              onOpenVersion(data);
-            }}
-            style={{
-              padding: "7px 11px",
-              borderRadius: 8,
-              cursor: "pointer",
-              background: `${T.purple}12`,
-              border: `1px solid ${T.purple}35`,
-              color: T.purple,
-              fontSize: 11,
-              fontWeight: 800,
-            }}
-          >
-            Abrir
-          </button>
+          <div style={{ display: "flex", gap: 6 }}>
+            <button
+              onClick={async () => {
+                const data = await getCaseVersion(caseId, v.id);
+                onOpenVersion(data);
+              }}
+              style={{
+                padding: "7px 11px",
+                borderRadius: 8,
+                cursor: "pointer",
+                background: `${T.purple}12`,
+                border: `1px solid ${T.purple}35`,
+                color: T.purple,
+                fontSize: 11,
+                fontWeight: 800,
+              }}
+            >
+              Abrir
+            </button>
+
+            <button
+              onClick={async () => {
+                const restored = await restoreCaseVersion(caseId, v.id);
+                onRestoreVersion(restored);
+              }}
+              style={{
+                padding: "7px 11px",
+                borderRadius: 8,
+                cursor: "pointer",
+                background: `${T.green}12`,
+                border: `1px solid ${T.green}35`,
+                color: T.green,
+                fontSize: 11,
+                fontWeight: 800,
+              }}
+            >
+              Restaurar
+            </button>
+          </div>
         </div>
       ))}
     </div>

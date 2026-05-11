@@ -19,6 +19,7 @@ import {
   deleteCase,
   updateCase,
   autocorrectCase,
+  restoreCaseVersion,
 } from "./services/api";
 
 export default function App() {
@@ -262,6 +263,11 @@ export default function App() {
                     <CaseVersionsPanel
                       caseId={activeCaseId}
                       onOpenVersion={(oldCase) => setVersionPreview(oldCase)}
+                      onRestoreVersion={(restored) => {
+                        setCaso(restored);
+                        setVersionPreview(null);
+                        listCases().then(setSavedCases).catch(console.error);
+                      }}
                     />
                   </div>
                 )}
