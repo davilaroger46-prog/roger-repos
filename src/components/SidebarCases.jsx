@@ -66,7 +66,7 @@ export default function SidebarCases({
           marginBottom: 14,
         }}
       >
-        💾 Casos Salvos · {filteredCases.length}/{cases.length}
+        💾 Casos Salvos · {cases.length}
       </div>
 
       <input
