@@ -263,10 +263,12 @@ export default function App() {
                     <CaseVersionsPanel
                       caseId={activeCaseId}
                       onOpenVersion={(oldCase) => setVersionPreview(oldCase)}
-                      onRestoreVersion={(restored) => {
-                        setCaso(restored);
+                      onRestoreVersion={async (restoredCase) => {
+                        setCaso(restoredCase);
                         setVersionPreview(null);
-                        listCases().then(setSavedCases).catch(console.error);
+
+                        const list = await listCases();
+                        setSavedCases(list);
                       }}
                     />
                   </div>
