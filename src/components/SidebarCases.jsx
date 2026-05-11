@@ -252,6 +252,38 @@ export default function SidebarCases({
           Nenhum caso encontrado com esses filtros.
         </div>
       )}
+
+      {pages > 1 && (
+        <div
+          style={{
+            marginTop: 14,
+            paddingTop: 12,
+            borderTop: `1px solid ${T.border}`,
+          }}
+        >
+          <div style={{ fontSize: 11, color: T.muted, marginBottom: 8 }}>
+            Página {page} de {pages} · {total} casos
+          </div>
+
+          <div style={{ display: "flex", gap: 8 }}>
+            <button
+              disabled={page <= 1}
+              onClick={() => onPageChange(page - 1)}
+              style={pageButton(page <= 1)}
+            >
+              ← Anterior
+            </button>
+
+            <button
+              disabled={page >= pages}
+              onClick={() => onPageChange(page + 1)}
+              style={pageButton(page >= pages)}
+            >
+              Próxima →
+            </button>
+          </div>
+        </div>
+      )}
     </aside>
   );
 }
@@ -278,3 +310,16 @@ const selectStyle = {
   fontSize: 11,
   outline: "none",
 };
+
+const pageButton = (disabled) => ({
+  flex: 1,
+  padding: "7px 10px",
+  borderRadius: 8,
+  border: `1px solid ${T.border}`,
+  background: T.s2,
+  color: disabled ? T.muted : T.text,
+  fontSize: 11,
+  fontWeight: 700,
+  cursor: disabled ? "not-allowed" : "pointer",
+  opacity: disabled ? 0.4 : 1,
+});
