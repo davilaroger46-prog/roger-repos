@@ -345,6 +345,49 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Passo a passo cirúrgico">
+        <ObjectListEditor
+          label="Passos cirúrgicos"
+          items={draft.cirurgia?.passo_a_passo || []}
+          onChange={(v) => update("cirurgia.passo_a_passo", v)}
+          addLabel="+ Adicionar passo"
+          createItem={() => ({
+            ordem: (draft.cirurgia?.passo_a_passo?.length || 0) + 1,
+            titulo: "",
+            descricao: "",
+            ponto_critico: "",
+          })}
+          renderItem={(p, index, updateItem) => (
+            <>
+              <Field
+                label="Ordem"
+                type="number"
+                value={p.ordem}
+                onChange={(v) => updateItem(index, { ordem: Number(v) })}
+              />
+
+              <Field
+                label="Título"
+                value={p.titulo}
+                onChange={(v) => updateItem(index, { titulo: v })}
+              />
+
+              <TextAreaField
+                label="Descrição"
+                value={p.descricao}
+                onChange={(v) => updateItem(index, { descricao: v })}
+              />
+
+              <TextAreaField
+                label="Ponto crítico"
+                value={p.ponto_critico}
+                onChange={(v) => updateItem(index, { ponto_critico: v })}
+              />
+            </>
+          )}
+        />
+      </Section>
+
       <Section title="Técnicas cirúrgicas">
         <ObjectListEditor
           label="Técnicas"
