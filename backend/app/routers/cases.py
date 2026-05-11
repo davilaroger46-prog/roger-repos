@@ -49,6 +49,8 @@ def list_cases(
         "regiao": ClinicalCaseModel.regiao,
         "nivel": ClinicalCaseModel.nivel,
         "ao_codigo": ClinicalCaseModel.ao_codigo,
+        "created_at": ClinicalCaseModel.created_at,
+        "updated_at": ClinicalCaseModel.updated_at,
     }
 
     sort_column = sort_map.get(sort_by, ClinicalCaseModel.id)
@@ -92,6 +94,8 @@ def list_cases(
             "ao_codigo": case.ao_codigo,
             "conduta": case_conduta,
             "diagnostico": diagnostico,
+            "created_at": case.created_at.isoformat() if case.created_at else None,
+            "updated_at": case.updated_at.isoformat() if case.updated_at else None,
         })
 
     db.close()

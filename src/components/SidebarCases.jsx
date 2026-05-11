@@ -19,7 +19,7 @@ export default function SidebarCases({
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
   const [conduta, setConduta] = useState("");
-  const [sortBy, setSortBy] = useState("id");
+  const [sortBy, setSortBy] = useState("created_at");
   const [sortDir, setSortDir] = useState("desc");
 
   const debouncedSearch = useDebounce(search, 450);
@@ -127,7 +127,8 @@ export default function SidebarCases({
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={selectStyle}>
-            <option value="id">Mais recentes</option>
+            <option value="created_at">Mais recentes</option>
+            <option value="updated_at">Última edição</option>
             <option value="titulo">Título</option>
             <option value="regiao">Região</option>
             <option value="nivel">Nível</option>
@@ -141,14 +142,14 @@ export default function SidebarCases({
         </div>
       </div>
 
-      {(search || nivel || regiao || conduta || sortBy !== "id" || sortDir !== "desc") && (
+      {(search || nivel || regiao || conduta || sortBy !== "created_at" || sortDir !== "desc") && (
         <button
           onClick={() => {
             setSearch("");
             setNivel("");
             setRegiao("");
             setConduta("");
-            setSortBy("id");
+            setSortBy("created_at");
             setSortDir("desc");
           }}
           style={{
