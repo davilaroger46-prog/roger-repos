@@ -17,6 +17,7 @@ import {
   getCase,
   deleteCase,
   updateCase,
+  autocorrectCase,
 } from "./services/api";
 
 export default function App() {
