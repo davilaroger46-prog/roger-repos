@@ -57,6 +57,11 @@ export default function App() {
     setEditing(true);
   };
 
+  const handleCancelEdit = () => {
+    setEditing(false);
+    setEditJson("");
+  };
+
   const handleUpdateCase = async () => {
     if (!activeCaseId) return;
     try {
@@ -205,7 +210,7 @@ export default function App() {
                 editJson={editJson}
                 setEditJson={setEditJson}
                 onSave={handleUpdateCase}
-                onCancel={() => { setEditing(false); setEditJson(""); }}
+                onCancel={handleCancelEdit}
               />
             )}
             <CasePreview caso={caso} />
