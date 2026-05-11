@@ -219,6 +219,11 @@ export default function App() {
             ) : (
               <>
                 <CasePreview caso={versionPreview || caso} />
+                {versionPreview && (
+                  <div style={{ marginTop: 16 }}>
+                    <CaseVersionDiff currentCase={caso} oldCase={versionPreview} />
+                  </div>
+                )}
                 {activeCaseId && (
                   <div style={{ marginTop: 24 }}>
                     {versionPreview && (
