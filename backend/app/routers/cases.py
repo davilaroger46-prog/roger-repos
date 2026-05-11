@@ -1,13 +1,15 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
+from app.models.user_model import UserModel
 from app.schemas.case import ClinicalCase
 from app.services.pdf_service import generate_case_pdf
 from app.core.slugify import slugify
+from app.deps.auth_deps import get_current_user
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
