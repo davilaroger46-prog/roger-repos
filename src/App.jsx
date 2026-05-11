@@ -156,9 +156,7 @@ export default function App() {
           <div style={{ marginTop: 20 }}>
             <CaseActions
               caso={caso}
-              onFlashcards={(c) => setFlashcardCase(c)}
-              onDetail={(c) => setSelectedCase(c)}
-              onDelete={handleDeleteCase}
+              onNewCase={() => setCaso(null)}
             />
             <CasePreview caso={caso} />
           </div>

@@ -1,67 +1,63 @@
 import { T } from "../constants/theme";
 
-export default function CaseActions({ caso, onFlashcards, onDetail, onDelete }) {
+export default function CaseActions({ caso, onNewCase }) {
   if (!caso) return null;
 
-  const flashCount = caso.flashcards?.length ?? 0;
+  const copyJson = async () => {
+    await navigator.clipboard.writeText(JSON.stringify(caso, null, 2));
+    alert("JSON copiado.");
+  };
+
+  const downloadJson = () => {
+    const blob = new Blob([JSON.stringify(caso, null, 2)], {
+      type: "application/json",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    const slug = caso.meta?.slug || "caso-orthostudy";
+
+    a.href = url;
+    a.download = `${slug}.json`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div
       style={{
         display: "flex",
-        gap: 10,
+        gap: 8,
         flexWrap: "wrap",
-        marginBottom: 20,
+        marginBottom: 14,
       }}
     >
-      {onFlashcards && (
-        <ActionBtn
-          onClick={() => onFlashcards(caso)}
-          color={T.cyan}
-          label={`🃏 Estudar Flashcards (${flashCount})`}
-          disabled={flashCount === 0}
-        />
-      )}
+      <button onClick={copyJson} style={buttonStyle(T.cyan)}>
+        📋 Copiar JSON
+      </button>
 
-      {onDetail && (
-        <ActionBtn
-          onClick={() => onDetail(caso)}
-          color={T.blue}
-          label="📋 Ver Detalhes"
-        />
-      )}
+      <button onClick={downloadJson} style={buttonStyle(T.green)}>
+        ⬇️ Baixar JSON
+      </button>
 
-      {onDelete && (
-        <ActionBtn
-          onClick={() => onDelete(caso.id ?? caso.meta?.titulo)}
-          color={T.red}
-          label="🗑 Deletar"
-          ghost
-        />
-      )}
+      <button onClick={onNewCase} style={buttonStyle(T.amber)}>
+        ↺ Novo Caso
+      </button>
     </div>
   );
 }
 
-function ActionBtn({ onClick, color, label, disabled, ghost }) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      style={{
-        padding: "9px 16px",
-        borderRadius: 10,
-        border: `1px solid ${color}55`,
-        background: ghost ? "transparent" : `${color}18`,
-        color: disabled ? T.muted : color,
-        fontWeight: 700,
-        fontSize: 12,
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.5 : 1,
-        transition: "background .15s",
-      }}
-    >
-      {label}
-    </button>
-  );
+function buttonStyle(color) {
+  return {
+    padding: "8px 14px",
+    borderRadius: 9,
+    cursor: "pointer",
+    fontSize: 11,
+    fontWeight: 800,
+    background: `${color}12`,
+    border: `1px solid ${color}35`,
+    color,
+  };
 }
