@@ -1,20 +1,10 @@
-from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.database import init_db
-from app.routers import ai, cases
-
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await init_db()
-    yield
-
+from app.routers import ai
 
 app = FastAPI(
     title="OrthoStudy API",
     version="2.0.0",
-    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -29,7 +19,6 @@ app.add_middleware(
 )
 
 app.include_router(ai.router)
-app.include_router(cases.router)
 
 
 @app.get("/")

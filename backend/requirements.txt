@@ -3,5 +3,5 @@ uvicorn
 python-dotenv
 anthropic
 pydantic
-sqlalchemy[asyncio]
-asyncpg
+sqlalchemy
+psycopg2-binary
