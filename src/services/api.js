@@ -149,21 +149,20 @@ export async function restoreCaseVersion(caseId, versionId) {
 }
 
 export function downloadCasePdf(caseId) {
-  const token = getToken();
   const url = `${API_URL}/cases/${caseId}/pdf`;
 
-  if (token) {
-    fetch(url, { headers: authHeaders() })
-      .then((res) => res.blob())
-      .then((blob) => {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = `orthostudy-${caseId}.pdf`;
-        a.click();
-      });
-  } else {
-    window.open(url, "_blank");
-  }
+  fetch(url, {
+    headers: {
+      ...authHeaders(),
+    },
+  })
+    .then((res) => res.blob())
+    .then((blob) => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `orthostudy-${caseId}.pdf`;
+      a.click();
+    });
 }
 
 export async function deleteCase(caseId) {
