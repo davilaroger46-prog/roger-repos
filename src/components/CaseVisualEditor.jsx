@@ -198,6 +198,32 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Exame físico">
+        <ListEditor
+          label="Inspeção"
+          items={draft.exame_fisico?.inspecao || []}
+          onChange={(v) => update("exame_fisico.inspecao", v)}
+        />
+
+        <ListEditor
+          label="Palpação"
+          items={draft.exame_fisico?.palpacao || []}
+          onChange={(v) => update("exame_fisico.palpacao", v)}
+        />
+
+        <TextAreaField
+          label="Movimento / ROM"
+          value={draft.exame_fisico?.movimento}
+          onChange={(v) => update("exame_fisico.movimento", v)}
+        />
+
+        <ListEditor
+          label="Red flags"
+          items={draft.exame_fisico?.red_flags || []}
+          onChange={(v) => update("exame_fisico.red_flags", v)}
+        />
+      </Section>
+
       <Section title="Diagnósticos diferenciais">
         <ListEditor
           label="Diferenciais"
