@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
+from app.schemas.case import ClinicalCase
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
@@ -71,7 +72,8 @@ def update_case(case_id: int, payload: UpdateCasePayload):
     try:
         case = _get_case_or_404(db, case_id)
 
-        j = payload.caso_json
+        validated = ClinicalCase.model_validate(payload.caso_json)
+        j = validated.model_dump(by_alias=True, exclude_none=True, mode="json")
         case.caso_json = j
         case.titulo    = j.get("meta", {}).get("titulo", case.titulo)
         case.regiao    = j.get("meta", {}).get("regiao", case.regiao)
