@@ -180,7 +180,7 @@ export default function App() {
             {editing ? (
               <CaseVisualEditor
                 caso={caso}
-                onCancel={() => setEditing(false)}
+                onCancel={handleCancelEdit}
                 onSave={async (draft) => {
                   try {
                     if (!activeCaseId) {
@@ -197,6 +197,16 @@ export default function App() {
                     setSavedCases(list);
                   } catch (err) {
                     setError(err.message || "Erro ao salvar edição.");
+                  }
+                }}
+                onAutoCorrect={async (draft) => {
+                  try {
+                    setError(null);
+                    const corrected = await autocorrectCase(draft);
+                    return corrected;
+                  } catch (err) {
+                    setError(err.message || "Erro ao autocorrigir caso.");
+                    return draft;
                   }
                 }}
               />
