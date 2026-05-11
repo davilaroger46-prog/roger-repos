@@ -162,7 +162,7 @@ export default function App() {
         activeCaseId={activeCaseId}
         onLoadCase={handleLoadCase}
         onDeleteCase={handleDeleteCase}
-        onExportPdf={(id) => downloadCasePdf(id)}
+        onExportPdf={(caseId) => downloadCasePdf(caseId)}
       />
 
       <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
