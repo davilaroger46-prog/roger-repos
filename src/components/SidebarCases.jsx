@@ -80,6 +80,19 @@ export default function SidebarCases({
         style={inputStyle}
       />
 
+      {isSearching && (
+        <div
+          style={{
+            fontSize: 10,
+            color: T.cyan,
+            marginBottom: 8,
+            fontWeight: 700,
+          }}
+        >
+          Buscando...
+        </div>
+      )}
+
       <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 6, marginBottom: 12 }}>
         <select value={nivel} onChange={(e) => setNivel(e.target.value)} style={selectStyle}>
           <option value="">Nível</option>
