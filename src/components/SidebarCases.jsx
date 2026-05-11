@@ -131,6 +131,7 @@ export default function SidebarCases({
             <option value="titulo">Título</option>
             <option value="nivel">Nível</option>
             <option value="regiao">Região</option>
+            <option value="ao_codigo">AO/OTA</option>
           </select>
 
           <button
