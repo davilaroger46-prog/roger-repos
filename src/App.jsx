@@ -50,6 +50,13 @@ export default function App() {
 
   const stopPct = () => setGenerating(false);
 
+  const handleStartEdit = () => {
+    if (!caso) return;
+
+    setEditJson(JSON.stringify(caso, null, 2));
+    setEditing(true);
+  };
+
   const handleUpdateCase = async () => {
     if (!activeCaseId) return;
     try {
@@ -189,7 +196,7 @@ export default function App() {
             <CaseActions
               caso={caso}
               onNewCase={handleNewCase}
-              onEdit={() => setEditing((v) => !v)}
+              onEdit={handleStartEdit}
               editing={editing}
             />
             {editing && (
