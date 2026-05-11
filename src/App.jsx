@@ -43,17 +43,17 @@ export default function App() {
   const [versionPreview, setVersionPreview] = useState(null);
   const [caseFilters, setCaseFilters] = useState({});
 
-  useEffect(() => {
-    async function loadCases() {
-      try {
-        const data = await listCases();
-        setSavedCases(data);
-      } catch (err) {
-        console.error(err);
-      }
+  const refreshCases = async (filters = caseFilters) => {
+    try {
+      const data = await listCases(filters);
+      setSavedCases(data);
+    } catch (err) {
+      setError("Erro ao carregar casos.");
     }
+  };
 
-    loadCases();
+  useEffect(() => {
+    refreshCases({});
   }, []);
 
   const stopPct = () => setGenerating(false);
@@ -79,8 +79,7 @@ export default function App() {
       setStage("Caso gerado com sucesso.");
       setCaso(data);
 
-      const updated = await listCases();
-      setSavedCases(updated);
+      await refreshCases();
     } catch (err) {
       stopPct();
       setStage("");
@@ -102,8 +101,7 @@ export default function App() {
     try {
       await deleteCase(caseId);
 
-      const updated = await listCases();
-      setSavedCases(updated);
+      await refreshCases();
 
       if (activeCaseId === caseId) {
         setCaso(null);
@@ -119,8 +117,7 @@ export default function App() {
 
   const handleSave = async () => {
     try {
-      const data = await listCases();
-      setSavedCases(data);
+      await refreshCases();
     } catch (err) {
       setError("Erro ao atualizar lista de casos.");
     }
@@ -165,6 +162,10 @@ export default function App() {
         onLoadCase={handleLoadCase}
         onDeleteCase={handleDeleteCase}
         onExportPdf={(caseId) => downloadCasePdf(caseId)}
+        onFilterChange={(filters) => {
+          setCaseFilters(filters);
+          refreshCases(filters);
+        }}
       />
 
       <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
@@ -213,8 +214,7 @@ export default function App() {
                     setCaso(updated);
                     setEditing(false);
 
-                    const list = await listCases();
-                    setSavedCases(list);
+                    await refreshCases();
                   } catch (err) {
                     setError(err.message || "Erro ao salvar edição.");
                   }
@@ -246,8 +246,7 @@ export default function App() {
 
                         setCaso(updated);
 
-                        const list = await listCases();
-                        setSavedCases(list);
+                        await refreshCases();
                       } catch (err) {
                         setError(err.message || "Erro ao restaurar campo.");
                       }
@@ -261,8 +260,7 @@ export default function App() {
 
                         setCaso(updated);
 
-                        const list = await listCases();
-                        setSavedCases(list);
+                        await refreshCases();
                       } catch (err) {
                         setError(err.message || "Erro ao restaurar bloco.");
                       }
@@ -318,8 +316,7 @@ export default function App() {
                         setCaso(restoredCase);
                         setVersionPreview(null);
 
-                        const list = await listCases();
-                        setSavedCases(list);
+                        await refreshCases();
                       }}
                     />
                   </div>
