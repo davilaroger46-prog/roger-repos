@@ -8,6 +8,7 @@ from app.db.database import Base
 from app.core.config import DATABASE_URL
 from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
+from app.models.user_model import UserModel
 
 config = context.config
 
