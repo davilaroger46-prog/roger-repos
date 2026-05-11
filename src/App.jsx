@@ -41,6 +41,7 @@ export default function App() {
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
   const [versionPreview, setVersionPreview] = useState(null);
+  const [caseFilters, setCaseFilters] = useState({});
 
   useEffect(() => {
     async function loadCases() {
