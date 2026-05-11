@@ -14,7 +14,7 @@ router = APIRouter(prefix="/ai", tags=["AI"])
 @router.post("/generate-case")
 def generate_case(
     payload: GenerateCaseInput,
-    user: UserModel = Depends(get_current_user),
+    current_user: UserModel = Depends(get_current_user),
 ):
     try:
         case = generate_orthopedic_case(
@@ -30,7 +30,7 @@ def generate_case(
                 regiao=case["meta"]["regiao"],
                 nivel=case["meta"]["nivel"],
                 ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
-                user_id=user.id,
+                user_id=current_user.id,
                 caso_json=case,
             )
 
