@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import or_
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
@@ -30,28 +29,13 @@ def list_cases(
 
     query = db.query(ClinicalCaseModel)
 
-    if q:
-        query = query.filter(
-            or_(
-                ClinicalCaseModel.titulo.ilike(f"%{q}%"),
-                ClinicalCaseModel.regiao.ilike(f"%{q}%"),
-                ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
-            )
-        )
-
     if regiao:
-        query = query.filter(
-            ClinicalCaseModel.regiao == regiao
-        )
+        query = query.filter(ClinicalCaseModel.regiao == regiao)
 
     if nivel:
-        query = query.filter(
-            ClinicalCaseModel.nivel == nivel
-        )
+        query = query.filter(ClinicalCaseModel.nivel == nivel)
 
-    cases = query.order_by(
-        ClinicalCaseModel.id.desc()
-    ).all()
+    cases = query.order_by(ClinicalCaseModel.id.desc()).all()
 
     result = []
 
@@ -60,9 +44,21 @@ def list_cases(
 
         diagnostico = case_json.get("diagnostico", {}).get("principal", "")
         resumo = case_json.get("output_app", {}).get("resumo", "")
-        conduta_json = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
+        case_conduta = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
 
-        if conduta and conduta_json != conduta:
+        if q:
+            searchable_text = " ".join([
+                case.titulo or "",
+                case.regiao or "",
+                case.ao_codigo or "",
+                diagnostico or "",
+                resumo or "",
+            ]).lower()
+
+            if q.lower() not in searchable_text:
+                continue
+
+        if conduta and case_conduta != conduta:
             continue
 
         result.append({
@@ -71,9 +67,8 @@ def list_cases(
             "regiao": case.regiao,
             "nivel": case.nivel,
             "ao_codigo": case.ao_codigo,
-            "conduta": conduta_json,
+            "conduta": case_conduta,
             "diagnostico": diagnostico,
-            "resumo": resumo,
         })
 
     db.close()
