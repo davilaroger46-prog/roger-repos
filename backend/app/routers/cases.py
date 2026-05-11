@@ -38,22 +38,21 @@ def list_cases(
 
         cases = query.order_by(ClinicalCaseModel.id.desc()).all()
 
-        return [
+        result = [
             {
-                "id":         c.id,
-                "titulo":     c.titulo,
-                "regiao":     c.regiao,
-                "nivel":      c.nivel,
-                "ao_codigo":  c.ao_codigo,
-                "meta":       c.caso_json.get("meta", {}),
-                "paciente":   c.caso_json.get("paciente", {}),
-                "output_app": c.caso_json.get("output_app", {}),
-                "conduta":    c.caso_json.get("decisao_clinica", {})
-                              .get("output", {})
-                              .get("conduta"),
+                "id":        case.id,
+                "titulo":    case.titulo,
+                "regiao":    case.regiao,
+                "nivel":     case.nivel,
+                "ao_codigo": case.ao_codigo,
+                "conduta":   case.caso_json.get("decisao_clinica", {})
+                             .get("output", {})
+                             .get("conduta"),
             }
-            for c in cases
+            for case in cases
         ]
+
+        return result
     finally:
         db.close()
 
