@@ -27,6 +27,9 @@ export default function App() {
   const [stage, setStage] = useState("");
   const [generating, setGenerating] = useState(false);
   const [activeCaseId, setActiveCaseId] = useState(null);
+  const [tema, setTema] = useState("");
+  const [regiao, setRegiao] = useState("");
+  const [pct, setPct] = useState(0);
 
   useEffect(() => {
     async function loadCases() {
@@ -42,6 +45,16 @@ export default function App() {
   }, []);
 
   const stopPct = () => setGenerating(false);
+
+  const handleNewCase = () => {
+    setCaso(null);
+    setTema("");
+    setRegiao("");
+    setError(null);
+    setPct(0);
+    setStage("");
+    setActiveCaseId(null);
+  };
 
   const handleGenerate = async ({ tema, nivel, regiao }) => {
     setGenerating(true);
@@ -156,7 +169,7 @@ export default function App() {
           <div style={{ marginTop: 20 }}>
             <CaseActions
               caso={caso}
-              onNewCase={() => setCaso(null)}
+              onNewCase={handleNewCase}
             />
             <CasePreview caso={caso} />
           </div>
