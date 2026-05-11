@@ -101,12 +101,13 @@ export default function SidebarCases({
         </select>
       </div>
 
-      {(search || nivel || regiao) && (
+      {(search || nivel || regiao || conduta) && (
         <button
           onClick={() => {
             setSearch("");
             setNivel("");
             setRegiao("");
+            setConduta("");
           }}
           style={{
             width: "100%",
