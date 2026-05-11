@@ -1,5 +1,23 @@
 const API_URL = "http://localhost:8000";
 
+export function setToken(token) {
+  localStorage.setItem("orthostudy_token", token);
+}
+
+export function getToken() {
+  return localStorage.getItem("orthostudy_token");
+}
+
+export function authHeaders() {
+  const token = getToken();
+
+  return token
+    ? {
+        Authorization: `Bearer ${token}`,
+      }
+    : {};
+}
+
 export async function generateCase({ tema, nivel, regiao }) {
   const response = await fetch(`${API_URL}/ai/generate-case`, {
     method: "POST",
