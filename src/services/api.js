@@ -71,6 +71,26 @@ export async function autocorrectCase(caseJson) {
   return response.json();
 }
 
+export async function listCaseVersions(caseId) {
+  const response = await fetch(`${API_URL}/cases/${caseId}/versions`);
+
+  if (!response.ok) {
+    throw new Error("Erro ao listar versões");
+  }
+
+  return response.json();
+}
+
+export async function getCaseVersion(caseId, versionId) {
+  const response = await fetch(`${API_URL}/cases/${caseId}/versions/${versionId}`);
+
+  if (!response.ok) {
+    throw new Error("Erro ao carregar versão");
+  }
+
+  return response.json();
+}
+
 export async function deleteCase(caseId) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "DELETE",
