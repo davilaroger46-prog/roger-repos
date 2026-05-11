@@ -37,16 +37,18 @@ export async function getCase(caseId) {
   return response.json();
 }
 
-export async function updateCase(caseId, casoJson) {
+export async function updateCase(caseId, caseJson) {
   const response = await fetch(`${API_URL}/cases/${caseId}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(casoJson),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(caseJson),
   });
 
   if (!response.ok) {
     const err = await response.json().catch(() => null);
-    throw new Error(err?.detail || "Erro ao salvar caso");
+    throw new Error(err?.detail || "Erro ao atualizar caso");
   }
 
   return response.json();
