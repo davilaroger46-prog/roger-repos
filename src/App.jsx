@@ -18,6 +18,7 @@ export default function App() {
   const [selectedCase, setSelectedCase] = useState(null);
   const [flashcardCase, setFlashcardCase] = useState(null);
   const [savedCases, setSavedCases] = useState([]);
+  const [caso, setCaso] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -32,6 +33,15 @@ export default function App() {
 
     loadCases();
   }, []);
+
+  const handleLoadCase = async (caseId) => {
+    try {
+      const data = await getCase(caseId);
+      setCaso(data);
+    } catch (err) {
+      setError("Erro ao carregar caso.");
+    }
+  };
 
   const handleSave = async () => {
     try {
