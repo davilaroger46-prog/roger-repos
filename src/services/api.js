@@ -18,6 +18,36 @@ export function authHeaders() {
     : {};
 }
 
+export async function registerUser({ name, email, password }) {
+  const response = await fetch(`${API_URL}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => null);
+    throw new Error(err?.detail || "Erro ao criar conta");
+  }
+
+  return response.json();
+}
+
+export async function loginUser({ email, password }) {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => null);
+    throw new Error(err?.detail || "Erro ao fazer login");
+  }
+
+  return response.json();
+}
+
 export async function generateCase({ tema, nivel, regiao }) {
   const response = await fetch(`${API_URL}/ai/generate-case`, {
     method: "POST",
