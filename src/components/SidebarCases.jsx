@@ -10,6 +10,10 @@ export default function SidebarCases({
   onDeleteCase,
   onExportPdf,
   onFilterChange,
+  page,
+  pages,
+  total,
+  onPageChange,
 }) {
   const [search, setSearch] = useState("");
   const [nivel, setNivel] = useState("");
