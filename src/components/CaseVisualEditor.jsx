@@ -345,6 +345,48 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Técnicas cirúrgicas">
+        <ObjectListEditor
+          label="Técnicas"
+          items={draft.tratamento?.cirurgico?.tecnicas || []}
+          onChange={(v) => update("tratamento.cirurgico.tecnicas", v)}
+          addLabel="+ Adicionar técnica"
+          createItem={() => ({
+            nome: "",
+            quando_usar: "",
+            vantagens: [],
+            desvantagens: [],
+          })}
+          renderItem={(t, index, updateItem) => (
+            <>
+              <Field
+                label="Nome da técnica"
+                value={t.nome}
+                onChange={(v) => updateItem(index, { nome: v })}
+              />
+
+              <TextAreaField
+                label="Quando usar"
+                value={t.quando_usar}
+                onChange={(v) => updateItem(index, { quando_usar: v })}
+              />
+
+              <ListEditor
+                label="Vantagens"
+                items={t.vantagens || []}
+                onChange={(v) => updateItem(index, { vantagens: v })}
+              />
+
+              <ListEditor
+                label="Desvantagens"
+                items={t.desvantagens || []}
+                onChange={(v) => updateItem(index, { desvantagens: v })}
+              />
+            </>
+          )}
+        />
+      </Section>
+
       <Section title="Complicações">
         <ListEditor
           label="Complicações precoces"
