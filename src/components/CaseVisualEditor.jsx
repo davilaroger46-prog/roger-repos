@@ -627,6 +627,29 @@ export default function CaseVisualEditor({
           Cancelar
         </button>
       </div>
+
+      {validationErrors.length > 0 && (
+        <div
+          style={{
+            background: "rgba(225,29,72,.07)",
+            border: "1px solid rgba(225,29,72,.25)",
+            borderRadius: 12,
+            padding: 12,
+            marginTop: 12,
+            color: "#fca5a5",
+            fontSize: 12,
+            lineHeight: 1.7,
+          }}
+        >
+          <strong>Corrija antes de salvar:</strong>
+
+          <ul style={{ marginTop: 6, paddingLeft: 18 }}>
+            {validationErrors.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
