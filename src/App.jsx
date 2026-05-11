@@ -33,7 +33,6 @@ export default function App() {
   const [regiao, setRegiao] = useState("");
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
-  const [editJson, setEditJson] = useState("");
 
   useEffect(() => {
     async function loadCases() {
@@ -49,40 +48,6 @@ export default function App() {
   }, []);
 
   const stopPct = () => setGenerating(false);
-
-  const handleStartEdit = () => {
-    if (!caso) return;
-
-    setEditJson(JSON.stringify(caso, null, 2));
-    setEditing(true);
-  };
-
-  const handleCancelEdit = () => {
-    setEditing(false);
-    setEditJson("");
-  };
-
-  const handleSaveEdit = async () => {
-    try {
-      if (!activeCaseId) {
-        setError("Este caso ainda não possui ID no banco.");
-        return;
-      }
-
-      const parsed = JSON.parse(editJson);
-
-      const updated = await updateCase(activeCaseId, parsed);
-
-      setCaso(updated);
-      setEditing(false);
-      setEditJson("");
-
-      const list = await listCases();
-      setSavedCases(list);
-    } catch (err) {
-      setError(err.message || "Erro ao salvar edição.");
-    }
-  };
 
   const handleNewCase = () => {
     setCaso(null);
@@ -208,59 +173,32 @@ export default function App() {
             <CaseActions
               caso={caso}
               onNewCase={handleNewCase}
-              onEdit={handleStartEdit}
+              onEdit={() => setEditing(true)}
             />
 
             {editing ? (
-              <div
-                style={{
-                  background: T.s1,
-                  border: `1px solid ${T.b2}`,
-                  borderRadius: 18,
-                  padding: 18,
+              <CaseVisualEditor
+                caso={caso}
+                onCancel={() => setEditing(false)}
+                onSave={async (draft) => {
+                  try {
+                    if (!activeCaseId) {
+                      setError("Este caso ainda não possui ID no banco.");
+                      return;
+                    }
+
+                    const updated = await updateCase(activeCaseId, draft);
+
+                    setCaso(updated);
+                    setEditing(false);
+
+                    const list = await listCases();
+                    setSavedCases(list);
+                  } catch (err) {
+                    setError(err.message || "Erro ao salvar edição.");
+                  }
                 }}
-              >
-                <div
-                  style={{
-                    fontSize: 10,
-                    color: T.amber,
-                    fontWeight: 800,
-                    textTransform: "uppercase",
-                    letterSpacing: ".1em",
-                    marginBottom: 10,
-                  }}
-                >
-                  Modo edição JSON
-                </div>
-
-                <textarea
-                  value={editJson}
-                  onChange={(e) => setEditJson(e.target.value)}
-                  rows={26}
-                  style={{
-                    width: "100%",
-                    background: T.s2,
-                    border: `1px solid ${T.border}`,
-                    borderRadius: 12,
-                    padding: 14,
-                    color: "#a5f3fc",
-                    fontSize: 11,
-                    lineHeight: 1.6,
-                    fontFamily: "monospace",
-                    outline: "none",
-                  }}
-                />
-
-                <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-                  <button onClick={handleSaveEdit} style={editButton(T.green)}>
-                    💾 Salvar alterações
-                  </button>
-
-                  <button onClick={handleCancelEdit} style={editButton(T.red)}>
-                    Cancelar
-                  </button>
-                </div>
-              </div>
+              />
             ) : (
               <CasePreview caso={caso} />
             )}
@@ -269,17 +207,4 @@ export default function App() {
       </main>
     </div>
   );
-}
-
-function editButton(color) {
-  return {
-    padding: "9px 15px",
-    borderRadius: 9,
-    cursor: "pointer",
-    fontSize: 12,
-    fontWeight: 800,
-    background: `${color}12`,
-    border: `1px solid ${color}35`,
-    color,
-  };
 }
