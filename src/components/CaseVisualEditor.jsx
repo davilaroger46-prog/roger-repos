@@ -391,3 +391,64 @@ function buttonStyle(color) {
     color,
   };
 }
+
+function ListEditor({ label, items = [], onChange, placeholder = "Novo item" }) {
+  const updateItem = (index, value) => {
+    const next = [...items];
+    next[index] = value;
+    onChange(next);
+  };
+
+  const addItem = () => {
+    onChange([...(items || []), ""]);
+  };
+
+  const removeItem = (index) => {
+    onChange(items.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div style={{ gridColumn: "1 / -1" }}>
+      <div style={labelText}>{label}</div>
+
+      <div style={{ display: "grid", gap: 8, marginTop: 6 }}>
+        {items?.map((item, index) => (
+          <div key={index} style={{ display: "flex", gap: 8 }}>
+            <input
+              value={item ?? ""}
+              onChange={(e) => updateItem(index, e.target.value)}
+              placeholder={placeholder}
+              style={inputStyle}
+            />
+
+            <button
+              onClick={() => removeItem(index)}
+              type="button"
+              style={smallButton(T.red)}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+
+        <button onClick={addItem} type="button" style={smallButton(T.blue)}>
+          + Adicionar item
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function smallButton(color) {
+  return {
+    padding: "8px 11px",
+    borderRadius: 8,
+    cursor: "pointer",
+    fontSize: 12,
+    fontWeight: 800,
+    background: `${color}12`,
+    border: `1px solid ${color}35`,
+    color,
+    whiteSpace: "nowrap",
+  };
+}
