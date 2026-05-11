@@ -295,6 +295,56 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Medicamentos">
+        <ObjectListEditor
+          label="Medicamentos do tratamento conservador"
+          items={draft.tratamento?.conservador?.medicamentos || []}
+          onChange={(v) => update("tratamento.conservador.medicamentos", v)}
+          addLabel="+ Adicionar medicamento"
+          createItem={() => ({
+            nome: "",
+            dose: "",
+            via: "VO",
+            intervalo: "",
+            duracao: "",
+          })}
+          renderItem={(m, index, updateItem) => (
+            <>
+              <Field
+                label="Nome"
+                value={m.nome}
+                onChange={(v) => updateItem(index, { nome: v })}
+              />
+
+              <Field
+                label="Dose"
+                value={m.dose}
+                onChange={(v) => updateItem(index, { dose: v })}
+              />
+
+              <SelectField
+                label="Via"
+                value={m.via}
+                options={["VO", "IV", "IM", "SC"]}
+                onChange={(v) => updateItem(index, { via: v })}
+              />
+
+              <Field
+                label="Intervalo"
+                value={m.intervalo}
+                onChange={(v) => updateItem(index, { intervalo: v })}
+              />
+
+              <Field
+                label="Duração"
+                value={m.duracao}
+                onChange={(v) => updateItem(index, { duracao: v })}
+              />
+            </>
+          )}
+        />
+      </Section>
+
       <Section title="Complicações">
         <ListEditor
           label="Complicações precoces"
