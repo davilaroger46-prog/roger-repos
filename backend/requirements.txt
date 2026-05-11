@@ -4,6 +4,7 @@ uvicorn
 python-dotenv
 anthropic
 pydantic[email]
+email-validator
 sqlalchemy
 psycopg2-binary
 reportlab
