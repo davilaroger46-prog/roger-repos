@@ -37,7 +37,13 @@ def list_cases(
     if nivel:
         query = query.filter(ClinicalCaseModel.nivel == nivel)
 
-    cases = query.order_by(ClinicalCaseModel.id.desc()).all()
+    total = query.count()
+
+    offset = (page - 1) * page_size
+
+    cases = query.order_by(
+        ClinicalCaseModel.id.desc()
+    ).offset(offset).limit(page_size).all()
 
     result = []
 
@@ -75,16 +81,12 @@ def list_cases(
 
     db.close()
 
-    total = len(result)
-    offset = (page - 1) * page_size
-    paginated = result[offset: offset + page_size]
-
     return {
+        "items": result,
         "total": total,
         "page": page,
         "page_size": page_size,
-        "pages": -(-total // page_size),
-        "items": paginated,
+        "pages": (total + page_size - 1) // page_size,
     }
 
 
