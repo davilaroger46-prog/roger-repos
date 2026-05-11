@@ -295,6 +295,26 @@ export default function CaseVisualEditor({
         />
       </Section>
 
+      <Section title="Complicações">
+        <ListEditor
+          label="Complicações precoces"
+          items={draft.complicacoes?.precoces || []}
+          onChange={(v) => update("complicacoes.precoces", v)}
+        />
+
+        <ListEditor
+          label="Complicações tardias"
+          items={draft.complicacoes?.tardias || []}
+          onChange={(v) => update("complicacoes.tardias", v)}
+        />
+
+        <ListEditor
+          label="Prevenção"
+          items={draft.complicacoes?.prevencao || []}
+          onChange={(v) => update("complicacoes.prevencao", v)}
+        />
+      </Section>
+
       <Section title="Output do app">
         <Field
           label="Diagnóstico resumido"
