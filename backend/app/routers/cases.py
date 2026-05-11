@@ -56,9 +56,13 @@ def list_cases(
     result = []
 
     for case in cases:
-        case_conduta = case.caso_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
+        case_json = case.caso_json or {}
 
-        if conduta and case_conduta != conduta:
+        diagnostico = case_json.get("diagnostico", {}).get("principal", "")
+        resumo = case_json.get("output_app", {}).get("resumo", "")
+        conduta_json = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
+
+        if conduta and conduta_json != conduta:
             continue
 
         result.append({
@@ -67,7 +71,9 @@ def list_cases(
             "regiao": case.regiao,
             "nivel": case.nivel,
             "ao_codigo": case.ao_codigo,
-            "conduta": case_conduta,
+            "conduta": conduta_json,
+            "diagnostico": diagnostico,
+            "resumo": resumo,
         })
 
     db.close()
