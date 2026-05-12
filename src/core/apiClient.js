@@ -34,11 +34,18 @@ export async function apiClient(path, options = {}) {
 
   if (!response.ok) {
     const error = await response.json().catch(() => null);
+
     const message =
       error?.detail?.message ||
-      (typeof error?.detail === "string" ? error.detail : null) ||
+      error?.detail ||
       `Erro HTTP ${response.status}`;
-    throw new Error(message);
+
+    const err = new Error(message);
+    err.status = response.status;
+    err.code = error?.detail?.code;
+    err.details = error?.detail?.details;
+
+    throw err;
   }
 
   const contentType = response.headers.get("content-type");
