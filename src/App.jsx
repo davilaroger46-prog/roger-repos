@@ -73,9 +73,14 @@ export default function App() {
       setIsAuthenticated(false);
       setCaso(null);
       setSavedCases([]);
+      showToast("Sessão expirada. Faça login novamente.", "error");
     };
+
     window.addEventListener("orthostudy:unauthorized", handler);
-    return () => window.removeEventListener("orthostudy:unauthorized", handler);
+
+    return () => {
+      window.removeEventListener("orthostudy:unauthorized", handler);
+    };
   }, []);
 
   const stopPct = () => setGenerating(false);
