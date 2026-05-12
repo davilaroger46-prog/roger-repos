@@ -19,13 +19,6 @@ from app.core.logging import logger
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
 
-def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
-    case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
-    if not case:
-        raise not_found(f"Caso {case_id} não encontrado.")
-    return case
-
-
 @router.get("/")
 def list_cases(
     q: str | None = None,
@@ -144,23 +137,31 @@ def get_case(
     case_id: int,
     current_user: UserModel = Depends(get_current_user),
 ):
-    db = SessionLocal()
+    db: Session = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
+        if current_user.role in ["reviewer", "admin"]:
+            case = db.query(ClinicalCaseModel).filter(
+                ClinicalCaseModel.id == case_id,
+            ).first()
+        else:
+            case = db.query(ClinicalCaseModel).filter(
+                ClinicalCaseModel.id == case_id,
+                ClinicalCaseModel.user_id == current_user.id,
+            ).first()
+
         if not case:
             raise not_found("Caso não encontrado")
+
         data = dict(case.caso_json or {})
         data["_db"] = {
             "id": case.id,
+            "user_id": case.user_id,
             "review_status": case.review_status,
             "review_notes": case.review_notes,
             "reviewed_by": case.reviewed_by,
-            "reviewed_at": str(case.reviewed_at) if case.reviewed_at else None,
-            "created_at": str(case.created_at) if case.created_at else None,
-            "updated_at": str(case.updated_at) if case.updated_at else None,
+            "reviewed_at": case.reviewed_at,
+            "created_at": case.created_at,
+            "updated_at": case.updated_at,
         }
         return data
     finally:
@@ -174,17 +175,15 @@ def update_case(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
-
-    case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id,
-        ClinicalCaseModel.user_id == current_user.id,
-    ).first()
-
-    if not case_db:
-        db.close()
-        raise not_found("Caso não encontrado")
-
     try:
+        case_db = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
+
+        if not case_db:
+            raise not_found("Caso não encontrado")
+
         validated = ClinicalCase.model_validate(payload)
 
         case_json = validated.model_dump(
@@ -278,26 +277,23 @@ def restore_case_version(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
-
-    case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id,
-        ClinicalCaseModel.user_id == current_user.id,
-    ).first()
-
-    if not case_db:
-        db.close()
-        raise not_found("Caso não encontrado")
-
-    version = db.query(ClinicalCaseVersionModel).filter(
-        ClinicalCaseVersionModel.case_id == case_id,
-        ClinicalCaseVersionModel.id == version_id,
-    ).first()
-
-    if not version:
-        db.close()
-        raise not_found("Versão não encontrada")
-
     try:
+        case_db = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
+
+        if not case_db:
+            raise not_found("Caso não encontrado")
+
+        version = db.query(ClinicalCaseVersionModel).filter(
+            ClinicalCaseVersionModel.case_id == case_id,
+            ClinicalCaseVersionModel.id == version_id,
+        ).first()
+
+        if not version:
+            raise not_found("Versão não encontrada")
+
         backup = ClinicalCaseVersionModel(
             case_id=case_db.id,
             action="before_restore",
