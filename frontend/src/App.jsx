@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
+import DashboardPage from "./pages/DashboardPage";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
 import ReviewQueue from "./components/ReviewQueue";
 import ReviewPanel from "./components/ReviewPanel";
-import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
 import { showToast } from "./core/toastStore";
@@ -344,7 +344,7 @@ export default function App() {
         )}
 
         {activeTab === "dashboard" && (
-          <ProgressPage />
+          <DashboardPage cases={savedCases} />
         )}
 
         {activeTab === "review" && (
