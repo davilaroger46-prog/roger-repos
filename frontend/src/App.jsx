@@ -23,7 +23,6 @@ import {
 } from "./services/api";
 
 export default function App() {
-  const { isAuthenticated, currentUser, handleAuthSuccess, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("generate");
   const [stage, setStage] = useState("");
   const [generating, setGenerating] = useState(false);
@@ -38,7 +37,6 @@ export default function App() {
 
   const {
     cases: savedCases,
-    setCases: setSavedCases,
     caso,
     setCaso,
     activeCaseId,
@@ -53,7 +51,10 @@ export default function App() {
     applyFilters,
     changePage,
     resetCaseSelection,
+    reset: resetCases,
   } = useCases();
+
+  const { isAuthenticated, currentUser, handleAuthSuccess, logout } = useAuth({ onLogout: resetCases });
 
   useEffect(() => {
     refreshCases({});
@@ -229,11 +230,7 @@ export default function App() {
               </div>
             </div>
             <button
-              onClick={() => {
-                logout();
-                resetCaseSelection();
-                setSavedCases([]);
-              }}
+              onClick={logout}
               style={{
                 padding: "7px 12px",
                 borderRadius: 9,

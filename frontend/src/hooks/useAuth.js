@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { getMe, getToken, logoutUser } from "../services/api";
 
-export default function useAuth() {
+export default function useAuth({ onLogout } = {}) {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
   const [currentUser, setCurrentUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(false);
@@ -38,7 +38,8 @@ export default function useAuth() {
     logoutUser();
     setIsAuthenticated(false);
     setCurrentUser(null);
-  }, []);
+    onLogout?.();
+  }, [onLogout]);
 
   useEffect(() => {
     if (getToken()) {

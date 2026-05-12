@@ -63,6 +63,16 @@ export default function useCases() {
     setActiveCaseId(null);
   };
 
+  const reset = () => {
+    setCases([]);
+    setCaso(null);
+    setActiveCaseId(null);
+    setCaseFilters({});
+    setCasePage(1);
+    setCasePages(1);
+    setCaseTotal(0);
+  };
+
   return {
     cases,
     setCases,
@@ -86,5 +96,6 @@ export default function useCases() {
     applyFilters,
     changePage,
     resetCaseSelection,
+    reset,
   };
 }
