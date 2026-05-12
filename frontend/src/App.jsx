@@ -1,11 +1,5 @@
-import { useState, useEffect } from "react";
-import CaseListPage from "./pages/CaseListPage";
-import CaseDetailPage from "./pages/CaseDetailPage";
-import FlashcardPage from "./pages/FlashcardPage";
-import ProgressPage from "./pages/ProgressPage";
+import { useState, useEffect, useRef } from "react";
 import GeneratePage from "./pages/GeneratePage";
-import DecisionPage from "./pages/DecisionPage";
-import { TABS } from "./constants/prompt";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import CasePreview from "./components/CasePreview";
@@ -18,9 +12,9 @@ import TopNav from "./components/TopNav";
 import ReviewQueue from "./components/ReviewQueue";
 import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
-import ToastContainer from "./components/ToastContainer";
+import ToastContainer from "./components/Toast";
 import { showToast } from "./core/toastStore";
-import { confirmAction } from "./core/confirmDialog";
+import { confirmAction } from "./core/confirm";
 import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
@@ -50,7 +44,9 @@ export default function App() {
   const [generating, setGenerating] = useState(false);
   const [activeCaseId, setActiveCaseId] = useState(null);
   const [tema, setTema] = useState("");
+  const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
+  const textareaRef = useRef(null);
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
   const [versionPreview, setVersionPreview] = useState(null);
@@ -104,36 +100,15 @@ export default function App() {
     };
   }, []);
 
-  const stopPct = () => setGenerating(false);
-
   const handleNewCase = () => {
     setCaso(null);
     setTema("");
+    setNivel("");
     setRegiao("");
     setError(null);
     setPct(0);
     setStage("");
     setActiveCaseId(null);
-  };
-
-  const handleGenerate = async ({ tema, nivel, regiao }) => {
-    setGenerating(true);
-    setStage("Gerando caso com IA...");
-    setError(null);
-    try {
-      const data = await generateCase({ tema, nivel, regiao });
-
-      stopPct();
-      setStage("Caso gerado com sucesso.");
-      setCaso(data);
-
-      await refreshCases();
-      showToast("Caso gerado com sucesso.");
-    } catch (err) {
-      stopPct();
-      setStage("");
-      showToast(err.message || "Erro ao gerar caso.", "error");
-    }
   };
 
   const handleLoadCase = async (caseId) => {
@@ -286,7 +261,37 @@ export default function App() {
         <TopNav activeTab={activeTab} onChange={setActiveTab} user={currentUser} />
 
         {activeTab === "generate" && (
-          <GeneratePage onGenerated={(c) => { setSelectedCase(c); setActiveTab("library"); }} />
+          <GeneratePage
+            tema={tema}
+            setTema={setTema}
+            nivel={nivel}
+            setNivel={setNivel}
+            regiao={regiao}
+            setRegiao={setRegiao}
+            loading={generating}
+            stage={stage}
+            pct={pct}
+            textareaRef={textareaRef}
+            onGenerate={async () => {
+              if (!tema.trim()) return;
+              setGenerating(true);
+              setStage("Gerando caso com IA...");
+              setError(null);
+              try {
+                const data = await generateCase({ tema, nivel, regiao });
+                setCaso(data);
+                setActiveCaseId(data.id || null);
+                await refreshCases();
+                showToast("Caso gerado com sucesso.");
+                setActiveTab("library");
+              } catch (err) {
+                showToast(err.message || "Erro ao gerar caso.", "error");
+              } finally {
+                setGenerating(false);
+                setStage("");
+              }
+            }}
+          />
         )}
 
         {activeTab === "dashboard" && (
