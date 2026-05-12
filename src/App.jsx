@@ -15,6 +15,8 @@ import CaseVersionsPanel from "./components/CaseVersionsPanel";
 import CaseVersionDiff from "./components/CaseVersionDiff";
 import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
+import ToastContainer from "./components/ToastContainer";
+import useToast from "./hooks/useToast";
 import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
@@ -30,6 +32,7 @@ import {
 } from "./services/api";
 
 export default function App() {
+  const { toasts, showToast } = useToast();
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
   const [tab, setTab] = useState("cases");
   const [selectedCase, setSelectedCase] = useState(null);
@@ -89,10 +92,11 @@ export default function App() {
       setCaso(data);
 
       await refreshCases();
+      showToast("Caso gerado com sucesso.");
     } catch (err) {
       stopPct();
       setStage("");
-      setError(err.message || "Erro ao gerar caso.");
+      showToast(err.message || "Erro ao gerar caso.", "error");
     }
   };
 
@@ -116,8 +120,10 @@ export default function App() {
         setCaso(null);
         setActiveCaseId(null);
       }
+
+      showToast("Caso deletado.", "success");
     } catch (err) {
-      setError("Erro ao deletar caso.");
+      showToast(err.message || "Erro ao deletar caso.", "error");
     }
   };
 
@@ -174,6 +180,7 @@ export default function App() {
         display: "flex",
       }}
     >
+      <ToastContainer toasts={toasts} />
       <SidebarCases
         cases={savedCases}
         activeCaseId={activeCaseId}
@@ -273,17 +280,19 @@ export default function App() {
                     setEditing(false);
 
                     await refreshCases();
+                    showToast("Caso salvo com sucesso.");
                   } catch (err) {
-                    setError(err.message || "Erro ao salvar edição.");
+                    showToast(err.message || "Erro ao salvar edição.", "error");
                   }
                 }}
                 onAutoCorrect={async (draft) => {
                   try {
                     setError(null);
                     const corrected = await autocorrectCase(draft);
+                    showToast("Autocorreção aplicada.");
                     return corrected;
                   } catch (err) {
-                    setError(err.message || "Erro ao autocorrigir caso.");
+                    showToast(err.message || "Erro ao autocorrigir caso.", "error");
                     return draft;
                   }
                 }}
