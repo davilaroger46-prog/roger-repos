@@ -20,7 +20,11 @@ def generate_case(
     payload: GenerateCaseInput,
     current_user: UserModel = Depends(get_current_user),
 ):
-    rate_limit(f"ai:{current_user.id}")
+    rate_limit(
+        key=f"generate_case:user:{current_user.id}",
+        limit=20,
+        window_seconds=3600,
+    )
 
     try:
         logger.info(f"Gerando caso | user_id={current_user.id} | tema={payload.tema}")
@@ -62,7 +66,11 @@ def autocorrect_case(
     payload: dict,
     current_user: UserModel = Depends(get_current_user),
 ):
-    rate_limit(f"ai:{current_user.id}")
+    rate_limit(
+        key=f"autocorrect_case:user:{current_user.id}",
+        limit=20,
+        window_seconds=3600,
+    )
 
     try:
         corrected = autocorrect_orthopedic_case(payload)
