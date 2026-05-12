@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
@@ -10,6 +10,7 @@ from app.schemas.case import ClinicalCase
 from app.services.pdf_service import generate_case_pdf
 from app.core.slugify import slugify
 from app.deps.auth_deps import get_current_user
+from app.core.errors import not_found, validation_error
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
@@ -17,7 +18,7 @@ router = APIRouter(prefix="/cases", tags=["Cases"])
 def _get_case_or_404(db: Session, case_id: int) -> ClinicalCaseModel:
     case = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.id == case_id).first()
     if not case:
-        raise HTTPException(status_code=404, detail=f"Caso {case_id} não encontrado.")
+        raise not_found(f"Caso {case_id} não encontrado.")
     return case
 
 
@@ -135,7 +136,7 @@ def get_case(
             ClinicalCaseModel.user_id == current_user.id,
         ).first()
         if not case:
-            raise HTTPException(status_code=404, detail="Caso não encontrado")
+            raise not_found("Caso não encontrado")
         return case.caso_json
     finally:
         db.close()
@@ -156,10 +157,7 @@ def update_case(
 
     if not case_db:
         db.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Caso não encontrado"
-        )
+        raise not_found("Caso não encontrado")
 
     try:
         validated = ClinicalCase.model_validate(payload)
@@ -191,9 +189,9 @@ def update_case(
 
     except Exception as e:
         db.rollback()
-        raise HTTPException(
-            status_code=422,
-            detail=f"Erro de validação do caso: {str(e)}"
+        raise validation_error(
+            "Erro de validação do caso",
+            {"error": str(e)}
         )
 
     finally:
@@ -244,10 +242,7 @@ def get_case_version(
     db.close()
 
     if not version:
-        raise HTTPException(
-            status_code=404,
-            detail="Versão não encontrada"
-        )
+        raise not_found("Versão não encontrada")
 
     return version.caso_json
 
@@ -267,7 +262,7 @@ def restore_case_version(
 
     if not case_db:
         db.close()
-        raise HTTPException(status_code=404, detail="Caso não encontrado")
+        raise not_found("Caso não encontrado")
 
     version = db.query(ClinicalCaseVersionModel).filter(
         ClinicalCaseVersionModel.case_id == case_id,
@@ -276,7 +271,7 @@ def restore_case_version(
 
     if not version:
         db.close()
-        raise HTTPException(status_code=404, detail="Versão não encontrada")
+        raise not_found("Versão não encontrada")
 
     try:
         backup = ClinicalCaseVersionModel(
@@ -308,9 +303,9 @@ def restore_case_version(
 
     except Exception as e:
         db.rollback()
-        raise HTTPException(
-            status_code=422,
-            detail=f"Erro ao restaurar versão: {str(e)}"
+        raise validation_error(
+            "Erro ao restaurar versão",
+            {"error": str(e)}
         )
 
     finally:
@@ -332,10 +327,7 @@ def export_case_pdf(
     db.close()
 
     if not case_db:
-        raise HTTPException(
-            status_code=404,
-            detail="Caso não encontrado"
-        )
+        raise not_found("Caso não encontrado")
 
     pdf_buffer = generate_case_pdf(case_db.caso_json)
 
@@ -363,7 +355,7 @@ def delete_case(
             ClinicalCaseModel.user_id == current_user.id,
         ).first()
         if not case:
-            raise HTTPException(status_code=404, detail="Caso não encontrado")
+            raise not_found("Caso não encontrado")
         db.delete(case)
         db.commit()
         return {"status": "deleted", "id": case_id}
