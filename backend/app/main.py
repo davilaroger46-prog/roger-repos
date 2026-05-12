@@ -2,7 +2,7 @@ import time
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import ai, cases, auth
+from app.routers import ai, cases, auth, admin
 from app.core.logging import logger
 
 app = FastAPI(
@@ -52,6 +52,7 @@ async def log_requests(request: Request, call_next):
 app.include_router(ai.router)
 app.include_router(cases.router)
 app.include_router(auth.router)
+app.include_router(admin.router)
 
 
 @app.get("/")
