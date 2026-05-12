@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from sqlalchemy.orm import Session
 
 from app.db.database import SessionLocal
@@ -10,6 +10,7 @@ from app.services.auth_service import (
     create_access_token,
 )
 from app.core.security import validate_password
+from app.core.errors import conflict, unauthorized
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)
@@ -32,10 +33,7 @@ def register(payload: RegisterInput):
 
     if existing:
         db.close()
-        raise HTTPException(
-            status_code=400,
-            detail="Email já cadastrado",
-        )
+        raise conflict("Email já cadastrado")
 
     user = UserModel(
         name=payload.name,
@@ -71,10 +69,7 @@ def login(payload: LoginInput):
 
     if not user:
         db.close()
-        raise HTTPException(
-            status_code=401,
-            detail="Credenciais inválidas",
-        )
+        raise unauthorized("Credenciais inválidas")
 
     valid = verify_password(
         payload.password,
@@ -83,10 +78,7 @@ def login(payload: LoginInput):
 
     if not valid:
         db.close()
-        raise HTTPException(
-            status_code=401,
-            detail="Credenciais inválidas",
-        )
+        raise unauthorized("Credenciais inválidas")
 
     db.close()
 

@@ -52,6 +52,22 @@ def validation_error(message: str, details: dict | None = None):
     )
 
 
+def conflict(message: str = "Conflito"):
+    return AppError(
+        status_code=400,
+        code="CONFLICT",
+        message=message,
+    )
+
+
+def rate_limit_error(message: str = "Limite de requisições atingido"):
+    return AppError(
+        status_code=429,
+        code="RATE_LIMIT",
+        message=message,
+    )
+
+
 def ai_error(message: str = "Erro ao processar IA"):
     return AppError(
         status_code=502,

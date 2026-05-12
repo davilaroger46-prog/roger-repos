@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.ai import GenerateCaseInput
 from app.schemas.case import ClinicalCase
@@ -8,6 +9,7 @@ from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
 from app.deps.auth_deps import get_current_user
 from app.core.rate_limit import check_ai_rate_limit
+from app.core.errors import ai_error, validation_error
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)
@@ -54,7 +56,7 @@ def generate_case(
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise ai_error(str(e))
 
 
 @router.post("/autocorrect-case")
@@ -69,7 +71,7 @@ def autocorrect_case(
         return corrected
 
     except Exception as e:
-        raise HTTPException(
-            status_code=422,
-            detail=str(e)
+        raise validation_error(
+            "Erro ao autocorrigir caso",
+            {"error": str(e)},
         )

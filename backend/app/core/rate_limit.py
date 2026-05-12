@@ -1,8 +1,7 @@
 import time
 from collections import defaultdict
-from fastapi import HTTPException
+from app.core.errors import rate_limit_error
 
-# In-memory store: {user_id: [timestamps]}
 _request_log: dict[int, list[float]] = defaultdict(list)
 
 WINDOW_SECONDS = 60
@@ -18,9 +17,8 @@ def check_ai_rate_limit(user_id: int) -> None:
     _request_log[user_id] = timestamps
 
     if len(timestamps) >= MAX_REQUESTS:
-        raise HTTPException(
-            status_code=429,
-            detail=f"Limite de {MAX_REQUESTS} requisições por minuto atingido. Aguarde e tente novamente.",
+        raise rate_limit_error(
+            f"Limite de {MAX_REQUESTS} requisições por minuto atingido. Aguarde e tente novamente."
         )
 
     _request_log[user_id].append(now)
