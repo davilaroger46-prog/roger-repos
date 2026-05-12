@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from sqlalchemy import or_
@@ -7,9 +8,11 @@ from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
 from app.models.user_model import UserModel
 from app.schemas.case import ClinicalCase
+from app.schemas.review import ReviewDecisionInput
 from app.services.pdf_service import generate_case_pdf
 from app.core.slugify import slugify
 from app.deps.auth_deps import get_current_user
+from app.deps.role_deps import require_role
 from app.core.errors import not_found, validation_error
 from app.core.logging import logger
 
@@ -396,4 +399,36 @@ def submit_case_review(
     return {
         "message": "Caso enviado para revisão",
         "review_status": case.review_status,
+    }
+
+
+@router.post("/{case_id}/review")
+def review_case(
+    case_id: int,
+    payload: ReviewDecisionInput,
+    current_user: UserModel = Depends(require_role("reviewer", "admin")),
+):
+    db: Session = SessionLocal()
+
+    case = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id,
+    ).first()
+
+    if not case:
+        db.close()
+        raise not_found("Caso não encontrado")
+
+    case.review_status = payload.status
+    case.review_notes = payload.notes
+    case.reviewed_by = current_user.id
+    case.reviewed_at = datetime.now(timezone.utc)
+
+    db.commit()
+    db.refresh(case)
+    db.close()
+
+    return {
+        "message": "Revisão registrada",
+        "review_status": case.review_status,
+        "review_notes": case.review_notes,
     }
