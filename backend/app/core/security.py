@@ -1,17 +1,28 @@
+import re
+
 from app.core.errors import validation_error
 
 
-MIN_PASSWORD_LENGTH = 8
+def validate_password_strength(password: str):
+    errors = []
 
+    if len(password) < 8:
+        errors.append("A senha deve ter pelo menos 8 caracteres.")
 
-def validate_password(password: str) -> None:
-    if len(password) < MIN_PASSWORD_LENGTH:
+    if not re.search(r"[A-Z]", password):
+        errors.append("A senha deve conter pelo menos uma letra maiúscula.")
+
+    if not re.search(r"[a-z]", password):
+        errors.append("A senha deve conter pelo menos uma letra minúscula.")
+
+    if not re.search(r"\d", password):
+        errors.append("A senha deve conter pelo menos um número.")
+
+    if not re.search(r"[^\w\s]", password):
+        errors.append("A senha deve conter pelo menos um caractere especial.")
+
+    if errors:
         raise validation_error(
-            f"A senha deve ter no mínimo {MIN_PASSWORD_LENGTH} caracteres."
+            "Senha fraca.",
+            {"password": errors},
         )
-
-    if not any(c.isdigit() for c in password):
-        raise validation_error("A senha deve conter ao menos um número.")
-
-    if not any(c.isupper() for c in password):
-        raise validation_error("A senha deve conter ao menos uma letra maiúscula.")

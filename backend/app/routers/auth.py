@@ -9,7 +9,7 @@ from app.services.auth_service import (
     verify_password,
     create_access_token,
 )
-from app.core.security import validate_password
+from app.core.security import validate_password_strength
 from app.core.errors import conflict, unauthorized
 from app.core.logging import logger
 
@@ -21,7 +21,7 @@ router = APIRouter(
 
 @router.post("/register", response_model=TokenOutput)
 def register(payload: RegisterInput):
-    validate_password(payload.password)
+    validate_password_strength(payload.password)
 
     db: Session = SessionLocal()
 
