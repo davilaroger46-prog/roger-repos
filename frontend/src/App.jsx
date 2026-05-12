@@ -8,19 +8,18 @@ import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
+import useCases from "./hooks/useCases";
 import { showToast } from "./core/toastStore";
 import { confirmAction } from "./core/confirm";
 import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
-  listCases,
   getCase,
-  deleteCase,
   updateCase,
   autocorrectCase,
-  restoreCaseVersion,
   downloadCasePdf,
   submitCaseReview,
+  listCases,
   getToken,
   logoutUser,
   getMe,
@@ -30,14 +29,8 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
   const [currentUser, setCurrentUser] = useState(null);
   const [activeTab, setActiveTab] = useState("generate");
-  const [selectedCase, setSelectedCase] = useState(null);
-  const [flashcardCase, setFlashcardCase] = useState(null);
-  const [savedCases, setSavedCases] = useState([]);
-  const [caso, setCaso] = useState(null);
-  const [error, setError] = useState(null);
   const [stage, setStage] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [activeCaseId, setActiveCaseId] = useState(null);
   const [tema, setTema] = useState("");
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
@@ -46,10 +39,25 @@ export default function App() {
   const [editing, setEditing] = useState(false);
   const [versionPreview, setVersionPreview] = useState(null);
   const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
-  const [caseFilters, setCaseFilters] = useState({});
-  const [casePage, setCasePage] = useState(1);
-  const [casePages, setCasePages] = useState(1);
-  const [caseTotal, setCaseTotal] = useState(0);
+
+  const {
+    cases: savedCases,
+    setCases: setSavedCases,
+    caso,
+    setCaso,
+    activeCaseId,
+    setActiveCaseId,
+    caseFilters,
+    casePage,
+    casePages,
+    caseTotal,
+    refreshCases,
+    loadCase,
+    removeCase,
+    applyFilters,
+    changePage,
+    resetCaseSelection,
+  } = useCases();
 
   const loadCurrentUser = async () => {
     try {
@@ -57,17 +65,6 @@ export default function App() {
       setCurrentUser(me);
     } catch (err) {
       console.error(err);
-    }
-  };
-
-  const refreshCases = async (filters = caseFilters) => {
-    try {
-      const data = await listCases(filters);
-      setSavedCases(data.items);
-      setCaseTotal(data.total);
-      setCasePages(data.pages);
-    } catch (err) {
-      setError("Erro ao carregar casos.");
     }
   };
 
@@ -84,7 +81,7 @@ export default function App() {
   useEffect(() => {
     const handler = () => {
       setIsAuthenticated(false);
-      setCaso(null);
+      resetCaseSelection();
       setSavedCases([]);
       showToast("Sessão expirada. Faça login novamente.", "error");
     };
@@ -97,23 +94,20 @@ export default function App() {
   }, []);
 
   const handleNewCase = () => {
-    setCaso(null);
+    resetCaseSelection();
     setTema("");
     setNivel("");
     setRegiao("");
-    setError(null);
     setPct(0);
     setStage("");
-    setActiveCaseId(null);
   };
 
   const handleLoadCase = async (caseId) => {
     try {
-      const data = await getCase(caseId);
-      setCaso(data);
-      setActiveCaseId(caseId);
+      await loadCase(caseId);
+      setActiveTab("library");
     } catch (err) {
-      setError("Erro ao carregar caso.");
+      showToast(err.message || "Erro ao carregar caso.", "error");
     }
   };
 
@@ -125,14 +119,7 @@ export default function App() {
     if (!ok) return;
 
     try {
-      await deleteCase(caseId);
-      await refreshCases(caseFilters);
-
-      if (activeCaseId === caseId) {
-        setCaso(null);
-        setActiveCaseId(null);
-      }
-
+      await removeCase(caseId);
       showToast("Caso deletado com sucesso.");
     } catch (err) {
       showToast(err.message || "Erro ao deletar caso.", "error");
@@ -175,8 +162,7 @@ export default function App() {
     }
     await submitCaseReview(activeCaseId);
     showToast("Caso enviado para revisão.");
-    const list = await listCases(caseFilters);
-    setSavedCases(list.items || list);
+    await refreshCases(caseFilters);
     const updated = await getCase(activeCaseId);
     setCaso(updated);
   };
@@ -186,8 +172,7 @@ export default function App() {
     setReviewRefreshKey((k) => k + 1);
     const updated = await getCase(activeCaseId);
     setCaso(updated);
-    const list = await listCases(caseFilters);
-    setSavedCases(list.items || list);
+    await refreshCases(caseFilters);
   };
 
   const handleRestoreField = async (path) => {
@@ -263,15 +248,8 @@ export default function App() {
         page={casePage}
         pages={casePages}
         total={caseTotal}
-        onPageChange={(page) => {
-          setCasePage(page);
-          refreshCases({ ...caseFilters, page });
-        }}
-        onFilterChange={(filters) => {
-          setCaseFilters(filters);
-          setCasePage(1);
-          refreshCases({ ...filters, page: 1 });
-        }}
+        onPageChange={changePage}
+        onFilterChange={applyFilters}
       />
 
       <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
@@ -289,7 +267,7 @@ export default function App() {
               onClick={() => {
                 logoutUser();
                 setIsAuthenticated(false);
-                setCaso(null);
+                resetCaseSelection();
                 setSavedCases([]);
                 setCurrentUser(null);
               }}
