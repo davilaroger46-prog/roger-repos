@@ -41,9 +41,12 @@ def list_cases(
 ):
     db: Session = SessionLocal()
 
-    query = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.user_id == current_user.id
-    )
+    if current_user.role in ["reviewer", "admin"] and review_status == "review_pending":
+        query = db.query(ClinicalCaseModel)
+    else:
+        query = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.user_id == current_user.id
+        )
 
     if q:
         query = query.filter(
