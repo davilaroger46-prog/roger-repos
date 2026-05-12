@@ -50,7 +50,10 @@ def generate_case(
 
 
 @router.post("/autocorrect-case")
-def autocorrect_case(payload: dict):
+def autocorrect_case(
+    payload: dict,
+    current_user: UserModel = Depends(get_current_user),
+):
     try:
         corrected = autocorrect_orthopedic_case(payload)
         return corrected
