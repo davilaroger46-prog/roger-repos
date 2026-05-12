@@ -11,9 +11,7 @@ from app.services.auth_service import (
 )
 from app.core.security import validate_password
 from app.core.errors import conflict, unauthorized
-from app.core.logging import get_logger
-
-logger = get_logger(__name__)
+from app.core.logging import logger
 
 router = APIRouter(
     prefix="/auth",

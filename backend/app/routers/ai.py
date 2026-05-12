@@ -10,9 +10,7 @@ from app.models.user_model import UserModel
 from app.deps.auth_deps import get_current_user
 from app.core.rate_limit import check_ai_rate_limit
 from app.core.errors import ai_error, validation_error
-from app.core.logging import get_logger
-
-logger = get_logger(__name__)
+from app.core.logging import logger
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
