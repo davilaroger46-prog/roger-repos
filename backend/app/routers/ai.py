@@ -1,15 +1,13 @@
 from fastapi import APIRouter, Depends
-from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.ai import GenerateCaseInput
-from app.schemas.case import ClinicalCase
 from app.services.anthropic_service import generate_orthopedic_case, autocorrect_orthopedic_case
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
 from app.deps.auth_deps import get_current_user
 from app.core.rate_limit import rate_limit
-from app.core.errors import ai_error, validation_error
+from app.core.errors import AppError, ai_error, validation_error
 from app.core.logging import logger
 
 router = APIRouter(prefix="/ai", tags=["AI"])
@@ -20,13 +18,13 @@ def generate_case(
     payload: GenerateCaseInput,
     current_user: UserModel = Depends(get_current_user),
 ):
-    rate_limit(
-        key=f"generate_case:user:{current_user.id}",
-        limit=20,
-        window_seconds=3600,
-    )
-
     try:
+        rate_limit(
+            key=f"generate_case:user:{current_user.id}",
+            limit=20,
+            window_seconds=3600,
+        )
+
         logger.info(f"Gerando caso | user_id={current_user.id} | tema={payload.tema}")
 
         case = generate_orthopedic_case(
@@ -55,8 +53,9 @@ def generate_case(
         finally:
             db.close()
 
-    except HTTPException:
+    except AppError:
         raise
+
     except Exception as e:
         raise ai_error(str(e))
 
@@ -66,15 +65,18 @@ def autocorrect_case(
     payload: dict,
     current_user: UserModel = Depends(get_current_user),
 ):
-    rate_limit(
-        key=f"autocorrect_case:user:{current_user.id}",
-        limit=20,
-        window_seconds=3600,
-    )
-
     try:
+        rate_limit(
+            key=f"autocorrect_case:user:{current_user.id}",
+            limit=30,
+            window_seconds=3600,
+        )
+
         corrected = autocorrect_orthopedic_case(payload)
         return corrected
+
+    except AppError:
+        raise
 
     except Exception as e:
         raise validation_error(
