@@ -2,6 +2,7 @@ import json
 from anthropic import Anthropic
 from app.core.config import ANTHROPIC_API_KEY
 from app.schemas.case import ClinicalCase
+from app.core.logging import logger
 
 client = Anthropic(api_key=ANTHROPIC_API_KEY)
 
@@ -99,7 +100,9 @@ Retorne somente JSON.
 
     raw_text = response.content[0].text
     parsed = extract_json(raw_text)
-    return validate_case_schema(parsed)
+    result = validate_case_schema(parsed)
+    logger.info("generate_orthopedic_case tema=%s nivel=%s regiao=%s", tema, nivel, regiao)
+    return result
 
 
 def autocorrect_orthopedic_case(case: dict) -> dict:
@@ -143,4 +146,6 @@ CASO ATUAL:
 
     raw_text = response.content[0].text
     parsed = extract_json(raw_text)
-    return validate_case_schema(parsed)
+    result = validate_case_schema(parsed)
+    logger.info("autocorrect_orthopedic_case completed")
+    return result

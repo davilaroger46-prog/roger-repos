@@ -11,6 +11,7 @@ from app.services.pdf_service import generate_case_pdf
 from app.core.slugify import slugify
 from app.deps.auth_deps import get_current_user
 from app.core.errors import not_found, validation_error
+from app.core.logging import logger
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
@@ -185,6 +186,7 @@ def update_case(
         db.commit()
         db.refresh(case_db)
 
+        logger.info("update_case user_id=%s case_id=%s", current_user.id, case_id)
         return case_db.caso_json
 
     except Exception as e:
@@ -299,6 +301,7 @@ def restore_case_version(
         db.commit()
         db.refresh(case_db)
 
+        logger.info("restore_case user_id=%s case_id=%s version_id=%s", current_user.id, case_id, version_id)
         return case_db.caso_json
 
     except Exception as e:
@@ -358,6 +361,7 @@ def delete_case(
             raise not_found("Caso não encontrado")
         db.delete(case)
         db.commit()
+        logger.info("delete_case user_id=%s case_id=%s", current_user.id, case_id)
         return {"status": "deleted", "id": case_id}
     finally:
         db.close()
