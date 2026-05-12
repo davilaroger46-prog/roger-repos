@@ -40,103 +40,103 @@ def list_cases(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
-
-    if current_user.role in ["reviewer", "admin"] and review_status == "review_pending":
-        query = db.query(ClinicalCaseModel)
-    else:
-        query = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.user_id == current_user.id
-        )
-
-    if q:
-        query = query.filter(
-            or_(
-                ClinicalCaseModel.titulo.ilike(f"%{q}%"),
-                ClinicalCaseModel.regiao.ilike(f"%{q}%"),
-                ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
+    try:
+        if current_user.role in ["reviewer", "admin"] and review_status == "review_pending":
+            query = db.query(ClinicalCaseModel)
+        else:
+            query = db.query(ClinicalCaseModel).filter(
+                ClinicalCaseModel.user_id == current_user.id
             )
-        )
-
-    if regiao:
-        query = query.filter(ClinicalCaseModel.regiao == regiao)
-
-    if nivel:
-        query = query.filter(ClinicalCaseModel.nivel == nivel)
-
-    if review_status:
-        query = query.filter(ClinicalCaseModel.review_status == review_status)
-
-    sort_map = {
-        "id": ClinicalCaseModel.id,
-        "titulo": ClinicalCaseModel.titulo,
-        "regiao": ClinicalCaseModel.regiao,
-        "nivel": ClinicalCaseModel.nivel,
-        "ao_codigo": ClinicalCaseModel.ao_codigo,
-        "created_at": ClinicalCaseModel.created_at,
-        "updated_at": ClinicalCaseModel.updated_at,
-    }
-
-    sort_column = sort_map.get(sort_by, ClinicalCaseModel.created_at)
-
-    if sort_dir == "asc":
-        query = query.order_by(sort_column.asc())
-    else:
-        query = query.order_by(sort_column.desc())
-
-    total = query.count()
-    offset = (page - 1) * page_size
-
-    cases = query.offset(offset).limit(page_size).all()
-
-    result = []
-
-    for case in cases:
-        case_json = case.caso_json or {}
-
-        diagnostico = case_json.get("diagnostico", {}).get("principal", "")
-        resumo = case_json.get("output_app", {}).get("resumo", "")
-        case_conduta = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
 
         if q:
-            searchable_text = " ".join([
-                case.titulo or "",
-                case.regiao or "",
-                case.ao_codigo or "",
-                diagnostico or "",
-                resumo or "",
-            ]).lower()
+            query = query.filter(
+                or_(
+                    ClinicalCaseModel.titulo.ilike(f"%{q}%"),
+                    ClinicalCaseModel.regiao.ilike(f"%{q}%"),
+                    ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
+                )
+            )
 
-            if q.lower() not in searchable_text:
+        if regiao:
+            query = query.filter(ClinicalCaseModel.regiao == regiao)
+
+        if nivel:
+            query = query.filter(ClinicalCaseModel.nivel == nivel)
+
+        if review_status:
+            query = query.filter(ClinicalCaseModel.review_status == review_status)
+
+        sort_map = {
+            "id": ClinicalCaseModel.id,
+            "titulo": ClinicalCaseModel.titulo,
+            "regiao": ClinicalCaseModel.regiao,
+            "nivel": ClinicalCaseModel.nivel,
+            "ao_codigo": ClinicalCaseModel.ao_codigo,
+            "created_at": ClinicalCaseModel.created_at,
+            "updated_at": ClinicalCaseModel.updated_at,
+        }
+
+        sort_column = sort_map.get(sort_by, ClinicalCaseModel.created_at)
+
+        if sort_dir == "asc":
+            query = query.order_by(sort_column.asc())
+        else:
+            query = query.order_by(sort_column.desc())
+
+        total = query.count()
+        offset = (page - 1) * page_size
+
+        cases = query.offset(offset).limit(page_size).all()
+
+        result = []
+
+        for case in cases:
+            case_json = case.caso_json or {}
+
+            diagnostico = case_json.get("diagnostico", {}).get("principal", "")
+            resumo = case_json.get("output_app", {}).get("resumo", "")
+            case_conduta = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
+
+            if q:
+                searchable_text = " ".join([
+                    case.titulo or "",
+                    case.regiao or "",
+                    case.ao_codigo or "",
+                    diagnostico or "",
+                    resumo or "",
+                ]).lower()
+
+                if q.lower() not in searchable_text:
+                    continue
+
+            if conduta and case_conduta != conduta:
                 continue
 
-        if conduta and case_conduta != conduta:
-            continue
+            result.append({
+                "id": case.id,
+                "titulo": case.titulo,
+                "regiao": case.regiao,
+                "nivel": case.nivel,
+                "ao_codigo": case.ao_codigo,
+                "conduta": case_conduta,
+                "diagnostico": diagnostico,
+                "review_status": case.review_status,
+                "review_notes": case.review_notes,
+                "reviewed_by": case.reviewed_by,
+                "reviewed_at": case.reviewed_at,
+                "created_at": case.created_at,
+                "updated_at": case.updated_at,
+            })
 
-        result.append({
-            "id": case.id,
-            "titulo": case.titulo,
-            "regiao": case.regiao,
-            "nivel": case.nivel,
-            "ao_codigo": case.ao_codigo,
-            "conduta": case_conduta,
-            "diagnostico": diagnostico,
-            "review_status": case.review_status,
-            "review_notes": case.review_notes,
-            "reviewed_by": case.reviewed_by,
-            "reviewed_at": case.reviewed_at,
-            "created_at": case.created_at,
-            "updated_at": case.updated_at,
-        })
-
-    db.close()
-
-    return {
-        "items": result,
-        "total": total,
-        "page": page,
-        "page_size": page_size,
-        "pages": (total + page_size - 1) // page_size,
-    }
+        return {
+            "items": result,
+            "total": total,
+            "page": page,
+            "page_size": page_size,
+            "pages": (total + page_size - 1) // page_size,
+        }
+    finally:
+        db.close()
 
 
 @router.get("/{case_id}")
@@ -230,26 +230,24 @@ def list_case_versions(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
+    try:
+        versions = db.query(ClinicalCaseVersionModel).filter(
+            ClinicalCaseVersionModel.case_id == case_id
+        ).order_by(
+            ClinicalCaseVersionModel.id.desc()
+        ).all()
 
-    versions = db.query(ClinicalCaseVersionModel).filter(
-        ClinicalCaseVersionModel.case_id == case_id
-    ).order_by(
-        ClinicalCaseVersionModel.id.desc()
-    ).all()
-
-    result = [
-        {
-            "id": v.id,
-            "case_id": v.case_id,
-            "action": v.action,
-            "created_at": v.created_at,
-        }
-        for v in versions
-    ]
-
-    db.close()
-
-    return result
+        return [
+            {
+                "id": v.id,
+                "case_id": v.case_id,
+                "action": v.action,
+                "created_at": v.created_at,
+            }
+            for v in versions
+        ]
+    finally:
+        db.close()
 
 
 @router.get("/{case_id}/versions/{version_id}")
@@ -259,18 +257,18 @@ def get_case_version(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
+    try:
+        version = db.query(ClinicalCaseVersionModel).filter(
+            ClinicalCaseVersionModel.case_id == case_id,
+            ClinicalCaseVersionModel.id == version_id,
+        ).first()
 
-    version = db.query(ClinicalCaseVersionModel).filter(
-        ClinicalCaseVersionModel.case_id == case_id,
-        ClinicalCaseVersionModel.id == version_id,
-    ).first()
+        if not version:
+            raise not_found("Versão não encontrada")
 
-    db.close()
-
-    if not version:
-        raise not_found("Versão não encontrada")
-
-    return version.caso_json
+        return version.caso_json
+    finally:
+        db.close()
 
 
 @router.post("/{case_id}/versions/{version_id}/restore")
@@ -345,20 +343,21 @@ def export_case_pdf(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
+    try:
+        case_db = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
 
-    case_db = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id,
-        ClinicalCaseModel.user_id == current_user.id,
-    ).first()
+        if not case_db:
+            raise not_found("Caso não encontrado")
 
-    db.close()
+        titulo = case_db.titulo or f"caso-{case_id}"
+        caso_json = case_db.caso_json
+    finally:
+        db.close()
 
-    if not case_db:
-        raise not_found("Caso não encontrado")
-
-    pdf_buffer = generate_case_pdf(case_db.caso_json)
-
-    titulo = case_db.titulo or f"caso-{case_id}"
+    pdf_buffer = generate_case_pdf(caso_json)
     filename = f"orthostudy-{case_id}-{slugify(titulo)}.pdf"
 
     return StreamingResponse(
@@ -397,26 +396,25 @@ def submit_case_review(
     current_user: UserModel = Depends(get_current_user),
 ):
     db: Session = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+            ClinicalCaseModel.user_id == current_user.id,
+        ).first()
 
-    case = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id,
-        ClinicalCaseModel.user_id == current_user.id,
-    ).first()
+        if not case:
+            raise not_found("Caso não encontrado")
 
-    if not case:
+        case.review_status = "review_pending"
+        db.commit()
+        db.refresh(case)
+
+        return {
+            "message": "Caso enviado para revisão",
+            "review_status": case.review_status,
+        }
+    finally:
         db.close()
-        raise not_found("Caso não encontrado")
-
-    case.review_status = "review_pending"
-
-    db.commit()
-    db.refresh(case)
-    db.close()
-
-    return {
-        "message": "Caso enviado para revisão",
-        "review_status": case.review_status,
-    }
 
 
 @router.post("/{case_id}/review")
@@ -426,26 +424,26 @@ def review_case(
     current_user: UserModel = Depends(require_role("reviewer", "admin")),
 ):
     db: Session = SessionLocal()
+    try:
+        case = db.query(ClinicalCaseModel).filter(
+            ClinicalCaseModel.id == case_id,
+        ).first()
 
-    case = db.query(ClinicalCaseModel).filter(
-        ClinicalCaseModel.id == case_id,
-    ).first()
+        if not case:
+            raise not_found("Caso não encontrado")
 
-    if not case:
+        case.review_status = payload.status
+        case.review_notes = payload.notes
+        case.reviewed_by = current_user.id
+        case.reviewed_at = datetime.now(timezone.utc)
+
+        db.commit()
+        db.refresh(case)
+
+        return {
+            "message": "Revisão registrada",
+            "review_status": case.review_status,
+            "review_notes": case.review_notes,
+        }
+    finally:
         db.close()
-        raise not_found("Caso não encontrado")
-
-    case.review_status = payload.status
-    case.review_notes = payload.notes
-    case.reviewed_by = current_user.id
-    case.reviewed_at = datetime.now(timezone.utc)
-
-    db.commit()
-    db.refresh(case)
-    db.close()
-
-    return {
-        "message": "Revisão registrada",
-        "review_status": case.review_status,
-        "review_notes": case.review_notes,
-    }
