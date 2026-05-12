@@ -143,29 +143,6 @@ export default function App() {
     );
   }
 
-  if (flashcardCase) {
-    return (
-      <div className="mobile-app">
-        <FlashcardPage
-          caso={flashcardCase}
-          onBack={() => setFlashcardCase(null)}
-        />
-      </div>
-    );
-  }
-
-  if (selectedCase) {
-    return (
-      <div className="mobile-app">
-        <CaseDetailPage
-          caso={selectedCase}
-          onBack={() => setSelectedCase(null)}
-          onFlashcards={(fullData) => setFlashcardCase(fullData)}
-        />
-      </div>
-    );
-  }
-
   return (
     <div
       style={{

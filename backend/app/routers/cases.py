@@ -149,7 +149,17 @@ def get_case(
         ).first()
         if not case:
             raise not_found("Caso não encontrado")
-        return case.caso_json
+        data = dict(case.caso_json or {})
+        data["_db"] = {
+            "id": case.id,
+            "review_status": case.review_status,
+            "review_notes": case.review_notes,
+            "reviewed_by": case.reviewed_by,
+            "reviewed_at": str(case.reviewed_at) if case.reviewed_at else None,
+            "created_at": str(case.created_at) if case.created_at else None,
+            "updated_at": str(case.updated_at) if case.updated_at else None,
+        }
+        return data
     finally:
         db.close()
 

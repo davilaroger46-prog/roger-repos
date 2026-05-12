@@ -3,6 +3,10 @@ import { T } from "../constants/theme";
 export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSubmitReview }) {
   if (!caso) return null;
 
+  const canSubmitReview =
+    caso._db?.id &&
+    !["approved", "review_pending"].includes(caso._db?.review_status);
+
   const copyJson = async () => {
     await navigator.clipboard.writeText(JSON.stringify(caso, null, 2));
     alert("JSON copiado.");
@@ -54,9 +58,9 @@ export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSu
         </button>
       )}
 
-      {onSubmitReview && (
+      {canSubmitReview && onSubmitReview && (
         <button onClick={onSubmitReview} style={buttonStyle(T.purple)}>
-          🔍 Enviar para revisão
+          🩺 Enviar para revisão
         </button>
       )}
 

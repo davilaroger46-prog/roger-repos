@@ -74,8 +74,8 @@ export default function CasePreview({ caso }) {
             <Tag c={COND_C[dc?.conduta] || T.blue}>
               {COND_I[dc?.conduta]} {dc?.conduta}
             </Tag>
-            {(caso.review_status || caso.meta?.review_status) && (
-              <ReviewBadge status={caso.review_status || caso.meta?.review_status} />
+            {caso._db?.review_status && (
+              <ReviewBadge status={caso._db.review_status} />
             )}
           </div>
         </div>
