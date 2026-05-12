@@ -74,6 +74,19 @@ export async function restoreCaseVersion(caseId, versionId) {
   });
 }
 
+export async function submitCaseReview(caseId) {
+  return apiClient(`/cases/${caseId}/submit-review`, {
+    method: "POST",
+  });
+}
+
+export async function reviewCase(caseId, { status, notes }) {
+  return apiClient(`/cases/${caseId}/review`, {
+    method: "POST",
+    body: JSON.stringify({ status, notes }),
+  });
+}
+
 export async function downloadCasePdf(caseId) {
   const response = await apiClient(`/cases/${caseId}/pdf`);
 
