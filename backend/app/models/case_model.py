@@ -17,6 +17,11 @@ class ClinicalCaseModel(Base):
 
     caso_json = Column(JSON, nullable=False)
 
+    review_status = Column(String, default="draft", nullable=False)
+    review_notes = Column(String, nullable=True)
+    reviewed_by = Column(Integer, ForeignKey("users.id"), nullable=True)
+    reviewed_at = Column(DateTime(timezone=True), nullable=True)
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     updated_at = Column(
