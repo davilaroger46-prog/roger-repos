@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.db.database import SessionLocal
@@ -12,6 +12,7 @@ from app.services.auth_service import (
 from app.core.password_policy import validate_password_strength
 from app.core.errors import conflict, unauthorized
 from app.core.logging import logger
+from app.deps.auth_deps import get_current_user
 
 router = APIRouter(
     prefix="/auth",
@@ -88,4 +89,13 @@ def login(payload: LoginInput):
     return {
         "access_token": token,
         "token_type": "bearer",
+    }
+
+
+@router.get("/me")
+def me(current_user: UserModel = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "name": current_user.name,
+        "email": current_user.email,
     }
