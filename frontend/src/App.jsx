@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -8,6 +8,7 @@ import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
+import useAuth from "./hooks/useAuth";
 import useCases from "./hooks/useCases";
 import { showToast } from "./core/toastStore";
 import { confirmAction } from "./core/confirm";
@@ -19,15 +20,10 @@ import {
   autocorrectCase,
   downloadCasePdf,
   submitCaseReview,
-  listCases,
-  getToken,
-  logoutUser,
-  getMe,
 } from "./services/api";
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
-  const [currentUser, setCurrentUser] = useState(null);
+  const { isAuthenticated, currentUser, handleAuthSuccess, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("generate");
   const [stage, setStage] = useState("");
   const [generating, setGenerating] = useState(false);
@@ -59,38 +55,8 @@ export default function App() {
     resetCaseSelection,
   } = useCases();
 
-  const loadCurrentUser = async () => {
-    try {
-      const me = await getMe();
-      setCurrentUser(me);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      loadCurrentUser();
-    }
-  }, []);
-
   useEffect(() => {
     refreshCases({});
-  }, []);
-
-  useEffect(() => {
-    const handler = () => {
-      setIsAuthenticated(false);
-      resetCaseSelection();
-      setSavedCases([]);
-      showToast("Sessão expirada. Faça login novamente.", "error");
-    };
-
-    window.addEventListener("orthostudy:unauthorized", handler);
-
-    return () => {
-      window.removeEventListener("orthostudy:unauthorized", handler);
-    };
   }, []);
 
   const handleNewCase = () => {
@@ -192,8 +158,7 @@ export default function App() {
   if (!isAuthenticated) {
     return (
       <AuthScreen onAuth={async () => {
-        setIsAuthenticated(true);
-        await loadCurrentUser();
+        await handleAuthSuccess();
         await refreshCases({});
       }} />
     );
@@ -265,11 +230,9 @@ export default function App() {
             </div>
             <button
               onClick={() => {
-                logoutUser();
-                setIsAuthenticated(false);
+                logout();
                 resetCaseSelection();
                 setSavedCases([]);
-                setCurrentUser(null);
               }}
               style={{
                 padding: "7px 12px",
