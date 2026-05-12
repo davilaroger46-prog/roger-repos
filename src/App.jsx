@@ -179,7 +179,13 @@ export default function App() {
         activeCaseId={activeCaseId}
         onLoadCase={handleLoadCase}
         onDeleteCase={handleDeleteCase}
-        onExportPdf={(caseId) => downloadCasePdf(caseId)}
+        onExportPdf={async (caseId) => {
+          try {
+            await downloadCasePdf(caseId);
+          } catch (err) {
+            setError(err.message || "Erro ao baixar PDF");
+          }
+        }}
         page={casePage}
         pages={casePages}
         total={caseTotal}
@@ -236,13 +242,17 @@ export default function App() {
               caso={caso}
               onNewCase={handleNewCase}
               onEdit={handleStartEdit}
-              onExportPdf={() => {
+              onExportPdf={async () => {
                 if (!activeCaseId) {
                   setError("Este caso ainda não possui ID no banco.");
                   return;
                 }
 
-                downloadCasePdf(activeCaseId);
+                try {
+                  await downloadCasePdf(activeCaseId);
+                } catch (err) {
+                  setError(err.message || "Erro ao baixar PDF");
+                }
               }}
             />
 
