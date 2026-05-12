@@ -7,6 +7,7 @@ from app.db.database import SessionLocal
 from app.models.user_model import UserModel
 from app.models.case_model import ClinicalCaseModel
 from app.services.auth_service import hash_password
+from tests.fixtures import valid_clinical_case
 
 
 client = TestClient(app)
@@ -62,39 +63,14 @@ def create_user(db):
 @pytest.fixture
 def create_case(db):
     def _create_case(user_id):
-        case_json = {
-            "meta": {
-                "id": "001",
-                "titulo": "Fratura teste",
-                "slug": "fratura-teste",
-                "especialidade": "ortopedia",
-                "regiao": "Punho",
-                "subespecialidade": "Trauma",
-                "nivel": "avancado",
-                "tags": ["teste"],
-                "versao": "2.0",
-            },
-            "output_app": {
-                "resumo": "Caso teste",
-            },
-            "decisao_clinica": {
-                "output": {
-                    "conduta": "cirurgico",
-                }
-            },
-            "classificacao": {
-                "ao_ota": {
-                    "codigo": "23-C2",
-                }
-            },
-        }
+        case_json = valid_clinical_case()
 
         case = ClinicalCaseModel(
             user_id=user_id,
-            titulo="Fratura teste",
-            regiao="Punho",
-            nivel="avancado",
-            ao_codigo="23-C2",
+            titulo=case_json["meta"]["titulo"],
+            regiao=case_json["meta"]["regiao"],
+            nivel=case_json["meta"]["nivel"],
+            ao_codigo=case_json["classificacao"]["ao_ota"]["codigo"],
             caso_json=case_json,
         )
 
