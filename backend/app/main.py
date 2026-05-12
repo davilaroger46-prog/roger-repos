@@ -24,16 +24,29 @@ app.add_middleware(
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     start = time.time()
-    response = await call_next(request)
-    duration_ms = (time.time() - start) * 1000
-    logger.info(
-        "%s %s %s %.0fms",
-        request.method,
-        request.url.path,
-        response.status_code,
-        duration_ms,
-    )
-    return response
+
+    try:
+        response = await call_next(request)
+
+        duration_ms = round((time.time() - start) * 1000, 2)
+
+        logger.info(
+            f'{request.method} {request.url.path} '
+            f'status={response.status_code} '
+            f'duration_ms={duration_ms}'
+        )
+
+        return response
+
+    except Exception as e:
+        duration_ms = round((time.time() - start) * 1000, 2)
+
+        logger.exception(
+            f'{request.method} {request.url.path} '
+            f'failed duration_ms={duration_ms} error={str(e)}'
+        )
+
+        raise
 
 
 app.include_router(ai.router)
