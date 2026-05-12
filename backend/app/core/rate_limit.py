@@ -1,11 +1,13 @@
 import time
-
 import redis
 
 from app.core.config import REDIS_URL
 from app.core.errors import AppError
 
-_redis = redis.from_url(REDIS_URL, decode_responses=True)
+redis_client = redis.from_url(
+    REDIS_URL,
+    decode_responses=True,
+)
 
 
 def rate_limit(
@@ -13,17 +15,19 @@ def rate_limit(
     limit: int = 10,
     window_seconds: int = 3600,
 ):
-    now = time.time()
-    window_start = now - window_seconds
+    now = int(time.time())
+    redis_key = f"rate_limit:{key}"
 
-    pipe = _redis.pipeline()
-    pipe.zremrangebyscore(key, "-inf", window_start)
-    pipe.zadd(key, {str(now): now})
-    pipe.zcard(key)
-    pipe.expire(key, window_seconds)
-    _, _, count, _ = pipe.execute()
+    pipe = redis_client.pipeline()
 
-    if count > limit:
+    pipe.zremrangebyscore(redis_key, 0, now - window_seconds)
+    pipe.zcard(redis_key)
+    pipe.zadd(redis_key, {str(now): now})
+    pipe.expire(redis_key, window_seconds)
+
+    _, count, _, _ = pipe.execute()
+
+    if count >= limit:
         raise AppError(
             status_code=429,
             code="RATE_LIMITED",
