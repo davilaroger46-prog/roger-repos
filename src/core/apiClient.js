@@ -1,50 +1,47 @@
-import { getToken, logoutUser } from "../services/api";
-import { parseApiError } from "./errors";
-import { showToast } from "./toastStore";
-
 const API_URL = "http://localhost:8000";
 
-function authHeaders() {
-  const token = getToken();
-  return token ? { Authorization: `Bearer ${token}` } : {};
+export function getToken() {
+  return localStorage.getItem("orthostudy_token");
 }
 
-async function request(path, options = {}) {
-  const { json, ...rest } = options;
+export function setToken(token) {
+  localStorage.setItem("orthostudy_token", token);
+}
+
+export function clearToken() {
+  localStorage.removeItem("orthostudy_token");
+}
+
+export async function apiClient(path, options = {}) {
+  const token = getToken();
 
   const headers = {
-    ...authHeaders(),
-    ...(json !== undefined ? { "Content-Type": "application/json" } : {}),
-    ...options.headers,
+    ...(options.body ? { "Content-Type": "application/json" } : {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers || {}),
   };
 
   const response = await fetch(`${API_URL}${path}`, {
-    ...rest,
+    ...options,
     headers,
-    body: json !== undefined ? JSON.stringify(json) : options.body,
   });
 
   if (response.status === 401) {
-    logoutUser();
-    showToast("Sessão expirada. Faça login novamente.", "error");
-    window.location.reload();
-    return;
+    clearToken();
+    window.dispatchEvent(new Event("orthostudy:unauthorized"));
+    throw new Error("Sessão expirada. Faça login novamente.");
   }
 
   if (!response.ok) {
-    throw await parseApiError(response);
+    const error = await response.json().catch(() => null);
+    throw new Error(error?.detail || `Erro HTTP ${response.status}`);
+  }
+
+  const contentType = response.headers.get("content-type");
+
+  if (contentType?.includes("application/json")) {
+    return response.json();
   }
 
   return response;
 }
-
-export const apiClient = {
-  get: (path, options) => request(path, { method: "GET", ...options }),
-  post: (path, json, options) => request(path, { method: "POST", json, ...options }),
-  put: (path, json, options) => request(path, { method: "PUT", json, ...options }),
-  delete: (path, options) => request(path, { method: "DELETE", ...options }),
-  blob: async (path, options) => {
-    const res = await request(path, { method: "GET", ...options });
-    return res.blob();
-  },
-};

@@ -69,6 +69,16 @@ export default function App() {
     refreshCases({});
   }, []);
 
+  useEffect(() => {
+    const handler = () => {
+      setIsAuthenticated(false);
+      setCaso(null);
+      setSavedCases([]);
+    };
+    window.addEventListener("orthostudy:unauthorized", handler);
+    return () => window.removeEventListener("orthostudy:unauthorized", handler);
+  }, []);
+
   const stopPct = () => setGenerating(false);
 
   const handleNewCase = () => {
