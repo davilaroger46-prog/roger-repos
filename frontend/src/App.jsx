@@ -2,11 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
 import DashboardPage from "./pages/DashboardPage";
+import ReviewPage from "./pages/ReviewPage";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
-import ReviewQueue from "./components/ReviewQueue";
-import ReviewPanel from "./components/ReviewPanel";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
 import { showToast } from "./core/toastStore";
@@ -46,6 +45,7 @@ export default function App() {
   const [pct, setPct] = useState(0);
   const [editing, setEditing] = useState(false);
   const [versionPreview, setVersionPreview] = useState(null);
+  const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
   const [caseFilters, setCaseFilters] = useState({});
   const [casePage, setCasePage] = useState(1);
   const [casePages, setCasePages] = useState(1);
@@ -183,6 +183,7 @@ export default function App() {
 
   const handleReviewed = async () => {
     showToast("Revisão registrada.");
+    setReviewRefreshKey((k) => k + 1);
     const updated = await getCase(activeCaseId);
     setCaso(updated);
     const list = await listCases(caseFilters);
@@ -348,30 +349,17 @@ export default function App() {
         )}
 
         {activeTab === "review" && (
-          <>
-            <ReviewQueue
-              onOpenCase={(id, fullCase) => {
-                setActiveCaseId(id);
-                setCaso(fullCase);
-              }}
-            />
-
-            {caso && (
-              <div style={{ marginTop: 16 }}>
-                <ReviewPanel
-                  caseId={activeCaseId}
-                  user={currentUser}
-                  onReviewed={async () => {
-                    showToast("Revisão registrada.");
-                    const updated = await getCase(activeCaseId);
-                    setCaso(updated);
-                    await refreshCases(caseFilters);
-                  }}
-                />
-                <CasePreview caso={caso} />
-              </div>
-            )}
-          </>
+          <ReviewPage
+            caso={caso}
+            activeCaseId={activeCaseId}
+            currentUser={currentUser}
+            reviewRefreshKey={reviewRefreshKey}
+            onOpenCase={(id, fullCase) => {
+              setActiveCaseId(id);
+              setCaso(fullCase);
+            }}
+            onReviewed={handleReviewed}
+          />
         )}
 
         {activeTab === "library" && (

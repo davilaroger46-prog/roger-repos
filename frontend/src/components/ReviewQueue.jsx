@@ -3,7 +3,7 @@ import { T } from "../constants/theme";
 import { listCases, getCase } from "../services/api";
 import ReviewBadge from "./ReviewBadge";
 
-export default function ReviewQueue({ onOpenCase }) {
+export default function ReviewQueue({ onOpenCase, refreshKey }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ export default function ReviewQueue({ onOpenCase }) {
 
   useEffect(() => {
     loadPending();
-  }, []);
+  }, [refreshKey]);
 
   return (
     <section
