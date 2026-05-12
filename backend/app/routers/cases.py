@@ -425,6 +425,12 @@ def review_case(
         if not case:
             raise not_found("Caso não encontrado")
 
+        if case.review_status != "review_pending":
+            raise validation_error(
+                "Somente casos pendentes podem ser revisados",
+                {"review_status": case.review_status},
+            )
+
         case.review_status = payload.status
         case.review_notes = payload.notes
         case.reviewed_by = current_user.id
