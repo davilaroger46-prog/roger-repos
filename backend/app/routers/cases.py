@@ -356,6 +356,12 @@ def export_case_pdf(
     try:
         case_db = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
+        if case_db.review_status != "approved":
+            raise validation_error(
+                "Somente casos aprovados podem ser exportados como PDF.",
+                {"review_status": case_db.review_status},
+            )
+
         titulo = case_db.titulo or f"caso-{case_id}"
         caso_json = case_db.caso_json
     finally:
