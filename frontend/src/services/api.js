@@ -1,4 +1,5 @@
 import { apiClient, setToken, clearToken, getToken } from "../core/apiClient";
+import { API_ROUTES } from "../constants/apiRoutes";
 
 export { setToken, getToken };
 
@@ -7,88 +8,91 @@ export function logoutUser() {
 }
 
 export async function getMe() {
-  return apiClient("/auth/me");
+  return apiClient(API_ROUTES.auth.me);
 }
 
 export async function registerUser({ name, email, password }) {
-  return apiClient("/auth/register", {
+  return apiClient(API_ROUTES.auth.register, {
     method: "POST",
     body: JSON.stringify({ name, email, password }),
   });
 }
 
 export async function loginUser({ email, password }) {
-  return apiClient("/auth/login", {
+  return apiClient(API_ROUTES.auth.login, {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
 }
 
 export async function generateCase({ tema, nivel, regiao }) {
-  return apiClient("/ai/generate-case", {
+  return apiClient(API_ROUTES.ai.generateCase, {
     method: "POST",
     body: JSON.stringify({ tema, nivel, regiao }),
   });
 }
 
 export async function autocorrectCase(caseJson) {
-  return apiClient("/ai/autocorrect-case", {
+  return apiClient(API_ROUTES.ai.autocorrectCase, {
     method: "POST",
     body: JSON.stringify(caseJson),
   });
 }
 
 export async function listCases(filters = {}) {
-  const params = new URLSearchParams(filters);
-  return apiClient(`/cases/?${params.toString()}`);
+  const clean = Object.fromEntries(
+    Object.entries(filters).filter(([, v]) => v !== "" && v != null)
+  );
+  const params = new URLSearchParams(clean);
+  return apiClient(`${API_ROUTES.cases.list}?${params.toString()}`);
 }
 
 export async function getCase(caseId) {
-  return apiClient(`/cases/${caseId}`);
+  return apiClient(API_ROUTES.cases.detail(caseId));
 }
 
 export async function updateCase(caseId, caseJson) {
-  return apiClient(`/cases/${caseId}`, {
+  return apiClient(API_ROUTES.cases.detail(caseId), {
     method: "PUT",
     body: JSON.stringify(caseJson),
   });
 }
 
 export async function deleteCase(caseId) {
-  return apiClient(`/cases/${caseId}`, {
+  return apiClient(API_ROUTES.cases.detail(caseId), {
     method: "DELETE",
   });
 }
 
 export async function listCaseVersions(caseId) {
-  return apiClient(`/cases/${caseId}/versions`);
+  return apiClient(API_ROUTES.cases.versions(caseId));
 }
 
 export async function getCaseVersion(caseId, versionId) {
-  return apiClient(`/cases/${caseId}/versions/${versionId}`);
+  return apiClient(API_ROUTES.cases.versionDetail(caseId, versionId));
 }
 
 export async function restoreCaseVersion(caseId, versionId) {
-  return apiClient(`/cases/${caseId}/versions/${versionId}/restore`, {
+  return apiClient(API_ROUTES.cases.restoreVersion(caseId, versionId), {
     method: "POST",
   });
 }
 
 export async function submitCaseReview(caseId) {
-  return apiClient(`/cases/${caseId}/submit-review`, {
+  return apiClient(API_ROUTES.cases.submitReview(caseId), {
     method: "POST",
   });
 }
 
 export async function reviewCase(caseId, { status, notes }) {
-  return apiClient(`/cases/${caseId}/review`, {
+  return apiClient(API_ROUTES.cases.review(caseId), {
     method: "POST",
     body: JSON.stringify({ status, notes }),
   });
 }
 
 export async function downloadCasePdf(caseId) {
-  const response = await apiClient(`/cases/${caseId}/pdf`);
+  const response = await apiClient(API_ROUTES.cases.pdf(caseId));
 
   const blob = await response.blob();
   const url = URL.createObjectURL(blob);
