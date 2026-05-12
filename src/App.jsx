@@ -121,20 +121,22 @@ export default function App() {
   };
 
   const handleDeleteCase = async (caseId) => {
-    const ok = confirmAction("Deletar este caso? Esta ação não pode ser desfeita.");
+    const ok = confirmAction(
+      "Tem certeza que deseja deletar este caso? Esta ação não pode ser desfeita."
+    );
+
     if (!ok) return;
 
     try {
       await deleteCase(caseId);
-
-      await refreshCases();
+      await refreshCases(caseFilters);
 
       if (activeCaseId === caseId) {
         setCaso(null);
         setActiveCaseId(null);
       }
 
-      showToast("Caso deletado.", "success");
+      showToast("Caso deletado com sucesso.");
     } catch (err) {
       showToast(err.message || "Erro ao deletar caso.", "error");
     }
