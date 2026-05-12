@@ -1,25 +1,60 @@
 from fastapi import HTTPException
 
 
-def not_found(entity: str = "Recurso") -> HTTPException:
-    return HTTPException(status_code=404, detail=f"{entity} não encontrado.")
+class AppError(HTTPException):
+    def __init__(
+        self,
+        status_code: int,
+        code: str,
+        message: str,
+        details: dict | None = None,
+    ):
+        super().__init__(
+            status_code=status_code,
+            detail={
+                "code": code,
+                "message": message,
+                "details": details or {},
+            },
+        )
 
 
-def unauthorized(detail: str = "Não autorizado.") -> HTTPException:
-    return HTTPException(status_code=401, detail=detail)
+def not_found(message: str = "Recurso não encontrado"):
+    return AppError(
+        status_code=404,
+        code="NOT_FOUND",
+        message=message,
+    )
 
 
-def forbidden(detail: str = "Acesso negado.") -> HTTPException:
-    return HTTPException(status_code=403, detail=detail)
+def unauthorized(message: str = "Não autenticado"):
+    return AppError(
+        status_code=401,
+        code="UNAUTHORIZED",
+        message=message,
+    )
 
 
-def bad_request(detail: str) -> HTTPException:
-    return HTTPException(status_code=400, detail=detail)
+def forbidden(message: str = "Acesso negado"):
+    return AppError(
+        status_code=403,
+        code="FORBIDDEN",
+        message=message,
+    )
 
 
-def unprocessable(detail: str) -> HTTPException:
-    return HTTPException(status_code=422, detail=detail)
+def validation_error(message: str, details: dict | None = None):
+    return AppError(
+        status_code=422,
+        code="VALIDATION_ERROR",
+        message=message,
+        details=details,
+    )
 
 
-def server_error(detail: str = "Erro interno do servidor.") -> HTTPException:
-    return HTTPException(status_code=500, detail=detail)
+def ai_error(message: str = "Erro ao processar IA"):
+    return AppError(
+        status_code=502,
+        code="AI_ERROR",
+        message=message,
+    )
