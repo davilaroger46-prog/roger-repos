@@ -182,9 +182,28 @@ export async function restoreCaseVersion(caseId, versionId) {
   return response.json();
 }
 
-export function downloadCasePdf(caseId) {
-  const token = getToken();
-  window.open(`${API_URL}/cases/${caseId}/pdf?token=${token}`, "_blank");
+export async function downloadCasePdf(caseId) {
+  const response = await fetch(`${API_URL}/cases/${caseId}/pdf`, {
+    headers: {
+      ...authHeaders(),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Erro ao baixar PDF");
+  }
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `orthostudy-case-${caseId}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
 }
 
 export async function deleteCase(caseId) {
