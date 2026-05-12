@@ -13,7 +13,7 @@ from app.services.pdf_service import generate_case_pdf
 from app.core.slugify import slugify
 from app.deps.auth_deps import get_current_user
 from app.deps.role_deps import require_role
-from app.core.errors import not_found, validation_error
+from app.core.errors import not_found, validation_error, conflict
 from app.core.logging import logger
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
@@ -426,9 +426,8 @@ def review_case(
             raise not_found("Caso não encontrado")
 
         if case.review_status != "review_pending":
-            raise validation_error(
-                "Somente casos pendentes podem ser revisados",
-                {"review_status": case.review_status},
+            raise conflict(
+                f"Somente casos pendentes podem ser revisados. Status atual: {case.review_status}"
             )
 
         case.review_status = payload.status
