@@ -1,10 +1,11 @@
 import time
-from collections import defaultdict
 
+import redis
+
+from app.core.config import REDIS_URL
 from app.core.errors import AppError
 
-
-_BUCKETS = defaultdict(list)
+_redis = redis.from_url(REDIS_URL, decode_responses=True)
 
 
 def rate_limit(
@@ -15,14 +16,14 @@ def rate_limit(
     now = time.time()
     window_start = now - window_seconds
 
-    requests = _BUCKETS[key]
+    pipe = _redis.pipeline()
+    pipe.zremrangebyscore(key, "-inf", window_start)
+    pipe.zadd(key, {str(now): now})
+    pipe.zcard(key)
+    pipe.expire(key, window_seconds)
+    _, _, count, _ = pipe.execute()
 
-    _BUCKETS[key] = [
-        timestamp for timestamp in requests
-        if timestamp > window_start
-    ]
-
-    if len(_BUCKETS[key]) >= limit:
+    if count > limit:
         raise AppError(
             status_code=429,
             code="RATE_LIMITED",
@@ -32,5 +33,3 @@ def rate_limit(
                 "window_seconds": window_seconds,
             },
         )
-
-    _BUCKETS[key].append(now)
