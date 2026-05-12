@@ -186,7 +186,7 @@ def update_case(
         db.commit()
         db.refresh(case_db)
 
-        logger.info("update_case user_id=%s case_id=%s", current_user.id, case_id)
+        logger.info(f"Caso atualizado | case_id={case_id} | user_id={current_user.id}")
         return case_db.caso_json
 
     except Exception as e:
@@ -301,7 +301,7 @@ def restore_case_version(
         db.commit()
         db.refresh(case_db)
 
-        logger.info("restore_case user_id=%s case_id=%s version_id=%s", current_user.id, case_id, version_id)
+        logger.info(f"Versão restaurada | case_id={case_id} | version_id={version_id} | user_id={current_user.id}")
         return case_db.caso_json
 
     except Exception as e:
@@ -361,7 +361,7 @@ def delete_case(
             raise not_found("Caso não encontrado")
         db.delete(case)
         db.commit()
-        logger.info("delete_case user_id=%s case_id=%s", current_user.id, case_id)
+        logger.info(f"Caso deletado | case_id={case_id} | user_id={current_user.id}")
         return {"status": "deleted", "id": case_id}
     finally:
         db.close()

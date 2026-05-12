@@ -34,5 +34,5 @@ def create_access_token(data: dict) -> str:
     to_encode.update({"exp": expire})
 
     token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    logger.info("create_access_token sub=%s exp=%s", to_encode.get("sub"), expire.isoformat())
+    logger.info(f"Token gerado | sub={to_encode.get('sub')} | exp={expire.isoformat()}")
     return token

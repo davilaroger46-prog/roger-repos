@@ -44,7 +44,7 @@ def register(payload: RegisterInput):
     db.refresh(user)
     db.close()
 
-    logger.info("register user_id=%s email=%s", user.id, user.email)
+    logger.info(f"Usuário registrado | user_id={user.id} | email={user.email}")
 
     token = create_access_token({
         "sub": str(user.id),

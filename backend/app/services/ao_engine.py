@@ -417,7 +417,7 @@ def ao_decision_engine(data: dict) -> dict:
         justificativa=justificativa,
         explicacao=explicacao,
     )
-    logger.info("ao_decision_engine codigo=%s conduta=%s urgencia=%s", codigo, conduta, urgencia)
+    logger.info(f"Decisão clínica | codigo={codigo} | conduta={conduta} | urgencia={urgencia}")
     return result.__dict__
 
 

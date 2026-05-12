@@ -212,5 +212,5 @@ def generate_case_pdf(case: dict) -> BytesIO:
     doc.build(story, onFirstPage=header_footer, onLaterPages=header_footer)
 
     buffer.seek(0)
-    logger.info("generate_case_pdf titulo=%s", meta.get("titulo"))
+    logger.info(f"PDF gerado | titulo={meta.get('titulo')}")
     return buffer

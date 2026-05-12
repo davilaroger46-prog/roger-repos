@@ -101,7 +101,7 @@ Retorne somente JSON.
     raw_text = response.content[0].text
     parsed = extract_json(raw_text)
     result = validate_case_schema(parsed)
-    logger.info("generate_orthopedic_case tema=%s nivel=%s regiao=%s", tema, nivel, regiao)
+    logger.info(f"Gerando caso ortopédico | tema={tema} | nivel={nivel} | regiao={regiao}")
     return result
 
 
@@ -147,5 +147,5 @@ CASO ATUAL:
     raw_text = response.content[0].text
     parsed = extract_json(raw_text)
     result = validate_case_schema(parsed)
-    logger.info("autocorrect_orthopedic_case completed")
+    logger.info("Autocorreção de caso iniciada")
     return result

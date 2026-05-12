@@ -23,7 +23,7 @@ def generate_case(
     check_ai_rate_limit(current_user.id)
 
     try:
-        logger.info("generate_case user_id=%s tema=%s", current_user.id, payload.tema)
+        logger.info(f"Gerando caso | user_id={current_user.id} | tema={payload.tema}")
 
         case = generate_orthopedic_case(
             tema=payload.tema,
