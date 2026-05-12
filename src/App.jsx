@@ -132,6 +132,15 @@ export default function App() {
     }
   };
 
+  if (!isAuthenticated) {
+    return (
+      <AuthScreen onAuth={() => {
+        setIsAuthenticated(true);
+        refreshCases({});
+      }} />
+    );
+  }
+
   if (flashcardCase) {
     return (
       <div className="mobile-app">
@@ -186,6 +195,28 @@ export default function App() {
       />
 
       <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+          <button
+            onClick={() => {
+              logoutUser();
+              setIsAuthenticated(false);
+              setCaso(null);
+              setSavedCases([]);
+            }}
+            style={{
+              padding: "7px 12px",
+              borderRadius: 9,
+              background: T.s2,
+              border: `1px solid ${T.border}`,
+              color: T.muted,
+              cursor: "pointer",
+              fontSize: 11,
+              fontWeight: 800,
+            }}
+          >
+            Sair
+          </button>
+        </div>
         {tab === "cases" && (
           <CaseListPage onSelect={setSelectedCase} />
         )}
