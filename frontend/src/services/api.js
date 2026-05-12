@@ -7,10 +7,7 @@ export function logoutUser() {
   clearToken();
 }
 
-export async function getMe() {
-  return apiClient(API_ROUTES.auth.me);
-}
-
+// AUTH
 export async function registerUser({ name, email, password }) {
   return apiClient(API_ROUTES.auth.register, {
     method: "POST",
@@ -25,6 +22,11 @@ export async function loginUser({ email, password }) {
   });
 }
 
+export async function getMe() {
+  return apiClient(API_ROUTES.auth.me);
+}
+
+// AI
 export async function generateCase({ tema, nivel, regiao }) {
   return apiClient(API_ROUTES.ai.generateCase, {
     method: "POST",
@@ -39,12 +41,22 @@ export async function autocorrectCase(caseJson) {
   });
 }
 
+// CASES
 export async function listCases(filters = {}) {
-  const clean = Object.fromEntries(
-    Object.entries(filters).filter(([, v]) => v !== "" && v != null)
-  );
-  const params = new URLSearchParams(clean);
-  return apiClient(`${API_ROUTES.cases.list}?${params.toString()}`);
+  const params = new URLSearchParams();
+
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      params.append(key, value);
+    }
+  });
+
+  const query = params.toString();
+  const path = query
+    ? `${API_ROUTES.cases.list}?${query}`
+    : API_ROUTES.cases.list;
+
+  return apiClient(path);
 }
 
 export async function getCase(caseId) {
@@ -64,33 +76,6 @@ export async function deleteCase(caseId) {
   });
 }
 
-export async function listCaseVersions(caseId) {
-  return apiClient(API_ROUTES.cases.versions(caseId));
-}
-
-export async function getCaseVersion(caseId, versionId) {
-  return apiClient(API_ROUTES.cases.versionDetail(caseId, versionId));
-}
-
-export async function restoreCaseVersion(caseId, versionId) {
-  return apiClient(API_ROUTES.cases.restoreVersion(caseId, versionId), {
-    method: "POST",
-  });
-}
-
-export async function submitCaseReview(caseId) {
-  return apiClient(API_ROUTES.cases.submitReview(caseId), {
-    method: "POST",
-  });
-}
-
-export async function reviewCase(caseId, { status, notes }) {
-  return apiClient(API_ROUTES.cases.review(caseId), {
-    method: "POST",
-    body: JSON.stringify({ status, notes }),
-  });
-}
-
 export async function downloadCasePdf(caseId) {
   const response = await apiClient(API_ROUTES.cases.pdf(caseId));
 
@@ -105,4 +90,33 @@ export async function downloadCasePdf(caseId) {
   a.remove();
 
   URL.revokeObjectURL(url);
+}
+
+// REVIEW
+export async function submitCaseReview(caseId) {
+  return apiClient(API_ROUTES.cases.submitReview(caseId), {
+    method: "POST",
+  });
+}
+
+export async function reviewCase(caseId, { status, notes }) {
+  return apiClient(API_ROUTES.cases.review(caseId), {
+    method: "POST",
+    body: JSON.stringify({ status, notes }),
+  });
+}
+
+// VERSIONS
+export async function listCaseVersions(caseId) {
+  return apiClient(API_ROUTES.cases.versions(caseId));
+}
+
+export async function getCaseVersion(caseId, versionId) {
+  return apiClient(API_ROUTES.cases.versionDetail(caseId, versionId));
+}
+
+export async function restoreCaseVersion(caseId, versionId) {
+  return apiClient(API_ROUTES.cases.restoreVersion(caseId, versionId), {
+    method: "POST",
+  });
 }
