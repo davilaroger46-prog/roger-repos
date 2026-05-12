@@ -31,7 +31,7 @@ export async function registerUser({ name, email, password }) {
 
   if (!response.ok) {
     const err = await response.json().catch(() => null);
-    throw new Error(err?.detail || "Erro ao criar conta");
+    throw new Error(err?.detail || "Erro ao cadastrar");
   }
 
   return response.json();
