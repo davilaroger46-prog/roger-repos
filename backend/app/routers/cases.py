@@ -32,6 +32,7 @@ def list_cases(
     regiao: str | None = None,
     nivel: str | None = None,
     conduta: str | None = None,
+    review_status: str | None = None,
     page: int = 1,
     page_size: int = 20,
     sort_by: str = "created_at",
@@ -58,6 +59,9 @@ def list_cases(
 
     if nivel:
         query = query.filter(ClinicalCaseModel.nivel == nivel)
+
+    if review_status:
+        query = query.filter(ClinicalCaseModel.review_status == review_status)
 
     sort_map = {
         "id": ClinicalCaseModel.id,

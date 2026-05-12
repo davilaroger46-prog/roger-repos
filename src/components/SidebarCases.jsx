@@ -20,6 +20,7 @@ export default function SidebarCases({
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
   const [conduta, setConduta] = useState("");
+  const [reviewStatus, setReviewStatus] = useState("");
   const [sortBy, setSortBy] = useState("created_at");
   const [sortDir, setSortDir] = useState("desc");
 
@@ -32,10 +33,11 @@ export default function SidebarCases({
       nivel,
       regiao,
       conduta,
+      review_status: reviewStatus,
       sort_by: sortBy,
       sort_dir: sortDir,
     });
-  }, [debouncedSearch, nivel, regiao, conduta, sortBy, sortDir]);
+  }, [debouncedSearch, nivel, regiao, conduta, reviewStatus, sortBy, sortDir]);
 
   const regioes = useMemo(() => {
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
@@ -126,6 +128,14 @@ export default function SidebarCases({
           <option value="urgente">Urgente</option>
         </select>
 
+        <select value={reviewStatus} onChange={(e) => setReviewStatus(e.target.value)} style={selectStyle}>
+          <option value="">Status de revisão</option>
+          <option value="draft">Rascunho</option>
+          <option value="review_pending">Em revisão</option>
+          <option value="approved">Aprovado</option>
+          <option value="rejected">Rejeitado</option>
+        </select>
+
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={selectStyle}>
             <option value="created_at">Criado em</option>
@@ -144,13 +154,14 @@ export default function SidebarCases({
         </div>
       </div>
 
-      {(search || nivel || regiao || conduta || sortBy !== "created_at" || sortDir !== "desc") && (
+      {(search || nivel || regiao || conduta || reviewStatus || sortBy !== "created_at" || sortDir !== "desc") && (
         <button
           onClick={() => {
             setSearch("");
             setNivel("");
             setRegiao("");
             setConduta("");
+            setReviewStatus("");
             setSortBy("created_at");
             setSortDir("desc");
           }}
