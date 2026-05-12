@@ -1,4 +1,4 @@
-.PHONY: up down build restart logs migrate shell-backend shell-frontend
+.PHONY: up down build restart logs ps migrate makemigration shell-backend shell-db clean
 
 up:
 	docker compose up
@@ -10,16 +10,26 @@ down:
 	docker compose down
 
 restart:
-	docker compose down && docker compose up --build
+	docker compose down
+	docker compose up --build
 
 logs:
 	docker compose logs -f
 
+ps:
+	docker compose ps
+
 migrate:
 	docker compose exec backend alembic upgrade head
+
+makemigration:
+	docker compose exec backend alembic revision --autogenerate -m "$(m)"
 
 shell-backend:
 	docker compose exec backend bash
 
-shell-frontend:
-	docker compose exec frontend sh
+shell-db:
+	docker compose exec postgres psql -U orthostudy -d orthostudy
+
+clean:
+	docker compose down -v
