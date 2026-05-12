@@ -110,6 +110,10 @@ def list_cases(
             "ao_codigo": case.ao_codigo,
             "conduta": case_conduta,
             "diagnostico": diagnostico,
+            "review_status": case.review_status,
+            "review_notes": case.review_notes,
+            "reviewed_by": case.reviewed_by,
+            "reviewed_at": case.reviewed_at,
             "created_at": case.created_at,
             "updated_at": case.updated_at,
         })
@@ -365,3 +369,31 @@ def delete_case(
         return {"status": "deleted", "id": case_id}
     finally:
         db.close()
+
+
+@router.post("/{case_id}/submit-review")
+def submit_case_review(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
+    db: Session = SessionLocal()
+
+    case = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id,
+        ClinicalCaseModel.user_id == current_user.id,
+    ).first()
+
+    if not case:
+        db.close()
+        raise not_found("Caso não encontrado")
+
+    case.review_status = "review_pending"
+
+    db.commit()
+    db.refresh(case)
+    db.close()
+
+    return {
+        "message": "Caso enviado para revisão",
+        "review_status": case.review_status,
+    }
