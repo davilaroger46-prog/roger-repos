@@ -7,6 +7,10 @@ from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
 from app.deps.auth_deps import get_current_user
+from app.core.rate_limit import check_ai_rate_limit
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -16,7 +20,11 @@ def generate_case(
     payload: GenerateCaseInput,
     current_user: UserModel = Depends(get_current_user),
 ):
+    check_ai_rate_limit(current_user.id)
+
     try:
+        logger.info("generate_case user_id=%s tema=%s", current_user.id, payload.tema)
+
         case = generate_orthopedic_case(
             tema=payload.tema,
             nivel=payload.nivel,
@@ -54,6 +62,8 @@ def autocorrect_case(
     payload: dict,
     current_user: UserModel = Depends(get_current_user),
 ):
+    check_ai_rate_limit(current_user.id)
+
     try:
         corrected = autocorrect_orthopedic_case(payload)
         return corrected

@@ -9,6 +9,10 @@ from app.services.auth_service import (
     verify_password,
     create_access_token,
 )
+from app.core.security import validate_password
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 router = APIRouter(
     prefix="/auth",
@@ -18,6 +22,8 @@ router = APIRouter(
 
 @router.post("/register", response_model=TokenOutput)
 def register(payload: RegisterInput):
+    validate_password(payload.password)
+
     db: Session = SessionLocal()
 
     existing = db.query(UserModel).filter(
@@ -41,6 +47,8 @@ def register(payload: RegisterInput):
     db.commit()
     db.refresh(user)
     db.close()
+
+    logger.info("register user_id=%s email=%s", user.id, user.email)
 
     token = create_access_token({
         "sub": str(user.id),
