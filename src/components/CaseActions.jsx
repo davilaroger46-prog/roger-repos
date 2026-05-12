@@ -1,6 +1,6 @@
 import { T } from "../constants/theme";
 
-export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf }) {
+export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSubmitReview }) {
   if (!caso) return null;
 
   const copyJson = async () => {
@@ -51,6 +51,12 @@ export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf }) {
       {onExportPdf && (
         <button onClick={onExportPdf} style={buttonStyle(T.red)}>
           📄 Exportar PDF
+        </button>
+      )}
+
+      {onSubmitReview && (
+        <button onClick={onSubmitReview} style={buttonStyle(T.purple)}>
+          🔍 Enviar para revisão
         </button>
       )}
 

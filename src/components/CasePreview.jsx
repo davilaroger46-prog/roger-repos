@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { T, NIV_C, COND_C, COND_I, URG_C } from "../constants/theme";
 import Tag from "./Tag";
+import ReviewBadge from "./ReviewBadge";
 
 export default function CasePreview({ caso }) {
   const [tab, setTab] = useState("resumo");
@@ -73,6 +74,9 @@ export default function CasePreview({ caso }) {
             <Tag c={COND_C[dc?.conduta] || T.blue}>
               {COND_I[dc?.conduta]} {dc?.conduta}
             </Tag>
+            {(caso.review_status || caso.meta?.review_status) && (
+              <ReviewBadge status={caso.review_status || caso.meta?.review_status} />
+            )}
           </div>
         </div>
 

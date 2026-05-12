@@ -28,6 +28,7 @@ import {
   autocorrectCase,
   restoreCaseVersion,
   downloadCasePdf,
+  submitCaseReview,
   getToken,
   logoutUser,
   getMe,
@@ -308,6 +309,26 @@ export default function App() {
                   await downloadCasePdf(activeCaseId);
                 } catch (err) {
                   setError(err.message || "Erro ao exportar PDF.");
+                }
+              }}
+              onSubmitReview={async () => {
+                try {
+                  if (!activeCaseId) {
+                    showToast("Este caso ainda não possui ID no banco.", "error");
+                    return;
+                  }
+
+                  await submitCaseReview(activeCaseId);
+
+                  showToast("Caso enviado para revisão.");
+
+                  const list = await listCases(caseFilters);
+                  setSavedCases(list.items || list);
+
+                  const updated = await getCase(activeCaseId);
+                  setCaso(updated);
+                } catch (err) {
+                  showToast(err.message || "Erro ao enviar para revisão.", "error");
                 }
               }}
             />
