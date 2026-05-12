@@ -17,7 +17,7 @@ import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/ToastContainer";
 import { showToast } from "./core/toastStore";
-import { useConfirmDialog } from "./core/confirmDialog";
+import { confirmAction } from "./core/confirmDialog";
 import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
@@ -33,7 +33,6 @@ import {
 } from "./services/api";
 
 export default function App() {
-  const { confirm, ConfirmDialog } = useConfirmDialog();
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
   const [tab, setTab] = useState("cases");
   const [selectedCase, setSelectedCase] = useState(null);
@@ -122,7 +121,7 @@ export default function App() {
   };
 
   const handleDeleteCase = async (caseId) => {
-    const ok = await confirm("Deletar este caso? Esta ação não pode ser desfeita.");
+    const ok = confirmAction("Deletar este caso? Esta ação não pode ser desfeita.");
     if (!ok) return;
 
     try {
@@ -195,7 +194,6 @@ export default function App() {
       }}
     >
       <ToastContainer />
-      {ConfirmDialog}
       <SidebarCases
         cases={savedCases}
         activeCaseId={activeCaseId}
