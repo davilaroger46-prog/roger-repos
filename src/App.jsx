@@ -251,7 +251,7 @@ export default function App() {
                 try {
                   await downloadCasePdf(activeCaseId);
                 } catch (err) {
-                  setError(err.message || "Erro ao baixar PDF");
+                  setError(err.message || "Erro ao exportar PDF.");
                 }
               }}
             />
