@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -10,14 +10,12 @@ import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
 import useAuth from "./hooks/useAuth";
 import useCases from "./hooks/useCases";
+import useCaseEditor from "./hooks/useCaseEditor";
 import { showToast } from "./core/toastStore";
 import { confirmAction } from "./core/confirm";
-import { getByPath, setByPath } from "./utils/objectPath";
 import {
   generateCase,
   getCase,
-  updateCase,
-  autocorrectCase,
   downloadCasePdf,
   submitCaseReview,
 } from "./services/api";
@@ -31,8 +29,6 @@ export default function App() {
   const [regiao, setRegiao] = useState("");
   const textareaRef = useRef(null);
   const [pct, setPct] = useState(0);
-  const [editing, setEditing] = useState(false);
-  const [versionPreview, setVersionPreview] = useState(null);
   const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
 
   const {
@@ -55,6 +51,21 @@ export default function App() {
   } = useCases();
 
   const { isAuthenticated, currentUser, handleAuthSuccess, logout } = useAuth({ onLogout: resetCases });
+
+  const {
+    editing,
+    setEditing,
+    versionPreview,
+    setVersionPreview,
+    editorLoading,
+    startEdit,
+    cancelEdit,
+    saveEdit,
+    autoCorrect,
+    restoreVersion,
+    restoreField,
+    restoreBlock,
+  } = useCaseEditor({ caso, setCaso, activeCaseId, refreshCases, showToast });
 
   useEffect(() => {
     refreshCases({});
@@ -93,26 +104,6 @@ export default function App() {
     }
   };
 
-  const handleStartEdit = () => setEditing(true);
-  const handleCancelEdit = () => setEditing(false);
-
-  const handleSaveEdit = async (draft) => {
-    if (!activeCaseId) {
-      showToast("Este caso ainda não possui ID no banco.", "error");
-      return;
-    }
-    const updated = await updateCase(activeCaseId, draft);
-    setCaso(updated);
-    setEditing(false);
-    await refreshCases();
-    showToast("Caso salvo com sucesso.");
-  };
-
-  const handleAutoCorrect = async (draft) => {
-    const corrected = await autocorrectCase(draft);
-    showToast("Autocorreção aplicada.");
-    return corrected;
-  };
 
   const handleExportPdf = async () => {
     if (!activeCaseId) {
@@ -142,19 +133,6 @@ export default function App() {
     await refreshCases(caseFilters);
   };
 
-  const handleRestoreField = async (path) => {
-    const merged = setByPath(caso, path, getByPath(versionPreview, path));
-    const updated = await updateCase(activeCaseId, merged);
-    setCaso(updated);
-    await refreshCases();
-  };
-
-  const handleRestoreBlock = async (path) => {
-    const merged = setByPath(caso, path, getByPath(versionPreview, path));
-    const updated = await updateCase(activeCaseId, merged);
-    setCaso(updated);
-    await refreshCases();
-  };
 
   if (!isAuthenticated) {
     return (
@@ -208,7 +186,7 @@ export default function App() {
           try {
             await downloadCasePdf(caseId);
           } catch (err) {
-            setError(err.message || "Erro ao baixar PDF");
+            showToast(err.message || "Erro ao baixar PDF", "error");
           }
         }}
         page={casePage}
@@ -264,7 +242,6 @@ export default function App() {
               if (!tema.trim()) return;
               setGenerating(true);
               setStage("Gerando caso com IA...");
-              setError(null);
               try {
                 const data = await generateCase({ tema, nivel, regiao });
                 setCaso(data);
@@ -310,15 +287,15 @@ export default function App() {
             setVersionPreview={setVersionPreview}
             currentUser={currentUser}
             onNewCase={handleNewCase}
-            onStartEdit={handleStartEdit}
-            onCancelEdit={handleCancelEdit}
-            onSaveEdit={handleSaveEdit}
-            onAutoCorrect={handleAutoCorrect}
+            onStartEdit={startEdit}
+            onCancelEdit={cancelEdit}
+            onSaveEdit={saveEdit}
+            onAutoCorrect={autoCorrect}
             onExportPdf={handleExportPdf}
             onSubmitReview={handleSubmitReview}
             onReviewed={handleReviewed}
-            onRestoreField={handleRestoreField}
-            onRestoreBlock={handleRestoreBlock}
+            onRestoreField={restoreField}
+            onRestoreBlock={restoreBlock}
           />
         )}
       </main>
