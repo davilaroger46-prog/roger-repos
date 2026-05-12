@@ -1,4 +1,4 @@
-.PHONY: up down build restart logs ps migrate makemigration shell-backend shell-db clean
+.PHONY: up down build restart logs ps migrate makemigration shell-backend shell-db clean test
 
 up:
 	docker compose up
@@ -33,3 +33,6 @@ shell-db:
 
 clean:
 	docker compose down -v
+
+test:
+	docker compose exec backend pytest -q

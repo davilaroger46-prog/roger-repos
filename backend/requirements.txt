@@ -11,3 +11,7 @@ reportlab
 passlib[bcrypt]
 python-jose[cryptography]
 redis
+
+pytest
+pytest-asyncio
+httpx
