@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { T, NIV_C } from "../constants/theme";
 import Tag from "./Tag";
+import ReviewBadge from "./ReviewBadge";
 import useDebounce from "../hooks/useDebounce";
 
 export default function SidebarCases({
@@ -258,6 +259,7 @@ export default function SidebarCases({
             {c.regiao && <Tag c={T.blue} sm>{c.regiao}</Tag>}
             {c.nivel && <Tag c={NIV_C[c.nivel] || T.blue} sm>{c.nivel}</Tag>}
             {c.ao_codigo && <Tag c={T.purple} sm>{c.ao_codigo}</Tag>}
+            {c.review_status && <ReviewBadge status={c.review_status} />}
           </div>
         </div>
       ))}
