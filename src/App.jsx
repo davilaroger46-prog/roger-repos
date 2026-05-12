@@ -13,6 +13,7 @@ import CaseActions from "./components/CaseActions";
 import CaseVisualEditor from "./components/CaseVisualEditor";
 import CaseVersionsPanel from "./components/CaseVersionsPanel";
 import CaseVersionDiff from "./components/CaseVersionDiff";
+import ReviewPanel from "./components/ReviewPanel";
 import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/ToastContainer";
@@ -330,6 +331,18 @@ export default function App() {
                 } catch (err) {
                   showToast(err.message || "Erro ao enviar para revisão.", "error");
                 }
+              }}
+            />
+
+            <ReviewPanel
+              caso={caso}
+              caseId={activeCaseId}
+              currentUser={currentUser}
+              onReviewed={async () => {
+                const updated = await getCase(activeCaseId);
+                setCaso(updated);
+                await refreshCases(caseFilters);
+                showToast("Revisão registrada.");
               }}
             />
 
