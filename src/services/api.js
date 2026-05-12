@@ -6,6 +6,10 @@ export function logoutUser() {
   clearToken();
 }
 
+export async function getMe() {
+  return apiClient("/auth/me");
+}
+
 export async function registerUser({ name, email, password }) {
   return apiClient("/auth/register", {
     method: "POST",

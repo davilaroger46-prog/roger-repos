@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.user_model import UserModel
 from app.schemas.auth import RegisterInput, LoginInput, TokenOutput
+from app.schemas.user import UserOutput
 from app.services.auth_service import (
     hash_password,
     verify_password,
@@ -92,10 +93,8 @@ def login(payload: LoginInput):
     }
 
 
-@router.get("/me")
-def me(current_user: UserModel = Depends(get_current_user)):
-    return {
-        "id": current_user.id,
-        "name": current_user.name,
-        "email": current_user.email,
-    }
+@router.get("/me", response_model=UserOutput)
+def me(
+    current_user: UserModel = Depends(get_current_user),
+):
+    return current_user

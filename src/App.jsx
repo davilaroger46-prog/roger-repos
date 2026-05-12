@@ -30,10 +30,12 @@ import {
   downloadCasePdf,
   getToken,
   logoutUser,
+  getMe,
 } from "./services/api";
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
+  const [currentUser, setCurrentUser] = useState(null);
   const [tab, setTab] = useState("cases");
   const [selectedCase, setSelectedCase] = useState(null);
   const [flashcardCase, setFlashcardCase] = useState(null);
@@ -53,6 +55,15 @@ export default function App() {
   const [casePages, setCasePages] = useState(1);
   const [caseTotal, setCaseTotal] = useState(0);
 
+  const loadCurrentUser = async () => {
+    try {
+      const me = await getMe();
+      setCurrentUser(me);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const refreshCases = async (filters = caseFilters) => {
     try {
       const data = await listCases(filters);
@@ -63,6 +74,12 @@ export default function App() {
       setError("Erro ao carregar casos.");
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadCurrentUser();
+    }
+  }, []);
 
   useEffect(() => {
     refreshCases({});
@@ -160,9 +177,10 @@ export default function App() {
 
   if (!isAuthenticated) {
     return (
-      <AuthScreen onAuth={() => {
+      <AuthScreen onAuth={async () => {
         setIsAuthenticated(true);
-        refreshCases({});
+        await loadCurrentUser();
+        await refreshCases({});
       }} />
     );
   }
@@ -229,26 +247,37 @@ export default function App() {
 
       <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
         <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-          <button
-            onClick={() => {
-              logoutUser();
-              setIsAuthenticated(false);
-              setCaso(null);
-              setSavedCases([]);
-            }}
-            style={{
-              padding: "7px 12px",
-              borderRadius: 9,
-              background: T.s2,
-              border: `1px solid ${T.border}`,
-              color: T.muted,
-              cursor: "pointer",
-              fontSize: 11,
-              fontWeight: 800,
-            }}
-          >
-            Sair
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: T.text }}>
+                {currentUser?.name}
+              </div>
+              <div style={{ fontSize: 10, color: T.muted }}>
+                {currentUser?.email}
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                logoutUser();
+                setIsAuthenticated(false);
+                setCaso(null);
+                setSavedCases([]);
+                setCurrentUser(null);
+              }}
+              style={{
+                padding: "7px 12px",
+                borderRadius: 9,
+                background: T.s2,
+                border: `1px solid ${T.border}`,
+                color: T.muted,
+                cursor: "pointer",
+                fontSize: 11,
+                fontWeight: 800,
+              }}
+            >
+              Sair
+            </button>
+          </div>
         </div>
         {tab === "cases" && (
           <CaseListPage onSelect={setSelectedCase} />
