@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: orthostudy_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: orthostudy
+      POSTGRES_USER: orthostudy
+      POSTGRES_PASSWORD: orthostudy_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - orthostudy_postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: orthostudy_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: orthostudy_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  orthostudy_postgres_data:
