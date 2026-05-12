@@ -8,6 +8,7 @@ from app.core.config import (
     ALGORITHM,
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
+from app.core.logging import logger
 
 pwd_context = CryptContext(
     schemes=["bcrypt"],
@@ -32,8 +33,6 @@ def create_access_token(data: dict) -> str:
 
     to_encode.update({"exp": expire})
 
-    return jwt.encode(
-        to_encode,
-        SECRET_KEY,
-        algorithm=ALGORITHM,
-    )
+    token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    logger.info("create_access_token sub=%s exp=%s", to_encode.get("sub"), expire.isoformat())
+    return token

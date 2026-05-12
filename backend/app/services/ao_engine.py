@@ -11,6 +11,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
+from app.core.logging import logger
+
 
 @dataclass
 class DecisionResult:
@@ -415,6 +417,7 @@ def ao_decision_engine(data: dict) -> dict:
         justificativa=justificativa,
         explicacao=explicacao,
     )
+    logger.info("ao_decision_engine codigo=%s conduta=%s urgencia=%s", codigo, conduta, urgencia)
     return result.__dict__
 
 
