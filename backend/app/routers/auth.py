@@ -9,7 +9,7 @@ from app.services.auth_service import (
     verify_password,
     create_access_token,
 )
-from app.core.security import validate_password_strength
+from app.core.password_policy import validate_password_strength
 from app.core.errors import conflict, unauthorized
 from app.core.logging import logger
 
