@@ -34,11 +34,21 @@ def list_cases(
 ):
     db: Session = SessionLocal()
     try:
-        if current_user.role in ["reviewer", "admin"] and review_status == "review_pending":
+        can_view_global_review_queue = (
+            current_user.role in ["reviewer", "admin"]
+            and review_status == "review_pending"
+        )
+
+        if can_view_global_review_queue:
             query = db.query(ClinicalCaseModel)
         else:
             query = db.query(ClinicalCaseModel).filter(
                 ClinicalCaseModel.user_id == current_user.id
+            )
+
+        if review_status:
+            query = query.filter(
+                ClinicalCaseModel.review_status == review_status
             )
 
         if q:
@@ -56,9 +66,6 @@ def list_cases(
         if nivel:
             query = query.filter(ClinicalCaseModel.nivel == nivel)
 
-        if review_status:
-            query = query.filter(ClinicalCaseModel.review_status == review_status)
-
         sort_map = {
             "id": ClinicalCaseModel.id,
             "titulo": ClinicalCaseModel.titulo,
@@ -71,10 +78,9 @@ def list_cases(
 
         sort_column = sort_map.get(sort_by, ClinicalCaseModel.created_at)
 
-        if sort_dir == "asc":
-            query = query.order_by(sort_column.asc())
-        else:
-            query = query.order_by(sort_column.desc())
+        query = query.order_by(
+            sort_column.asc() if sort_dir == "asc" else sort_column.desc()
+        )
 
         total = query.count()
         offset = (page - 1) * page_size
