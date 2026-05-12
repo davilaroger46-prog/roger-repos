@@ -7,7 +7,7 @@ from app.db.database import SessionLocal
 from app.models.user_model import UserModel
 from app.models.case_model import ClinicalCaseModel
 from app.services.auth_service import hash_password
-from tests.fixtures import valid_clinical_case
+from .fixtures import valid_clinical_case
 
 
 client = TestClient(app)
