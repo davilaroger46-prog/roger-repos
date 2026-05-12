@@ -1,15 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import GeneratePage from "./pages/GeneratePage";
+import LibraryPage from "./pages/LibraryPage";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
-import CasePreview from "./components/CasePreview";
-import CaseActions from "./components/CaseActions";
-import CaseVisualEditor from "./components/CaseVisualEditor";
-import CaseVersionsPanel from "./components/CaseVersionsPanel";
-import CaseVersionDiff from "./components/CaseVersionDiff";
-import ReviewPanel from "./components/ReviewPanel";
 import TopNav from "./components/TopNav";
 import ReviewQueue from "./components/ReviewQueue";
+import ReviewPanel from "./components/ReviewPanel";
 import CasesDashboard from "./components/CasesDashboard";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
@@ -146,12 +142,65 @@ export default function App() {
   const handleStartEdit = () => setEditing(true);
   const handleCancelEdit = () => setEditing(false);
 
-  const handleSave = async () => {
-    try {
-      await refreshCases();
-    } catch (err) {
-      setError("Erro ao atualizar lista de casos.");
+  const handleSaveEdit = async (draft) => {
+    if (!activeCaseId) {
+      showToast("Este caso ainda não possui ID no banco.", "error");
+      return;
     }
+    const updated = await updateCase(activeCaseId, draft);
+    setCaso(updated);
+    setEditing(false);
+    await refreshCases();
+    showToast("Caso salvo com sucesso.");
+  };
+
+  const handleAutoCorrect = async (draft) => {
+    const corrected = await autocorrectCase(draft);
+    showToast("Autocorreção aplicada.");
+    return corrected;
+  };
+
+  const handleExportPdf = async () => {
+    if (!activeCaseId) {
+      showToast("Este caso ainda não possui ID no banco.", "error");
+      return;
+    }
+    await downloadCasePdf(activeCaseId);
+  };
+
+  const handleSubmitReview = async () => {
+    if (!activeCaseId) {
+      showToast("Este caso ainda não possui ID no banco.", "error");
+      return;
+    }
+    await submitCaseReview(activeCaseId);
+    showToast("Caso enviado para revisão.");
+    const list = await listCases(caseFilters);
+    setSavedCases(list.items || list);
+    const updated = await getCase(activeCaseId);
+    setCaso(updated);
+  };
+
+  const handleReviewed = async () => {
+    showToast("Revisão registrada.");
+    const updated = await getCase(activeCaseId);
+    setCaso(updated);
+    const list = await listCases(caseFilters);
+    setSavedCases(list.items || list);
+  };
+
+  const handleRestoreField = async (path) => {
+    const merged = setByPath(caso, path, getByPath(versionPreview, path));
+    const updated = await updateCase(activeCaseId, merged);
+    setCaso(updated);
+    await refreshCases();
+  };
+
+  const handleRestoreBlock = async (path) => {
+    const merged = setByPath(caso, path, getByPath(versionPreview, path));
+    const updated = await updateCase(activeCaseId, merged);
+    setCaso(updated);
+    await refreshCases();
   };
 
   if (!isAuthenticated) {
@@ -326,177 +375,25 @@ export default function App() {
         )}
 
         {activeTab === "library" && (
-          <>
-            {caso ? (
-              <>
-                <CaseActions
-                  caso={caso}
-                  onNewCase={handleNewCase}
-                  onEdit={handleStartEdit}
-                  onExportPdf={async () => {
-                    if (!activeCaseId) {
-                      setError("Este caso ainda não possui ID no banco.");
-                      return;
-                    }
-                    try {
-                      await downloadCasePdf(activeCaseId);
-                    } catch (err) {
-                      setError(err.message || "Erro ao exportar PDF.");
-                    }
-                  }}
-                  onSubmitReview={async () => {
-                    try {
-                      if (!activeCaseId) {
-                        showToast("Este caso ainda não possui ID no banco.", "error");
-                        return;
-                      }
-                      await submitCaseReview(activeCaseId);
-                      showToast("Caso enviado para revisão.");
-                      const list = await listCases(caseFilters);
-                      setSavedCases(list.items || list);
-                      const updated = await getCase(activeCaseId);
-                      setCaso(updated);
-                    } catch (err) {
-                      showToast(err.message || "Erro ao enviar para revisão.", "error");
-                    }
-                  }}
-                />
-
-                <ReviewPanel
-                  caseId={activeCaseId}
-                  user={currentUser}
-                  onReviewed={async () => {
-                    showToast("Revisão registrada.");
-                    const updated = await getCase(activeCaseId);
-                    setCaso(updated);
-                    const list = await listCases(caseFilters);
-                    setSavedCases(list.items || list);
-                  }}
-                />
-
-                {editing ? (
-                  <CaseVisualEditor
-                    caso={caso}
-                    onCancel={handleCancelEdit}
-                    onSave={async (draft) => {
-                      try {
-                        if (!activeCaseId) {
-                          setError("Este caso ainda não possui ID no banco.");
-                          return;
-                        }
-                        const updated = await updateCase(activeCaseId, draft);
-                        setCaso(updated);
-                        setEditing(false);
-                        await refreshCases();
-                        showToast("Caso salvo com sucesso.");
-                      } catch (err) {
-                        showToast(err.message || "Erro ao salvar edição.", "error");
-                      }
-                    }}
-                    onAutoCorrect={async (draft) => {
-                      try {
-                        setError(null);
-                        const corrected = await autocorrectCase(draft);
-                        showToast("Autocorreção aplicada.");
-                        return corrected;
-                      } catch (err) {
-                        showToast(err.message || "Erro ao autocorrigir caso.", "error");
-                        return draft;
-                      }
-                    }}
-                  />
-                ) : (
-                  <>
-                    <CasePreview caso={versionPreview || caso} />
-                    {versionPreview && (
-                      <CaseVersionDiff
-                        currentCase={caso}
-                        oldCase={versionPreview}
-                        onRestoreField={async (path) => {
-                          try {
-                            const oldValue = getByPath(versionPreview, path);
-                            const merged = setByPath(caso, path, oldValue);
-                            const updated = await updateCase(activeCaseId, merged);
-                            setCaso(updated);
-                            await refreshCases();
-                          } catch (err) {
-                            setError(err.message || "Erro ao restaurar campo.");
-                          }
-                        }}
-                        onRestoreBlock={async (path) => {
-                          try {
-                            const oldValue = getByPath(versionPreview, path);
-                            const merged = setByPath(caso, path, oldValue);
-                            const updated = await updateCase(activeCaseId, merged);
-                            setCaso(updated);
-                            await refreshCases();
-                          } catch (err) {
-                            setError(err.message || "Erro ao restaurar bloco.");
-                          }
-                        }}
-                      />
-                    )}
-                    {activeCaseId && (
-                      <div style={{ marginTop: 24 }}>
-                        {versionPreview && (
-                          <div
-                            style={{
-                              background: "rgba(139,92,246,.07)",
-                              border: "1px solid rgba(139,92,246,.25)",
-                              borderRadius: 14,
-                              padding: 14,
-                              marginBottom: 14,
-                            }}
-                          >
-                            <div
-                              style={{
-                                fontSize: 10,
-                                color: T.purple,
-                                fontWeight: 800,
-                                textTransform: "uppercase",
-                                letterSpacing: ".1em",
-                                marginBottom: 8,
-                              }}
-                            >
-                              Visualizando versão antiga
-                            </div>
-                            <button
-                              onClick={() => setVersionPreview(null)}
-                              style={{
-                                padding: "7px 12px",
-                                borderRadius: 8,
-                                cursor: "pointer",
-                                background: T.s2,
-                                border: `1px solid ${T.border}`,
-                                color: T.muted,
-                                fontSize: 11,
-                                fontWeight: 800,
-                              }}
-                            >
-                              Voltar para versão atual
-                            </button>
-                          </div>
-                        )}
-                        <CaseVersionsPanel
-                          caseId={activeCaseId}
-                          onOpenVersion={(oldCase) => setVersionPreview(oldCase)}
-                          onRestoreVersion={async (restoredCase) => {
-                            setCaso(restoredCase);
-                            setVersionPreview(null);
-                            await refreshCases();
-                          }}
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
-            ) : (
-              <div style={{ color: T.muted, fontSize: 13, padding: "40px 0", textAlign: "center" }}>
-                Selecione um caso na sidebar para visualizar.
-              </div>
-            )}
-          </>
+          <LibraryPage
+            caso={caso}
+            activeCaseId={activeCaseId}
+            editing={editing}
+            setEditing={setEditing}
+            versionPreview={versionPreview}
+            setVersionPreview={setVersionPreview}
+            currentUser={currentUser}
+            onNewCase={handleNewCase}
+            onStartEdit={handleStartEdit}
+            onCancelEdit={handleCancelEdit}
+            onSaveEdit={handleSaveEdit}
+            onAutoCorrect={handleAutoCorrect}
+            onExportPdf={handleExportPdf}
+            onSubmitReview={handleSubmitReview}
+            onReviewed={handleReviewed}
+            onRestoreField={handleRestoreField}
+            onRestoreBlock={handleRestoreBlock}
+          />
         )}
       </main>
     </div>
