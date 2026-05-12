@@ -30,6 +30,7 @@ import {
 } from "./services/api";
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken());
   const [tab, setTab] = useState("cases");
   const [selectedCase, setSelectedCase] = useState(null);
   const [flashcardCase, setFlashcardCase] = useState(null);
