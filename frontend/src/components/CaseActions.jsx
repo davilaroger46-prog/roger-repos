@@ -3,9 +3,11 @@ import { T } from "../constants/theme";
 export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSubmitReview }) {
   if (!caso) return null;
 
+  const reviewStatus = caso?._db?.review_status || "draft";
+
   const canSubmitReview =
-    caso._db?.id &&
-    !["approved", "review_pending"].includes(caso._db?.review_status);
+    caso?._db?.id &&
+    !["approved", "review_pending"].includes(reviewStatus);
 
   const copyJson = async () => {
     await navigator.clipboard.writeText(JSON.stringify(caso, null, 2));
