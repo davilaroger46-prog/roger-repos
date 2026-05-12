@@ -19,6 +19,22 @@ from app.core.logging import logger
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
 
+def get_owned_case_or_404(
+    db: Session,
+    case_id: int,
+    user_id: int,
+) -> ClinicalCaseModel:
+    case = db.query(ClinicalCaseModel).filter(
+        ClinicalCaseModel.id == case_id,
+        ClinicalCaseModel.user_id == user_id,
+    ).first()
+
+    if not case:
+        raise not_found("Caso não encontrado")
+
+    return case
+
+
 @router.get("/")
 def list_cases(
     q: str | None = None,
@@ -182,13 +198,7 @@ def update_case(
 ):
     db: Session = SessionLocal()
     try:
-        case_db = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
-
-        if not case_db:
-            raise not_found("Caso não encontrado")
+        case_db = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
         validated = ClinicalCase.model_validate(payload)
 
@@ -236,6 +246,8 @@ def list_case_versions(
 ):
     db: Session = SessionLocal()
     try:
+        get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+
         versions = db.query(ClinicalCaseVersionModel).filter(
             ClinicalCaseVersionModel.case_id == case_id
         ).order_by(
@@ -263,6 +275,8 @@ def get_case_version(
 ):
     db: Session = SessionLocal()
     try:
+        get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+
         version = db.query(ClinicalCaseVersionModel).filter(
             ClinicalCaseVersionModel.case_id == case_id,
             ClinicalCaseVersionModel.id == version_id,
@@ -284,13 +298,7 @@ def restore_case_version(
 ):
     db: Session = SessionLocal()
     try:
-        case_db = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
-
-        if not case_db:
-            raise not_found("Caso não encontrado")
+        case_db = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
         version = db.query(ClinicalCaseVersionModel).filter(
             ClinicalCaseVersionModel.case_id == case_id,
@@ -346,13 +354,7 @@ def export_case_pdf(
 ):
     db: Session = SessionLocal()
     try:
-        case_db = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
-
-        if not case_db:
-            raise not_found("Caso não encontrado")
+        case_db = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
         titulo = case_db.titulo or f"caso-{case_id}"
         caso_json = case_db.caso_json
@@ -378,12 +380,7 @@ def delete_case(
 ):
     db = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
-        if not case:
-            raise not_found("Caso não encontrado")
+        case = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
         db.delete(case)
         db.commit()
         logger.info(f"Caso deletado | case_id={case_id} | user_id={current_user.id}")
@@ -399,13 +396,7 @@ def submit_case_review(
 ):
     db: Session = SessionLocal()
     try:
-        case = db.query(ClinicalCaseModel).filter(
-            ClinicalCaseModel.id == case_id,
-            ClinicalCaseModel.user_id == current_user.id,
-        ).first()
-
-        if not case:
-            raise not_found("Caso não encontrado")
+        case = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
         case.review_status = "review_pending"
         db.commit()
