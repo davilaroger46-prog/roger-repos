@@ -335,14 +335,16 @@ export default function App() {
             />
 
             <ReviewPanel
-              caso={caso}
               caseId={activeCaseId}
-              currentUser={currentUser}
+              user={currentUser}
               onReviewed={async () => {
+                showToast("Revisão registrada.");
+
                 const updated = await getCase(activeCaseId);
                 setCaso(updated);
-                await refreshCases(caseFilters);
-                showToast("Revisão registrada.");
+
+                const list = await listCases(caseFilters);
+                setSavedCases(list.items || list);
               }}
             />
 
