@@ -60,14 +60,6 @@ def conflict(message: str = "Conflito"):
     )
 
 
-def rate_limit_error(message: str = "Limite de requisições atingido"):
-    return AppError(
-        status_code=429,
-        code="RATE_LIMIT",
-        message=message,
-    )
-
-
 def ai_error(message: str = "Erro ao processar IA"):
     return AppError(
         status_code=502,

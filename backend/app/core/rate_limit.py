@@ -1,24 +1,36 @@
 import time
 from collections import defaultdict
-from app.core.errors import rate_limit_error
 
-_request_log: dict[int, list[float]] = defaultdict(list)
-
-WINDOW_SECONDS = 60
-MAX_REQUESTS = 10
+from app.core.errors import AppError
 
 
-def check_ai_rate_limit(user_id: int) -> None:
+_BUCKETS = defaultdict(list)
+
+
+def rate_limit(
+    key: str,
+    limit: int = 10,
+    window_seconds: int = 3600,
+):
     now = time.time()
-    window_start = now - WINDOW_SECONDS
+    window_start = now - window_seconds
 
-    timestamps = _request_log[user_id]
-    timestamps = [t for t in timestamps if t > window_start]
-    _request_log[user_id] = timestamps
+    requests = _BUCKETS[key]
 
-    if len(timestamps) >= MAX_REQUESTS:
-        raise rate_limit_error(
-            f"Limite de {MAX_REQUESTS} requisições por minuto atingido. Aguarde e tente novamente."
+    _BUCKETS[key] = [
+        timestamp for timestamp in requests
+        if timestamp > window_start
+    ]
+
+    if len(_BUCKETS[key]) >= limit:
+        raise AppError(
+            status_code=429,
+            code="RATE_LIMITED",
+            message="Limite de uso da IA atingido. Tente novamente mais tarde.",
+            details={
+                "limit": limit,
+                "window_seconds": window_seconds,
+            },
         )
 
-    _request_log[user_id].append(now)
+    _BUCKETS[key].append(now)

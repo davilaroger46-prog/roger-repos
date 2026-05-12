@@ -8,7 +8,7 @@ from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
 from app.deps.auth_deps import get_current_user
-from app.core.rate_limit import check_ai_rate_limit
+from app.core.rate_limit import rate_limit
 from app.core.errors import ai_error, validation_error
 from app.core.logging import logger
 
@@ -20,7 +20,7 @@ def generate_case(
     payload: GenerateCaseInput,
     current_user: UserModel = Depends(get_current_user),
 ):
-    check_ai_rate_limit(current_user.id)
+    rate_limit(f"ai:{current_user.id}")
 
     try:
         logger.info(f"Gerando caso | user_id={current_user.id} | tema={payload.tema}")
@@ -62,7 +62,7 @@ def autocorrect_case(
     payload: dict,
     current_user: UserModel = Depends(get_current_user),
 ):
-    check_ai_rate_limit(current_user.id)
+    rate_limit(f"ai:{current_user.id}")
 
     try:
         corrected = autocorrect_orthopedic_case(payload)
