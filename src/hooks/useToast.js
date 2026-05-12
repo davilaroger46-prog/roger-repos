@@ -1,17 +1,12 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
+import { subscribeToasts } from "../core/toastStore";
 
 export default function useToast() {
   const [toasts, setToasts] = useState([]);
 
-  const showToast = useCallback((message, type = "success") => {
-    const id = Date.now();
-
-    setToasts((prev) => [...prev, { id, message, type }]);
-
-    setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3500);
+  useEffect(() => {
+    return subscribeToasts(setToasts);
   }, []);
 
-  return { toasts, showToast };
+  return toasts;
 }

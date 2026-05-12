@@ -1,3 +1,4 @@
+import useToast from "../hooks/useToast";
 import { T } from "../constants/theme";
 
 const TYPE_STYLES = {
@@ -18,7 +19,9 @@ const TYPE_STYLES = {
   },
 };
 
-export default function ToastContainer({ toasts }) {
+export default function ToastContainer() {
+  const toasts = useToast();
+
   if (!toasts.length) return null;
 
   return (
@@ -43,7 +46,7 @@ export default function ToastContainer({ toasts }) {
             fontWeight: 700,
             maxWidth: 320,
             boxShadow: "0 4px 24px rgba(0,0,0,.4)",
-            ...TYPE_STYLES[t.type] || TYPE_STYLES.success,
+            ...(TYPE_STYLES[t.type] || TYPE_STYLES.success),
           }}
         >
           {t.message}
