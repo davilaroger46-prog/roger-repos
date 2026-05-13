@@ -17,6 +17,7 @@ import {
   generateCase,
   getCase,
   downloadCasePdf,
+  downloadCasePdfDraft,
   submitCaseReview,
 } from "./services/api";
 
@@ -111,6 +112,14 @@ export default function App() {
       return;
     }
     await downloadCasePdf(activeCaseId);
+  };
+
+  const handleExportDraftPdf = async () => {
+    if (!activeCaseId) {
+      showToast("Este caso ainda não possui ID no banco.", "error");
+      return;
+    }
+    await downloadCasePdfDraft(activeCaseId);
   };
 
   const handleSubmitReview = async () => {
@@ -269,6 +278,7 @@ export default function App() {
             onSaveEdit={saveEdit}
             onAutoCorrect={autoCorrect}
             onExportPdf={handleExportPdf}
+            onExportDraftPdf={handleExportDraftPdf}
             onSubmitReview={handleSubmitReview}
             onReviewed={handleReviewed}
             onRestoreField={restoreField}

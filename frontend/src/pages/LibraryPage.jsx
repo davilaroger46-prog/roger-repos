@@ -22,6 +22,7 @@ export default function LibraryPage({
   onSaveEdit,
   onAutoCorrect,
   onExportPdf,
+  onExportDraftPdf,
   onSubmitReview,
   onReviewed,
 
@@ -123,6 +124,7 @@ export default function LibraryPage({
         onNewCase={onNewCase}
         onEdit={onStartEdit}
         onExportPdf={onExportPdf}
+        onExportDraftPdf={onExportDraftPdf}
         onSubmitReview={onSubmitReview}
       />
 

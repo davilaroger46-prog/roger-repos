@@ -14,6 +14,7 @@ export const API_ROUTES = {
     list: "/cases/",
     detail: (id) => `/cases/${id}`,
     pdf: (id) => `/cases/${id}/pdf`,
+    pdfDraft: (id) => `/cases/${id}/pdf-draft`,
 
     submitReview: (id) => `/cases/${id}/submit-review`,
     review: (id) => `/cases/${id}/review`,

@@ -379,6 +379,35 @@ def export_case_pdf(
     )
 
 
+@router.get("/{case_id}/pdf-draft")
+def export_case_pdf_draft(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
+    db: Session = SessionLocal()
+
+    case_db = get_owned_case_or_404(
+        db=db,
+        case_id=case_id,
+        user_id=current_user.id,
+    )
+
+    titulo = case_db.titulo or f"caso-{case_id}"
+    caso_json = case_db.caso_json
+    db.close()
+
+    pdf_buffer = generate_case_pdf(caso_json, draft=True)
+    filename = f"orthostudy-draft-{case_id}-{slugify(titulo)}.pdf"
+
+    return StreamingResponse(
+        pdf_buffer,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        },
+    )
+
+
 @router.delete("/{case_id}")
 def delete_case(
     case_id: int,

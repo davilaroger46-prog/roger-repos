@@ -17,7 +17,7 @@ from reportlab.platypus import (
 )
 
 
-def generate_case_pdf(case: dict) -> BytesIO:
+def generate_case_pdf(case: dict, draft: bool = False) -> BytesIO:
     buffer = BytesIO()
 
     doc = SimpleDocTemplate(
@@ -57,6 +57,16 @@ def generate_case_pdf(case: dict) -> BytesIO:
         canvas.setFillColor(colors.grey)
         canvas.drawString(1.7 * cm, 1 * cm, "OrthoStudy — Relatório Clínico")
         canvas.drawRightString(19 * cm, 1 * cm, f"Página {doc.page}")
+
+        if draft:
+            canvas.setFont("Helvetica-Bold", 42)
+            canvas.setFillColor(colors.Color(1, 0, 0, alpha=0.12))
+            canvas.saveState()
+            canvas.translate(10.5 * cm, 14.5 * cm)
+            canvas.rotate(35)
+            canvas.drawCentredString(0, 0, "RASCUNHO — NÃO APROVADO")
+            canvas.restoreState()
+
         canvas.restoreState()
 
     def section(title):
@@ -201,13 +211,14 @@ def generate_case_pdf(case: dict) -> BytesIO:
             ["Resposta", card.get("resposta")],
         ])
 
-    story.append(Spacer(1, 20))
-    story.append(
-        Paragraph(
-            "Documento gerado pelo OrthoStudy. Deve ser revisado por médico responsável antes de uso clínico.",
-            styles["SmallMuted"],
-        )
+    warning = (
+        "Documento em RASCUNHO, não aprovado para uso clínico."
+        if draft
+        else "Documento aprovado. Deve ser interpretado no contexto clínico pelo médico responsável."
     )
+
+    story.append(Spacer(1, 20))
+    story.append(Paragraph(warning, styles["SmallMuted"]))
 
     doc.build(story, onFirstPage=header_footer, onLaterPages=header_footer)
 

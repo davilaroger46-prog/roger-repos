@@ -1,6 +1,6 @@
 import { T } from "../constants/theme";
 
-export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSubmitReview }) {
+export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onExportDraftPdf, onSubmitReview }) {
   if (!caso) return null;
 
   const reviewStatus = caso?._db?.review_status || "draft";
@@ -54,10 +54,18 @@ export default function CaseActions({ caso, onNewCase, onEdit, onExportPdf, onSu
         </button>
       )}
 
-      {onExportPdf && (
-        <button onClick={onExportPdf} style={buttonStyle(T.red)}>
-          📄 Exportar PDF
-        </button>
+      {caso?._db?.review_status === "approved" ? (
+        onExportPdf && (
+          <button onClick={onExportPdf} style={buttonStyle(T.red)}>
+            📄 Exportar PDF Final
+          </button>
+        )
+      ) : (
+        onExportDraftPdf && (
+          <button onClick={onExportDraftPdf} style={buttonStyle(T.amber)}>
+            📄 Exportar Rascunho
+          </button>
+        )
       )}
 
       {canSubmitReview && onSubmitReview && (

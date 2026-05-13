@@ -92,6 +92,22 @@ export async function downloadCasePdf(caseId) {
   URL.revokeObjectURL(url);
 }
 
+export async function downloadCasePdfDraft(caseId) {
+  const response = await apiClient(API_ROUTES.cases.pdfDraft(caseId));
+
+  const blob = await response.blob();
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `orthostudy-draft-case-${caseId}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
+
 // REVIEW
 export async function submitCaseReview(caseId) {
   return apiClient(API_ROUTES.cases.submitReview(caseId), {
