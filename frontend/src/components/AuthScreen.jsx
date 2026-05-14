@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { T } from "../constants/theme";
-import { loginUser, registerUser, setToken } from "../services/api";
+import { loginUser, registerUser } from "../services/api";
 
 export default function AuthScreen({ onAuth }) {
   const [mode, setMode] = useState("login");
@@ -21,7 +21,6 @@ export default function AuthScreen({ onAuth }) {
           ? await loginUser({ email, password })
           : await registerUser({ name, email, password });
 
-      setToken(data.access_token);
       onAuth();
     } catch (err) {
       setError(err.message || "Erro de autenticação");
