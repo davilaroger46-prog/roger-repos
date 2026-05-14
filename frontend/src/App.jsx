@@ -23,6 +23,7 @@ import {
   downloadCasePdfDraft,
   submitCaseReview,
 } from "./services/api";
+import BottomNav from "./components/BottomNav";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("generate");
@@ -34,6 +35,7 @@ export default function App() {
   const textareaRef = useRef(null);
   const [pct, setPct] = useState(0);
   const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   const {
     cases: savedCases,
@@ -169,11 +171,13 @@ export default function App() {
       }}
     >
       <style>{`
+        .ortho-bottomnav { display: none; }
         @media (max-width: 768px) {
-          .ortho-sidebar { display: none !important; }
-          .ortho-main { padding: 16px 12px 80px !important; }
-          .ortho-topnav { overflow-x: auto; }
-          .ortho-user-bar { display: none !important; }
+          .ortho-sidebar   { display: none !important; }
+          .ortho-main      { padding: 16px 12px 80px !important; }
+          .ortho-topnav    { display: none !important; }
+          .ortho-user-bar  { display: none !important; }
+          .ortho-bottomnav { display: flex !important; }
         }
       `}</style>
       <ToastContainer />
@@ -196,6 +200,68 @@ export default function App() {
         onPageChange={changePage}
         onFilterChange={applyFilters}
       />
+
+      {mobileDrawerOpen && (
+        <div
+          style={{
+            position: "fixed", inset: 0, zIndex: 150,
+            background: "rgba(0,0,0,0.55)",
+          }}
+          onClick={() => setMobileDrawerOpen(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: "absolute", top: 0, left: 0, bottom: 0,
+              width: "88vw", maxWidth: 340,
+              background: T.s1, overflowY: "auto",
+              display: "flex", flexDirection: "column",
+            }}
+          >
+            <div style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "14px 16px", borderBottom: `1px solid ${T.border}`,
+              flexShrink: 0,
+            }}>
+              <span style={{ fontWeight: 800, fontSize: 13, color: T.text }}>Casos Salvos</span>
+              <button
+                onClick={() => setMobileDrawerOpen(false)}
+                style={{
+                  background: "none", border: "none", color: T.muted,
+                  cursor: "pointer", fontSize: 22, lineHeight: 1, padding: "0 4px",
+                }}
+              >
+                ×
+              </button>
+            </div>
+            <div style={{ flex: 1, overflowY: "auto" }}>
+              <SidebarCases
+                cases={savedCases}
+                activeCaseId={activeCaseId}
+                onLoadCase={(id) => {
+                  handleLoadCase(id);
+                  setMobileDrawerOpen(false);
+                }}
+                onDeleteCase={handleDeleteCase}
+                onExportPdf={async (caseId) => {
+                  try { await downloadCasePdf(caseId); }
+                  catch (err) { showToast(err.message || "Erro ao baixar PDF", "error"); }
+                }}
+                page={casePage}
+                pages={casePages}
+                total={caseTotal}
+                onPageChange={changePage}
+                onFilterChange={applyFilters}
+              />
+              {!savedCases.length && (
+                <div style={{ padding: 24, color: T.muted, fontSize: 13, textAlign: "center" }}>
+                  Nenhum caso salvo ainda.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="ortho-main" style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
         <div className="ortho-user-bar" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
@@ -225,7 +291,9 @@ export default function App() {
             </button>
           </div>
         </div>
-        <TopNav activeTab={activeTab} onChange={setActiveTab} user={currentUser} />
+        <div className="ortho-topnav">
+          <TopNav activeTab={activeTab} onChange={setActiveTab} user={currentUser} />
+        </div>
 
         {activeTab === "generate" && (
           <GeneratePage
@@ -305,6 +373,13 @@ export default function App() {
           />
         )}
       </main>
+
+      <BottomNav
+        activeTab={activeTab}
+        onChange={setActiveTab}
+        onCasesOpen={() => setMobileDrawerOpen(true)}
+        user={currentUser}
+      />
     </div>
     </Sentry.ErrorBoundary>
   );
