@@ -70,3 +70,4 @@ def root():
         "status": "online",
         "version": "2.0.0",
     }
+# auto-deploy test — this line can be removed
