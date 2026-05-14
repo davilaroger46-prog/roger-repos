@@ -1,0 +1,104 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: orthostudy_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-orthostudy}
+      POSTGRES_USER: ${POSTGRES_USER:-orthostudy}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - orthostudy_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-orthostudy}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    container_name: orthostudy_redis
+    restart: always
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    volumes:
+      - orthostudy_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: orthostudy-backend:${TAG:-latest}
+    container_name: orthostudy_backend
+    restart: always
+    env_file:
+      - ./backend/.env.prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - internal
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: orthostudy-frontend:${TAG:-latest}
+    container_name: orthostudy_frontend
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - internal
+
+  nginx:
+    image: nginx:alpine
+    container_name: orthostudy_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/orthostudy.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - internal
+      - external
+
+volumes:
+  orthostudy_postgres_data:
+  orthostudy_redis_data:
+  nginx_logs:
+
+networks:
+  internal:
+    driver: bridge
+  external:
+    driver: bridge

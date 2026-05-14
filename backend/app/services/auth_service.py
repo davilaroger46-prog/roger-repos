@@ -26,13 +26,19 @@ def verify_password(password: str, hashed_password: str) -> bool:
 
 def create_access_token(data: dict) -> str:
     to_encode = data.copy()
-
-    expire = datetime.now(timezone.utc) + timedelta(
-        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
-    )
-
-    to_encode.update({"exp": expire})
-
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire, "type": "access"})
     token = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     logger.info(f"Token gerado | sub={to_encode.get('sub')} | exp={expire.isoformat()}")
     return token
+
+
+def create_refresh_token(data: dict) -> str:
+    to_encode = data.copy()
+    expire = datetime.now(timezone.utc) + timedelta(days=7)
+    to_encode.update({"exp": expire, "type": "refresh"})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def decode_token(token: str) -> dict:
+    return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])

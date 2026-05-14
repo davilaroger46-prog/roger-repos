@@ -3,6 +3,7 @@ export const API_ROUTES = {
     login: "/auth/login",
     register: "/auth/register",
     me: "/auth/me",
+    refresh: "/auth/refresh",
   },
 
   ai: {
@@ -12,12 +13,16 @@ export const API_ROUTES = {
 
   cases: {
     list: "/cases/",
+    stats: "/cases/stats",
     detail: (id) => `/cases/${id}`,
     pdf: (id) => `/cases/${id}/pdf`,
     pdfDraft: (id) => `/cases/${id}/pdf-draft`,
 
     submitReview: (id) => `/cases/${id}/submit-review`,
     review: (id) => `/cases/${id}/review`,
+
+    shares: (id) => `/cases/${id}/shares`,
+    removeShare: (caseId, shareId) => `/cases/${caseId}/shares/${shareId}`,
 
     versions: (id) => `/cases/${id}/versions`,
     versionDetail: (caseId, versionId) =>

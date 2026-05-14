@@ -10,9 +10,6 @@ ALGORITHM = os.getenv("ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440"))
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
-if not ANTHROPIC_API_KEY:
-    raise RuntimeError("ANTHROPIC_API_KEY não encontrada no .env")
-
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL não encontrada no .env")
 

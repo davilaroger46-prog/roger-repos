@@ -1,25 +1,29 @@
-import { apiClient, setToken, clearToken, getToken } from "../core/apiClient";
+import { apiClient, storeTokens, clearTokens, getToken } from "../core/apiClient";
 import { API_ROUTES } from "../constants/apiRoutes";
 
-export { setToken, getToken };
+export { getToken };
 
 export function logoutUser() {
-  clearToken();
+  clearTokens();
 }
 
 // AUTH
 export async function registerUser({ name, email, password }) {
-  return apiClient(API_ROUTES.auth.register, {
+  const data = await apiClient(API_ROUTES.auth.register, {
     method: "POST",
     body: JSON.stringify({ name, email, password }),
   });
+  storeTokens(data);
+  return data;
 }
 
 export async function loginUser({ email, password }) {
-  return apiClient(API_ROUTES.auth.login, {
+  const data = await apiClient(API_ROUTES.auth.login, {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
+  storeTokens(data);
+  return data;
 }
 
 export async function getMe() {
@@ -119,6 +123,29 @@ export async function reviewCase(caseId, { status, notes }) {
   return apiClient(API_ROUTES.cases.review(caseId), {
     method: "POST",
     body: JSON.stringify({ status, notes }),
+  });
+}
+
+// STATS
+export async function getCaseStats() {
+  return apiClient(API_ROUTES.cases.stats);
+}
+
+// SHARE
+export async function shareCase(caseId, { email, permission = "view" }) {
+  return apiClient(API_ROUTES.cases.shares(caseId), {
+    method: "POST",
+    body: JSON.stringify({ email, permission }),
+  });
+}
+
+export async function listCaseShares(caseId) {
+  return apiClient(API_ROUTES.cases.shares(caseId));
+}
+
+export async function removeCaseShare(caseId, shareId) {
+  return apiClient(API_ROUTES.cases.removeShare(caseId, shareId), {
+    method: "DELETE",
   });
 }
 

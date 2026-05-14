@@ -1,3 +1,5 @@
+const DURATION = 4000;
+
 let listeners = [];
 let toasts = [];
 
@@ -10,16 +12,17 @@ export function showToast(message, type = "success") {
   toasts = [...toasts, { id, message, type }];
   notify();
 
-  setTimeout(() => {
-    toasts = toasts.filter((t) => t.id !== id);
-    notify();
-  }, 3500);
+  setTimeout(() => dismissToast(id), DURATION);
+}
+
+export function dismissToast(id) {
+  toasts = toasts.filter((t) => t.id !== id);
+  notify();
 }
 
 export function subscribeToasts(fn) {
   listeners.push(fn);
   fn([...toasts]);
-
   return () => {
     listeners = listeners.filter((l) => l !== fn);
   };

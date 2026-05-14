@@ -8,6 +8,7 @@ import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
 import AuthScreen from "./components/AuthScreen";
 import ToastContainer from "./components/Toast";
+import ConfirmModal from "./components/ConfirmModal";
 import useAuth from "./hooks/useAuth";
 import useCases from "./hooks/useCases";
 import useCaseEditor from "./hooks/useCaseEditor";
@@ -162,8 +163,17 @@ export default function App() {
         display: "flex",
       }}
     >
+      <style>{`
+        @media (max-width: 768px) {
+          .ortho-sidebar { display: none !important; }
+          .ortho-main { padding: 16px 12px 80px !important; }
+          .ortho-topnav { overflow-x: auto; }
+          .ortho-user-bar { display: none !important; }
+        }
+      `}</style>
       <ToastContainer />
-      <SidebarCases
+      <ConfirmModal />
+      <SidebarCases className="ortho-sidebar"
         cases={savedCases}
         activeCaseId={activeCaseId}
         onLoadCase={handleLoadCase}
@@ -182,8 +192,8 @@ export default function App() {
         onFilterChange={applyFilters}
       />
 
-      <main style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+      <main className="ortho-main" style={{ flex: 1, maxWidth: 860, margin: "0 auto", padding: "36px 24px 80px" }}>
+        <div className="ortho-user-bar" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ textAlign: "right" }}>
               <div style={{ fontSize: 12, fontWeight: 800, color: T.text }}>

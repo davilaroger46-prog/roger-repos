@@ -17,7 +17,7 @@ from reportlab.platypus import (
 )
 
 
-def generate_case_pdf(case: dict, draft: bool = False) -> BytesIO:
+def generate_case_pdf(case: dict, draft: bool = False, reviewer_name: str = None, reviewed_at=None) -> BytesIO:
     buffer = BytesIO()
 
     doc = SimpleDocTemplate(
@@ -211,10 +211,24 @@ def generate_case_pdf(case: dict, draft: bool = False) -> BytesIO:
             ["Resposta", card.get("resposta")],
         ])
 
+    if not draft and reviewer_name:
+        story.append(Spacer(1, 24))
+        story.append(Paragraph("Aprovação", styles["SectionTitle"]))
+        reviewed_date = (
+            reviewed_at.strftime("%d/%m/%Y às %H:%M")
+            if reviewed_at else datetime.now().strftime("%d/%m/%Y às %H:%M")
+        )
+        table([
+            ["Campo", "Valor"],
+            ["Revisor médico", reviewer_name],
+            ["Data de aprovação", reviewed_date],
+            ["Status", "APROVADO para uso educacional"],
+        ])
+
     warning = (
         "Documento em RASCUNHO, não aprovado para uso clínico."
         if draft
-        else "Documento aprovado. Deve ser interpretado no contexto clínico pelo médico responsável."
+        else "Documento aprovado para fins educacionais. Deve ser interpretado no contexto clínico pelo médico responsável."
     )
 
     story.append(Spacer(1, 20))

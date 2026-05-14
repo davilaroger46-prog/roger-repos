@@ -1,11 +1,13 @@
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
-from sqlalchemy import or_
+from pydantic import BaseModel, EmailStr
+from sqlalchemy import or_, cast, String, func
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.case_version_model import ClinicalCaseVersionModel
+from app.models.case_share_model import CaseShareModel
 from app.models.user_model import UserModel
 from app.schemas.case import ClinicalCase
 from app.schemas.review import ReviewDecisionInput
@@ -15,6 +17,11 @@ from app.deps.auth_deps import get_current_user
 from app.deps.role_deps import require_role
 from app.core.errors import not_found, validation_error, conflict
 from app.core.logging import logger
+
+
+class ShareInput(BaseModel):
+    email: EmailStr
+    permission: str = "view"
 
 router = APIRouter(prefix="/cases", tags=["Cases"])
 
@@ -68,11 +75,14 @@ def list_cases(
             )
 
         if q:
+            term = f"%{q.lower()}%"
             query = query.filter(
                 or_(
-                    ClinicalCaseModel.titulo.ilike(f"%{q}%"),
-                    ClinicalCaseModel.regiao.ilike(f"%{q}%"),
-                    ClinicalCaseModel.ao_codigo.ilike(f"%{q}%"),
+                    ClinicalCaseModel.titulo.ilike(term),
+                    ClinicalCaseModel.regiao.ilike(term),
+                    ClinicalCaseModel.ao_codigo.ilike(term),
+                    ClinicalCaseModel.nivel.ilike(term),
+                    cast(ClinicalCaseModel.caso_json, String).ilike(term),
                 )
             )
 
@@ -149,6 +159,39 @@ def list_cases(
             "page": page,
             "page_size": page_size,
             "pages": (total + page_size - 1) // page_size,
+        }
+    finally:
+        db.close()
+
+
+@router.get("/stats")
+def get_cases_stats(current_user: UserModel = Depends(get_current_user)):
+    db: Session = SessionLocal()
+    try:
+        query = db.query(ClinicalCaseModel).filter(ClinicalCaseModel.user_id == current_user.id)
+        cases = query.all()
+
+        by_status = {}
+        by_regiao = {}
+        by_nivel = {}
+        by_day = {}
+
+        for c in cases:
+            by_status[c.review_status] = by_status.get(c.review_status, 0) + 1
+            by_regiao[c.regiao or "—"] = by_regiao.get(c.regiao or "—", 0) + 1
+            by_nivel[c.nivel or "—"] = by_nivel.get(c.nivel or "—", 0) + 1
+            if c.created_at:
+                day = c.created_at.strftime("%Y-%m-%d")
+                by_day[day] = by_day.get(day, 0) + 1
+
+        timeline = sorted([{"date": d, "count": n} for d, n in by_day.items()], key=lambda x: x["date"])
+
+        return {
+            "total": len(cases),
+            "by_status": by_status,
+            "by_regiao": by_regiao,
+            "by_nivel": by_nivel,
+            "timeline": timeline,
         }
     finally:
         db.close()
@@ -362,20 +405,24 @@ def export_case_pdf(
                 {"review_status": case_db.review_status},
             )
 
+        reviewer_name = None
+        if case_db.reviewed_by:
+            reviewer = db.query(UserModel).filter(UserModel.id == case_db.reviewed_by).first()
+            reviewer_name = reviewer.name if reviewer else None
+
         titulo = case_db.titulo or f"caso-{case_id}"
         caso_json = case_db.caso_json
+        reviewed_at = case_db.reviewed_at
     finally:
         db.close()
 
-    pdf_buffer = generate_case_pdf(caso_json)
+    pdf_buffer = generate_case_pdf(caso_json, reviewer_name=reviewer_name, reviewed_at=reviewed_at)
     filename = f"orthostudy-{case_id}-{slugify(titulo)}.pdf"
 
     return StreamingResponse(
         pdf_buffer,
         media_type="application/pdf",
-        headers={
-            "Content-Disposition": f'attachment; filename="{filename}"'
-        }
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )
 
 
@@ -478,5 +525,98 @@ def review_case(
             "review_status": case.review_status,
             "review_notes": case.review_notes,
         }
+    finally:
+        db.close()
+
+
+@router.post("/{case_id}/share")
+def share_case(
+    case_id: int,
+    payload: ShareInput,
+    current_user: UserModel = Depends(get_current_user),
+):
+    db: Session = SessionLocal()
+    try:
+        get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+
+        target = db.query(UserModel).filter(UserModel.email == payload.email).first()
+        if not target:
+            raise not_found(f"Usuário '{payload.email}' não encontrado")
+
+        if target.id == current_user.id:
+            raise conflict("Você não pode compartilhar um caso com você mesmo")
+
+        existing = db.query(CaseShareModel).filter(
+            CaseShareModel.case_id == case_id,
+            CaseShareModel.shared_with_id == target.id,
+        ).first()
+
+        if existing:
+            existing.permission = payload.permission
+            db.commit()
+            return {"message": "Permissão atualizada", "shared_with": target.email}
+
+        share = CaseShareModel(
+            case_id=case_id,
+            owner_id=current_user.id,
+            shared_with_id=target.id,
+            permission=payload.permission,
+        )
+        db.add(share)
+        db.commit()
+
+        logger.info(f"Caso compartilhado | case_id={case_id} | com={target.email} | perm={payload.permission}")
+        return {"message": "Caso compartilhado", "shared_with": target.email, "permission": payload.permission}
+    finally:
+        db.close()
+
+
+@router.get("/{case_id}/shares")
+def list_case_shares(
+    case_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
+    db: Session = SessionLocal()
+    try:
+        get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+
+        shares = db.query(CaseShareModel).filter(CaseShareModel.case_id == case_id).all()
+
+        result = []
+        for s in shares:
+            user = db.query(UserModel).filter(UserModel.id == s.shared_with_id).first()
+            result.append({
+                "id": s.id,
+                "shared_with_email": user.email if user else "—",
+                "shared_with_name": user.name if user else "—",
+                "permission": s.permission,
+                "created_at": s.created_at,
+            })
+        return result
+    finally:
+        db.close()
+
+
+@router.delete("/{case_id}/shares/{share_id}")
+def remove_case_share(
+    case_id: int,
+    share_id: int,
+    current_user: UserModel = Depends(get_current_user),
+):
+    db: Session = SessionLocal()
+    try:
+        get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+
+        share = db.query(CaseShareModel).filter(
+            CaseShareModel.id == share_id,
+            CaseShareModel.case_id == case_id,
+        ).first()
+
+        if not share:
+            raise not_found("Compartilhamento não encontrado")
+
+        db.delete(share)
+        db.commit()
+        return {"status": "removed", "id": share_id}
     finally:
         db.close()
