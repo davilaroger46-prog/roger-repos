@@ -56,8 +56,8 @@ def admin_stats(_=Depends(require_role("admin"))):
         total_cases = db.query(func.count(ClinicalCaseModel.id)).scalar()
 
         by_status = dict(
-            db.query(ClinicalCaseModel.status, func.count(ClinicalCaseModel.id))
-            .group_by(ClinicalCaseModel.status)
+            db.query(ClinicalCaseModel.review_status, func.count(ClinicalCaseModel.id))
+            .group_by(ClinicalCaseModel.review_status)
             .all()
         )
 
