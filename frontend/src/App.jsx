@@ -3,6 +3,7 @@ import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
 import DashboardPage from "./pages/DashboardPage";
 import ReviewPage from "./pages/ReviewPage";
+import AdminPanel from "./components/AdminPanel";
 import { T } from "./constants/theme";
 import SidebarCases from "./components/SidebarCases";
 import TopNav from "./components/TopNav";
@@ -271,6 +272,10 @@ export default function App() {
             }}
             onReviewed={handleReviewed}
           />
+        )}
+
+        {activeTab === "admin" && currentUser?.role === "admin" && (
+          <AdminPanel currentUser={currentUser} />
         )}
 
         {activeTab === "library" && (

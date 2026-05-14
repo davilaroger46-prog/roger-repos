@@ -30,4 +30,10 @@ export const API_ROUTES = {
     restoreVersion: (caseId, versionId) =>
       `/cases/${caseId}/versions/${versionId}/restore`,
   },
+
+  admin: {
+    stats: "/admin/stats",
+    users: "/admin/users",
+    userRole: (id) => `/admin/users/${id}/role`,
+  },
 };

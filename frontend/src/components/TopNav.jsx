@@ -11,6 +11,10 @@ export default function TopNav({ activeTab, onChange, user }) {
     tabs.push(["review", "🩺 Revisão"]);
   }
 
+  if (user?.role === "admin") {
+    tabs.push(["admin", "⚙️ Admin"]);
+  }
+
   return (
     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 18 }}>
       {tabs.map(([id, label]) => (

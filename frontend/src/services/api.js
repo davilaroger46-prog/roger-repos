@@ -149,6 +149,25 @@ export async function removeCaseShare(caseId, shareId) {
   });
 }
 
+// ADMIN
+export async function getAdminStats() {
+  return apiClient(API_ROUTES.admin.stats);
+}
+
+export async function listAdminUsers({ page = 1, q = "", role = "" } = {}) {
+  const params = new URLSearchParams({ page });
+  if (q) params.append("q", q);
+  if (role) params.append("role", role);
+  return apiClient(`${API_ROUTES.admin.users}?${params}`);
+}
+
+export async function updateUserRole(userId, role) {
+  return apiClient(API_ROUTES.admin.userRole(userId), {
+    method: "PATCH",
+    body: JSON.stringify({ role }),
+  });
+}
+
 // VERSIONS
 export async function listCaseVersions(caseId) {
   return apiClient(API_ROUTES.cases.versions(caseId));
