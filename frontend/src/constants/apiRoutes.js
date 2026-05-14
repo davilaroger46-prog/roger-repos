@@ -35,5 +35,6 @@ export const API_ROUTES = {
     stats: "/admin/stats",
     users: "/admin/users",
     userRole: (id) => `/admin/users/${id}/role`,
+    seedDemo: "/admin/seed-demo",
   },
 };

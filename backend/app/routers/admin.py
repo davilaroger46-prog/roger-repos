@@ -146,6 +146,38 @@ def list_users(
         db.close()
 
 
+@router.post("/seed-demo")
+def seed_demo_cases(
+    target_user_id: int | None = None,
+    current_admin=Depends(require_role("admin")),
+):
+    from app.data.demo_cases import DEMO_CASES
+
+    db: Session = SessionLocal()
+    try:
+        owner_id = target_user_id or current_admin.id
+
+        inserted = 0
+        for case_data in DEMO_CASES:
+            new_case = ClinicalCaseModel(
+                user_id=owner_id,
+                titulo=case_data["meta"]["titulo"],
+                regiao=case_data["meta"].get("regiao", ""),
+                nivel=case_data["meta"].get("nivel", ""),
+                ao_codigo=case_data["meta"].get("ao_codigo", ""),
+                review_status="approved",
+                caso_json=case_data,
+            )
+            db.add(new_case)
+            inserted += 1
+
+        db.commit()
+        logger.info(f"Demo cases inseridos | admin_id={current_admin.id} user_id={owner_id} count={inserted}")
+        return {"inserted": inserted, "user_id": owner_id}
+    finally:
+        db.close()
+
+
 @router.patch("/users/{user_id}/role")
 def update_user_role(
     user_id: int,

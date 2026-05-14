@@ -168,6 +168,11 @@ export async function updateUserRole(userId, role) {
   });
 }
 
+export async function seedDemoCases(targetUserId = null) {
+  const params = targetUserId ? `?target_user_id=${targetUserId}` : "";
+  return apiClient(`${API_ROUTES.admin.seedDemo}${params}`, { method: "POST" });
+}
+
 // VERSIONS
 export async function listCaseVersions(caseId) {
   return apiClient(API_ROUTES.cases.versions(caseId));

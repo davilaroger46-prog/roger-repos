@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { T } from "../constants/theme";
-import { getAdminStats, listAdminUsers, updateUserRole } from "../services/api";
+import { getAdminStats, listAdminUsers, updateUserRole, seedDemoCases } from "../services/api";
 import { showToast } from "../core/toastStore";
 
 const ROLES = ["doctor", "reviewer", "admin"];
@@ -23,6 +23,7 @@ export default function AdminPanel({ currentUser }) {
   const [loadingStats, setLoadingStats] = useState(true);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [updatingId, setUpdatingId] = useState(null);
+  const [seeding, setSeeding] = useState(false);
 
   useEffect(() => {
     getAdminStats()
@@ -65,11 +66,38 @@ export default function AdminPanel({ currentUser }) {
     }
   };
 
+  const handleSeedDemo = async () => {
+    setSeeding(true);
+    try {
+      const result = await seedDemoCases();
+      showToast(`${result.inserted} casos demo inseridos com sucesso.`, "success");
+      getAdminStats().then(setStats).catch(() => {});
+    } catch (e) {
+      showToast(e.message || "Erro ao inserir casos demo", "error");
+    } finally {
+      setSeeding(false);
+    }
+  };
+
   return (
     <div style={{ maxWidth: 960, margin: "0 auto", padding: "0 4px" }}>
-      <h2 style={{ fontFamily: "Georgia,serif", fontSize: 22, marginBottom: 4 }}>
-        Painel Admin
-      </h2>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 4, flexWrap: "wrap", gap: 12 }}>
+        <h2 style={{ fontFamily: "Georgia,serif", fontSize: 22, margin: 0 }}>
+          Painel Admin
+        </h2>
+        <button
+          onClick={handleSeedDemo}
+          disabled={seeding}
+          style={{
+            padding: "8px 16px", borderRadius: 10, border: `1px solid ${T.border}`,
+            background: seeding ? T.s1 : T.s2, color: seeding ? T.muted : T.cyan,
+            fontSize: 12, fontWeight: 800, cursor: seeding ? "not-allowed" : "pointer",
+            opacity: seeding ? 0.7 : 1,
+          }}
+        >
+          {seeding ? "Inserindo..." : "Inserir Casos Demo"}
+        </button>
+      </div>
       <p style={{ color: T.muted, fontSize: 12, marginBottom: 24 }}>
         Visão geral da plataforma e gerenciamento de usuários
       </p>
