@@ -1,10 +1,29 @@
 import os
 import time
+import sentry_sdk
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from sentry_sdk.integrations.fastapi import FastApiIntegration
+from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 
 from app.routers import ai, cases, auth, admin
 from app.core.logging import logger
+
+_sentry_dsn = os.getenv("SENTRY_DSN", "")
+if _sentry_dsn:
+    sentry_sdk.init(
+        dsn=_sentry_dsn,
+        environment=os.getenv("RAILWAY_ENVIRONMENT_NAME", "production"),
+        release=f"orthostudy@2.0.0",
+        traces_sample_rate=0.2,
+        profiles_sample_rate=0.1,
+        integrations=[
+            FastApiIntegration(),
+            SqlalchemyIntegration(),
+        ],
+        send_default_pii=False,
+    )
+    logger.info("Sentry inicializado")
 
 app = FastAPI(
     title="OrthoStudy API",

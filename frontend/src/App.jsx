@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import * as Sentry from "@sentry/react";
 import GeneratePage from "./pages/GeneratePage";
 import LibraryPage from "./pages/LibraryPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -147,14 +148,17 @@ export default function App() {
 
   if (!isAuthenticated) {
     return (
-      <AuthScreen onAuth={async () => {
-        await handleAuthSuccess();
-        await refreshCases({});
-      }} />
+      <Sentry.ErrorBoundary fallback={<ErrorFallback />}>
+        <AuthScreen onAuth={async () => {
+          await handleAuthSuccess();
+          await refreshCases({});
+        }} />
+      </Sentry.ErrorBoundary>
     );
   }
 
   return (
+    <Sentry.ErrorBoundary fallback={<ErrorFallback />}>
     <div
       style={{
         minHeight: "100vh",
@@ -301,6 +305,34 @@ export default function App() {
           />
         )}
       </main>
+    </div>
+    </Sentry.ErrorBoundary>
+  );
+}
+
+function ErrorFallback() {
+  return (
+    <div style={{
+      minHeight: "100vh", display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center",
+      background: "#0f1117", color: "#e2e8f0", fontFamily: "system-ui",
+      gap: 12, padding: 24, textAlign: "center",
+    }}>
+      <div style={{ fontSize: 32 }}>⚠️</div>
+      <h2 style={{ margin: 0, fontSize: 20 }}>Algo deu errado</h2>
+      <p style={{ color: "#94a3b8", fontSize: 14, margin: 0 }}>
+        O erro foi registrado automaticamente. Tente recarregar a página.
+      </p>
+      <button
+        onClick={() => window.location.reload()}
+        style={{
+          padding: "10px 20px", borderRadius: 10, border: "none",
+          background: "#1d4ed8", color: "#fff", cursor: "pointer",
+          fontWeight: 700, fontSize: 14, marginTop: 8,
+        }}
+      >
+        Recarregar
+      </button>
     </div>
   );
 }
