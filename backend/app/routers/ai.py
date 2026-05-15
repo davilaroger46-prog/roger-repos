@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.schemas.ai import GenerateCaseInput
 from app.services.anthropic_service import generate_orthopedic_case, autocorrect_orthopedic_case
+from app.services.audit_service import log_action
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
@@ -9,6 +10,7 @@ from app.deps.auth_deps import get_current_user
 from app.core.rate_limit import rate_limit
 from app.core.errors import AppError, ai_error, validation_error
 from app.core.logging import logger
+from app.utils.search import build_search_text
 
 router = APIRouter(prefix="/ai", tags=["AI"])
 
@@ -42,11 +44,15 @@ def generate_case(
                 nivel=case["meta"]["nivel"],
                 ao_codigo=case["classificacao"]["ao_ota"]["codigo"],
                 caso_json=case,
+                search_text=build_search_text(case),
             )
 
             db.add(new_case)
             db.commit()
             db.refresh(new_case)
+
+            log_action(db, action="case.generated", resource_type="case", user_id=current_user.id, resource_id=new_case.id, ip=None)
+            db.commit()
 
             return new_case.caso_json
 

@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sentry_sdk.integrations.fastapi import FastApiIntegration
 from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 
-from app.routers import ai, cases, auth, admin
+from app.routers import ai, cases, auth, admin, audit
 from app.core.logging import logger
 
 _sentry_dsn = os.getenv("SENTRY_DSN", "")
@@ -79,6 +79,7 @@ app.include_router(ai.router)
 app.include_router(cases.router)
 app.include_router(auth.router)
 app.include_router(admin.router)
+app.include_router(audit.router)
 
 
 @app.get("/")

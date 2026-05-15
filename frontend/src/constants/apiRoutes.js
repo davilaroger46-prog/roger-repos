@@ -39,4 +39,9 @@ export const API_ROUTES = {
     userRole: (id) => `/admin/users/${id}/role`,
     seedDemo: "/admin/seed-demo",
   },
+
+  audit: {
+    caseTimeline: (id) => `/audit/cases/${id}`,
+    adminRecent: "/audit/admin/recent",
+  },
 };

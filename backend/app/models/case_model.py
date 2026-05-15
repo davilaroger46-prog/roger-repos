@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, JSON, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, JSON, DateTime, ForeignKey, Text
 from sqlalchemy.sql import func
 from app.db.database import Base
 
@@ -21,6 +21,7 @@ class ClinicalCaseModel(Base):
     reviewed_at = Column(DateTime(timezone=True), nullable=True)
 
     caso_json = Column(JSON, nullable=False)
+    search_text = Column(Text, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 

@@ -186,6 +186,18 @@ export async function seedDemoCases(targetUserId = null) {
   return apiClient(`${API_ROUTES.admin.seedDemo}${params}`, { method: "POST" });
 }
 
+// AUDIT
+export async function getCaseTimeline(caseId) {
+  return apiClient(API_ROUTES.audit.caseTimeline(caseId));
+}
+
+export async function getAdminAuditRecent({ limit = 50, resource_type, action } = {}) {
+  const params = new URLSearchParams({ limit });
+  if (resource_type) params.append("resource_type", resource_type);
+  if (action) params.append("action", action);
+  return apiClient(`${API_ROUTES.audit.adminRecent}?${params}`);
+}
+
 // VERSIONS
 export async function listCaseVersions(caseId) {
   return apiClient(API_ROUTES.cases.versions(caseId));

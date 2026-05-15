@@ -11,6 +11,7 @@ import CaseVersionsPanel from "../components/CaseVersionsPanel";
 import CaseVersionDiff from "../components/CaseVersionDiff";
 import ReviewPanel from "../components/ReviewPanel";
 import SharePanel from "../components/SharePanel";
+import TimelinePanel from "../components/TimelinePanel";
 import { downloadCasePdf, downloadCasePdfDraft, submitCaseReview, getCase } from "../services/api";
 import { showToast } from "../core/toastStore";
 
@@ -97,6 +98,8 @@ export default function LibraryPage() {
       <ReviewPanel caseId={activeCaseId} user={user} onReviewed={handleReviewed} />
 
       <SharePanel caseId={activeCaseId} currentUser={user} caso={caso} />
+
+      <TimelinePanel caseId={activeCaseId} />
 
       <CaseActions
         caso={caso}

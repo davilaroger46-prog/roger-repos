@@ -8,6 +8,7 @@ from app.db.database import SessionLocal
 from app.deps.role_deps import require_role
 from app.models.case_model import ClinicalCaseModel
 from app.models.user_model import UserModel
+from app.services.audit_service import log_action
 from app.core.errors import not_found, validation_error, forbidden
 from app.core.logging import logger
 
@@ -157,7 +158,7 @@ def seed_demo_cases(
     try:
         owner_id = target_user_id or current_admin.id
 
-        inserted = 0
+        inserted_cases = []
         for case_data in DEMO_CASES:
             new_case = ClinicalCaseModel(
                 user_id=owner_id,
@@ -169,11 +170,16 @@ def seed_demo_cases(
                 caso_json=case_data,
             )
             db.add(new_case)
-            inserted += 1
+            inserted_cases.append(new_case)
+
+        db.flush()
+
+        for new_case in inserted_cases:
+            log_action(db, action="case.demo_seeded", resource_type="case", user_id=current_admin.id, resource_id=new_case.id)
 
         db.commit()
-        logger.info(f"Demo cases inseridos | admin_id={current_admin.id} user_id={owner_id} count={inserted}")
-        return {"inserted": inserted, "user_id": owner_id}
+        logger.info(f"Demo cases inseridos | admin_id={current_admin.id} user_id={owner_id} count={len(inserted_cases)}")
+        return {"inserted": len(inserted_cases), "user_id": owner_id}
     finally:
         db.close()
 
@@ -195,6 +201,14 @@ def update_user_role(
 
         old_role = user.role
         user.role = payload.role
+        log_action(
+            db,
+            action="user.role_changed",
+            resource_type="user",
+            user_id=current_admin.id,
+            resource_id=user_id,
+            after={"old_role": old_role, "new_role": payload.role},
+        )
         db.commit()
 
         logger.info(

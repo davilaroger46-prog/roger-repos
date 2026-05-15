@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr
-from sqlalchemy import or_, cast, String, func
+from sqlalchemy import or_, cast, String, func, text as sa_text
 from sqlalchemy.orm import Session
 from app.db.database import SessionLocal
 from app.models.case_model import ClinicalCaseModel
@@ -12,11 +12,13 @@ from app.models.user_model import UserModel
 from app.schemas.case import ClinicalCase
 from app.schemas.review import ReviewDecisionInput
 from app.services.pdf_service import generate_case_pdf
+from app.services.audit_service import log_action
 from app.core.slugify import slugify
 from app.deps.auth_deps import get_current_user
 from app.deps.role_deps import require_role
 from app.core.errors import not_found, validation_error, conflict
 from app.core.logging import logger
+from app.utils.search import build_search_text
 
 
 class ShareInput(BaseModel):
@@ -75,15 +77,10 @@ def list_cases(
             )
 
         if q:
-            term = f"%{q.lower()}%"
             query = query.filter(
-                or_(
-                    ClinicalCaseModel.titulo.ilike(term),
-                    ClinicalCaseModel.regiao.ilike(term),
-                    ClinicalCaseModel.ao_codigo.ilike(term),
-                    ClinicalCaseModel.nivel.ilike(term),
-                    cast(ClinicalCaseModel.caso_json, String).ilike(term),
-                )
+                sa_text(
+                    "to_tsvector('simple', coalesce(clinical_cases.search_text, '')) @@ plainto_tsquery('simple', :q)"
+                ).bindparams(q=q)
             )
 
         if regiao:
@@ -117,26 +114,10 @@ def list_cases(
 
         for case in cases:
             case_json = case.caso_json or {}
-
-            diagnostico = case_json.get("diagnostico", {}).get("principal", "")
-            resumo = case_json.get("output_app", {}).get("resumo", "")
             case_conduta = case_json.get("decisao_clinica", {}).get("output", {}).get("conduta")
-
-            if q:
-                searchable_text = " ".join([
-                    case.titulo or "",
-                    case.regiao or "",
-                    case.ao_codigo or "",
-                    diagnostico or "",
-                    resumo or "",
-                ]).lower()
-
-                if q.lower() not in searchable_text:
-                    continue
-
             if conduta and case_conduta != conduta:
                 continue
-
+            diagnostico = case_json.get("diagnostico", {}).get("principal", "")
             result.append({
                 "id": case.id,
                 "titulo": case.titulo,
@@ -264,7 +245,9 @@ def update_case(
         case_db.nivel = case_json["meta"]["nivel"]
         case_db.ao_codigo = case_json["classificacao"]["ao_ota"]["codigo"]
         case_db.caso_json = case_json
+        case_db.search_text = build_search_text(case_json)
 
+        log_action(db, action="case.updated", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.commit()
         db.refresh(case_db)
 
@@ -372,7 +355,9 @@ def restore_case_version(
         case_db.nivel = case_json["meta"]["nivel"]
         case_db.ao_codigo = case_json["classificacao"]["ao_ota"]["codigo"]
         case_db.caso_json = case_json
+        case_db.search_text = build_search_text(case_json)
 
+        log_action(db, action="case.version_restored", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.commit()
         db.refresh(case_db)
 
@@ -413,6 +398,8 @@ def export_case_pdf(
         titulo = case_db.titulo or f"caso-{case_id}"
         caso_json = case_db.caso_json
         reviewed_at = case_db.reviewed_at
+        log_action(db, action="case.pdf_exported", resource_type="case", user_id=current_user.id, resource_id=case_id)
+        db.commit()
     finally:
         db.close()
 
@@ -463,6 +450,7 @@ def delete_case(
     db = SessionLocal()
     try:
         case = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
+        log_action(db, action="case.deleted", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.delete(case)
         db.commit()
         logger.info(f"Caso deletado | case_id={case_id} | user_id={current_user.id}")
@@ -481,6 +469,7 @@ def submit_case_review(
         case = get_owned_case_or_404(db=db, case_id=case_id, user_id=current_user.id)
 
         case.review_status = "review_pending"
+        log_action(db, action="case.review_submitted", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.commit()
         db.refresh(case)
 
@@ -517,6 +506,8 @@ def review_case(
         case.reviewed_by = current_user.id
         case.reviewed_at = datetime.now(timezone.utc)
 
+        action = "case.approved" if payload.status == "approved" else "case.rejected"
+        log_action(db, action=action, resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.commit()
         db.refresh(case)
 
@@ -553,6 +544,7 @@ def share_case(
 
         if existing:
             existing.permission = payload.permission
+            log_action(db, action="case.shared", resource_type="case", user_id=current_user.id, resource_id=case_id)
             db.commit()
             return {"message": "Permissão atualizada", "shared_with": target.email}
 
@@ -563,6 +555,7 @@ def share_case(
             permission=payload.permission,
         )
         db.add(share)
+        log_action(db, action="case.shared", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.commit()
 
         logger.info(f"Caso compartilhado | case_id={case_id} | com={target.email} | perm={payload.permission}")
@@ -615,6 +608,7 @@ def remove_case_share(
         if not share:
             raise not_found("Compartilhamento não encontrado")
 
+        log_action(db, action="case.share_removed", resource_type="case", user_id=current_user.id, resource_id=case_id)
         db.delete(share)
         db.commit()
         return {"status": "removed", "id": share_id}
