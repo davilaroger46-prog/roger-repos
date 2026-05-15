@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { T } from "../constants/theme";
 import { useAuthStore } from "../stores/authStore";
@@ -106,7 +106,15 @@ export default function MainLayout() {
           <TopNav user={user} />
         </div>
 
-        <Outlet />
+        <Suspense fallback={
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "40px 0", color: "#6b7280", fontSize: 13 }}>
+            <div style={{ width: 18, height: 18, borderRadius: "50%", border: "2px solid #2a2d3a", borderTopColor: "#3b82f6", animation: "spin .7s linear infinite" }} />
+            <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+            Carregando...
+          </div>
+        }>
+          <Outlet />
+        </Suspense>
       </main>
 
       <BottomNav
