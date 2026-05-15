@@ -13,5 +13,6 @@ class UserModel(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
     role = Column(String, default="doctor", nullable=False)
+    token_version = Column(Integer, default=1, nullable=False, server_default="1")
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())

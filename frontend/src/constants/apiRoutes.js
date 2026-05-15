@@ -4,6 +4,8 @@ export const API_ROUTES = {
     register: "/auth/register",
     me: "/auth/me",
     refresh: "/auth/refresh",
+    logout: "/auth/logout",
+    changePassword: "/auth/change-password",
   },
 
   ai: {

@@ -28,8 +28,8 @@ export default function MainLayout() {
     refreshCases({});
   }, []);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     reset();
     navigate("/login");
   };

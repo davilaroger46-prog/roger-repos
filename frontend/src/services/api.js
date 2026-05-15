@@ -3,8 +3,21 @@ import { API_ROUTES } from "../constants/apiRoutes";
 
 export { getToken };
 
-export function logoutUser() {
-  clearTokens();
+export async function logoutUser() {
+  try {
+    await apiClient(API_ROUTES.auth.logout, { method: "POST" });
+  } catch {
+    // ignore — clear tokens regardless
+  } finally {
+    clearTokens();
+  }
+}
+
+export async function changePassword({ currentPassword, newPassword }) {
+  return apiClient(API_ROUTES.auth.changePassword, {
+    method: "POST",
+    body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+  });
 }
 
 // AUTH

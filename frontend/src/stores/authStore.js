@@ -17,14 +17,14 @@ export const useAuthStore = create((set) => ({
       set({ user, isAuthenticated: true });
       return user;
     } catch {
-      logoutUser();
+      await logoutUser();
       set({ user: null, isAuthenticated: false });
       return null;
     }
   },
 
-  logout: () => {
-    logoutUser();
+  logout: async () => {
+    await logoutUser();
     set({ user: null, isAuthenticated: false });
   },
 }));
