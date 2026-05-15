@@ -1,21 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { T, NIV_C } from "../constants/theme";
+import { useCaseStore } from "../stores/caseStore";
+import { downloadCasePdf } from "../services/api";
+import { showToast } from "../core/toastStore";
+import { confirmAction } from "../core/confirm";
 import Tag from "./Tag";
 import ReviewBadge from "./ReviewBadge";
 import useDebounce from "../hooks/useDebounce";
 
-export default function SidebarCases({
-  cases = [],
-  activeCaseId,
-  onLoadCase,
-  onDeleteCase,
-  onExportPdf,
-  onFilterChange,
-  page,
-  pages,
-  total,
-  onPageChange,
-}) {
+export default function SidebarCases({ className, onAfterLoadCase }) {
+  const navigate = useNavigate();
+  const { cases, activeCaseId, page, pages, total, loadCase, removeCase, applyFilters, changePage } = useCaseStore();
+
   const [search, setSearch] = useState("");
   const [nivel, setNivel] = useState("");
   const [regiao, setRegiao] = useState("");
@@ -28,7 +25,7 @@ export default function SidebarCases({
   const isSearching = search !== debouncedSearch;
 
   useEffect(() => {
-    onFilterChange?.({
+    applyFilters({
       q: debouncedSearch,
       nivel,
       regiao,
@@ -43,45 +40,58 @@ export default function SidebarCases({
     return [...new Set(cases.map((c) => c.regiao).filter(Boolean))].sort();
   }, [cases]);
 
-  const filteredCases = useMemo(() => {
-    return cases.filter((c) => {
-      const text = `${c.titulo || ""} ${c.regiao || ""} ${c.ao_codigo || ""}`.toLowerCase();
+  const handleLoadCase = async (caseId) => {
+    try {
+      await loadCase(caseId);
+      navigate("/library");
+      onAfterLoadCase?.();
+    } catch (err) {
+      showToast(err.message || "Erro ao carregar caso.", "error");
+    }
+  };
 
-      const matchSearch = text.includes(search.toLowerCase());
-      const matchNivel = nivel ? c.nivel === nivel : true;
-      const matchRegiao = regiao ? c.regiao === regiao : true;
+  const handleDeleteCase = async (caseId) => {
+    const ok = confirmAction("Tem certeza que deseja deletar este caso? Esta ação não pode ser desfeita.");
+    if (!ok) return;
+    try {
+      await removeCase(caseId);
+      showToast("Caso deletado com sucesso.");
+    } catch (err) {
+      showToast(err.message || "Erro ao deletar caso.", "error");
+    }
+  };
 
-      return matchSearch && matchNivel && matchRegiao;
-    });
-  }, [cases, search, nivel, regiao]);
+  const handleExportPdf = async (caseId) => {
+    try {
+      await downloadCasePdf(caseId);
+    } catch (err) {
+      showToast(err.message || "Erro ao baixar PDF", "error");
+    }
+  };
 
-  if (!cases.length) return null;
+  const hasFilters = search || nivel || regiao || conduta || reviewStatus || sortBy !== "created_at" || sortDir !== "desc";
+
+  const clearFilters = () => {
+    setSearch(""); setNivel(""); setRegiao(""); setConduta("");
+    setReviewStatus(""); setSortBy("created_at"); setSortDir("desc");
+  };
+
+  if (!cases.length && !hasFilters) return null;
 
   return (
     <aside
+      className={className}
       style={{
-        width: 300,
-        height: "100vh",
-        position: "sticky",
-        top: 0,
-        overflowY: "auto",
-        background: T.s1,
-        borderRight: `1px solid ${T.border}`,
-        padding: "18px 12px",
-        flexShrink: 0,
+        width: 300, height: "100vh", position: "sticky", top: 0,
+        overflowY: "auto", background: T.s1,
+        borderRight: `1px solid ${T.border}`, padding: "18px 12px", flexShrink: 0,
       }}
     >
-      <div
-        style={{
-          fontSize: 10,
-          fontWeight: 800,
-          color: T.muted,
-          textTransform: "uppercase",
-          letterSpacing: ".12em",
-          marginBottom: 14,
-        }}
-      >
-        💾 Casos Salvos · {cases.length}
+      <div style={{
+        fontSize: 10, fontWeight: 800, color: T.muted,
+        textTransform: "uppercase", letterSpacing: ".12em", marginBottom: 14,
+      }}>
+        💾 Casos Salvos · {total}
       </div>
 
       <input
@@ -92,14 +102,7 @@ export default function SidebarCases({
       />
 
       {isSearching && (
-        <div
-          style={{
-            fontSize: 10,
-            color: T.cyan,
-            marginBottom: 8,
-            fontWeight: 700,
-          }}
-        >
+        <div style={{ fontSize: 10, color: T.cyan, marginBottom: 8, fontWeight: 700 }}>
           Buscando...
         </div>
       )}
@@ -114,11 +117,7 @@ export default function SidebarCases({
 
         <select value={regiao} onChange={(e) => setRegiao(e.target.value)} style={selectStyle}>
           <option value="">Região</option>
-          {regioes.map((r) => (
-            <option key={r} value={r}>
-              {r}
-            </option>
-          ))}
+          {regioes.map((r) => <option key={r} value={r}>{r}</option>)}
         </select>
 
         <select value={conduta} onChange={(e) => setConduta(e.target.value)} style={selectStyle}>
@@ -136,17 +135,15 @@ export default function SidebarCases({
           <option value="rejected">Rejeitado</option>
         </select>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={selectStyle}>
             <option value="created_at">Criado em</option>
             <option value="updated_at">Atualizado em</option>
-            <option value="id">ID</option>
             <option value="titulo">Título</option>
             <option value="regiao">Região</option>
             <option value="nivel">Nível</option>
             <option value="ao_codigo">AO/OTA</option>
           </select>
-
           <select value={sortDir} onChange={(e) => setSortDir(e.target.value)} style={selectStyle}>
             <option value="desc">Desc</option>
             <option value="asc">Asc</option>
@@ -154,115 +151,48 @@ export default function SidebarCases({
         </div>
       </div>
 
-      {(search || nivel || regiao || conduta || reviewStatus || sortBy !== "created_at" || sortDir !== "desc") && (
-        <button
-          onClick={() => {
-            setSearch("");
-            setNivel("");
-            setRegiao("");
-            setConduta("");
-            setReviewStatus("");
-            setSortBy("created_at");
-            setSortDir("desc");
-          }}
-          style={{
-            width: "100%",
-            marginBottom: 12,
-            background: T.s2,
-            border: `1px solid ${T.border}`,
-            color: T.muted,
-            borderRadius: 8,
-            padding: "7px 10px",
-            cursor: "pointer",
-            fontSize: 11,
-            fontWeight: 700,
-          }}
-        >
+      {hasFilters && (
+        <button onClick={clearFilters} style={{
+          width: "100%", marginBottom: 12, background: T.s2,
+          border: `1px solid ${T.border}`, color: T.muted,
+          borderRadius: 8, padding: "7px 10px", cursor: "pointer",
+          fontSize: 11, fontWeight: 700,
+        }}>
           Limpar filtros
         </button>
       )}
 
-      {filteredCases.map((c) => (
+      {cases.map((c) => (
         <div
           key={c.id}
-          onClick={() => onLoadCase(c.id)}
+          onClick={() => handleLoadCase(c.id)}
           style={{
             background: activeCaseId === c.id ? `${T.blue}12` : T.s2,
-            border: `1px solid ${
-              activeCaseId === c.id ? T.blue + "55" : T.border
-            }`,
-            borderRadius: 12,
-            padding: 12,
-            cursor: "pointer",
-            marginBottom: 8,
+            border: `1px solid ${activeCaseId === c.id ? T.blue + "55" : T.border}`,
+            borderRadius: 12, padding: 12, cursor: "pointer", marginBottom: 8,
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              marginBottom: 6,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 10,
-                color: T.muted,
-                fontFamily: "monospace",
-                fontWeight: 700,
-              }}
-            >
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 6 }}>
+            <div style={{ fontSize: 10, color: T.muted, fontFamily: "monospace", fontWeight: 700 }}>
               #{c.id}
             </div>
-
             <div style={{ display: "flex", gap: 6 }}>
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onExportPdf(c.id);
-                }}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: T.red,
-                  cursor: "pointer",
-                  fontSize: 13,
-                  lineHeight: 1,
-                  fontWeight: 800,
-                }}
+                onClick={(e) => { e.stopPropagation(); handleExportPdf(c.id); }}
+                style={{ background: "none", border: "none", color: T.red, cursor: "pointer", fontSize: 13, lineHeight: 1, fontWeight: 800 }}
               >
                 PDF
               </button>
-
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDeleteCase(c.id);
-                }}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: T.muted,
-                  cursor: "pointer",
-                  fontSize: 16,
-                  lineHeight: 1,
-                }}
+                onClick={(e) => { e.stopPropagation(); handleDeleteCase(c.id); }}
+                style={{ background: "none", border: "none", color: T.muted, cursor: "pointer", fontSize: 16, lineHeight: 1 }}
               >
                 ×
               </button>
             </div>
           </div>
 
-          <div
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: T.text,
-              lineHeight: 1.35,
-              marginBottom: 8,
-            }}
-          >
+          <div style={{ fontSize: 12, fontWeight: 700, color: T.text, lineHeight: 1.35, marginBottom: 8 }}>
             {c.titulo}
           </div>
 
@@ -275,46 +205,22 @@ export default function SidebarCases({
         </div>
       ))}
 
-      {!filteredCases.length && (
-        <div
-          style={{
-            marginTop: 20,
-            color: T.muted,
-            fontSize: 12,
-            lineHeight: 1.7,
-            textAlign: "center",
-          }}
-        >
+      {!cases.length && hasFilters && (
+        <div style={{ marginTop: 20, color: T.muted, fontSize: 12, lineHeight: 1.7, textAlign: "center" }}>
           Nenhum caso encontrado com esses filtros.
         </div>
       )}
 
       {pages > 1 && (
-        <div
-          style={{
-            marginTop: 14,
-            paddingTop: 12,
-            borderTop: `1px solid ${T.border}`,
-          }}
-        >
+        <div style={{ marginTop: 14, paddingTop: 12, borderTop: `1px solid ${T.border}` }}>
           <div style={{ fontSize: 11, color: T.muted, marginBottom: 8 }}>
             Página {page} de {pages} · {total} casos
           </div>
-
           <div style={{ display: "flex", gap: 8 }}>
-            <button
-              disabled={page <= 1}
-              onClick={() => onPageChange(page - 1)}
-              style={pageButton(page <= 1)}
-            >
+            <button disabled={page <= 1} onClick={() => changePage(page - 1)} style={pageButton(page <= 1)}>
               ← Anterior
             </button>
-
-            <button
-              disabled={page >= pages}
-              onClick={() => onPageChange(page + 1)}
-              style={pageButton(page >= pages)}
-            >
+            <button disabled={page >= pages} onClick={() => changePage(page + 1)} style={pageButton(page >= pages)}>
               Próxima →
             </button>
           </div>
@@ -325,37 +231,20 @@ export default function SidebarCases({
 }
 
 const inputStyle = {
-  width: "100%",
-  background: T.s2,
-  border: `1px solid ${T.border}`,
-  borderRadius: 9,
-  padding: "9px 10px",
-  color: T.text,
-  fontSize: 12,
-  outline: "none",
-  marginBottom: 8,
+  width: "100%", background: T.s2, border: `1px solid ${T.border}`,
+  borderRadius: 9, padding: "9px 10px", color: T.text,
+  fontSize: 12, outline: "none", marginBottom: 8,
 };
 
 const selectStyle = {
-  width: "100%",
-  background: T.s2,
-  border: `1px solid ${T.border}`,
-  borderRadius: 8,
-  padding: "8px 9px",
-  color: T.muted,
-  fontSize: 11,
-  outline: "none",
+  width: "100%", background: T.s2, border: `1px solid ${T.border}`,
+  borderRadius: 8, padding: "8px 9px", color: T.muted,
+  fontSize: 11, outline: "none",
 };
 
 const pageButton = (disabled) => ({
-  flex: 1,
-  padding: "7px 10px",
-  borderRadius: 8,
-  border: `1px solid ${T.border}`,
-  background: T.s2,
-  color: disabled ? T.muted : T.text,
-  fontSize: 11,
-  fontWeight: 700,
-  cursor: disabled ? "not-allowed" : "pointer",
-  opacity: disabled ? 0.4 : 1,
+  flex: 1, padding: "7px 10px", borderRadius: 8,
+  border: `1px solid ${T.border}`, background: T.s2,
+  color: disabled ? T.muted : T.text, fontSize: 11, fontWeight: 700,
+  cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.4 : 1,
 });

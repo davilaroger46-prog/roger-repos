@@ -7,17 +7,11 @@ import { useUIStore } from "../stores/uiStore";
 import SidebarCases from "../components/SidebarCases";
 import TopNav from "../components/TopNav";
 import BottomNav from "../components/BottomNav";
-import { downloadCasePdf } from "../services/api";
-import { showToast } from "../core/toastStore";
-import { confirmAction } from "../core/confirm";
 
 export default function MainLayout() {
   const navigate = useNavigate();
   const { user, loadUser, logout } = useAuthStore();
-  const {
-    cases, caso, activeCaseId, page, pages, total,
-    loadCase, removeCase, applyFilters, changePage, reset, refreshCases,
-  } = useCaseStore();
+  const { reset, refreshCases } = useCaseStore();
   const { mobileDrawerOpen, setMobileDrawerOpen } = useUIStore();
 
   useEffect(() => {
@@ -32,26 +26,6 @@ export default function MainLayout() {
     await logout();
     reset();
     navigate("/login");
-  };
-
-  const handleLoadCase = async (caseId) => {
-    try {
-      await loadCase(caseId);
-      navigate("/library");
-    } catch (err) {
-      showToast(err.message || "Erro ao carregar caso.", "error");
-    }
-  };
-
-  const handleDeleteCase = async (caseId) => {
-    const ok = confirmAction("Tem certeza que deseja deletar este caso? Esta ação não pode ser desfeita.");
-    if (!ok) return;
-    try {
-      await removeCase(caseId);
-      showToast("Caso deletado com sucesso.");
-    } catch (err) {
-      showToast(err.message || "Erro ao deletar caso.", "error");
-    }
   };
 
   return (
@@ -75,22 +49,7 @@ export default function MainLayout() {
         }
       `}</style>
 
-      <SidebarCases
-        className="ortho-sidebar"
-        cases={cases}
-        activeCaseId={activeCaseId}
-        onLoadCase={handleLoadCase}
-        onDeleteCase={handleDeleteCase}
-        onExportPdf={async (caseId) => {
-          try { await downloadCasePdf(caseId); }
-          catch (err) { showToast(err.message || "Erro ao baixar PDF", "error"); }
-        }}
-        page={page}
-        pages={pages}
-        total={total}
-        onPageChange={changePage}
-        onFilterChange={applyFilters}
-      />
+      <SidebarCases className="ortho-sidebar" />
 
       {mobileDrawerOpen && (
         <div
@@ -116,26 +75,7 @@ export default function MainLayout() {
               >×</button>
             </div>
             <div style={{ flex: 1, overflowY: "auto" }}>
-              <SidebarCases
-                cases={cases}
-                activeCaseId={activeCaseId}
-                onLoadCase={(id) => { handleLoadCase(id); setMobileDrawerOpen(false); }}
-                onDeleteCase={handleDeleteCase}
-                onExportPdf={async (caseId) => {
-                  try { await downloadCasePdf(caseId); }
-                  catch (err) { showToast(err.message || "Erro ao baixar PDF", "error"); }
-                }}
-                page={page}
-                pages={pages}
-                total={total}
-                onPageChange={changePage}
-                onFilterChange={applyFilters}
-              />
-              {!cases.length && (
-                <div style={{ padding: 24, color: T.muted, fontSize: 13, textAlign: "center" }}>
-                  Nenhum caso salvo ainda.
-                </div>
-              )}
+              <SidebarCases onAfterLoadCase={() => setMobileDrawerOpen(false)} />
             </div>
           </div>
         </div>
