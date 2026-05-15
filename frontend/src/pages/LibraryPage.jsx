@@ -6,6 +6,7 @@ import CaseVisualEditor from "../components/CaseVisualEditor";
 import CaseVersionsPanel from "../components/CaseVersionsPanel";
 import CaseVersionDiff from "../components/CaseVersionDiff";
 import ReviewPanel from "../components/ReviewPanel";
+import SharePanel from "../components/SharePanel";
 
 export default function LibraryPage({
   caso,
@@ -118,6 +119,8 @@ export default function LibraryPage({
         user={currentUser}
         onReviewed={onReviewed}
       />
+
+      <SharePanel caseId={activeCaseId} currentUser={currentUser} caso={caso} />
 
       <CaseActions
         caso={caso}
